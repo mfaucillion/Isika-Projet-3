@@ -5,13 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_info")
-public class UserInfo {
+@Table(name = "admin_info")
+public class AdminInfo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,13 +20,5 @@ public class UserInfo {
 	
 	@Column(length=50, name = "last_name")
 	private String lastName;
-	
-	@Column(length=20)
-	private String phone;
-	
-	@OneToOne
-	@JoinColumn(name = "user_address")
-	private UserAddress userAddress;
-	
 
 }
