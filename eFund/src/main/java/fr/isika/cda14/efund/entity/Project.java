@@ -8,7 +8,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Project extends ProjectGeneric{
+public class Project extends GenericProject{
 	
 	@Column(name="target_amount")
 	private Integer targetAmount;

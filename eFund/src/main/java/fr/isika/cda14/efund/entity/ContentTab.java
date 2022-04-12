@@ -27,6 +27,6 @@ public class ContentTab {
 	private String name;
 	
 	@ManyToOne 
-	private ProjectGeneric projectGeneric;
+	private GenericProject projectGeneric;
 	
 }

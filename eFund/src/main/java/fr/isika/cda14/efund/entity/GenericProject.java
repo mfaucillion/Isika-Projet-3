@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class ProjectGeneric {
+public abstract class GenericProject {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO )

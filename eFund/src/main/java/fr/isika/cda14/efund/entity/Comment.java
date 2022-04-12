@@ -29,7 +29,7 @@ public class Comment {
 	private String child;
 	
 	@ManyToOne 
-	private ProjectGeneric projectGeneric;
+	private GenericProject projectGeneric;
 
 	
 }

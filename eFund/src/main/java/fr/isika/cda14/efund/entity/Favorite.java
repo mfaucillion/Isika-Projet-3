@@ -14,5 +14,5 @@ public class Favorite {
 	private Long id;
 
 	@ManyToOne 
-	private ProjectGeneric projectGeneric;
+	private GenericProject projectGeneric;
 }

@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Event extends ProjectGeneric{
+public class Event extends GenericProject{
 	
 	@Column(name="start_date")
 	@Temporal(TemporalType.DATE)
