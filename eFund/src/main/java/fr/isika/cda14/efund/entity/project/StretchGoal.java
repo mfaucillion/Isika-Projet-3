@@ -5,8 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "stretch_goal")
 public class StretchGoal {
 
 	@Id
@@ -16,9 +18,5 @@ public class StretchGoal {
 	private Integer target;
 	
 	private String description;
-	
-	@ManyToOne 
-	private GenericProject projectGeneric;
-
 	
 }

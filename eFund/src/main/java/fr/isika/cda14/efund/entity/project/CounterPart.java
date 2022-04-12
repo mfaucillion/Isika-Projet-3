@@ -19,7 +19,4 @@ public class CounterPart {
 	
 	private String description;
 
-	@ManyToOne 
-	private GenericProject projectGeneric;
-
 }

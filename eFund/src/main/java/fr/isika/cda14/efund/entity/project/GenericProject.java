@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import fr.isika.cda14.efund.entity.content.ContentTab;
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
 import fr.isika.cda14.efund.entity.enums.ProjectRange;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
@@ -26,40 +27,56 @@ import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 public abstract class GenericProject {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
-	
+
 	protected String name;
-	
-	@Column(name="creation_date")
+
+	@Column(name = "creation_date")
 	@Temporal(TemporalType.DATE)
 	protected Date creationDate;
-	
-	@Column(name="end_date")
+
+	@Column(name = "end_date")
 	@Temporal(TemporalType.DATE)
 	protected Date endDate;
 
 	protected String summary;
-	
-	@Column(name="image_path")
+
+	@Column(name = "image_path")
 	protected String imagePath;
 
 	protected String location;
-	
+
 	@Enumerated(EnumType.STRING)
+	@Column(name = "project_category")
 	protected ProjectCategory projectCategory;
-	
+
 	@Enumerated(EnumType.STRING)
+	@Column(name = "project_range")
 	protected ProjectRange projectRange;
-	
+
 	@Enumerated(EnumType.STRING)
+	@Column(name = "project_status")
 	protected ProjectStatus projectStatus;
+
+	@OneToMany
+	@JoinColumn(name = "generic_project_id")
+	protected List<ContentTab> listContentTab;
+
+	@OneToMany
+	@JoinColumn(name = "generic_project_id")
+	protected List<UserLike> likes;
+
+	@OneToMany
+	@JoinColumn(name = "generic_project_id")
+	protected List<Comment> comments;
 	
 	@OneToMany
-	@JoinColumn(name = "contenttab_id")
-	protected List <ContentTab> listContentTab;
+	@JoinColumn(name = "generic_project_id")
+	protected List<ContentTab> contentTabs;
 	
 	@OneToMany
-	@JoinColumn(name = "like_id")
-	protected List <UserLike> likes;
+	@JoinColumn(name = "generic_project_id")
+	protected List<Favorite> favorites;
+	
 }

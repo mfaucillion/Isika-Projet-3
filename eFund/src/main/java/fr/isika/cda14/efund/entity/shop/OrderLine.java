@@ -16,7 +16,6 @@ public class OrderLine {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "one_item_quantity")
 	private Integer quantity;
 
 	@OneToOne

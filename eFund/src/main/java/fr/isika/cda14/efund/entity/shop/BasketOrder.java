@@ -20,18 +20,18 @@ import javax.persistence.TemporalType;
 import fr.isika.cda14.efund.entity.enums.OrderStatus;
 
 @Entity
-@Table(name = "full_order")
+@Table(name = "basket_order")
 public class BasketOrder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column
-	private Double amount;
+	@Column(name = "total_price")
+	private Double totalPrice;
 
-	@Column
-	private Double totalItemQuantity;
+	@Column(name = "total_items_quantity")
+	private Integer totalItemsQuantity;
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
@@ -39,17 +39,17 @@ public class BasketOrder {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
-	@Column
+	@Column(name = "shipping_address")
 	private String shippingAddress;
 
-	@Column
+	@Column(name = "billing_address")
 	private String billingAddress;
 
 	@OneToOne
 	private Basket basket;
 
 	@OneToMany
-	@JoinColumn(name = "my_order_lines")
-	private List<OrderLine> myOrderLines;
+	@JoinColumn(name = "basket_order_id")
+	private List<OrderLine> orderLines;
 
 }

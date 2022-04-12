@@ -27,7 +27,7 @@ public class UserInfo {
 	private String phone;
 	
 	@OneToOne
-	@JoinColumn(name = "user_address")
+	@JoinColumn(name = "user_address_id")
 	private UserAddress userAddress;
 	
 

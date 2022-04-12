@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.entity.project;
+package fr.isika.cda14.efund.entity.content;
 
 import java.util.Date;
 
@@ -15,15 +15,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Table(name = "content_block")
-public class ContentBlock {
+public abstract class ContentBlock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 
 	@Column(name = "post_date")
 	@Temporal(TemporalType.DATE)
-	private Date postDate;
+	protected Date postDate;
 
 }
