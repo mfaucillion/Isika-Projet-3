@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import fr.isika.cda14.efund.entity.content.ContentTab;
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
 import fr.isika.cda14.efund.entity.enums.ProjectRange;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;

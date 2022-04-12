@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.entity.project;
+package fr.isika.cda14.efund.entity.content;
 
 import java.util.Date;
 
