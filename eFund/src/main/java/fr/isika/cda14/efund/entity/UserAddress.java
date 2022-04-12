@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class UserAddress {
 	
 	@Id
-	@GeneratedValue(strategy =GenerationType.AUTO )
+	@GeneratedValue(strategy=GenerationType.AUTO )
 	private Long id;
 	
 	@Column(length=120)
