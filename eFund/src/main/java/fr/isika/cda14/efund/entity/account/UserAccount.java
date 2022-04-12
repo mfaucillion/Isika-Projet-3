@@ -10,6 +10,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.account.paiement.PaymentMethod;
+import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Entity
@@ -29,4 +30,7 @@ public class UserAccount extends Account {
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
 
+	@OneToOne
+	@JoinColumn(name = "basket_id")
+	private Basket basket;
 }

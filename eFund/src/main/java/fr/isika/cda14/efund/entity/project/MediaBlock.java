@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.entity.project;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -7,6 +8,7 @@ import javax.persistence.Table;
 @Table(name = "media_block")
 public class MediaBlock extends ContentBlock {
 	
+	@Column(name = "file_path")
 	private String filePath;
 	
 	private String type;

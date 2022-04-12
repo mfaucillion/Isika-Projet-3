@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,12 +25,11 @@ public class Comment {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 	
-	private String parent;
+	@OneToOne
+	private Comment parent;
 	
-	private String child;
-	
-	@ManyToOne 
-	private GenericProject projectGeneric;
+	@OneToOne
+	private Comment child;
 
 	
 }

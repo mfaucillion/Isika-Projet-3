@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.enums.ItemCategory;
@@ -20,21 +22,9 @@ public class BasketItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String label;
+	private Integer quantity;
 
-	@Column(name = "quantity_stock")
-	private Integer quantityStock;
-
-	@Column(scale = 2)
-	private Double price;
-
-	@Column
-	private String description;
-
-	@Enumerated(EnumType.STRING)
-	private ItemStatus itemStatus;
-
-	@Enumerated(EnumType.STRING)
-	private ItemCategory itemCategory;
+	@OneToOne
+	private Item item;
 
 }

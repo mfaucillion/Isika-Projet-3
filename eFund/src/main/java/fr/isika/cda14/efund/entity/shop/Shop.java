@@ -19,7 +19,7 @@ public class Shop {
 	private Long id;
 
 	@OneToMany
-	@JoinColumn(name = "myItems")
-	private List<Item> myItems;
+	@JoinColumn(name = "shop_id")
+	private List<Item> items;
 
 }

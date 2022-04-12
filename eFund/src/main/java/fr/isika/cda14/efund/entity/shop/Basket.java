@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,17 +21,8 @@ public class Basket {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column
-	private Double amount;
-
-	@Column(name = "tatal_item_quantity")
-	private Double totalItemQuantity;
-
-	@Temporal(TemporalType.DATE)
-	private Date date;
-
 	@OneToMany
-	@JoinColumn(name = "my_basket_items")
-	private List<BasketItem> mybasketItems;
+	@JoinColumn(name = "basket_id")
+	private List<BasketItem> basketItems;
 
 }

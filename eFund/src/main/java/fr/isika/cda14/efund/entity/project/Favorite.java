@@ -13,6 +13,4 @@ public class Favorite {
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private Long id;
 
-	@ManyToOne 
-	private GenericProject projectGeneric;
 }

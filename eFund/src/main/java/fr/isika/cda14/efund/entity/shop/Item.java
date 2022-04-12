@@ -30,8 +30,10 @@ public class Item {
 	private String description;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "item_status")
 	private ItemStatus itemStatus;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "item_category")
 	private ItemCategory itemCategory;
 }
