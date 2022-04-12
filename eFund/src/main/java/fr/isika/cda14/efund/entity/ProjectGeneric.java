@@ -42,6 +42,10 @@ public class ProjectGeneric {
 	@JoinColumn(name = "contenttab_id")
 	private List <ContentTab> listContentTab = new LinkedList <>();
 	
+	@OneToMany
+	@JoinColumn(name = "like_id")
+	private List <UserLike> likes = new LinkedList <>();
+	
 	private String summary;
 	
 	@Column(name="image_path")
