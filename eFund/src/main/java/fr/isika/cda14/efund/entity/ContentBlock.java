@@ -7,29 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Comment {
+public class ContentBlock {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO )
 	private Long id;
 
-	private String message;
-	
-	@Column(name="creation_date")
+	@Column(name="post_date")
 	@Temporal(TemporalType.DATE)
-	private Date creationDate;
-	
-	private String parent;
-	
-	private String child;
-	
-	@ManyToOne 
-	private ProjectGeneric projectGeneric;
-
-	
+	private Date postDate;
 }
