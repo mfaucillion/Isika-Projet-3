@@ -17,14 +17,13 @@ import javax.persistence.TemporalType;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "content_block")
 public class ContentBlock {
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="post_date")
+	@Column(name = "post_date")
 	@Temporal(TemporalType.DATE)
 	private Date postDate;
-	
-	
+
 }

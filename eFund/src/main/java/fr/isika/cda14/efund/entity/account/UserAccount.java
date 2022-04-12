@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import fr.isika.cda14.efund.entity.user.paiement.PaymentMethod;
+import fr.isika.cda14.efund.entity.account.paiement.PaymentMethod;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
