@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.entity.user.paiement;
+package fr.isika.cda14.efund.entity.account.paiement;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
