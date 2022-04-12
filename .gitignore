@@ -29,6 +29,7 @@ hs_err_pid*
 target/
 .tern-project
 .factorypath
+.metadata/
 
 # mac files
 .DS_Store
