@@ -6,10 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "id")
 public class Event extends ProjectGeneric{
 	
 	@Column(name="start_date")
@@ -19,9 +21,6 @@ public class Event extends ProjectGeneric{
 	private Integer duration;
 	
 	private String location;
-	
-	@Enumerated(EnumType.STRING)
-	private EventStatus status;
 	
 	@Column(name="volunteer_target")
 	private Integer volunteerTarget;
