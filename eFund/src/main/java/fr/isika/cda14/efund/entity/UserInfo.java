@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class UserInfo {
@@ -13,28 +15,18 @@ public class UserInfo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Column(length=50)
+	@Column(length=50, name = "first_name")
 	private String firstName;
 	
-	@Column(length=50)
+	@Column(length=50, name = "last_name")
 	private String lastName;
-	
-	@Column(length=120)
-	private String address;
-	
-	@Column(length=16)
-	private String zipcode;
-	
-	@Column(length=100)
-	private String city;
-	
-	@Column(length=60)
-	private String country;
 	
 	@Column(length=20)
 	private String phone;
 	
-	@Column(length=320)
-	private String email;
+	@OneToOne
+	@JoinColumn(name = "user_address")
+	private UserAddress userAddress;
+	
 
 }

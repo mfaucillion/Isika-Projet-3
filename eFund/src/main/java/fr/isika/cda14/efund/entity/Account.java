@@ -4,6 +4,7 @@ package fr.isika.cda14.efund.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,9 +23,18 @@ public class Account {
 	private Long id;
 	
 	private String password;
-	private String username;
+	
+	@Column(name = "displayed_name")
+	private String displayedName;
+	
+	@Column(length=320)
+	private String email;
 	
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "account_status")
+	private AccountStatus accountStatus;
 
 }
