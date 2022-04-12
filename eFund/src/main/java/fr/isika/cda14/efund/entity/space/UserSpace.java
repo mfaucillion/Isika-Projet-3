@@ -8,10 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.Comment;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Event;
@@ -26,31 +24,32 @@ public class UserSpace {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@OneToOne
-	@JoinColumn(name = "user_account_id")
-	private UserAccount userAccount;
-	
 	@OneToMany
-	@JoinColumn(name = "basket_order_id")
+	@JoinColumn(name = "user_space_id")
 	private List<BasketOrder> basketOrders;
 
 	@OneToMany
+	@JoinColumn(name = "user_space_id")
 	private List<Comment> comments;
 	
 	@OneToMany
+	@JoinColumn(name = "user_space_id")
 	private List<Favorite> favorites;
 	
 	@OneToMany
-	@JoinColumn(name = "user_like_id")
+	@JoinColumn(name = "user_space_id")
 	private List<UserLike> userLikes;
 	
 	@OneToMany
+	@JoinColumn(name = "user_space_id")
 	private List<Event> events;
 	
 	@OneToMany
+	@JoinColumn(name = "user_space_id")
 	private List<Donation> donations;
 	
 	@OneToMany
+	@JoinColumn(name = "user_space_id")
 	private List<Follow> follows;
 
 }
