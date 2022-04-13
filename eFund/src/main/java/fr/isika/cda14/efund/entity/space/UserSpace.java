@@ -15,6 +15,7 @@ import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.UserLike;
+import fr.isika.cda14.efund.entity.report.Report;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 
 @Entity
@@ -52,5 +53,9 @@ public class UserSpace {
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Follow> follows;
+	
+	@OneToMany
+	@JoinColumn(name = "user_space_id")
+	private List<Report> reports;
 
 }
