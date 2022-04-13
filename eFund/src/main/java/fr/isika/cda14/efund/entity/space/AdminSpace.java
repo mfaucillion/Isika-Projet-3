@@ -15,6 +15,7 @@ import fr.isika.cda14.efund.entity.account.AdminAccount;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.GenericProject;
+import fr.isika.cda14.efund.entity.report.Report;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 
 @Entity
@@ -45,4 +46,7 @@ public class AdminSpace {
 	@JoinColumn(name = "admin_space_id")
 	private List<GenericProject> genericProjects;
 
+	@OneToMany
+	@JoinColumn(name = "admin_space_id")
+	private List<Report> reports;
 }
