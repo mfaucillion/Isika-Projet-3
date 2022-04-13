@@ -38,4 +38,33 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "item_category")
 	private ItemCategory itemCategory;
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public void setQuantityStock(Integer quantityStock) {
+		this.quantityStock = quantityStock;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setItemStatus(ItemStatus itemStatus) {
+		this.itemStatus = itemStatus;
+	}
+
+	public void setItemCategory(ItemCategory itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+	
+	
+	
 }
+
+
