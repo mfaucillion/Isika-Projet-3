@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.entity.account;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,8 +12,16 @@ import javax.persistence.Table;
 @Table(name = "organization_account")
 public class OrganizationAccount extends Account {
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_info_id")
 	private OrganizationInfo organizationInfo;
+
+	public OrganizationInfo getOrganizationInfo() {
+		return organizationInfo;
+	}
+
+	public void setOrganizationInfo(OrganizationInfo organizationInfo) {
+		this.organizationInfo = organizationInfo;
+	}
 
 }

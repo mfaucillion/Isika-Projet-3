@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Modification association/ONG</h1>
+	<hr/>
+	<h:form id="modifForm">
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Email" />
+			<h:inputText value="#{createOrganizationAccountBean.organization.email}" />
+			
+			<h:outputLabel value="Nom du compte" />
+			<h:inputSecret value="#{createOrganizationAccountBean.organization.displayedName}" />
+			
+			<h:outputLabel value="Nom complet de l'association" />
+			<h:inputText value="#{createOrganizationAccountBean.organization.organizationName}" />
+			
+			<h:outputLabel value="Siret" />
+			<h:inputText value="#{createOrganizationAccountBean.organization.siret}" />
+			
+			<h:outputLabel value="Résumé" />
+			<h:inputText value="#{createOrganizationAccountBean.organization.summary}" />
+			
+			<h:outputLabel value="Description" />
+			<h:inputText value="#{createOrganizationAccountBean.organization.description}" />
+			
+			<h:button outcome="index.xhtml" value="Annuler"/>
+			<h:commandButton action="#{createOrganizationAccountBean.modify()}" value="Modifier" />
+		</h:panelGrid>
+	</h:form>
+</body> 
+</html>
