@@ -9,8 +9,7 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name = "paypal_payment_method")
 public class PaypalPaymentMethod extends PaymentMethod {
-	
-	
+
 	@Column(length = 320)
 	private String email;
 

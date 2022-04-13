@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.entity.shop;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -24,7 +26,7 @@ public class Item {
 	private Integer quantityStock;
 
 	@Column(scale = 2)
-	private Double price;
+	private BigDecimal price;
 
 	@Column
 	private String description;

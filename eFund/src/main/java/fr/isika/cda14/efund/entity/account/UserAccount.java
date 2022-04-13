@@ -25,7 +25,7 @@ public class UserAccount extends Account {
 	@OneToMany
 	@JoinColumn(name = "user_account_id")
 	private List<PaymentMethod> paymentMethods;
-	
+
 	@OneToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;

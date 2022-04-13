@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.entity.content;
+package fr.isika.cda14.efund.entity.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

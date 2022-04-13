@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import fr.isika.cda14.efund.entity.content.ContentTab;
+import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
 import fr.isika.cda14.efund.entity.enums.ProjectRange;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
@@ -70,13 +70,13 @@ public abstract class GenericProject {
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Comment> comments;
-	
+
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<ContentTab> contentTabs;
-	
+
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Favorite> favorites;
-	
+
 }

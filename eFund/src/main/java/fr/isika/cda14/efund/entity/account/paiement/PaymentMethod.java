@@ -10,9 +10,9 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class PaymentMethod {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
-	
+
 }

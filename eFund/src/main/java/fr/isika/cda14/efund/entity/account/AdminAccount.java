@@ -7,8 +7,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "admin_account")
-public class AdminAccount extends Account{
-	
+public class AdminAccount extends Account {
+
 	@OneToOne
 	@JoinColumn(name = "admin_info_id")
 	private AdminInfo adminInfo;

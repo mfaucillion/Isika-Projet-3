@@ -1,7 +1,5 @@
 package fr.isika.cda14.efund.entity.account;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,26 +16,26 @@ import fr.isika.cda14.efund.entity.enums.Role;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Account {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
-	
-	@Column(length=50)
+
+	@Column(length = 50)
 	protected String password;
-	
-	@Column(name = "displayed_name", length=50)
+
+	@Column(name = "displayed_name", length = 50)
 	protected String displayedName;
-	
-	@Column(length=320)
+
+	@Column(length = 320)
 	protected String email;
-	
-	@Column(name = "image_path", length=260)
+
+	@Column(name = "image_path", length = 260)
 	protected String imagePath;
-	
+
 	@Enumerated(EnumType.STRING)
 	protected Role role;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "account_status")
 	protected AccountStatus accountStatus;
