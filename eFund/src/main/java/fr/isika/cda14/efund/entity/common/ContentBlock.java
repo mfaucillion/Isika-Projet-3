@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.entity.content;
+package fr.isika.cda14.efund.entity.common;
 
 import java.util.Date;
 
@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 

@@ -20,10 +20,11 @@ import fr.isika.cda14.efund.entity.shop.BasketOrder;
 @Entity
 @Table(name = "user_space")
 public class UserSpace {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<BasketOrder> basketOrders;
@@ -31,23 +32,23 @@ public class UserSpace {
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Comment> comments;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Favorite> favorites;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<UserLike> userLikes;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Event> events;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Donation> donations;
-	
+
 	@OneToMany
 	@JoinColumn(name = "user_space_id")
 	private List<Follow> follows;

@@ -9,10 +9,10 @@ import javax.persistence.Table;
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
 @Table(name = "organization_account")
-public class OrganizationAccount extends Account{
+public class OrganizationAccount extends Account {
 
 	@OneToOne
 	@JoinColumn(name = "organization_info_id")
 	private OrganizationInfo organizationInfo;
-	
+
 }

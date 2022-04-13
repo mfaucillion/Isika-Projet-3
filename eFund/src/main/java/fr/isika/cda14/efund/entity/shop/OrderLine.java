@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.entity.shop;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

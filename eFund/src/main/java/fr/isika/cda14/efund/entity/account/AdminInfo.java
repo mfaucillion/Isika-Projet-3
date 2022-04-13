@@ -10,15 +10,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "admin_info")
 public class AdminInfo {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(length=50, name = "first_name")
+
+	@Column(length = 50, name = "first_name")
 	private String firstName;
-	
-	@Column(length=50, name = "last_name")
+
+	@Column(length = 50, name = "last_name")
 	private String lastName;
 
 }

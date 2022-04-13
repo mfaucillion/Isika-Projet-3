@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.entity.shop;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.enums.OrderStatus;
 
 @Entity
@@ -27,8 +29,8 @@ public class BasketOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column(name = "total_price")
-	private Double totalPrice;
+	@Column(name = "total_price", scale = 2)
+	private BigDecimal totalPrice;
 
 	@Column(name = "total_items_quantity")
 	private Integer totalItemsQuantity;
@@ -39,11 +41,13 @@ public class BasketOrder {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
-	@Column(name = "shipping_address")
-	private String shippingAddress;
+	@OneToOne
+	@JoinColumn(name = "shipping_address_id")
+	private Address shippingAddress;
 
-	@Column(name = "billing_address")
-	private String billingAddress;
+	@OneToOne
+	@JoinColumn(name = "billing_address_id")
+	private Address billingAddress;
 
 	@OneToOne
 	private Basket basket;

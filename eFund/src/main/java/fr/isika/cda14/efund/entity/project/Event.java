@@ -10,16 +10,16 @@ import javax.persistence.TemporalType;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
-public class Event extends GenericProject{
-	
-	@Column(name="start_date")
+public class Event extends GenericProject {
+
+	@Column(name = "start_date")
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
-	
+
 	private Integer duration;
-	
+
 	private String location;
-	
-	@Column(name="volunteer_target")
+
+	@Column(name = "volunteer_target")
 	private Integer volunteerTarget;
 }

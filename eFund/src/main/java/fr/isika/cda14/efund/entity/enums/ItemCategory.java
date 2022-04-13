@@ -1,7 +1,7 @@
 package fr.isika.cda14.efund.entity.enums;
 
 public enum ItemCategory {
-	
-	CLOTHING, FOODANDDRINKS, FOURNITURE, OTHER;
+
+	CLOTHING, FOOD_AND_DRINKS, FOURNITURE, OTHER;
 
 }
