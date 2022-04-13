@@ -107,4 +107,12 @@ public abstract class GenericProject {
 		this.projectRange = projectRange;
 	}
 
+	public void setProjectStatus(ProjectStatus projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 }

@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.viewModels;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
@@ -12,14 +13,15 @@ public class ProjectCreationFormVM {
 	private String summary;
 	private String imagePath;
 	private String location;
+	private BigDecimal targetAmount;
 
-	private ProjectCategory category;
+	private ProjectCategory projectCategory;
 	private ProjectRange projectRange;
-	
+
 	public ProjectCategory[] getProjectCategories() {
 		return ProjectCategory.values();
 	}
-	
+
 	public ProjectRange[] getProjectRanges() {
 		return ProjectRange.values();
 	}
@@ -64,12 +66,12 @@ public class ProjectCreationFormVM {
 		this.location = location;
 	}
 
-	public ProjectCategory getCategory() {
-		return category;
+	public ProjectCategory getProjectCategory() {
+		return projectCategory;
 	}
 
-	public void setCategory(ProjectCategory category) {
-		this.category = category;
+	public void setProjectCategory(ProjectCategory ProjectCategory) {
+		this.projectCategory = ProjectCategory;
 	}
 
 	public ProjectRange getProjectRange() {
@@ -80,25 +82,12 @@ public class ProjectCreationFormVM {
 		this.projectRange = projectRange;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ProjectCreationFormVM [name=");
-		builder.append(name);
-		builder.append(", endDate=");
-		builder.append(endDate);
-		builder.append(", summary=");
-		builder.append(summary);
-		builder.append(", imagePath=");
-		builder.append(imagePath);
-		builder.append(", location=");
-		builder.append(location);
-		builder.append(", category=");
-		builder.append(category);
-		builder.append(", projectRange=");
-		builder.append(projectRange);
-		builder.append("]");
-		return builder.toString();
+	public BigDecimal getTargetAmount() {
+		return targetAmount;
+	}
+
+	public void setTargetAmount(BigDecimal targetAmount) {
+		this.targetAmount = targetAmount;
 	}
 
 }
