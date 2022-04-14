@@ -27,13 +27,10 @@
 
 			<h:form>
 				<h:commandButton
-					action="#{createOrganizationAccountBean.writeInSesstion()}"
-					value="Ecrire qq chose" />
-				<h:commandButton
-					action="#{createOrganizationAccountBean.readFromSession()}"
+					action="#{loginBean.readFromSession()}"
 					value="Afficher en console" />
 				<h:commandButton
-					action="#{createOrganizationAccountBean.resetSessionAttributes()}"
+					action="#{loginBean.resetSessionAttributes()}"
 					value="Invalider session" />
 			</h:form>
 
