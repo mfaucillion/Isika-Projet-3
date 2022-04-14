@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="content">
+			<f:metadata>
+				<f:viewParam name="id" />
+			</f:metadata>
+			<h1>Modification de l'utilisateur</h1>
+			<hr />
+			<h:form id="LoginForm">
+				<h:panelGrid columns="3">
+
+					<h:outputLabel value="Nom : " />
+					<h:inputText id="LastNameInput"
+						value="#{createUserBisBean.createUserBis.lastName}" />
+					<h:messages for="LastNameInput" />
+
+					<h:outputLabel value="Prénom : " />
+					<h:inputText id="FirstNameInput"
+						value="#{createUserBisBean.createUserBis.firstName}" />
+					<h:messages for="FirstNameInput" />
+
+					<h:outputLabel value="Téléphone : " />
+					<h:inputText id="PhoneInput"
+						value="#{createUserBisBean.createUserBis.phone}" />
+					<h:messages for="PhoneInput" />
+
+					<h:outputLabel value="Adresse : " />
+					<h:inputText id="AddressInput"
+						value="#{createUserBisBean.createUserBis.address}" />
+					<h:messages for="AddressInput" />
+
+					<h:outputLabel value="Code postale : " />
+					<h:inputText id="ZipcodeInput"
+						value="#{createUserBisBean.createUserBis.zipcode}" />
+					<h:messages for="zipcodeInput" />
+
+					<h:outputLabel value="Ville : " />
+					<h:inputText id="CityInput"
+						value="#{createUserBisBean.createUserBis.city}" />
+					<h:messages for="CityInput" />
+
+					<h:outputLabel value="Pays : " />
+					<h:inputText id="CountryInput"
+						value="#{createUserBisBean.createUserBis.country}" />
+					<h:messages for="CountryInput" />
+
+					<span></span>
+					<h:button outcome="index.xhtml" value="Annuler" />
+					<h:commandButton action="#{createUserBisBean.create(id)}"
+						value="Modifier" />
+				</h:panelGrid>
+			</h:form>
+
+			<hr />
+
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>
+
+
