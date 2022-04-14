@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.repositories;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +16,11 @@ public class ProjectRepository {
 
 	public void create(Project project) {
 		em.persist(project);
-
+	}
+	
+	public List<Project> findAll(){
+		return this.em
+				.createQuery("SELECT pro FROM Project pro", Project.class)
+				.getResultList();
 	}
 }
