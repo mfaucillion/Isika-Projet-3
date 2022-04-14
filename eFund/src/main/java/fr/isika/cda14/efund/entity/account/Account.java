@@ -87,5 +87,9 @@ public abstract class Account {
 	public void setAccountStatus(AccountStatus accountStatus) {
 		this.accountStatus = accountStatus;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
 }

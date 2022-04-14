@@ -11,11 +11,18 @@ import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 public class OrganizationAccountRepo {
 	
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager em;
 
-	public void persists(OrganizationAccount newOrg) {
-		newOrg.setOrganizationInfo(new OrganizationInfo());
-		entityManager.persist(newOrg);
-		
+	public Long persists(OrganizationAccount newOrg) {
+		em.persist(newOrg);
+		return newOrg.getId();
+	}
+
+	public OrganizationAccount find(Long id) {
+		return em.find(OrganizationAccount.class, id);
+	}
+
+	public void update(OrganizationAccount myOrg) {
+		em.merge(myOrg);		
 	}
 }

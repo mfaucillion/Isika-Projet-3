@@ -25,10 +25,6 @@ public class OrganizationSpace {
 	private Long id;
 
 	@OneToOne
-	@JoinColumn(name = "organization_account_id")
-	private OrganizationAccount organizationAccount;
-
-	@OneToOne
 	private Shop shop;
 
 	@OneToMany

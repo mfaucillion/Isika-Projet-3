@@ -4,6 +4,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.account.OrganizationInfo;
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.OrganizationAccountRepo;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -11,17 +13,28 @@ import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 public class AccountService {
 	
 	@Inject
-	OrganizationAccountRepo organizationAccountRepo;
+	OrganizationAccountRepo orgRepo;
 
-	public void createOrg(OrganizationForm organizationForm) {
+	public Long createOrg(OrganizationForm inputOrg) {
 		OrganizationAccount newOrg = new OrganizationAccount();
-		newOrg.setEmail(organizationForm.getEmail());
-		newOrg.setPassword(organizationForm.getPassword());
-		newOrg.setDisplayedName(organizationForm.getDisplayedName());
+		newOrg.setEmail(inputOrg.getEmail());
+		newOrg.setPassword(inputOrg.getPassword());
+		newOrg.setDisplayedName(inputOrg.getDisplayedName());
+		newOrg.setOrganizationInfo(new OrganizationInfo());
+		newOrg.setOrganizationSpace(new OrganizationSpace());
 		
-		organizationAccountRepo.persists(newOrg);
-		System.out.println("je suis le service !" + organizationForm);
+		return orgRepo.persists(newOrg);
+	}
+
+	public void updateOrg(Long id, OrganizationForm inputOrg) {
+		OrganizationAccount myOrg = orgRepo.find(id);
 		
+		myOrg.getOrganizationInfo().setName(inputOrg.getOrganizationName());
+		myOrg.getOrganizationInfo().setSiret(inputOrg.getSiret());
+		myOrg.getOrganizationInfo().setSummary(inputOrg.getSummary());
+		myOrg.getOrganizationInfo().setDescription(inputOrg.getDescription());
+		
+		orgRepo.update(myOrg);
 	}
 	
 }
