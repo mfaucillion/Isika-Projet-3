@@ -7,7 +7,7 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-		
+
 		<ui:define name="content">
 			<h1>eFund Welcome page</h1>
 			<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
@@ -18,17 +18,25 @@
 			<br />
 			<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
 			<br />
+			<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
+			<br />
 			<h:link outcome="paymentPage">Formulaire de paiement</h:link>
 			<br />
 			<i class="fa-solid fa-thumbs-up"></i>
-			
-			
+
+
 			<h:form>
-				<h:commandButton action="#{createOrganizationAccountBean.writeInSesstion()}" value="Ecrire qq chose" />
-				<h:commandButton action="#{createOrganizationAccountBean.readFromSession()}" value="Afficher en console" />
-			<h:commandButton action="#{createOrganizationAccountBean.resetSessionAttributes()}" value="Invalider session" />
+				<h:commandButton
+					action="#{createOrganizationAccountBean.writeInSesstion()}"
+					value="Ecrire qq chose" />
+				<h:commandButton
+					action="#{createOrganizationAccountBean.readFromSession()}"
+					value="Afficher en console" />
+				<h:commandButton
+					action="#{createOrganizationAccountBean.resetSessionAttributes()}"
+					value="Invalider session" />
 			</h:form>
-			
+
 		</ui:define>
 
 	</ui:composition>
