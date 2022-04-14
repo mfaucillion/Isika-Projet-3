@@ -19,11 +19,8 @@ public class EventListBean {
 	private List<Event> events;
 	
 	@PostConstruct
-	private void init() {
-		
+	private void init() {	
 		events = eventService.getAllEvents();
-		
-		
 	}
 	 
 	public List<Event> getEvents() {
