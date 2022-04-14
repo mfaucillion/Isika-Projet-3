@@ -1,13 +1,20 @@
 package fr.isika.cda14.efund.services;
 
+import java.util.Optional;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.account.UserInfo;
 import fr.isika.cda14.efund.entity.common.Address;
+import fr.isika.cda14.efund.entity.enums.AccountStatus;
+import fr.isika.cda14.efund.entity.enums.Role;
+import fr.isika.cda14.efund.entity.shop.Basket;
+import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 import fr.isika.cda14.efund.repositories.OrganizationAccountRepo;
@@ -34,7 +41,10 @@ public class AccountService {
 		newOrg.setDisplayedName(inputOrg.getDisplayedName());
 		newOrg.setOrganizationInfo(new OrganizationInfo());
 		newOrg.setOrganizationSpace(new OrganizationSpace());
-
+		newOrg.getOrganizationSpace().setShop(new Shop());
+		newOrg.setRole(Role.ASSOC);
+		newOrg.setAccountStatus(AccountStatus.ACTIVE);
+		newOrg.setImagePath("defaultImg.jpg");
 		return orgRepo.persists(newOrg);
 	}
 
@@ -60,6 +70,10 @@ public class AccountService {
 		newUser.setUserInfo(new UserInfo());
 		newUser.getUserInfo().setUserAddress(new Address());
 		newUser.setUserSpace(new UserSpace());
+		newUser.setBasket(new Basket());
+		newUser.setRole(Role.USER);
+		newUser.setAccountStatus(AccountStatus.ACTIVE);
+		newUser.setImagePath("defaultImg.jpg");
 
 		return userRepo.persists(newUser);
 
@@ -79,6 +93,10 @@ public class AccountService {
 
 		userRepo.update(user);
 
+	}
+
+	public Optional<Account> findByEmail(String email) {
+		return userRepo.findByEmail(email);
 	}
 
 }

@@ -23,6 +23,7 @@ public class Event extends GenericProject {
 
 	public void setEventStartDate(Date eventStartDate) {
 		this.eventStartDate = eventStartDate;
+	}
 
 	public Date getEventStartDate() {
 		return eventStartDate;
