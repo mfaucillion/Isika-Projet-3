@@ -17,8 +17,17 @@ public class UserAccountRepository {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void persists(UserAccount newUser) {
+	public Long persists(UserAccount newUser) {
 		em.persist(newUser);
+		return newUser.getId();
+	}
+
+	public UserAccount find(Long id) {
+		return em.find(UserAccount.class, id);
+	}
+
+	public void update(UserAccount user) {
+		em.merge(user);
 	}
 
 	public Optional<Account> findByEmail(String email) {

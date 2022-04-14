@@ -19,6 +19,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 import fr.isika.cda14.efund.repositories.OrganizationAccountRepo;
 import fr.isika.cda14.efund.repositories.UserAccountRepository;
+import fr.isika.cda14.efund.viewmodel.CreateUserBisViewModel;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -32,7 +33,9 @@ public class AccountService {
 	private UserAccountRepository userRepo;
 
 	public Long createOrg(OrganizationForm inputOrg) {
+
 		OrganizationAccount newOrg = new OrganizationAccount();
+
 		newOrg.setEmail(inputOrg.getEmail());
 		newOrg.setPassword(inputOrg.getPassword());
 		newOrg.setDisplayedName(inputOrg.getDisplayedName());
@@ -46,6 +49,7 @@ public class AccountService {
 	}
 
 	public void updateOrg(Long id, OrganizationForm inputOrg) {
+
 		OrganizationAccount myOrg = orgRepo.find(id);
 
 		myOrg.getOrganizationInfo().setName(inputOrg.getOrganizationName());
@@ -56,7 +60,8 @@ public class AccountService {
 		orgRepo.update(myOrg);
 	}
 
-	public void createUser(CreateUserViewModel createUser) {
+	public Long createUser(CreateUserViewModel createUser) {
+
 		UserAccount newUser = new UserAccount();
 
 		newUser.setEmail(createUser.getEmail());
@@ -70,7 +75,23 @@ public class AccountService {
 		newUser.setAccountStatus(AccountStatus.ACTIVE);
 		newUser.setImagePath("defaultImg.jpg");
 
-		userRepo.persists(newUser);
+		return userRepo.persists(newUser);
+
+	}
+
+	public void updateUser(Long id, CreateUserBisViewModel createUserBis) {
+
+		UserAccount user = userRepo.find(id);
+
+		user.getUserInfo().setFirstName(createUserBis.getFirstName());
+		user.getUserInfo().setLastName(createUserBis.getLastName());
+		user.getUserInfo().setPhone(createUserBis.getPhone());
+		user.getUserInfo().getUserAddress().setAddress(createUserBis.getAddress());
+		user.getUserInfo().getUserAddress().setCity(createUserBis.getCity());
+		user.getUserInfo().getUserAddress().setZipcode(createUserBis.getZipcode());
+		user.getUserInfo().getUserAddress().setCountry(createUserBis.getCountry());
+
+		userRepo.update(user);
 
 	}
 

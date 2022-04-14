@@ -15,8 +15,8 @@ public class CreateUserBean {
 	private CreateUserViewModel createUser = new CreateUserViewModel();
 
 	public String create() {
-		accountService.createUser(createUser);
-		return "createUser.xhtml";
+		Long id = accountService.createUser(createUser);
+		return "createUserBis?id=" + id + "faces-redirect=true";
 	}
 
 	public CreateUserViewModel getCreateUser() {
