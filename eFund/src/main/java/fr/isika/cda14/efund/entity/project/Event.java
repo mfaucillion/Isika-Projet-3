@@ -12,23 +12,20 @@ import javax.persistence.TemporalType;
 @PrimaryKeyJoinColumn(name = "id")
 public class Event extends GenericProject {
 
-	@Column(name = "start_date")
+	@Column(name = "event_start_date")
 	@Temporal(TemporalType.DATE)
-	private Date startDate;
+	private Date eventStartDate;
 
 	private Integer duration;
-
-	private String location;
 
 	@Column(name = "volunteer_target")
 	private Integer volunteerTarget;
 
-	public Date getStartDate() {
-		return startDate;
-	}
+	public void setEventStartDate(Date eventStartDate) {
+		this.eventStartDate = eventStartDate;
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public Date getEventStartDate() {
+		return eventStartDate;
 	}
 
 	public Integer getDuration() {
@@ -54,6 +51,5 @@ public class Event extends GenericProject {
 	public void setVolunteerTarget(Integer volunteerTarget) {
 		this.volunteerTarget = volunteerTarget;
 	}
-	
-	
+    
 }
