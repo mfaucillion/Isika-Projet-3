@@ -79,4 +79,40 @@ public abstract class GenericProject {
 	@JoinColumn(name = "generic_project_id")
 	protected List<Favorite> favorites;
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public void setProjectCategory(ProjectCategory projectCategory) {
+		this.projectCategory = projectCategory;
+	}
+
+	public void setProjectRange(ProjectRange projectRange) {
+		this.projectRange = projectRange;
+	}
+
+	public void setProjectStatus(ProjectStatus projectStatus) {
+		this.projectStatus = projectStatus;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 }

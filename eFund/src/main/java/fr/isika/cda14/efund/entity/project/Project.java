@@ -31,4 +31,8 @@ public class Project extends GenericProject {
 	@JoinColumn(name = "project_id")
 	protected List<StretchGoal> stretchGoals;
 
+	public void setTargetAmount(BigDecimal targetAmount) {
+		this.targetAmount = targetAmount;
+	}
+
 }

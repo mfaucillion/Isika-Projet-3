@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:head>
+
+	<title>Création de projet</title>
+
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"></link>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</h:head>
+
+<body>
+	<div class="container shadow p-5 mt-5">
+		<h1>Création de projet</h1>
+		<hr class="bg-primary" />
+		<h:form id="ProjectCreationForm">
+
+			<div class="row">
+				<div class="col-12 col-md-1 mt-3"></div>
+				<div class="col-12 col-md-5 mt-3">
+					<h:outputLabel for="NameInput" value="Nom" />
+					<h:inputText styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.name}"
+						id="NameInput" />
+				</div>
+				<div class="col-12 col-md-5 mt-3">
+					<h:outputLabel for="EndDateInput" value="Date de fin" />
+					<h:inputText a:placeholder="dd/MM/yyyy" styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.endDate}"
+						id="EndDateInput">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-md-1 mt-3"></div>
+				<div class="col-12 col-md-5 mt-3">
+					<h:outputLabel for="LocalisationInput" value="Localisation" />
+					<h:inputText styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.location}"
+						id="LocalisationInput" />
+				</div>
+				<div class="col-12 col-md-5 mt-3">
+					<h:outputLabel for="ImageInput" value="Image" />
+					<h:inputText styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.imagePath}"
+						id="ImageInput" />
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-md-1 mt-3"></div>
+				<div class="col-12 col-md-2 mt-3">
+					<h:outputLabel for="CategoryInput" value="Categorie" />
+					<br />
+					<h:selectOneMenu style="width:150px;"
+						value="#{projectCreationBean.projectCreationFormVM.projectCategory}">
+						<f:selectItem itemLabel="Sélection" itemValue="" />
+						<f:selectItems
+							value="#{projectCreationBean.projectCreationFormVM.projectCategories}"
+							var="category" itemValue="#{category}"
+							itemLabel="#{category.projectCategoryLabel}" />
+
+					</h:selectOneMenu>
+				</div>
+
+
+				<div class="col-12 col-md-2 mt-3">
+					<h:outputLabel for="RangeInput" value="Portée" />
+					<br />
+					<h:selectOneMenu style="width:150px;"
+						value="#{projectCreationBean.projectCreationFormVM.projectRange}">
+						<f:selectItem itemLabel="Sélection" itemValue="" />
+						<f:selectItems
+							value="#{projectCreationBean.projectCreationFormVM.projectRanges}"
+							var="range" itemValue="#{range}"
+							itemLabel="#{range.projectRangeLabel}" />
+
+					</h:selectOneMenu>
+				</div>
+
+				<div class="col-12 col-md-1 mt-3"></div>
+
+				<div class="col-12 col-md-5 mt-3">
+					<h:outputLabel for="TargetAmountInput" value="Montant à atteindre" />
+					<h:inputText styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.targetAmount}"
+						id="TargetAmountInput" />
+				</div>
+
+
+			</div>
+
+			<div class="row">
+				<div class="col-12 col-md-1 mt-3"></div>
+				<div class="col-12 col-md-10 mt-3">
+					<h:outputLabel for="SummaryInput" value="Résumé du projet" />
+					<h:inputTextarea styleClass="form-control"
+						value="#{projectCreationBean.projectCreationFormVM.summary}"
+						id="SummaryInput" />
+				</div>
+			</div>
+
+
+
+			<div class="row">
+				<div class="col-12 col-md-1 mt-3"></div>
+				<div class="col-12 col-md-5 mt-4 d-grid">
+					<h:commandButton styleClass="btn-outline-secondary btn-black"
+						action="#" value="Annuler" />
+				</div>
+				<div class="col-12 col-md-5 mt-4 d-grid">
+					<h:commandButton styleClass="btn-outline-secondary btn-black"
+						action="#{projectCreationBean.createProject()}" value="Valider" />
+				</div>
+
+			</div>
+		</h:form>
+
+	</div>
+
+</body>
+</html>
