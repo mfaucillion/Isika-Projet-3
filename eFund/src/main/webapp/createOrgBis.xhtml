@@ -4,36 +4,43 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head>
-<body>
-	<f:metadata>
-		<f:viewParam name="id"/>
-	</f:metadata>
-	<h1>Modification association/ONG</h1>
-	<hr />
-	<h:form id="modifForm">
-		<h:panelGrid columns="2">
+<h:body>
 
-			<h:outputLabel value="Nom complet de l'association" />
-			<h:inputText
-				value="#{createOrganizationAccountBean.organization.organizationName}" />
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
-			<h:outputLabel value="Siret" />
-			<h:inputText
-				value="#{createOrganizationAccountBean.organization.siret}" />
+		<ui:define name="content">
+			<f:metadata>
+				<f:viewParam name="id" />
+			</f:metadata>
+			<h1>Modification association/ONG</h1>
+			<hr />
+			<h:form id="modifForm">
+				<h:panelGrid columns="2">
 
-			<h:outputLabel value="Résumé" />
-			<h:inputText
-				value="#{createOrganizationAccountBean.organization.summary}" />
+					<h:outputLabel value="Nom complet de l'association" />
+					<h:inputText
+						value="#{createOrganizationAccountBean.organization.organizationName}" />
 
-			<h:outputLabel value="Description" />
-			<h:inputText
-				value="#{createOrganizationAccountBean.organization.description}" />
+					<h:outputLabel value="Siret" />
+					<h:inputText
+						value="#{createOrganizationAccountBean.organization.siret}" />
 
-			<h:button outcome="index.xhtml" value="Annuler" />
-			<h:commandButton action="#{createOrganizationAccountBean.modify(id)}"
-				value="Modifier" />
-		</h:panelGrid>
-	</h:form>
-</body>
+					<h:outputLabel value="Résumé" />
+					<h:inputText
+						value="#{createOrganizationAccountBean.organization.summary}" />
+
+					<h:outputLabel value="Description" />
+					<h:inputText
+						value="#{createOrganizationAccountBean.organization.description}" />
+
+					<h:button outcome="index.xhtml" value="Annuler" />
+					<h:commandButton
+						action="#{createOrganizationAccountBean.modify(id)}"
+						value="Modifier" />
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
 </html>
