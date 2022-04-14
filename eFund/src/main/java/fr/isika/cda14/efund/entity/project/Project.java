@@ -34,5 +34,9 @@ public class Project extends GenericProject {
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
 	}
+	
+	public BigDecimal getTargetAmount() {
+		return targetAmount;
+	}
 
 }
