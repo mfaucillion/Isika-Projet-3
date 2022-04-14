@@ -12,11 +12,10 @@ import fr.isika.cda14.efund.entity.project.Event;
 public class EventRepository {
 
 	@PersistenceContext
-	private EntityManager emEvent;
+	private EntityManager em;
 
 	public void create(Event event) {
-		emEvent.persist(event);
-
+		em.persist(event);
 	}
 
 	public List<Event> findAll() {
