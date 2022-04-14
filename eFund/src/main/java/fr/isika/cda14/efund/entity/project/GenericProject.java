@@ -115,4 +115,66 @@ public abstract class GenericProject {
 		this.creationDate = creationDate;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public ProjectCategory getProjectCategory() {
+		return projectCategory;
+	}
+
+	public ProjectRange getProjectRange() {
+		return projectRange;
+	}
+
+	public ProjectStatus getProjectStatus() {
+		return projectStatus;
+	}
+
+	public List<ContentTab> getListContentTab() {
+		return listContentTab;
+	}
+
+	public List<UserLike> getLikes() {
+		return likes;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public List<ContentTab> getContentTabs() {
+		return contentTabs;
+	}
+
+	public List<Favorite> getFavorites() {
+		return favorites;
+	}
+	
+	
+
 }

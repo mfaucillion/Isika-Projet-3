@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.services;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -11,7 +12,7 @@ import fr.isika.cda14.efund.repositories.ProjectRepository;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
 @Stateless
-public class ProjectCreationService {
+public class ProjectService {
 
 	@Inject
 	private ProjectRepository projectRepo;
@@ -32,6 +33,10 @@ public class ProjectCreationService {
 
 		projectRepo.create(newProject);
 
+	}
+
+	public List<Project> findAll() {
+		return projectRepo.findAll();
 	}
 
 }
