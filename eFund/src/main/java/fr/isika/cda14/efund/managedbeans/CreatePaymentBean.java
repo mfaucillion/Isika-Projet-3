@@ -7,7 +7,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.services.PaymentService;
-import fr.isika.cda14.efund.viewModel.PaymentForm;
+import fr.isika.cda14.efund.viewmodel.PaymentForm;
+
 
 @ManagedBean
 @ViewScoped

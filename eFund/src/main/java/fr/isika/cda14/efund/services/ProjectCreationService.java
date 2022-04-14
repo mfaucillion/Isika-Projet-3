@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
-import fr.isika.cda14.efund.viewModels.ProjectCreationFormVM;
+import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
 @Stateless
 public class ProjectCreationService {
