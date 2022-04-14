@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.viewModels;
+package fr.isika.cda14.efund.viewmodel;
 
 import java.math.BigDecimal;
 import java.util.Date;

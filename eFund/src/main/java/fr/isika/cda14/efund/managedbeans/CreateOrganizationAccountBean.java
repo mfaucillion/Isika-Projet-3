@@ -11,7 +11,7 @@ import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
 @ManagedBean
 @ViewScoped
-public class OrganizationAccountBean {
+public class CreateOrganizationAccountBean {
 
 	private OrganizationForm organization = new OrganizationForm();
 	

@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.viewModel;
+package fr.isika.cda14.efund.viewmodel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

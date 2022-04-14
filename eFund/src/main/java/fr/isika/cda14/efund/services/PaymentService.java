@@ -5,7 +5,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.repositories.PaymentRepository;
-import fr.isika.cda14.efund.viewModel.PaymentForm;
+import fr.isika.cda14.efund.viewmodel.PaymentForm;
 
 @Stateless
 public class PaymentService {
