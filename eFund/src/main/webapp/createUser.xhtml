@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>Création d'un compte d'utilisateur</title>
+</h:head>
+<body>
+	<h1>Création d'un compte d'utilisateur</h1>
+	<hr />
+	<h:form id="LoginForm">
+		<h:panelGrid columns="3">
+
+			<h:outputLabel value="Email : " />
+			<h:inputText id="emailInput"
+				value="#{createUserBean.createUser.email}" />
+			<h:messages for="emailInput" />
+
+			<h:outputLabel value="Mot de passe : " />
+			<h:inputSecret id="passwordInput"
+				value="#{createUserBean.createUser.password}" />
+			<h:messages for="passwordInput" />
+
+			<h:outputLabel value="Pseudo : " />
+			<h:inputText id="displayedNameInput"
+				value="#{createUserBean.createUser.displayedName}" />
+			<h:messages for="displayedName" />
+
+			<span></span>
+			<h:commandButton value="Crée" action="#{createUserBean.create()}" />
+		</h:panelGrid>
+	</h:form>
+
+	<hr />
+
+</body>
+</html>
