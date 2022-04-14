@@ -4,36 +4,39 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-	<title>Création d'un compte d'utilisateur</title>
-</h:head>
-<body>
-	<h1>Création d'un compte d'utilisateur</h1>
-	<hr />
-	<h:form id="LoginForm">
-		<h:panelGrid columns="3">
+<h:body>
 
-			<h:outputLabel value="Email : " />
-			<h:inputText id="emailInput"
-				value="#{createUserBean.createUser.email}" />
-			<h:messages for="emailInput" />
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
-			<h:outputLabel value="Mot de passe : " />
-			<h:inputSecret id="passwordInput"
-				value="#{createUserBean.createUser.password}" />
-			<h:messages for="passwordInput" />
+		<ui:define name="content">
+			<h1>Création d'un compte d'utilisateur</h1>
+			<hr />
+			<h:form id="LoginForm">
+				<h:panelGrid columns="3">
 
-			<h:outputLabel value="Pseudo : " />
-			<h:inputText id="displayedNameInput"
-				value="#{createUserBean.createUser.displayedName}" />
-			<h:messages for="displayedName" />
+					<h:outputLabel value="Email : " />
+					<h:inputText id="emailInput"
+						value="#{createUserBean.createUser.email}" />
+					<h:messages for="emailInput" />
 
-			<span></span>
-			<h:commandButton value="Crée" action="#{createUserBean.create()}" />
-		</h:panelGrid>
-	</h:form>
+					<h:outputLabel value="Mot de passe : " />
+					<h:inputSecret id="passwordInput"
+						value="#{createUserBean.createUser.password}" />
+					<h:messages for="passwordInput" />
 
-	<hr />
+					<h:outputLabel value="Pseudo : " />
+					<h:inputText id="displayedNameInput"
+						value="#{createUserBean.createUser.displayedName}" />
+					<h:messages for="displayedName" />
 
-</body>
+					<span></span>
+					<h:commandButton value="Crée" action="#{createUserBean.create()}" />
+				</h:panelGrid>
+			</h:form>
+
+			<hr />
+		</ui:define>
+
+	</ui:composition>
+</h:body>
 </html>

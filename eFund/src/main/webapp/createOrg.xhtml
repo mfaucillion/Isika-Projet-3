@@ -1,27 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head> 
-<body> 
-	<h1>Création d'une nouvelle association/ONG</h1>
-	<hr/>
-	<h:form id="orgCreationForm">
-		<h:panelGrid columns="2">
-			<h:outputLabel for="orgEmail" value="Email" />
-			<h:inputText id="orgEmail" value="#{createOrganizationAccountBean.organization.email}" />
-				
-			<h:outputLabel for="orgPwd" value="Mot de passe" />
-			<h:inputSecret id="orgPwd" value="#{createOrganizationAccountBean.organization.password}" />
-			
-			<h:outputLabel for="orgUserName" value="Nom du compte" />
-			<h:inputText id="orgUserName" value="#{createOrganizationAccountBean.organization.displayedName}" />
-			
-			<h:button outcome="index.xhtml" value="Retour"/>
-			<h:commandButton action="#{createOrganizationAccountBean.create()}" value="OK" />
-		</h:panelGrid>
-	</h:form>
-</body> 
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="content">
+			<h1>Création d'une nouvelle association/ONG</h1>
+			<hr />
+			<h:form id="orgCreationForm">
+				<h:panelGrid columns="2">
+					<h:outputLabel for="orgEmail" value="Email" />
+					<h:inputText id="orgEmail"
+						value="#{createOrganizationAccountBean.organization.email}" />
+
+					<h:outputLabel for="orgPwd" value="Mot de passe" />
+					<h:inputSecret id="orgPwd"
+						value="#{createOrganizationAccountBean.organization.password}" />
+
+					<h:outputLabel for="orgUserName" value="Nom du compte" />
+					<h:inputText id="orgUserName"
+						value="#{createOrganizationAccountBean.organization.displayedName}" />
+
+					<h:button outcome="index.xhtml" value="Retour" />
+					<h:commandButton action="#{createOrganizationAccountBean.create()}"
+						value="OK" />
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
 </html>

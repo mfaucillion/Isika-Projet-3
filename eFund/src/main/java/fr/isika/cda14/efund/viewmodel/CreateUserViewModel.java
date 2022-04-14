@@ -2,8 +2,6 @@ package fr.isika.cda14.efund.viewmodel;
 
 import java.io.Serializable;
 
-
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 

@@ -4,37 +4,49 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head>
-</h:head>
-<body>
-	<h3>FORMULAIRE DE CREATION D'OBJETS A VENDRE</h3>
+<h:body>
 
-	<h:form>
-		<h:panelGrid columns="2">
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
-			<h:outputLabel value="Nom du produit :" for="itemInput" />
-			<h:inputText id="itemInput" value="#{itemCreationBean.itemCreationForm.label}" />
+		<ui:define name="content">
+			<h3>FORMULAIRE DE CREATION D'OBJETS A VENDRE</h3>
 
-			<h:outputLabel value="Description :" for="descriptionInput" />
-			<h:inputText id="descriptionInput" value="#{itemCreationBean.itemCreationForm.description}" />
+			<h:form>
+				<h:panelGrid columns="2">
 
-			<h:outputLabel value="Prix :" for="priceInput" />
-			<h:inputText id="priceInput" value="#{itemCreationBean.itemCreationForm.price}" />
+					<h:outputLabel value="Nom du produit :" for="itemInput" />
+					<h:inputText id="itemInput"
+						value="#{itemCreationBean.itemCreationForm.label}" />
 
-			<h:outputLabel value="Categorie :" for="categoryInput" />
-			<h:selectOneMenu value="#{itemCreationBean.itemCreationForm.itemCategory}">
-				<f:selectItems value="#{itemCreationBean.itemCreationForm.categories}" var="category" itemValue="#{category}" itemLabel="#{category.label}"/>
-			</h:selectOneMenu>
+					<h:outputLabel value="Description :" for="descriptionInput" />
+					<h:inputText id="descriptionInput"
+						value="#{itemCreationBean.itemCreationForm.description}" />
 
-			<span></span>
-			<h:panelGrid columns="2">
-				<h:commandButton value="Reset" action="#" />
-				<h:commandButton value="Créer article" action="#{itemCreationBean.createItem()}" />
+					<h:outputLabel value="Prix :" for="priceInput" />
+					<h:inputText id="priceInput"
+						value="#{itemCreationBean.itemCreationForm.price}" />
+
+					<h:outputLabel value="Categorie :" for="categoryInput" />
+					<h:selectOneMenu
+						value="#{itemCreationBean.itemCreationForm.itemCategory}">
+						<f:selectItems
+							value="#{itemCreationBean.itemCreationForm.categories}"
+							var="category" itemValue="#{category}"
+							itemLabel="#{category.label}" />
+					</h:selectOneMenu>
+
+					<span></span>
+					<h:panelGrid columns="2">
+						<h:commandButton value="Reset" action="#" />
+						<h:commandButton value="Créer article"
+							action="#{itemCreationBean.createItem()}" />
 
 
-			</h:panelGrid>
-		</h:panelGrid>
-	</h:form>
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
 
-</body>
+	</ui:composition>
+</h:body>
 </html>

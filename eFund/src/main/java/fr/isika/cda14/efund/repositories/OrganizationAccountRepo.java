@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 
 @Stateless
 public class OrganizationAccountRepo {

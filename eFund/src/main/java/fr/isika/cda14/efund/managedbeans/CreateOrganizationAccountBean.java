@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.managedbeans;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -16,8 +15,8 @@ public class CreateOrganizationAccountBean {
 	private OrganizationForm organization = new OrganizationForm();
 	
 	@Inject
-	AccountService accountService;
-
+	AccountService accountService;	
+	
 	public String create() {
 		
 		Long newOrgID = accountService.createOrg(organization);
