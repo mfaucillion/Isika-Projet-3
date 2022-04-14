@@ -22,4 +22,38 @@ public class Event extends GenericProject {
 
 	@Column(name = "volunteer_target")
 	private Integer volunteerTarget;
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Integer duration) {
+		this.duration = duration;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public Integer getVolunteerTarget() {
+		return volunteerTarget;
+	}
+
+	public void setVolunteerTarget(Integer volunteerTarget) {
+		this.volunteerTarget = volunteerTarget;
+	}
+	
+	
 }
