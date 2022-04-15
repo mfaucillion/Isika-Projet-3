@@ -3,7 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:body>
 
@@ -25,11 +26,8 @@
 						</div>
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="EndDateInput" value="Date de fin d'inscription à l'évènement" />
-							<h:inputText a:placeholder="dd/MM/yyyy" styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.endDate}"
-								id="EndDateInput">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
+							<br/>
+							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.endDate}"/>
 						</div>
 					</div>
 
@@ -53,11 +51,8 @@
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="StartDateInput" value="Date de début de l'évènement" />
-							<h:inputText a:placeholder="dd/MM/yyyy" styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.eventStartDate}"
-								id="StartDateInput">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
+							<br/>
+							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.eventStartDate}"/>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="DurationInput" value="Durée de l'évènement" />
