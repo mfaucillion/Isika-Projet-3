@@ -31,7 +31,7 @@ public class LoginBean {
 
 	public String login() {
 		
-		Optional<UserAccount> optional = accountService.findByEmail(email);
+		Optional<Account> optional = accountService.findByEmail(email);
 		if (optional.isPresent()) {
 			
 			Account account = optional.get();
