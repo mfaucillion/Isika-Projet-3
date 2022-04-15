@@ -13,17 +13,17 @@ import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 public class CreateOrganizationAccountBean {
 
 	private OrganizationForm organization = new OrganizationForm();
-	
+
 	@Inject
 	AccountService accountService;	
-	
+
 	public String create() {
-		
+
 		Long newOrgID = accountService.createOrg(organization);
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("viewmodel", organization);
 		return "createOrgBis?id=" + newOrgID + "faces-redirect=true";
 	}
-	
+
 	public String modify(Long id) {
 		accountService.updateOrg(id, organization);
 		return "index";

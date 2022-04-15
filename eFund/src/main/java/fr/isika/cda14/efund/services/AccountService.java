@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.ejb.Stateless;
@@ -90,6 +91,10 @@ public class AccountService {
 
 	public Optional<Account> findByEmail(String email) {
 		return repo.findByEmail(email);
+	}
+	//pour trouver ma liste d'orga
+	public List<OrganizationAccount> findAll(){
+		return orgRepo.findAll();
 	}
 
 }
