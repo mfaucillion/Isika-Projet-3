@@ -11,18 +11,20 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-		<div class="col-md-3">
 			<div class="container">
-				<h1>Nom du projet</h1>
-
 				<div class="row">
-						<p>blabla</p>
-						<!-- <img src="https://ellibrepensador.com/wp-content/uploads/2012/05/msf200x200.jpg" class="img-fluid" alt="Image projet" /> -->
-						<div class="col-md-3"></div>
-						<p>blabla</p>
+
+					<div class="col-12 col-md-8 mt-3" style="background-color: aqua;">
+						<div class="row">
+							<h3>Projet</h3>
+						</div>
+						<h:graphicImage
+							url="https://ellibrepensador.com/wp-content/uploads/2012/05/msf200x200.jpg"></h:graphicImage>
+					</div>
+					<div class="col-12 col-md-4 mt-3" style="background-color: orange;">
+					<h5>deuxieme partie</h5>
 					</div>
 				</div>
-
 			</div>
 		</ui:define>
 
