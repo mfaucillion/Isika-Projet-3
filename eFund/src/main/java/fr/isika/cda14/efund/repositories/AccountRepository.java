@@ -11,8 +11,6 @@ import javax.persistence.PersistenceContext;
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
-import fr.isika.cda14.efund.entity.space.OrganizationSpace;
-
 
 @Stateless
 public class AccountRepository {
@@ -71,7 +69,7 @@ public class AccountRepository {
 				"SELECT orgAcc from OrganizationAccount orgAcc " + "left join fetch orgAcc.organizationInfo orgInfo",
 				OrganizationAccount.class).getResultList();
 	}
-	
+
 	/* Recherche d'un Organization Space id à partir d'un ID */
 	public Long findOrgSpace(Long id) {
 		return findOrganization(id).getOrganizationSpace().getId();
