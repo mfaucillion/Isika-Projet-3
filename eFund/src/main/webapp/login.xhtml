@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="loginForm">
+				<h:outputLabel for="emailInput" value="Adresse email" />
+				<h:inputText id="emailInput" a:placeholder="Entrez votre adresse Email" value="#{loginBean.email}" />
+				<h:message for="emailInput"/>
+				<br/>
+				<h:outputLabel for="passwordInput" value="Mot de passe" />
+				<h:inputSecret id="passwordInput" a:placeholder="Entrez votre adresse Mot de Passe" value="#{loginBean.password}" />
+				<h:message for="passwordInput"/>
+				<br/>
+				<h:commandButton action="#{loginBean.login()}" value="Se Connecter" />
+			</h:form>
+
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

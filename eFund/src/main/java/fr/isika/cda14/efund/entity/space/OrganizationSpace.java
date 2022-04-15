@@ -2,6 +2,7 @@ package fr.isika.cda14.efund.entity.space;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class OrganizationSpace {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Shop shop;
 
 	@OneToMany
@@ -37,5 +38,41 @@ public class OrganizationSpace {
 	@OneToMany
 	@JoinColumn(name = "organization_space_id")
 	private List<GenericProject> genericProjects;
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public List<Follow> getFollows() {
+		return follows;
+	}
+
+	public void setFollows(List<Follow> follows) {
+		this.follows = follows;
+	}
+
+	public List<ContentTab> getContentTabs() {
+		return contentTabs;
+	}
+
+	public void setContentTabs(List<ContentTab> contentTabs) {
+		this.contentTabs = contentTabs;
+	}
+
+	public List<GenericProject> getGenericProjects() {
+		return genericProjects;
+	}
+
+	public void setGenericProjects(List<GenericProject> genericProjects) {
+		this.genericProjects = genericProjects;
+	}
+
+	public Long getId() {
+		return id;
+	}
 
 }

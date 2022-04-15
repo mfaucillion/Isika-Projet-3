@@ -31,7 +31,7 @@ public class UserAccount extends Account {
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "basket_id")
 	private Basket basket;
 

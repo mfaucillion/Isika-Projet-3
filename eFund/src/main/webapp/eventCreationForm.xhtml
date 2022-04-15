@@ -12,25 +12,22 @@
 
 		<ui:define name="content">
 			<div class="container shadow p-5 mt-5">
-				<h1>Création de projet</h1>
+				<h1>Création d'évènement</h1>
 				<hr class="bg-primary" />
-				<h:form id="ProjectCreationForm">
+				<h:form id="EventCreationForm">
 
 					<div class="row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="NameInput" value="Nom" />
 							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.name}"
+								value="#{eventCreationBean.eventCreationFormVM.name}"
 								id="NameInput" />
 						</div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="EndDateInput" value="Date de fin" />
-							<h:inputText a:placeholder="dd/MM/yyyy" styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.endDate}"
-								id="EndDateInput">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
+							<h:outputLabel for="EndDateInput" value="Date de fin d'inscription à l'évènement" />
+							<br/>
+							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.endDate}"/>
 						</div>
 					</div>
 
@@ -39,14 +36,29 @@
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="LocalisationInput" value="Localisation" />
 							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.location}"
+								value="#{eventCreationBean.eventCreationFormVM.location}"
 								id="LocalisationInput" />
 						</div>
 						<div class="col-12 col-md-5 mt-3">
 							<h:outputLabel for="ImageInput" value="Image" />
 							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.imagePath}"
+								value="#{eventCreationBean.eventCreationFormVM.imagePath}"
 								id="ImageInput" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<h:outputLabel for="StartDateInput" value="Date de début de l'évènement" />
+							<br/>
+							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.eventStartDate}"/>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<h:outputLabel for="DurationInput" value="Durée de l'évènement" />
+							<h:inputText styleClass="form-control"
+								value="#{eventCreationBean.eventCreationFormVM.duration}"
+								id="DurationInput" />
 						</div>
 					</div>
 
@@ -56,10 +68,10 @@
 							<h:outputLabel for="CategoryInput" value="Categorie" />
 							<br />
 							<h:selectOneMenu style="width:150px;"
-								value="#{projectCreationBean.projectCreationFormVM.projectCategory}">
+								value="#{eventCreationBean.eventCreationFormVM.projectCategory}">
 								<f:selectItem itemLabel="Sélection" itemValue="" />
 								<f:selectItems
-									value="#{projectCreationBean.projectCreationFormVM.projectCategories}"
+									value="#{eventCreationBean.eventCreationFormVM.projectCategories}"
 									var="category" itemValue="#{category}"
 									itemLabel="#{category.projectCategoryLabel}" />
 
@@ -71,10 +83,10 @@
 							<h:outputLabel for="RangeInput" value="Portée" />
 							<br />
 							<h:selectOneMenu style="width:150px;"
-								value="#{projectCreationBean.projectCreationFormVM.projectRange}">
+								value="#{eventCreationBean.eventCreationFormVM.projectRange}">
 								<f:selectItem itemLabel="Sélection" itemValue="" />
 								<f:selectItems
-									value="#{projectCreationBean.projectCreationFormVM.projectRanges}"
+									value="#{eventCreationBean.eventCreationFormVM.projectRanges}"
 									var="range" itemValue="#{range}"
 									itemLabel="#{range.projectRangeLabel}" />
 
@@ -84,11 +96,11 @@
 						<div class="col-12 col-md-1 mt-3"></div>
 
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="TargetAmountInput"
-								value="Montant à atteindre" />
+							<h:outputLabel for="VolunteerTargetInput"
+								value="Nombre de volontaires souhaité" />
 							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.targetAmount}"
-								id="TargetAmountInput" />
+								value="#{eventCreationBean.eventCreationFormVM.volunteerTarget}"
+								id="VolunteerTargetInput" />
 						</div>
 
 
@@ -97,9 +109,9 @@
 					<div class="row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
-							<h:outputLabel for="SummaryInput" value="Résumé du projet" />
+							<h:outputLabel for="SummaryInput" value="Résumé de l'évènement" />
 							<h:inputTextarea styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.summary}"
+								value="#{eventCreationBean.eventCreationFormVM.summary}"
 								id="SummaryInput" />
 						</div>
 					</div>
@@ -114,14 +126,14 @@
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<h:commandButton styleClass="btn-outline-secondary btn-black"
-								action="#{projectCreationBean.createProject()}" value="Valider" />
+								action="#{eventCreationBean.createEvent()}" value="Valider" />
 						</div>
 
 					</div>
 				</h:form>
 
 			</div>
-
+			
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -11,9 +11,31 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-
+			<h:dataTable value="#{eventListBean.events}" var="event"> 
+				<h:column>
+					<f:facet name="header">id</f:facet>
+					#{event.id}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nom de l'évènement</f:facet>
+					#{event.name}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Lieu de l'évènement</f:facet>
+					#{event.location}
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date</f:facet>
+					#{event.eventStartDate}
+				</h:column>
+				
+				
+				
+			</h:dataTable>
+			
+			
 		</ui:define>
-
+			
 	</ui:composition>
 </h:body>
 </html>
