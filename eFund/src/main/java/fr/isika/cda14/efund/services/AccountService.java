@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -58,6 +60,10 @@ public class AccountService {
 
 		userRepo.persists(newUser);
 
+	}
+	//pour trouver ma liste d'orga
+	public List<OrganizationAccount> findAll(){
+		return orgRepo.findAll();
 	}
 
 }

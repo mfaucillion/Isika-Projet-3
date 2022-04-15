@@ -9,7 +9,30 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
+			<h3>Available Organization</h3>
+			<hr />
+			<h:dataTable value="#{organizationsListBean.organizationsList}"
+				var="orgAcc">
 
+				<h:column>
+					<f:facet name="header">Id</f:facet>#{orgAcc.id}
+		</h:column>
+
+				<h:column>
+					<f:facet name="header">ONG's Name</f:facet>#{orgAcc.organizationInfo.name}
+			
+		</h:column>
+
+				<h:column>
+					<f:facet name="header">Description</f:facet>#{orgAcc.organizationInfo.description}
+			
+		</h:column>
+
+				<h:column>
+					<f:facet name="header">Aperçu d'activité</f:facet>#{orgAcc.organizationInfo.summary}
+		</h:column>
+
+			</h:dataTable>
 		</ui:define>
 
 	</ui:composition>
