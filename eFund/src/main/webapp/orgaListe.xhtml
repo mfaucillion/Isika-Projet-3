@@ -11,7 +11,7 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<h3>Available Organization</h3>
+			<h3>Available Organizations</h3>
 			<hr />
 			<h:dataTable value="#{organizationsListBean.organizationsList}"
 				var="orgAcc">
@@ -21,7 +21,7 @@
 		</h:column>
 
 				<h:column>
-					<f:facet name="header">Nom</f:facet>#{orgAcc.organizationInfo.name}
+					<f:facet name="header">Name</f:facet><h:link value="#{orgAcc.organizationInfo.name}" outcome="pageOng?ongId=#{orgAcc.id}faces-redirect=true" includeViewParams="true"/>
 			
 		</h:column>
 
