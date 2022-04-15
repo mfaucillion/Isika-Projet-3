@@ -94,7 +94,7 @@ public class AccountService {
 	}
 	//pour trouver ma liste d'orga
 	public List<OrganizationAccount> findAll(){
-		return orgRepo.findAll();
+		return repo.findAll();
 	}
 
 }
