@@ -96,5 +96,10 @@ public class AccountService {
 	public List<OrganizationAccount> findAll(){
 		return repo.findAll();
 	}
+	//pour trouver mon orga
+	public OrganizationAccount find(Long id) {
+
+		return repo.findOrganization(id);
+	}
 
 }
