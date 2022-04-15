@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.ejb.Stateless;
@@ -22,7 +23,7 @@ public class AccountRepository {
 		em.persist(newUser);
 		return newUser.getId();
 	}
-	
+
 	/* Persistance des comptes Organization */
 	public Long persist(OrganizationAccount newOrg) {
 		em.persist(newOrg);
@@ -33,12 +34,12 @@ public class AccountRepository {
 	public void update(UserAccount user) {
 		em.merge(user);
 	}
-	
+
 	/* Mise à jour des comptes Organization */
 	public void update(OrganizationAccount myOrg) {
-		em.merge(myOrg);		
+		em.merge(myOrg);
 	}
-	
+
 	/* Recherche d'un compte User à partir d'un ID */
 	public UserAccount findUser(Long id) {
 		return em.find(UserAccount.class, id);
@@ -52,16 +53,21 @@ public class AccountRepository {
 	/* Recherche d'un compte tout type confondu à partir d'un email */
 	public Optional<Account> findByEmail(String email) {
 		try {
-			Optional<Account> result = Optional.ofNullable(em.createQuery("SELECT acc "
-					+ "FROM Account acc "
-					+ "WHERE acc.email = :email ", Account.class)
-					.setParameter("email", email)
-					.getSingleResult());
+			Optional<Account> result = Optional.ofNullable(
+					em.createQuery("SELECT acc " + "FROM Account acc " + "WHERE acc.email = :email ", Account.class)
+							.setParameter("email", email).getSingleResult());
 			return result;
-		}catch(NoResultException ex) {
+		} catch (NoResultException ex) {
 			System.out.println("Aucun utilisateur trouvé");
 		}
 		return Optional.empty();
 	}
-	
+
+	/* Récupération de la liste de toutes les Organizations */
+	public List<OrganizationAccount> findAll() {
+		return this.em.createQuery(
+				"SELECT orgAcc from OrganizationAccount orgAcc " + "left join fetch orgAcc.organizationInfo orgInfo",
+				OrganizationAccount.class).getResultList();
+	}
+
 }
