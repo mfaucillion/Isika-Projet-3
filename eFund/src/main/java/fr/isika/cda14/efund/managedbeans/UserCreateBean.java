@@ -7,7 +7,7 @@ import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 
 @ManagedBean
-public class CreateUserBean {
+public class UserCreateBean {
 
 	@Inject
 	private AccountService accountService;
@@ -17,6 +17,11 @@ public class CreateUserBean {
 	public String create() {
 		Long id = accountService.createUser(createUser);
 		return "createUserBis?id=" + id + "faces-redirect=true";
+	}
+	
+	public String modify(Long id) {
+		accountService.updateUser(id,createUser);
+		return "index.xhtml?faces-redirect=true";
 	}
 
 	public CreateUserViewModel getCreateUser() {

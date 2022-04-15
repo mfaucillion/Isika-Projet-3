@@ -19,42 +19,42 @@
 
 					<h:outputLabel value="Nom : " />
 					<h:inputText id="LastNameInput"
-						value="#{createUserBisBean.createUserBis.lastName}" />
+						value="#{createUserBean.createUser.lastName}" />
 					<h:messages for="LastNameInput" />
 
 					<h:outputLabel value="Prénom : " />
 					<h:inputText id="FirstNameInput"
-						value="#{createUserBisBean.createUserBis.firstName}" />
+						value="#{createUserBean.createUser.firstName}" />
 					<h:messages for="FirstNameInput" />
 
 					<h:outputLabel value="Téléphone : " />
 					<h:inputText id="PhoneInput"
-						value="#{createUserBisBean.createUserBis.phone}" />
+						value="#{createUserBean.createUser.phone}" />
 					<h:messages for="PhoneInput" />
 
 					<h:outputLabel value="Adresse : " />
 					<h:inputText id="AddressInput"
-						value="#{createUserBisBean.createUserBis.address}" />
+						value="#{createUserBean.createUser.address}" />
 					<h:messages for="AddressInput" />
 
 					<h:outputLabel value="Code postale : " />
 					<h:inputText id="ZipcodeInput"
-						value="#{createUserBisBean.createUserBis.zipcode}" />
+						value="#{createUserBean.createUser.zipcode}" />
 					<h:messages for="zipcodeInput" />
 
 					<h:outputLabel value="Ville : " />
 					<h:inputText id="CityInput"
-						value="#{createUserBisBean.createUserBis.city}" />
+						value="#{createUserBean.createUser.city}" />
 					<h:messages for="CityInput" />
 
 					<h:outputLabel value="Pays : " />
 					<h:inputText id="CountryInput"
-						value="#{createUserBisBean.createUserBis.country}" />
+						value="#{createUserBean.createUser.country}" />
 					<h:messages for="CountryInput" />
 
 					<span></span>
 					<h:button outcome="index.xhtml" value="Annuler" />
-					<h:commandButton action="#{createUserBisBean.create(id)}"
+					<h:commandButton action="#{createUserBean.modify(id)}"
 						value="Modifier" />
 				</h:panelGrid>
 			</h:form>

@@ -17,9 +17,7 @@ import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
-import fr.isika.cda14.efund.repositories.OrganizationAccountRepo;
-import fr.isika.cda14.efund.repositories.UserAccountRepository;
-import fr.isika.cda14.efund.viewmodel.CreateUserBisViewModel;
+import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -27,76 +25,71 @@ import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 public class AccountService {
 
 	@Inject
-	private OrganizationAccountRepo orgRepo;
-
-	@Inject
-	private UserAccountRepository userRepo;
+	private AccountRepository repo;
 
 	public Long createOrg(OrganizationForm inputOrg) {
 
-		OrganizationAccount newOrg = new OrganizationAccount();
+		OrganizationAccount org = new OrganizationAccount();
 
-		newOrg.setEmail(inputOrg.getEmail());
-		newOrg.setPassword(inputOrg.getPassword());
-		newOrg.setDisplayedName(inputOrg.getDisplayedName());
-		newOrg.setOrganizationInfo(new OrganizationInfo());
-		newOrg.setOrganizationSpace(new OrganizationSpace());
-		newOrg.getOrganizationSpace().setShop(new Shop());
-		newOrg.setRole(Role.ASSOC);
-		newOrg.setAccountStatus(AccountStatus.ACTIVE);
-		newOrg.setImagePath("defaultImg.jpg");
-		return orgRepo.persists(newOrg);
+		org.setEmail(inputOrg.getEmail());
+		org.setPassword(inputOrg.getPassword());
+		org.setDisplayedName(inputOrg.getDisplayedName());
+		org.setOrganizationInfo(new OrganizationInfo());
+		org.setOrganizationSpace(new OrganizationSpace());
+		org.getOrganizationSpace().setShop(new Shop());
+		org.setRole(Role.ASSOC);
+		org.setAccountStatus(AccountStatus.ACTIVE);
+		org.setImagePath("defaultImg.jpg");
+		return repo.persist(org);
 	}
 
 	public void updateOrg(Long id, OrganizationForm inputOrg) {
 
-		OrganizationAccount myOrg = orgRepo.find(id);
+		OrganizationAccount org = repo.findOrganization(id);
 
-		myOrg.getOrganizationInfo().setName(inputOrg.getOrganizationName());
-		myOrg.getOrganizationInfo().setSiret(inputOrg.getSiret());
-		myOrg.getOrganizationInfo().setSummary(inputOrg.getSummary());
-		myOrg.getOrganizationInfo().setDescription(inputOrg.getDescription());
+		org.getOrganizationInfo().setName(inputOrg.getOrganizationName());
+		org.getOrganizationInfo().setSiret(inputOrg.getSiret());
+		org.getOrganizationInfo().setSummary(inputOrg.getSummary());
+		org.getOrganizationInfo().setDescription(inputOrg.getDescription());
 
-		orgRepo.update(myOrg);
+		repo.update(org);
 	}
 
-	public Long createUser(CreateUserViewModel createUser) {
+	public Long createUser(CreateUserViewModel inputUser) {
 
-		UserAccount newUser = new UserAccount();
+		UserAccount user = new UserAccount();
 
-		newUser.setEmail(createUser.getEmail());
-		newUser.setPassword(createUser.getPassword());
-		newUser.setDisplayedName(createUser.getDisplayedName());
-		newUser.setUserInfo(new UserInfo());
-		newUser.getUserInfo().setUserAddress(new Address());
-		newUser.setUserSpace(new UserSpace());
-		newUser.setBasket(new Basket());
-		newUser.setRole(Role.USER);
-		newUser.setAccountStatus(AccountStatus.ACTIVE);
-		newUser.setImagePath("defaultImg.jpg");
+		user.setEmail(inputUser.getEmail());
+		user.setPassword(inputUser.getPassword());
+		user.setDisplayedName(inputUser.getDisplayedName());
+		user.setUserInfo(new UserInfo());
+		user.getUserInfo().setUserAddress(new Address());
+		user.setUserSpace(new UserSpace());
+		user.setBasket(new Basket());
+		user.setRole(Role.USER);
+		user.setAccountStatus(AccountStatus.ACTIVE);
+		user.setImagePath("defaultImg.jpg");
 
-		return userRepo.persists(newUser);
-
+		return repo.persist(user);
 	}
 
-	public void updateUser(Long id, CreateUserBisViewModel createUserBis) {
+	public void updateUser(Long id, CreateUserViewModel inputUser) {
 
-		UserAccount user = userRepo.find(id);
+		UserAccount user = repo.findUser(id);
 
-		user.getUserInfo().setFirstName(createUserBis.getFirstName());
-		user.getUserInfo().setLastName(createUserBis.getLastName());
-		user.getUserInfo().setPhone(createUserBis.getPhone());
-		user.getUserInfo().getUserAddress().setAddress(createUserBis.getAddress());
-		user.getUserInfo().getUserAddress().setCity(createUserBis.getCity());
-		user.getUserInfo().getUserAddress().setZipcode(createUserBis.getZipcode());
-		user.getUserInfo().getUserAddress().setCountry(createUserBis.getCountry());
+		user.getUserInfo().setFirstName(inputUser.getFirstName());
+		user.getUserInfo().setLastName(inputUser.getLastName());
+		user.getUserInfo().setPhone(inputUser.getPhone());
+		user.getUserInfo().getUserAddress().setAddress(inputUser.getAddress());
+		user.getUserInfo().getUserAddress().setCity(inputUser.getCity());
+		user.getUserInfo().getUserAddress().setZipcode(inputUser.getZipcode());
+		user.getUserInfo().getUserAddress().setCountry(inputUser.getCountry());
 
-		userRepo.update(user);
-
+		repo.update(user);
 	}
 
 	public Optional<Account> findByEmail(String email) {
-		return userRepo.findByEmail(email);
+		return repo.findByEmail(email);
 	}
 
 }
