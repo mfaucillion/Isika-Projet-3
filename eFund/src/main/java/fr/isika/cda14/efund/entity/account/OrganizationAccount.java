@@ -14,7 +14,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 @Table(name = "organization_account")
 public class OrganizationAccount extends Account {
 
-	@OneToOne(cascade = CascadeType.ALL )
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_info_id")
 	private OrganizationInfo organizationInfo;
 	
