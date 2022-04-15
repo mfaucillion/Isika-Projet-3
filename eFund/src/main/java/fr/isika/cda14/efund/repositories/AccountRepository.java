@@ -13,6 +13,7 @@ import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
+
 @Stateless
 public class AccountRepository {
 

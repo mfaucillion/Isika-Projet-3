@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import fr.isika.cda14.efund.entity.account.Account;
+import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.services.AccountService;
 
 @ManagedBean

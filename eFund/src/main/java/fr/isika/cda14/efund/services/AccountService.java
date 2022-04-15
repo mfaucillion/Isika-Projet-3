@@ -18,6 +18,7 @@ import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
+import fr.isika.cda14.efund.exception.UserAlreadyExistsException;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
@@ -56,7 +57,11 @@ public class AccountService {
 		repo.update(org);
 	}
 
-	public Long createUser(CreateUserViewModel inputUser) {
+	public Long createUser(CreateUserViewModel inputUser) throws UserAlreadyExistsException {
+		Optional<Account> account = repo.findByEmail(inputUser.getEmail());
+		if (account.isPresent()) {
+			throw new UserAlreadyExistsException("Le compte d'utilisateur existe déjà");
+		}
 
 		UserAccount user = new UserAccount();
 
@@ -72,6 +77,7 @@ public class AccountService {
 		user.setImagePath("defaultImg.jpg");
 
 		return repo.persist(user);
+
 	}
 
 	public void updateUser(Long id, CreateUserViewModel inputUser) {
@@ -105,6 +111,11 @@ public class AccountService {
 	//pour trouver mon orga
 	public OrganizationAccount find(Long id) {
 		return repo.findOrganization(id);
+	}
+
+	public List<OrganizationAccount> findAll() {
+		return repo.findAll();
+
 	}
 
 }
