@@ -16,101 +16,129 @@
 				<hr class="bg-primary" />
 				<h:form id="EventCreationForm">
 
-					<div class="row">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="NameInput" value="Nom" />
-							<h:inputText styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.name}"
-								id="NameInput" />
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-align-justify"></i>
+								</div>
+								<p:inputText placeholder="Nom"
+									value="#{eventCreationBean.eventCreationFormVM.name}"
+									id="NameInput" />
+							</div>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="EndDateInput" value="Date de fin d'inscription à l'évènement" />
-							<br/>
-							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.endDate}"/>
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-calendar"></i>
+								</div>
+							<p:datePicker placeholder="Date de fin d'inscription à l'évènement"
+								value="#{eventCreationBean.eventCreationFormVM.endDate}" />
+								</div>
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="LocalisationInput" value="Localisation" />
-							<h:inputText styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.location}"
-								id="LocalisationInput" />
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-map"></i>
+								</div>
+								<p:inputText placeholder="Localisation"
+									value="#{eventCreationBean.eventCreationFormVM.location}"
+									id="LocalisationInput" />
+							</div>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="ImageInput" value="Image" />
-							<h:inputText styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.imagePath}"
-								id="ImageInput" />
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-12 col-md-1 mt-3"></div>
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="StartDateInput" value="Date de début de l'évènement" />
-							<br/>
-							<p:datePicker value="#{eventCreationBean.eventCreationFormVM.eventStartDate}"/>
-						</div>
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="DurationInput" value="Durée de l'évènement" />
-							<h:inputText styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.duration}"
-								id="DurationInput" />
+							<!-- <input class="form-control" type="file" title="image ou vidéo" id="formFile"> -->
+							<h:inputFile value=""></h:inputFile>
+							
+<!-- 							</input> -->
+<!-- 								value="#{eventCreationBean.eventCreationFormVM.imagePath}"
+								id="ImageInput" /> -->
+
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
-						<div class="col-12 col-md-2 mt-3">
-							<h:outputLabel for="CategoryInput" value="Categorie" />
-							<br />
-							<h:selectOneMenu style="width:150px;"
-								value="#{eventCreationBean.eventCreationFormVM.projectCategory}">
-								<f:selectItem itemLabel="Sélection" itemValue="" />
-								<f:selectItems
-									value="#{eventCreationBean.eventCreationFormVM.projectCategories}"
-									var="category" itemValue="#{category}"
-									itemLabel="#{category.projectCategoryLabel}" />
+						<div class="col-12 col-md-5 mt-3">
 
-							</h:selectOneMenu>
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-calendar"></i>
+								</div>
+								<p:datePicker placeholder="Date de début de l'évènement"
+									value="#{eventCreationBean.eventCreationFormVM.eventStartDate}" />
+							</div>
+
+
 						</div>
-
-
-						<div class="col-12 col-md-2 mt-3">
-							<h:outputLabel for="RangeInput" value="Portée" />
-							<br />
-							<h:selectOneMenu style="width:150px;"
-								value="#{eventCreationBean.eventCreationFormVM.projectRange}">
-								<f:selectItem itemLabel="Sélection" itemValue="" />
-								<f:selectItems
-									value="#{eventCreationBean.eventCreationFormVM.projectRanges}"
-									var="range" itemValue="#{range}"
-									itemLabel="#{range.projectRangeLabel}" />
-
-							</h:selectOneMenu>
-						</div>
-
-						<div class="col-12 col-md-1 mt-3"></div>
 
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="VolunteerTargetInput"
-								value="Nombre de volontaires souhaité" />
-							<h:inputText styleClass="form-control"
-								value="#{eventCreationBean.eventCreationFormVM.volunteerTarget}"
-								id="VolunteerTargetInput" />
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-clock"></i>
+								</div>
+								<p:spinner placeholder="Durée de l'évènement (en jours)" min="1"
+									upButtonStyleClass="ui-button-secondary"
+									downButtonStyleClass="ui-button-secondary"
+									value="#{eventCreationBean.eventCreationFormVM.duration}"
+									id="DurationInput" />
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<p:selectOneMenu
+										value="#{eventCreationBean.eventCreationFormVM.projectCategory}">
+										<f:selectItem itemLabel="Catégorie" itemValue="" />
+										<f:selectItems
+											value="#{eventCreationBean.eventCreationFormVM.projectCategories}"
+											var="category" itemValue="#{category}"
+											itemLabel="#{category.projectCategoryLabel}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-12 col-md-6">
+									<p:selectOneMenu
+										value="#{eventCreationBean.eventCreationFormVM.projectRange}">
+										<f:selectItem itemLabel="Sélection" itemValue="" />
+										<f:selectItems
+											value="#{eventCreationBean.eventCreationFormVM.projectRanges}"
+											var="range" itemValue="#{range}"
+											itemLabel="#{range.projectRangeLabel}" />
+
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-user"></i>
+								</div>
+								<p:spinner placeholder="Nombre de volontaires souhaité" min="1"
+									upButtonStyleClass="ui-button-secondary"
+									downButtonStyleClass="ui-button-secondary"
+									value="#{eventCreationBean.eventCreationFormVM.volunteerTarget}"
+									id="VolunteerTargetInput" />
+							</div>
 						</div>
 
 
 					</div>
 
-					<div class="row">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
-							<h:outputLabel for="SummaryInput" value="Résumé de l'évènement" />
-							<h:inputTextarea styleClass="form-control"
+							<p:inputTextarea placeholder="Résumé de l'évènement"
 								value="#{eventCreationBean.eventCreationFormVM.summary}"
 								id="SummaryInput" />
 						</div>
@@ -121,11 +149,13 @@
 					<div class="row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
-							<h:commandButton styleClass="btn-outline-secondary btn-black"
+							<h:commandButton
+								styleClass="btn-outline-secondary btn-black rounded-pill"
 								action="#" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
-							<h:commandButton styleClass="btn-outline-secondary btn-black"
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
 								action="#{eventCreationBean.createEvent()}" value="Valider" />
 						</div>
 
@@ -133,7 +163,7 @@
 				</h:form>
 
 			</div>
-			
+
 		</ui:define>
 	</ui:composition>
 </h:body>
