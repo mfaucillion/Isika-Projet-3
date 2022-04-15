@@ -17,7 +17,8 @@
 						<img class="img-fluid" src="https://www.legiennois.fr/images/2-Le_territoire/participer/6583.jpg"/>
 					</div>
 					<div class="col-12 col-md-7 my-auto">
-						<h1>Mon Asso <i class="fa-solid fa-gear"/></h1>
+						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
+						<h1>Mon Asso <p:link outcome="MODELE.xhtml"><i class="fa-solid fa-gear"/></p:link></h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget arcu egestas dictum. Nullam bibendum dignissim leo, id euismod libero ultricies vel. Vivamus tellus turpis, ultrices id ante vitae, commodo blandit nunc. Curabitur dignissim tempor nulla, quis ultrices magna dictum vitae. Integer tempus hendrerit ante non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada efficitur elit. Nulla in ligula fermentum, interdum nibh at, consequat elit.</p>
 						<br/>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget arcu egestas dictum. Nullam bibendum dignissim leo, id euismod libero ultricies vel. Vivamus tellus turpis, ultrices id ante vitae, commodo blandit nunc. Curabitur dignissim tempor nulla, quis ultrices magna dictum vitae. Integer tempus hendrerit ante non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada efficitur elit. Nulla in ligula fermentum, interdum nibh at, consequat elit.</p>
@@ -25,9 +26,16 @@
 				</div>
 				<hr/>
 				<p:tabView>
-								
-				<!-- Onglet Boutique -->
 
+					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux onglets -->
+					<p:tab>
+						<f:facet name="title">
+							<i class="fa-solid fa-plus" />
+						</f:facet>
+						FORMULAIRE NOUVEL ONGLET
+					</p:tab>
+					
+				<!-- Onglet Boutique -->
 					<p:tab title="Boutique">
 						<div class="row">
 							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">

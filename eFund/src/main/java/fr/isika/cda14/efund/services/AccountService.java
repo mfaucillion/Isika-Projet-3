@@ -113,9 +113,4 @@ public class AccountService {
 		return repo.findOrganization(id);
 	}
 
-	public List<OrganizationAccount> findAll() {
-		return repo.findAll();
-
-	}
-
 }
