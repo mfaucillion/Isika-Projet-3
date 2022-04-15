@@ -98,6 +98,20 @@ public class AccountService {
 	public Optional<Account> findByEmail(String email) {
 		return repo.findByEmail(email);
 	}
+  
+	//pour trouver ma liste d'orga
+	public List<OrganizationAccount> findAll(){
+		return repo.findAll();
+	}
+	
+	public Long findOrgSpace(Long id) {
+		return repo.findOrgSpace(id);
+  }
+  
+	//pour trouver mon orga
+	public OrganizationAccount find(Long id) {
+		return repo.findOrganization(id);
+	}
 
 	public List<OrganizationAccount> findAll() {
 		return repo.findAll();

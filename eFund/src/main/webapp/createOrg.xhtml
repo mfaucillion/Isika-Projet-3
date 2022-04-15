@@ -20,8 +20,7 @@
 						value="#{createOrganizationAccountBean.organization.email}" />
 
 					<h:outputLabel for="orgPwd" value="Mot de passe" />
-					<h:inputSecret id="orgPwd"
-						value="#{createOrganizationAccountBean.organization.password}" />
+					<p:password id="orgPwd" toggleMask="true" value="#{createOrganizationAccountBean.organization.password}"/>
 
 					<h:outputLabel for="orgUserName" value="Nom du compte" />
 					<h:inputText id="orgUserName"
