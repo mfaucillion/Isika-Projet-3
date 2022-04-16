@@ -11,28 +11,77 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<h1>Création d'une nouvelle association/ONG</h1>
-			<hr />
-			<h:form id="orgCreationForm">
-				<h:panelGrid columns="2">
-					<h:outputLabel for="orgEmail" value="Email" />
-					<h:inputText id="orgEmail"
-						value="#{createOrganizationAccountBean.organization.email}" />
+			<div class="container shadow p-5 mt-5">
+				<h1>Création de votre compte Organisation/ONG</h1>
+				<hr class="bg-primary" />
+				<h:form id="createOrgForm">
 
-					<h:outputLabel for="orgPwd" value="Mot de passe" />
-					<p:password id="orgPwd" toggleMask="true" value="#{createOrganizationAccountBean.organization.password}"/>
+					<div class="ui-fluid row">
 
-					<h:outputLabel for="orgUserName" value="Nom du compte" />
-					<h:inputText id="orgUserName"
-						value="#{createOrganizationAccountBean.organization.displayedName}" />
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-at"></i>
+								</div>
+								<p:inputText placeholder="Email"
+									value="#{createOrganizationAccountBean.organization.email}"
+									id="OrgEmailInput" />
+							</div>
+						</div>
 
-					<h:button outcome="index.xhtml" value="Retour" />
-					<h:commandButton action="#{createOrganizationAccountBean.create()}"
-						value="OK" />
-				</h:panelGrid>
-			</h:form>
+					</div>
+
+					<div class="ui-fluid row">
+
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-key"></i>
+								</div>
+								<p:inputText placeholder="Mot de passe" type="password"
+									value="#{createOrganizationAccountBean.organization.password}"
+									id="OrgPasswordInput" />
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-fluid row">
+
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-user"></i>
+								</div>
+								<p:inputText placeholder="Nom de compte"
+									value="#{createOrganizationAccountBean.organization.displayedName}"
+									id="OrgDisplayedNameInput" />
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#"
+								value="Annuler" />
+						</div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{createOrganizationAccountBean.create()}"
+								value="Valider" />
+						</div>
+					</div>
+
+				</h:form>
+
+			</div>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>
