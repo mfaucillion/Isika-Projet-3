@@ -7,6 +7,8 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
+import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.EventRepository;
 import fr.isika.cda14.efund.viewmodel.EventCreationFormVM;
 
@@ -15,8 +17,10 @@ public class EventCreationService {
 
 	@Inject
 	private EventRepository eventRepo;
+	@Inject
+	private AccountRepository accountRepo;
 
-	public void create(EventCreationFormVM eventCreationFormVM) {
+	public void create(EventCreationFormVM eventCreationFormVM, Long id) {
 		System.out.println("Service; " + eventCreationFormVM);
 		Event newEvent = new Event();
 		newEvent.setName(eventCreationFormVM.getName());
@@ -31,8 +35,13 @@ public class EventCreationService {
 		newEvent.setDuration(eventCreationFormVM.getDuration());
 		newEvent.setProjectStatus(ProjectStatus.DRAFT);
 		newEvent.setCreationDate(new Date());
+		
+		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 
+		newEvent.setOrgSpace(orgSpace);
+		
 		eventRepo.create(newEvent);
+//		accountRepo.update(orgSpace);
 
 	}
 

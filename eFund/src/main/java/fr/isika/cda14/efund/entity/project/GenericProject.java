@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +22,7 @@ import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
 import fr.isika.cda14.efund.entity.enums.ProjectRange;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -78,6 +80,9 @@ public abstract class GenericProject {
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Favorite> favorites;
+	
+	@ManyToOne
+	private OrganizationSpace orgSpace;
 
 	public void setName(String name) {
 		this.name = name;
@@ -173,6 +178,14 @@ public abstract class GenericProject {
 
 	public List<Favorite> getFavorites() {
 		return favorites;
+	}
+
+	public OrganizationSpace getOrgSpace() {
+		return orgSpace;
+	}
+
+	public void setOrgSpace(OrganizationSpace orgSpace) {
+		this.orgSpace = orgSpace;
 	}
 	
 	

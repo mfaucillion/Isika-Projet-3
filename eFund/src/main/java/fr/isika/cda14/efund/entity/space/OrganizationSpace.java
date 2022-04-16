@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,8 +36,7 @@ public class OrganizationSpace {
 	@JoinColumn(name = "organization_space_id")
 	private List<ContentTab> contentTabs;
 
-	@OneToMany
-	@JoinColumn(name = "organization_space_id")
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "orgSpace")
 	private List<GenericProject> genericProjects;
 
 	public Shop getShop() {

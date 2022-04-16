@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
