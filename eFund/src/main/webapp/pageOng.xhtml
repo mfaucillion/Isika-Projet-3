@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="content">
+			<f:metadata>
+				<f:viewParam name="id" />
+				<f:event listener="#{organizationSpaceBean.onLoad(id)}"
+					type="preRenderView"></f:event>
+			</f:metadata>
+
+			<div class="container-fluid p-5">
+				<div class="row">
+					<div class="col-12 col-md-5">
+						<img class="img-fluid"
+							src="https://www.legiennois.fr/images/2-Le_territoire/participer/6583.jpg" />
+					</div>
+					<div class="col-12 col-md-7 my-auto">
+						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
+						<h1>
+							Mon Asso
+							<p:link outcome="MODELE.xhtml">
+								<i class="fa-solid fa-gear" />
+							</p:link>
+						</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget
+							arcu egestas dictum. Nullam bibendum dignissim leo, id euismod
+							libero ultricies vel. Vivamus tellus turpis, ultrices id ante
+							vitae, commodo blandit nunc. Curabitur dignissim tempor nulla,
+							quis ultrices magna dictum vitae. Integer tempus hendrerit ante
+							non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada
+							efficitur elit. Nulla in ligula fermentum, interdum nibh at,
+							consequat elit.</p>
+						<br />
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget
+							arcu egestas dictum. Nullam bibendum dignissim leo, id euismod
+							libero ultricies vel. Vivamus tellus turpis, ultrices id ante
+							vitae, commodo blandit nunc. Curabitur dignissim tempor nulla,
+							quis ultrices magna dictum vitae. Integer tempus hendrerit ante
+							non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada
+							efficitur elit. Nulla in ligula fermentum, interdum nibh at,
+							consequat elit.</p>
+					</div>
+				</div>
+				<hr />
+				<p:tabView>
+
+					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux onglets -->
+					<p:tab>
+						<f:facet name="title">
+							<i class="fa-solid fa-plus" />
+						</f:facet>
+						<h3>Nouvel Onglet</h3>
+					</p:tab>
+
+					<!-- Onglet Boutique -->
+					<p:tab title="Boutique">
+
+						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
+						<p:link outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProduct">
+							<i class="fa-solid fa-plus" />
+						</p:link>
+						<p:tooltip for="newProduct" value="Nouveau Produit"
+							position="right" />
+						<div class="row">
+							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<p:card styleClass="shadow">
+									<f:facet name="header">
+										<img
+											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
+									</f:facet>
+									<f:facet name="title">
+										<i class="fa-solid fa-minus"></i>Sushi
+									</f:facet>
+									<f:facet name="subtitle">
+										Nourriture
+									</f:facet>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Fusce a urna eget massa tempus faucibus.</p>
+									<f:facet name="footer">
+										<div class="m-3">
+											Prix : 20.00€
+											<p:commandButton styleClass="float-end" icon="pi pi-check"
+												value="Acheter" />
+										</div>
+									</f:facet>
+								</p:card>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<p:card styleClass="shadow">
+									<f:facet name="header">
+										<img
+											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
+									</f:facet>
+									<f:facet name="title">
+										Sushi
+									</f:facet>
+									<f:facet name="subtitle">
+										Nourriture
+									</f:facet>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Fusce a urna eget massa tempus faucibus.</p>
+									<f:facet name="footer">
+										<div class="m-3">
+											Prix : 20.00€
+											<p:commandButton styleClass="float-end" icon="pi pi-check"
+												value="Acheter" />
+										</div>
+									</f:facet>
+								</p:card>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<p:card styleClass="shadow">
+									<f:facet name="header">
+										<img
+											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
+									</f:facet>
+									<f:facet name="title">
+										Sushi
+									</f:facet>
+									<f:facet name="subtitle">
+										Nourriture
+									</f:facet>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Fusce a urna eget massa tempus faucibus.</p>
+									<f:facet name="footer">
+										<div class="m-3">
+											Prix : 20.00€
+											<p:commandButton styleClass="float-end" icon="pi pi-check"
+												value="Acheter" />
+										</div>
+									</f:facet>
+								</p:card>
+							</div>
+							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<p:card styleClass="shadow">
+									<f:facet name="header">
+										<img
+											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
+									</f:facet>
+									<f:facet name="title">
+										Sushi
+									</f:facet>
+									<f:facet name="subtitle">
+										Nourriture
+									</f:facet>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Fusce a urna eget massa tempus faucibus.</p>
+									<f:facet name="footer">
+										<div class="m-3">
+											Prix : 20.00€
+											<p:commandButton styleClass="float-end" icon="pi pi-check"
+												value="Acheter" />
+										</div>
+									</f:facet>
+								</p:card>
+							</div>
+						</div>
+					</p:tab>
+
+					<!-- Onglet Projets -->
+
+					<p:tab title="Projets">
+						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
+						<p:link outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
+							<i class="fa-solid fa-plus" />
+						</p:link>
+						<p:tooltip for="newProject" value="Nouveau Projet"/>
+						<div class="row">
+							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+									<p:card styleClass="shadow">
+										<f:facet name="header">
+											<img src="#{project.imagePath}" />
+										</f:facet>
+										<f:facet name="title">
+												Mon projet
+											</f:facet>
+										<f:facet name="subtitle">
+												Humanitaire
+											</f:facet>
+										<p>Description : Lorem ipsum dolor sit amet, consectetur
+											adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+										<f:facet name="footer">
+											<div class="m-3">
+												55€ collecté sur 2500€
+												<p:commandButton styleClass="float-end" icon="pi pi-check"
+													value="Explorer" />
+											</div>
+										</f:facet>
+									</p:card>
+								</div>
+							</p:repeat>
+						</div>
+					</p:tab>
+
+					<!-- Onglet Evénements -->
+					<p:tab title="Evénements">
+						<div class="row">
+							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<p:card styleClass="shadow">
+									<f:facet name="header">
+										<img
+											src="https://www.ville-montreuil-juigne.fr/var/ayaline/storage/images/media/images/actualites/recherche-de-benevoles/117162-1-fre-FR/recherche-de-benevoles_image_full.jpg"></img>
+									</f:facet>
+									<f:facet name="title">
+										Mon Evénement
+									</f:facet>
+									<f:facet name="subtitle">
+										Humanitaire
+									</f:facet>
+									<p>Description : Lorem ipsum dolor sit amet, consectetur
+										adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+									<f:facet name="footer">
+										<div class="m-3">
+											55€ collecté sur 2500€
+											<p:commandButton styleClass="float-end" icon="pi pi-check"
+												value="Explorer" />
+										</div>
+									</f:facet>
+								</p:card>
+							</div>
+						</div>
+					</p:tab>
+				</p:tabView>
+			</div>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>

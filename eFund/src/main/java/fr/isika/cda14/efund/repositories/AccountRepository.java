@@ -77,7 +77,6 @@ public class AccountRepository {
 
 	public void update(OrganizationSpace orgSpace) {
 		em.merge(orgSpace);
-		
 	}
 
 }

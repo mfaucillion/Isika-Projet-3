@@ -2,7 +2,6 @@ package fr.isika.cda14.efund.managedbeans;
 
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
@@ -22,17 +21,10 @@ public class LoginBean {
 	private String email;
 	private String password;
 
-	@PostConstruct
-	private void init() {
-		// ce code s'exécute dès la création du bean
-		// attention il est possible que le refresh sur la page n'appelle pas ce bloc
-	}
-
 	public String login() {
 		
 		Optional<Account> optional = accountService.findByEmail(email);
 		if (optional.isPresent()) {
-			
 			Account account = optional.get();
 			if (account.getEmail().equals(email) && account.getPassword().equals(password)) {
 				

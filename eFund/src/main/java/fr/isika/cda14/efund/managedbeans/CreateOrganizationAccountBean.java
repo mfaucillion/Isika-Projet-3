@@ -5,6 +5,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -16,6 +17,10 @@ public class CreateOrganizationAccountBean {
 
 	@Inject
 	AccountService accountService;	
+	
+	private Long id;
+	
+	OrganizationAccount myOrg;
 
 	public String create() {
 
@@ -23,7 +28,7 @@ public class CreateOrganizationAccountBean {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("viewmodel", organization);
 		return "createOrgBis?id=" + newOrgID + "faces-redirect=true";
 	}
-
+	
 	public String modify(Long id) {
 		accountService.updateOrg(id, organization);
 		return "index";
@@ -36,4 +41,5 @@ public class CreateOrganizationAccountBean {
 	public void setOrganization(OrganizationForm organization) {
 		this.organization = organization;
 	}
+
 }
