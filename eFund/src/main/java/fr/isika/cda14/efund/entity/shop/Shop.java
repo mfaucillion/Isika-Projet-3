@@ -22,4 +22,16 @@ public class Shop {
 	@JoinColumn(name = "shop_id")
 	private List<Item> items;
 
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 }

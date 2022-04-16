@@ -3,7 +3,6 @@ package fr.isika.cda14.efund.managedbeans;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
@@ -25,6 +24,7 @@ public class OrganizationSpaceBean {
 	public void onLoad(String id) {
 
 		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
+		
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);
