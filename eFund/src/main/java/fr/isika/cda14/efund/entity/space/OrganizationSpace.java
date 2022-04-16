@@ -36,8 +36,7 @@ public class OrganizationSpace {
 	@JoinColumn(name = "organization_space_id")
 	private List<ContentTab> contentTabs;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "organization_space_id")
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "orgSpace")
 	private List<GenericProject> genericProjects;
 
 	public Shop getShop() {
