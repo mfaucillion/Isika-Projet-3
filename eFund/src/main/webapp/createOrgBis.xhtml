@@ -6,43 +6,101 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="id" />
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<f:metadata>
-				<f:viewParam name="id" />
-			</f:metadata>
-			<h1>Modification association/ONG</h1>
-			<hr />
-			<h:form id="modifForm">
-				<h:panelGrid columns="2">
+			<div class="container shadow p-5 mt-5">
+				<h1>Informations de l'Association/ONG</h1>
+				<hr class="bg-primary" />
+				<h:form id="createOrgFormBis">
 
-					<h:outputLabel value="Nom complet de l'association" />
-					<h:inputText
-						value="#{createOrganizationAccountBean.organization.organizationName}" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-map"></i>
+								</div>
+								<p:inputText placeholder="Nom complet de l'association"
+									value="#{createOrganizationAccountBean.organization.organizationName}"
+									id="OrgNameInput" />
+							</div>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-calendar"></i>
+								</div>
+								<p:inputText placeholder="Siret"
+									value="#{createOrganizationAccountBean.organization.siret}"
+									id="siretInput" />
+							</div>
+						</div>
+					</div>
 
-					<h:outputLabel value="Siret" />
-					<h:inputText
-						value="#{createOrganizationAccountBean.organization.siret}" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:inputTextarea placeholder="Résumé de l'association"
+								value="#{createOrganizationAccountBean.organization.summary}"
+								id="OrgSummaryInput" />
+						</div>
+					</div>
 
-					<h:outputLabel value="Résumé" />
-					<h:inputText
-						value="#{createOrganizationAccountBean.organization.summary}" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:inputTextarea
+								placeholder="Description complète de l'association"
+								value="#{createOrganizationAccountBean.organization.description}"
+								id="OrgDescriptionInput" />
+						</div>
+					</div>
+					
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:fileUpload skinSimple="true"
+								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
+								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
+								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
+								label="Choisissez une image" style="background-color:green"
+								title="Choisissez une image pour votre évènement"
+								mode="advanced" sizeLimit="5000000" fileLimit="1"
+								accept=".gif,.jpg,.jpeg,.png"
+								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
+								listener="#" />
 
-					<h:outputLabel value="Description" />
-					<h:inputText
-						value="#{createOrganizationAccountBean.organization.description}" />
+						</div>
 
-					<h:button outcome="index.xhtml" value="Annuler" />
-					<h:commandButton
-						action="#{createOrganizationAccountBean.modify(id)}"
-						value="Modifier" />
-				</h:panelGrid>
-			</h:form>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#" value="Annuler" />
+						</div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{createOrganizationAccountBean.modify(id)}"
+								value="Valider" />
+						</div>
+					</div>
+					
+				</h:form>
+
+			</div>
+
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>
