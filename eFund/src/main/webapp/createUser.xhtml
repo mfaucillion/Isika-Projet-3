@@ -11,34 +11,74 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<h1>Création d'un compte d'utilisateur</h1>
-			<hr />
-			<h:form id="createAccountForm">
-				<h:panelGrid columns="3">
+			<div class="container shadow p-5 mt-5">
+				<h1>Création de votre compte utilisateur</h1>
+				<hr class="bg-primary" />
+				<h:form id="createAccountForm">
 
-					<h:outputLabel value="Email : " />
-					<h:inputText id="emailInput"
-						value="#{createUserBean.createUser.email}" />
-					<h:messages for="emailInput" />
+					<div class="ui-fluid row">
 
-					<h:outputLabel value="Mot de passe : " />
-					<h:inputSecret id="passwordInput"
-						value="#{createUserBean.createUser.password}" />
-					<h:messages for="passwordInput" />
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-at"></i>
+								</div>
+								<p:inputText placeholder="Email"
+									value="#{createUserBean.createUser.email}" id="emailInput" />
+							</div>
+						</div>
 
-					<h:outputLabel value="Pseudo : " />
-					<h:inputText id="displayedNameInput"
-						value="#{createUserBean.createUser.displayedName}" />
-					<h:messages for="displayedName" />
+					</div>
 
-					<span></span>
-					<h:commandButton value="Crée" action="#{createUserBean.create()}" />
-				</h:panelGrid>
-			</h:form>
+					<div class="ui-fluid row">
 
-			<hr />
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-key"></i>
+								</div>
+								<p:inputText placeholder="Mot de passe" type="password"
+									value="#{createUserBean.createUser.password}"
+									id="passwordInput" />
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-fluid row">
+
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-user"></i>
+								</div>
+								<p:inputText placeholder="Nom d'utilisateur"
+									value="#{createUserBean.createUser.displayedName}"
+									id="displayedNameInput" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#" value="Annuler" />
+						</div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{createUserBean.create()}" value="Valider" />
+						</div>
+					</div>
+
+				</h:form>
+
+			</div>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

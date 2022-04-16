@@ -6,65 +6,119 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="id" />
+</f:metadata>
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<f:metadata>
-				<f:viewParam name="id" />
-			</f:metadata>
-			<h1>Modification de l'utilisateur</h1>
-			<hr />
-			<h:form id="LoginForm">
-				<h:panelGrid columns="3">
+			<div class="container shadow p-5 mt-5">
+				<h1>Informations de l'utilisateur</h1>
+				<hr class="bg-primary" />
+				<h:form id="LoginForm">
 
-					<h:outputLabel value="Nom : " />
-					<h:inputText id="LastNameInput"
-						value="#{createUserBean.createUser.lastName}" />
-					<h:messages for="LastNameInput" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-align-justify"></i>
+								</div>
+								<p:inputText placeholder="Prénom"
+									value="#{createUserBean.createUser.firstName}"
+									id="FistNameInput" />
+							</div>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-align-justify"></i>
+								</div>
+								<p:inputText placeholder="Nom"
+									value="#{createUserBean.createUser.lastName}"
+									id="LastNameInput" />
+							</div>
+						</div>
+					</div>
 
-					<h:outputLabel value="Prénom : " />
-					<h:inputText id="FirstNameInput"
-						value="#{createUserBean.createUser.firstName}" />
-					<h:messages for="FirstNameInput" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-address-card"></i>
+								</div>
+								<p:inputText placeholder="N° et rue"
+									value="#{createUserBean.createUser.address}" id="AddressInput" />
+							</div>
+						</div>
+					</div>
 
-					<h:outputLabel value="Téléphone : " />
-					<h:inputText id="PhoneInput"
-						value="#{createUserBean.createUser.phone}" />
-					<h:messages for="PhoneInput" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-address-card"></i>
+								</div>
+								<p:inputText placeholder="Code postal"
+									value="#{createUserBean.createUser.zipcode}" id="ZipcodeInput" />
+							</div>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-address-card"></i>
+								</div>
+								<p:inputText placeholder="Ville"
+									value="#{createUserBean.createUser.city}" id="CityInput" />
+							</div>
+						</div>
+					</div>
 
-					<h:outputLabel value="Adresse : " />
-					<h:inputText id="AddressInput"
-						value="#{createUserBean.createUser.address}" />
-					<h:messages for="AddressInput" />
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-address-card"></i>
+								</div>
+								<p:inputText placeholder="Pays"
+									value="#{createUserBean.createUser.country}" id="CountryInput" />
+							</div>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-phone"></i>
+								</div>
+								<p:inputText placeholder="Téléphone"
+									value="#{createUserBean.createUser.phone}" id="PhoneInput" />
+							</div>
+						</div>
+					</div>
 
-					<h:outputLabel value="Code postale : " />
-					<h:inputText id="ZipcodeInput"
-						value="#{createUserBean.createUser.zipcode}" />
-					<h:messages for="zipcodeInput" />
+					<div class="row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#" value="Annuler" />
+						</div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{createUserBean.modify(id)}" value="Valider" />
+						</div>
 
-					<h:outputLabel value="Ville : " />
-					<h:inputText id="CityInput"
-						value="#{createUserBean.createUser.city}" />
-					<h:messages for="CityInput" />
+					</div>
+				</h:form>
 
-					<h:outputLabel value="Pays : " />
-					<h:inputText id="CountryInput"
-						value="#{createUserBean.createUser.country}" />
-					<h:messages for="CountryInput" />
-
-					<span></span>
-					<h:button outcome="index.xhtml" value="Annuler" />
-					<h:commandButton action="#{createUserBean.modify(id)}"
-						value="Modifier" />
-				</h:panelGrid>
-			</h:form>
-
-			<hr />
+			</div>
 
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>
