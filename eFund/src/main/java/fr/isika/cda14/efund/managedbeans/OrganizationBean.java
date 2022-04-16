@@ -20,7 +20,7 @@ public class OrganizationBean {
 	}
 
 	private OrganizationAccount getOrganizationAccount(Long id) {
-		return this.organisationService.find(id);
+		return this.organisationService.findOrganizationccount(id);
 	}
 
 	public OrganizationAccount getOrgAccount() {

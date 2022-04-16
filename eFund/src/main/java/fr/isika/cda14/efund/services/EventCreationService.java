@@ -41,8 +41,6 @@ public class EventCreationService {
 		newEvent.setOrgSpace(orgSpace);
 		
 		eventRepo.create(newEvent);
-//		accountRepo.update(orgSpace);
-
 	}
 
 }

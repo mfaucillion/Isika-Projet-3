@@ -24,7 +24,7 @@ public class OrganizationSpaceBean {
 	
 	public void onLoad(String id) {
 
-		orgAccount = accountService.find(Long.parseLong(id));
+		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);

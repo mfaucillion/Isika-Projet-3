@@ -104,12 +104,12 @@ public class AccountService {
 		return repo.findAll();
 	}
 	
-	public Long findOrgSpace(Long id) {
-		return repo.findOrgSpace(id);
+	public Long getOrgSpaceId(Long id) {
+		return repo.findOrgSpace(id).getId();
   }
   
 	//pour trouver mon orga
-	public OrganizationAccount find(Long id) {
+	public OrganizationAccount findOrganizationccount(Long id) {
 		return repo.findOrganization(id);
 	}
 
