@@ -10,7 +10,6 @@ import java.nio.file.StandardCopyOption;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 public class FileUpload {

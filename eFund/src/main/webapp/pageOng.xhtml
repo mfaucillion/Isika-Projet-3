@@ -22,150 +22,56 @@
 				<div class="row">
 					<div class="col-12 col-md-5">
 						<img class="img-fluid"
-							src="https://www.legiennois.fr/images/2-Le_territoire/participer/6583.jpg" />
+							src="#{organizationSpaceBean.orgAccount.imagePath}" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
-							Mon Asso
+							#{organizationSpaceBean.orgAccount.organizationInfo.name}
 							<p:link outcome="MODELE.xhtml">
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget
-							arcu egestas dictum. Nullam bibendum dignissim leo, id euismod
-							libero ultricies vel. Vivamus tellus turpis, ultrices id ante
-							vitae, commodo blandit nunc. Curabitur dignissim tempor nulla,
-							quis ultrices magna dictum vitae. Integer tempus hendrerit ante
-							non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada
-							efficitur elit. Nulla in ligula fermentum, interdum nibh at,
-							consequat elit.</p>
-						<br />
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-							Fusce a urna eget massa tempus faucibus. Curabitur ac dui eget
-							arcu egestas dictum. Nullam bibendum dignissim leo, id euismod
-							libero ultricies vel. Vivamus tellus turpis, ultrices id ante
-							vitae, commodo blandit nunc. Curabitur dignissim tempor nulla,
-							quis ultrices magna dictum vitae. Integer tempus hendrerit ante
-							non hendrerit. Quisque mi neque, facilisis a nisl in, malesuada
-							efficitur elit. Nulla in ligula fermentum, interdum nibh at,
-							consequat elit.</p>
+						<p>#{organizationSpaceBean.orgAccount.organizationInfo.description}</p>
 					</div>
 				</div>
 				<hr />
 				<p:tabView>
 
-					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux onglets -->
-					<p:tab>
-						<f:facet name="title">
-							<i class="fa-solid fa-plus" />
-						</f:facet>
-						<h3>Nouvel Onglet</h3>
-					</p:tab>
-
 					<!-- Onglet Boutique -->
 					<p:tab title="Boutique">
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
-						<p:link outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProduct">
+						<p:link outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}" id="newProduct">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
-							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img
-											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
-									</f:facet>
-									<f:facet name="title">
-										<i class="fa-solid fa-minus"></i>Sushi
-									</f:facet>
-									<f:facet name="subtitle">
-										Nourriture
-									</f:facet>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Fusce a urna eget massa tempus faucibus.</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											Prix : 20.00€
-											<p:commandButton styleClass="float-end" icon="pi pi-check"
-												value="Acheter" />
-										</div>
-									</f:facet>
-								</p:card>
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img
-											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
-									</f:facet>
-									<f:facet name="title">
-										Sushi
-									</f:facet>
-									<f:facet name="subtitle">
-										Nourriture
-									</f:facet>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Fusce a urna eget massa tempus faucibus.</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											Prix : 20.00€
-											<p:commandButton styleClass="float-end" icon="pi pi-check"
-												value="Acheter" />
-										</div>
-									</f:facet>
-								</p:card>
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img
-											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
-									</f:facet>
-									<f:facet name="title">
-										Sushi
-									</f:facet>
-									<f:facet name="subtitle">
-										Nourriture
-									</f:facet>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Fusce a urna eget massa tempus faucibus.</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											Prix : 20.00€
-											<p:commandButton styleClass="float-end" icon="pi pi-check"
-												value="Acheter" />
-										</div>
-									</f:facet>
-								</p:card>
-							</div>
-							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img
-											src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"></img>
-									</f:facet>
-									<f:facet name="title">
-										Sushi
-									</f:facet>
-									<f:facet name="subtitle">
-										Nourriture
-									</f:facet>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Fusce a urna eget massa tempus faucibus.</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											Prix : 20.00€
-											<p:commandButton styleClass="float-end" icon="pi pi-check"
-												value="Acheter" />
-										</div>
-									</f:facet>
-								</p:card>
-							</div>
+			<!-- TODO p:repeat var="item" value="{organizationSpaceBean.orgAccount.organizationSpace.shop.items}" -->
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+									<p:card styleClass="shadow">
+										<f:facet name="header">
+												<img src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"/>								
+										</f:facet>
+										<f:facet name="title">
+											<i class="fa-solid fa-minus"></i>Sushi
+										</f:facet>
+										<f:facet name="subtitle">
+											Nourriture
+										</f:facet>
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Fusce a urna eget massa tempus faucibus.</p>
+										<f:facet name="footer">
+											<div class="m-3">
+												Prix : 20.00€
+												<p:commandButton styleClass="float-end" icon="pi pi-check"
+													value="Acheter" />
+											</div>
+										</f:facet>
+									</p:card>
+								</div>
+			<!-- TODOBIS /p:repeat  -->
 						</div>
 					</p:tab>
 
@@ -179,23 +85,22 @@
 						<p:tooltip for="newProject" value="Nouveau Projet"/>
 						<div class="row">
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3 d-flex align-items-stretch">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-											<img src="#{project.imagePath}" />
+											<img src="#{project.imagePath}" class="ratio" style="object-fit:cover;"/>
 										</f:facet>
 										<f:facet name="title">
-												Mon projet
+												#{project.name}
 											</f:facet>
 										<f:facet name="subtitle">
-												Humanitaire
+												#{project.projectCategory}
 											</f:facet>
-										<p>Description : Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+										<p>#{project.summary}</p>
 										<f:facet name="footer">
 											<div class="m-3">
-												55€ collecté sur 2500€
-												<p:commandButton styleClass="float-end" icon="pi pi-check"
+												#{project.currentAmount}€ collecté sur #{project.targetAmount}€
+												<p:button outcome="pageProject?id=#{project.id}" styleClass="float-end" icon="pi pi-check"
 													value="Explorer" />
 											</div>
 										</f:facet>
@@ -207,30 +112,37 @@
 
 					<!-- Onglet Evénements -->
 					<p:tab title="Evénements">
+					
+					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
+						<p:link outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
+							<i class="fa-solid fa-plus" />
+						</p:link>
 						<div class="row">
-							<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img
-											src="https://www.ville-montreuil-juigne.fr/var/ayaline/storage/images/media/images/actualites/recherche-de-benevoles/117162-1-fre-FR/recherche-de-benevoles_image_full.jpg"></img>
-									</f:facet>
-									<f:facet name="title">
-										Mon Evénement
-									</f:facet>
-									<f:facet name="subtitle">
-										Humanitaire
-									</f:facet>
-									<p>Description : Lorem ipsum dolor sit amet, consectetur
-										adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											55€ collecté sur 2500€
-											<p:commandButton styleClass="float-end" icon="pi pi-check"
-												value="Explorer" />
-										</div>
-									</f:facet>
-								</p:card>
-							</div>
+							<p:repeat var="project" value="#{organizationSpaceBean.events}">
+								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+									<p:card styleClass="shadow">
+										<f:facet name="header">
+											<img
+												src="https://www.ville-montreuil-juigne.fr/var/ayaline/storage/images/media/images/actualites/recherche-de-benevoles/117162-1-fre-FR/recherche-de-benevoles_image_full.jpg"></img>
+										</f:facet>
+										<f:facet name="title">
+											Mon Evénement
+										</f:facet>
+										<f:facet name="subtitle">
+											Humanitaire
+										</f:facet>
+										<p>Description : Lorem ipsum dolor sit amet, consectetur
+											adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+										<f:facet name="footer">
+											<div class="m-3">
+												4 bénévoles inscrits sur 30
+												<p:commandButton styleClass="float-end" icon="pi pi-check"
+													value="Explorer" />
+											</div>
+										</f:facet>
+									</p:card>
+								</div>
+							</p:repeat>
 						</div>
 					</p:tab>
 				</p:tabView>

@@ -34,9 +34,41 @@ public class Project extends GenericProject {
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
 	}
-	
+
 	public BigDecimal getTargetAmount() {
 		return targetAmount;
+	}
+
+	public BigDecimal getCurrentAmount() {
+		return currentAmount;
+	}
+
+	public void setCurrentAmount(BigDecimal currentAmount) {
+		this.currentAmount = currentAmount;
+	}
+
+	public List<Donation> getDonations() {
+		return donations;
+	}
+
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+
+	public List<CounterPart> getCounterParts() {
+		return counterParts;
+	}
+
+	public void setCounterParts(List<CounterPart> counterParts) {
+		this.counterParts = counterParts;
+	}
+
+	public List<StretchGoal> getStretchGoals() {
+		return stretchGoals;
+	}
+
+	public void setStretchGoals(List<StretchGoal> stretchGoals) {
+		this.stretchGoals = stretchGoals;
 	}
 
 }
