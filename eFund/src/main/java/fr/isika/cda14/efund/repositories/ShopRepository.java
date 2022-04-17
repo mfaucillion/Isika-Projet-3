@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.repositories;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,4 +23,10 @@ public class ShopRepository {
 		em.merge(shop);		
 	}
 
+	public List<Item> getShopItemList(Long id) {
+		List<Item> myItems = em.createQuery("SELECT items FROM Shop shop WHERE shop.id=:id").setParameter("id", id).getResultList();
+		System.out.println(myItems.size());
+		return myItems;
+	}
+	
 }

@@ -48,7 +48,7 @@
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
-			<!-- TODO p:repeat var="item" value="{organizationSpaceBean.orgAccount.organizationSpace.shop.items}" -->
+							<p:repeat var="item" value="#{organizationSpaceBean.items}">
 								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
@@ -71,7 +71,7 @@
 										</f:facet>
 									</p:card>
 								</div>
-			<!-- TODOBIS /p:repeat  -->
+							</p:repeat>
 						</div>
 					</p:tab>
 
