@@ -8,6 +8,8 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Project;
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
+import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -16,9 +18,11 @@ public class ProjectService {
 
 	@Inject
 	private ProjectRepository projectRepo;
+	@Inject
+	private AccountRepository accountRepo;
 
-	public void create(ProjectCreationFormVM projectCreationFormVM) {
-		System.out.println("Service; " + projectCreationFormVM);
+	public void create(ProjectCreationFormVM projectCreationFormVM, Long id) {
+		System.out.println("Service projet " + projectCreationFormVM);
 		Project newProject = new Project();
 		newProject.setName(projectCreationFormVM.getName());
 		newProject.setEndDate(projectCreationFormVM.getEndDate());
@@ -30,7 +34,11 @@ public class ProjectService {
 		newProject.setTargetAmount(projectCreationFormVM.getTargetAmount());
 		newProject.setProjectStatus(ProjectStatus.DRAFT);
 		newProject.setCreationDate(new Date());
-
+		
+		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
+		
+		newProject.setOrgSpace(orgSpace);
+		
 		projectRepo.create(newProject);
 
 	}
