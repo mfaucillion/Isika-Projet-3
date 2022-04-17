@@ -25,14 +25,14 @@ public class ProjectCreationBean {
 		projectCreationService.create(projectCreationFormVM, Long.parseLong(id));
 		return "projectCreationForm.xhtml";
 	}
-	
+
 	public void uploadFile(FileUploadEvent project) {
 		UploadedFile file = project.getFile();
 		String filePath = "/project/" + file.getFileName();
 		projectCreationFormVM.setImagePath("img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
-	
+
 	public ProjectCreationFormVM getProjectCreationFormVM() {
 		return projectCreationFormVM;
 	}

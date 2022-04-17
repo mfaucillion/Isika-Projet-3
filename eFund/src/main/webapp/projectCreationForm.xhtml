@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-<f:viewParam name="id"/>
+	<f:viewParam name="id" />
 </f:metadata>
 
 <h:body>
@@ -120,9 +120,8 @@
 								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
 								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
 								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
-								label="Choisissez une image"
-								mode="advanced" sizeLimit="5000000" fileLimit="1"
-								accept=".gif,.jpg,.jpeg,.png"
+								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
 								listener="#{projectCreationBean.uploadFile()}" />
 
@@ -140,7 +139,8 @@
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<h:commandButton
 								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-								action="#{projectCreationBean.createProject(id)}" value="Valider" />
+								action="#{projectCreationBean.createProject(id)}"
+								value="Valider" />
 						</div>
 
 					</div>
