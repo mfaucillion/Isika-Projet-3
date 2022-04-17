@@ -21,7 +21,6 @@ public class EventCreationBean {
 	private EventCreationFormVM eventCreationFormVM = new EventCreationFormVM();
 
 	public String createEvent(String id) {
-		System.out.println(id);
 		eventCreationService.create(eventCreationFormVM, Long.parseLong(id));
 		return "eventCreationForm.xhtml";
 	}

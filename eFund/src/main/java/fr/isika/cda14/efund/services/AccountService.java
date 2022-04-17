@@ -41,7 +41,11 @@ public class AccountService {
 		org.getOrganizationSpace().setShop(new Shop());
 		org.setRole(Role.ASSOC);
 		org.setAccountStatus(AccountStatus.ACTIVE);
-		org.setImagePath("defaultImg.jpg");
+		if (inputOrg.getImagePath().isEmpty()) {
+			org.setImagePath("/img/organization/default.jpg");
+		} else {
+			org.setImagePath(inputOrg.getImagePath());
+		}
 		return repo.persist(org);
 	}
 

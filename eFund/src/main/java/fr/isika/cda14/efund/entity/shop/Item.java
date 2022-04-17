@@ -22,13 +22,12 @@ public class Item {
 
 	private String label;
 
-	@Column(name = "quantity_stock")
-	private Integer quantityStock;
+	@Column(name = "image_path")
+	private String imagePath;
 
 	@Column(scale = 2)
 	private BigDecimal price;
 
-	@Column
 	private String description;
 
 	@Enumerated(EnumType.STRING)
@@ -39,32 +38,56 @@ public class Item {
 	@Column(name = "item_category")
 	private ItemCategory itemCategory;
 
+	public String getLabel() {
+		return label;
+	}
+
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
-	public void setQuantityStock(Integer quantityStock) {
-		this.quantityStock = quantityStock;
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
 	}
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public ItemStatus getItemStatus() {
+		return itemStatus;
 	}
 
 	public void setItemStatus(ItemStatus itemStatus) {
 		this.itemStatus = itemStatus;
 	}
 
+	public ItemCategory getItemCategory() {
+		return itemCategory;
+	}
+
 	public void setItemCategory(ItemCategory itemCategory) {
 		this.itemCategory = itemCategory;
 	}
-	
-	
-	
+
+	public Long getId() {
+		return id;
+	}
+
 }
-
-

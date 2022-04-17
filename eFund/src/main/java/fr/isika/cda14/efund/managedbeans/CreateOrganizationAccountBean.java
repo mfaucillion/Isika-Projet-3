@@ -5,22 +5,21 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
+
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
 @ManagedBean
 @ViewScoped
 public class CreateOrganizationAccountBean {
 
-	private OrganizationForm organization = new OrganizationForm();
-
 	@Inject
-	AccountService accountService;	
+	AccountService accountService;
 	
-	private Long id;
-	
-	OrganizationAccount myOrg;
+	private OrganizationForm organization = new OrganizationForm();
 
 	public String create() {
 
@@ -28,12 +27,19 @@ public class CreateOrganizationAccountBean {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("viewmodel", organization);
 		return "createOrgBis?id=" + newOrgID + "faces-redirect=true";
 	}
-	
+
 	public String modify(Long id) {
 		accountService.updateOrg(id, organization);
-		return "index";
+		return "pageOng?id=" + id + "faces-redirect=true";
 	}
 
+	public void upload(FileUploadEvent event) {
+		UploadedFile file = event.getFile();
+		String filePath = "/organization/" + file.getFileName();
+		organization.setImagePath("img" + filePath);
+		FileUpload.doUpload(file, filePath);
+	}
+	
 	public OrganizationForm getOrganization() {
 		return organization;
 	}

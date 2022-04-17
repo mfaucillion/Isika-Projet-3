@@ -9,7 +9,9 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
+		<f:metadata>
+			<f:viewParam name="id"/>
+		</f:metadata>
 		<ui:define name="content">
 			<div class="container shadow p-5 mt-5">
 				<h1>Enregistrez votre produit</h1>
@@ -76,7 +78,7 @@
 								mode="advanced" sizeLimit="5000000" fileLimit="1"
 								accept=".gif,.jpg,.jpeg,.png"
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
-								listener="#" />
+								listener="#{itemCreationBean.upload}" />
 
 						</div>
 
@@ -92,7 +94,7 @@
 						<div class="col-12 col-md-4 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-								action="#{itemCreationBean.createItem()}"
+								action="#{itemCreationBean.createItem(id)}"
 								value="Valider" />
 						</div>
 					</div>
