@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
-import fr.isika.cda14.efund.services.ItemCreationService;
+import fr.isika.cda14.efund.services.ShopService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 
@@ -16,7 +16,7 @@ import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 public class ItemCreationBean {
 
 	@Inject
-	private ItemCreationService creationService;
+	private ShopService creationService;
 	
 	private ItemCreationForm itemCreationForm = new ItemCreationForm();
 

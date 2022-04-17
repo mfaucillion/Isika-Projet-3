@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -11,7 +13,7 @@ import fr.isika.cda14.efund.repositories.ShopRepository;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 
 @Stateless
-public class ItemCreationService {
+public class ShopService {
 
 	@Inject
 	private ShopRepository shopRepo;
@@ -31,5 +33,9 @@ public class ItemCreationService {
 
 		shopRepo.update(shop);
 
+	}
+
+	public List<Item> getShopItemList(Long id) {
+		return shopRepo.getShopItemList(id);
 	}
 }
