@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="content">
+			<div class="container-fluid p-5">
+
+				<div class="row">
+					<div class="col-12 col-md-3">
+						<!--user's photo, on mettre l'image Path au lieu du lien-->
+						<img class="img-fluid"
+							src="https://64.media.tumblr.com/5c595f61ea7d0695c8965451907165cc/7817ce05b3ebe1ed-95/s540x810/be9ffe07a6d73629f7309a6bdf470da5760ae0f7.jpg"
+							alt="user's photo"
+							onclick="this.src='https://www.computerhope.com/jargon/p/plus.png';"
+							border="" />
+
+
+						<p:button value="Changer mon adresse email"
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
+						<p:button value="Changer mon mot de passe"
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
+
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 col-md-3">
+						<!-- vide c'est normal c à coté des tabs-->
+					</div>
+					<div class="clo-12 col-md-9">
+						<!-- les tab -->
+						<p:tabView>
+							<p:tab title="Favoris">
+								<div class="card">
+									<h:form>
+										<p:growl>
+											<p:autoUpdate />
+										</p:growl>
+										<p:panelMenu style="width:300px">
+											<p:submenu label="Projects">
+												<p:menuitem value="Le projet des pingouins" />
+												<p:menuitem value="Le projet des requins" />
+											</p:submenu>
+											<p:submenu label="Events">
+												<p:menuitem value="Marche pour la liberté des électrons" />
+												<p:menuitem value="Marathon -Tous contre les pauvres-" />
+											</p:submenu>
+										</p:panelMenu>
+									</h:form>
+								</div>
+							</p:tab>
+							<p:tab title="Mes donations">
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button value="Ma donation pour le projet des dauphins"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-2">
+										<p:button value="Montant"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-3">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button value="Ma donation pour le projet des pingouins"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-2">
+										<p:button value="Montant"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-3">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button
+											value="Ma donation pour le projet des poissons-rouges"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-2">
+										<p:button value="Montant"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<div class="col-12 col-md-3">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									</div>
+								</div>
+
+
+							</p:tab>
+							<p:tab title="Mes évènements">
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button
+											value="Journée de sensibilisation au droit à la bêtise"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<!-- ajouter la duree de l'event -->
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button value="Marche pour la liberté des électrons"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<!-- ajouter la duree de l'event -->
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-12 col-md-6">
+										<p:button value="Marathon -Tous contre les pauvres-"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+									<!-- ajouter la duree de l'event -->
+									<div class="col-12 col-md-1">
+										<p:button value="Date"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+											style="width:100%" />
+									</div>
+								</div>
+							</p:tab>
+							<p:tab title="Mes commandees">
+								<p>Lorem Ipsum is simply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the industry's
+									standard dummy text ever since the 1500s, when an unknown
+									printer took a galley of type and scrambled it to make a type
+									specimen book. It has survived not only five centuries, but
+									also the leap into electronic typesetting, remaining
+									essentially unchanged. It was popularised in the 1960s with the
+									release of Letraset sheets containing Lorem Ipsum passages, and
+									more recently with desktop publishing software like Aldus
+									PageMaker including versions of Lorem Ipsum.</p>
+							</p:tab>
+							<p:tab title="Mes infos personnelles" icon-on="fa-solid fa-minus">
+								<p>Lorem Ipsum is simply dummy text of the printing and
+									typesetting industry. Lorem Ipsum has been the industry's
+									standard dummy text ever since the 1500s, when an unknown
+									printer took a galley of type and scrambled it to make a type
+									specimen book. It has survived not only five centuries, but
+									also the leap into electronic typesetting, remaining
+									essentially unchanged. It was popularised in the 1960s with the
+									release of Letraset sheets containing Lorem Ipsum passages, and
+									more recently with desktop publishing software like Aldus
+									PageMaker including versions of Lorem Ipsum.</p>
+							</p:tab>
+						</p:tabView>
+					</div>
+				</div>
+
+			</div>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>
