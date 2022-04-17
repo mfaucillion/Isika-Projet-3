@@ -28,6 +28,8 @@ public class OrganizationForm implements Serializable {
 	@NotNull(message = "Ne doit pas être null")
 	private String displayedName;
 	
+	private String imagePath;
+	
 	private String organizationName;
 	
 	private String siret;
@@ -92,25 +94,12 @@ public class OrganizationForm implements Serializable {
 		this.description = description;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("OrganizationForm [email=");
-		builder.append(email);
-		builder.append(", password=");
-		builder.append(password);
-		builder.append(", displayedName=");
-		builder.append(displayedName);
-		builder.append(", organizationName=");
-		builder.append(organizationName);
-		builder.append(", siret=");
-		builder.append(siret);
-		builder.append(", summary=");
-		builder.append(summary);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append("]");
-		return builder.toString();
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 }

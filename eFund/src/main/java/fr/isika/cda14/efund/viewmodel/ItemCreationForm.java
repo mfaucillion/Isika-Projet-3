@@ -13,6 +13,8 @@ public class ItemCreationForm {
 	private BigDecimal price;
 
 	private String description;
+	
+	private String imagePath;
 
 	private ItemCategory itemCategory;
 
@@ -60,21 +62,12 @@ public class ItemCreationForm {
 		this.itemCategory = itemCategory;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ItemCreationForm [label=");
-		builder.append(label);
-		builder.append(", quantityStock=");
-		builder.append(quantityStock);
-		builder.append(", price=");
-		builder.append(price);
-		builder.append(", description=");
-		builder.append(description);
-		builder.append(", itemCategory=");
-		builder.append(itemCategory);
-		builder.append("]");
-		return builder.toString();
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 }
