@@ -20,7 +20,7 @@ public class Shop {
 	@Column
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "shop_id")
 	private List<Item> items;
 

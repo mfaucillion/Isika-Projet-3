@@ -12,11 +12,15 @@ import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.services.ShopService;
 
 @ManagedBean
 public class OrganizationSpaceBean {
 	@Inject
 	AccountService accountService;
+	
+	@Inject
+	ShopService shopService;
 	
 	OrganizationAccount orgAccount;
 	List<Project> projects = new ArrayList<Project>();
@@ -27,10 +31,8 @@ public class OrganizationSpaceBean {
 
 		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
 		
-		items = orgAccount.getOrganizationSpace().getShop().getItems();
-		for (Item item : items) {
-			System.out.println("Item : " + item.getId() + " " + item.getLabel());
-		}
+		items = shopService.getShopItemList(orgAccount.getOrganizationSpace().getShop().getId());
+		
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);
@@ -44,12 +46,16 @@ public class OrganizationSpaceBean {
 	public OrganizationAccount getOrgAccount() {
 		return orgAccount;
 	}
-	
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
 	public List<Event> getEvents() {
 		return events;
 	}
-	
-	public List<Project> getProjects() {
-		return projects;
+
+	public List<Item> getItems() {
+		return items;
 	}
 }
