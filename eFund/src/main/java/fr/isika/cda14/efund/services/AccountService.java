@@ -41,11 +41,7 @@ public class AccountService {
 		org.getOrganizationSpace().setShop(new Shop());
 		org.setRole(Role.ASSOC);
 		org.setAccountStatus(AccountStatus.ACTIVE);
-		if (inputOrg.getImagePath().isEmpty()) {
-			org.setImagePath("/img/organization/default.jpg");
-		} else {
-			org.setImagePath(inputOrg.getImagePath());
-		}
+		org.setImagePath("/img/organization/default.jpg");
 		return repo.persist(org);
 	}
 
@@ -57,7 +53,10 @@ public class AccountService {
 		org.getOrganizationInfo().setSiret(inputOrg.getSiret());
 		org.getOrganizationInfo().setSummary(inputOrg.getSummary());
 		org.getOrganizationInfo().setDescription(inputOrg.getDescription());
-
+		if (inputOrg.getImagePath() != null) {
+			org.setImagePath(inputOrg.getImagePath());
+		}
+		
 		repo.update(org);
 	}
 

@@ -10,6 +10,7 @@ import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
+import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.services.AccountService;
 
 @ManagedBean
@@ -20,11 +21,16 @@ public class OrganizationSpaceBean {
 	OrganizationAccount orgAccount;
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
+	List<Item> items = new ArrayList<Item>();
 	
 	public void onLoad(String id) {
 
 		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
 		
+		items = orgAccount.getOrganizationSpace().getShop().getItems();
+		for (Item item : items) {
+			System.out.println("Item : " + item.getId() + " " + item.getLabel());
+		}
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);
