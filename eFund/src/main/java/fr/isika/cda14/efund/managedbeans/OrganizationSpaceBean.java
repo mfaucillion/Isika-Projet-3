@@ -30,9 +30,8 @@ public class OrganizationSpaceBean {
 	public void onLoad(String id) {
 
 		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
-		
 		items = shopService.getShopItemList(orgAccount.getOrganizationSpace().getShop().getId());
-		
+
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);

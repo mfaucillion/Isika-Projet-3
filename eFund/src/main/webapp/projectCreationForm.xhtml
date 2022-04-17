@@ -6,6 +6,10 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="id" />
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
@@ -16,105 +20,127 @@
 				<hr class="bg-primary" />
 				<h:form id="ProjectCreationForm">
 
-					<div class="row">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="NameInput" value="Nom" />
-							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.name}"
-								id="NameInput" />
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-align-justify"></i>
+								</div>
+								<p:inputText placeholder="Nom"
+									value="#{projectCreationBean.projectCreationFormVM.name}"
+									id="NameInput" />
+							</div>
 						</div>
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="EndDateInput" value="Date de fin" />
-							<h:inputText a:placeholder="dd/MM/yyyy" styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.endDate}"
-								id="EndDateInput">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
-							</h:inputText>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-12 col-md-1 mt-3"></div>
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="LocalisationInput" value="Localisation" />
-							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.location}"
-								id="LocalisationInput" />
-						</div>
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="ImageInput" value="Image" />
-							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.imagePath}"
-								id="ImageInput" />
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-12 col-md-1 mt-3"></div>
-						<div class="col-12 col-md-2 mt-3">
-							<h:outputLabel for="CategoryInput" value="Categorie" />
-							<br />
-							<h:selectOneMenu style="width:150px;"
-								value="#{projectCreationBean.projectCreationFormVM.projectCategory}">
-								<f:selectItem itemLabel="Sélection" itemValue="" />
-								<f:selectItems
-									value="#{projectCreationBean.projectCreationFormVM.projectCategories}"
-									var="category" itemValue="#{category}"
-									itemLabel="#{category.projectCategoryLabel}" />
-
-							</h:selectOneMenu>
-						</div>
-
-
-						<div class="col-12 col-md-2 mt-3">
-							<h:outputLabel for="RangeInput" value="Portée" />
-							<br />
-							<h:selectOneMenu style="width:150px;"
-								value="#{projectCreationBean.projectCreationFormVM.projectRange}">
-								<f:selectItem itemLabel="Sélection" itemValue="" />
-								<f:selectItems
-									value="#{projectCreationBean.projectCreationFormVM.projectRanges}"
-									var="range" itemValue="#{range}"
-									itemLabel="#{range.projectRangeLabel}" />
-
-							</h:selectOneMenu>
-						</div>
-
-						<div class="col-12 col-md-1 mt-3"></div>
-
-						<div class="col-12 col-md-5 mt-3">
-							<h:outputLabel for="TargetAmountInput"
-								value="Montant à atteindre" />
-							<h:inputText styleClass="form-control"
-								value="#{projectCreationBean.projectCreationFormVM.targetAmount}"
-								id="TargetAmountInput" />
-						</div>
-
 
 					</div>
 
-					<div class="row">
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-map"></i>
+								</div>
+								<p:inputText placeholder="Localisation"
+									value="#{projectCreationBean.projectCreationFormVM.location}"
+									id="LocalisationInput" />
+							</div>
+						</div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="pi pi-calendar"></i>
+								</div>
+								<p:datePicker
+									placeholder="Date de fin de collecte pour ce projet"
+									value="#{projectCreationBean.projectCreationFormVM.endDate}" />
+							</div>
+						</div>
+					</div>
+
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-3">
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<p:selectOneMenu
+										value="#{projectCreationBean.projectCreationFormVM.projectCategory}">
+										<f:selectItem itemLabel="Catégorie" itemValue="" />
+										<f:selectItems
+											value="#{projectCreationBean.projectCreationFormVM.projectCategories}"
+											var="category" itemValue="#{category}"
+											itemLabel="#{category.projectCategoryLabel}" />
+									</p:selectOneMenu>
+								</div>
+								<div class="col-12 col-md-6">
+									<p:selectOneMenu
+										value="#{projectCreationBean.projectCreationFormVM.projectRange}">
+										<f:selectItem itemLabel="Sélection" itemValue="" />
+										<f:selectItems
+											value="#{projectCreationBean.projectCreationFormVM.projectRanges}"
+											var="range" itemValue="#{range}"
+											itemLabel="#{range.projectRangeLabel}" />
+
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+
+
+
+						<div class="col-12 col-md-5 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-euro-sign"></i>
+								</div>
+								<p:spinner placeholder="Montant à atteindre" min="1"
+									upButtonStyleClass="ui-button-secondary"
+									downButtonStyleClass="ui-button-secondary"
+									value="#{projectCreationBean.projectCreationFormVM.targetAmount}"
+									id="TargetAmountInput" />
+							</div>
+						</div>
+					</div>
+
+
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
-							<h:outputLabel for="SummaryInput" value="Résumé du projet" />
-							<h:inputTextarea styleClass="form-control"
+							<p:inputTextarea placeholder="Résumé du projet"
 								value="#{projectCreationBean.projectCreationFormVM.summary}"
 								id="SummaryInput" />
 						</div>
 					</div>
 
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:fileUpload skinSimple="true"
+								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
+								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
+								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
+								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
+								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
+								listener="#{projectCreationBean.uploadFile}" />
 
+						</div>
+
+					</div>
 
 					<div class="row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
-							<h:commandButton styleClass="btn-outline-secondary btn-black"
+							<h:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
 								action="#" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
-							<h:commandButton styleClass="btn-outline-secondary btn-black"
-								action="#{projectCreationBean.createProject()}" value="Valider" />
+							<h:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{projectCreationBean.createProject(id)}"
+								value="Valider" />
 						</div>
 
 					</div>
