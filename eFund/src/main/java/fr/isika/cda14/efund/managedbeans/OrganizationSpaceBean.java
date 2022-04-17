@@ -27,10 +27,10 @@ public class OrganizationSpaceBean {
 
 		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
 		
-		items = orgAccount.getOrganizationSpace().getShop().getItems();
-		for (Item item : items) {
-			System.out.println("Item : " + item.getId() + " " + item.getLabel());
-		}
+//		items = orgAccount.getOrganizationSpace().getShop().getItems();
+//		for (Item item : items) {
+//			System.out.println("Item : " + item.getId() + " " + item.getLabel());
+//		}
 		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
 			if (gp.getClass().equals(Project.class)) {
 				projects.add((Project) gp);
