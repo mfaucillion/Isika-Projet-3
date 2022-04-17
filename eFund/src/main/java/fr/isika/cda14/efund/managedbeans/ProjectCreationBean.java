@@ -4,7 +4,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
+
 import fr.isika.cda14.efund.services.ProjectService;
+import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
 @ManagedBean
@@ -16,11 +20,19 @@ public class ProjectCreationBean {
 
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
 
-	public String createProject() {
-		projectCreationService.create(projectCreationFormVM);
+	public String createProject(String id) {
+		System.out.println("Je crée le projet avec le spaceId: " + id);
+		projectCreationService.create(projectCreationFormVM, Long.parseLong(id));
 		return "projectCreationForm.xhtml";
 	}
-
+	
+	public void uploadFile(FileUploadEvent project) {
+		UploadedFile file = project.getFile();
+		String filePath = "/project/" + file.getFileName();
+		projectCreationFormVM.setImagePath("img" + filePath);
+		FileUpload.doUpload(file, filePath);
+	}
+	
 	public ProjectCreationFormVM getProjectCreationFormVM() {
 		return projectCreationFormVM;
 	}
