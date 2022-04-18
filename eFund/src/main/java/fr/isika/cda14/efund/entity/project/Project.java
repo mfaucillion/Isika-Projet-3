@@ -6,8 +6,11 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -30,6 +33,10 @@ public class Project extends GenericProject {
 	@OneToMany
 	@JoinColumn(name = "project_id")
 	protected List<StretchGoal> stretchGoals;
+	
+	@ManyToOne
+	@JoinColumn(name = "organization_space_id")
+	private OrganizationSpace organizationSpace;
 
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
@@ -71,4 +78,11 @@ public class Project extends GenericProject {
 		this.stretchGoals = stretchGoals;
 	}
 
+	public OrganizationSpace getOrganizationSpace() {
+		return organizationSpace;
+	}
+
+	public void setOrganizationSpace(OrganizationSpace organizationSpace) {
+		this.organizationSpace = organizationSpace;
+	}	
 }

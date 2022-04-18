@@ -80,9 +80,6 @@ public abstract class GenericProject {
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Favorite> favorites;
-	
-	@ManyToOne
-	private OrganizationSpace orgSpace;
 
 	public void setName(String name) {
 		this.name = name;
@@ -179,15 +176,5 @@ public abstract class GenericProject {
 	public List<Favorite> getFavorites() {
 		return favorites;
 	}
-
-	public OrganizationSpace getOrgSpace() {
-		return orgSpace;
-	}
-
-	public void setOrgSpace(OrganizationSpace orgSpace) {
-		this.orgSpace = orgSpace;
-	}
-	
-	
 
 }

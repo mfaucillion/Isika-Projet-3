@@ -145,6 +145,15 @@
 							</p:repeat>
 						</div>
 					</p:tab>
+					
+					<p:tab title="NEWTAB">
+						<div class="card">
+						    <p:contentFlow value="#{organizationSpaceBean.projects}" var="project">
+						        <img src="#{project.imagePath}" class="content"/>
+						        <div class="caption text-dark">#{project.summary}</div>
+						    </p:contentFlow>
+						</div>
+					</p:tab>
 				</p:tabView>
 			</div>
 		</ui:define>

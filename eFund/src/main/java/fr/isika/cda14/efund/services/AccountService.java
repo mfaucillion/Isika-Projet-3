@@ -112,8 +112,12 @@ public class AccountService {
   }
   
 	//pour trouver mon orga
-	public OrganizationAccount findOrganizationccount(Long id) {
+	public OrganizationAccount findOrganizationAccount(Long id) {
 		return repo.findOrganization(id);
+	}
+
+	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
+		return repo.loadOrganizationAccountWithChildren(id);
 	}
 
 }

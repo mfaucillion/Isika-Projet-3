@@ -14,7 +14,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.common.ContentTab;
+import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.GenericProject;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Shop;
 
 @Entity
@@ -35,10 +37,13 @@ public class OrganizationSpace {
 	@OneToMany
 	@JoinColumn(name = "organization_space_id")
 	private List<ContentTab> contentTabs;
-
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "orgSpace")
-	private List<GenericProject> genericProjects;
-
+	
+	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
+	private List<Project> projects;
+	
+	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
+	private List<Event> events;
+	
 	public Shop getShop() {
 		return shop;
 	}
@@ -63,12 +68,20 @@ public class OrganizationSpace {
 		this.contentTabs = contentTabs;
 	}
 
-	public List<GenericProject> getGenericProjects() {
-		return genericProjects;
+	public List<Project> getProjects() {
+		return projects;
 	}
 
-	public void setGenericProjects(List<GenericProject> genericProjects) {
-		this.genericProjects = genericProjects;
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
 	}
 
 	public Long getId() {
