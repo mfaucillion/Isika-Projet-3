@@ -17,13 +17,13 @@ public class ProjectPageBean {
 	private ProjectService projectService;
 
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
-	
+
 	private Project project;
-	
+
 	public void onLoad(String id) {
 		project = projectService.findProjet(Long.parseLong(id));
 	}
-	
+
 	public Project getProject() {
 		return project;
 	}
