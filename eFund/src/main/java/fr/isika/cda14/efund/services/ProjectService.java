@@ -46,5 +46,9 @@ public class ProjectService {
 	public List<Project> findAll() {
 		return projectRepo.findAll();
 	}
+	
+	public Project findProjet(Long id) {
+		return projectRepo.findProject(id);
+	}
 
 }

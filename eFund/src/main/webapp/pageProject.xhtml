@@ -11,12 +11,19 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
+		<f:metadata>
+		<f:viewParam name="id" />
+		<f:event listener="#{projectPageBean.onLoad(id)}"
+			type="preRenderView"></f:event>
+		</f:metadata>
+		
 			<div class="container">
 				<div class="row">
 
 					<div class="col-12 col-md-8" style="background-color: aqua;">
 						<div class="row">
 							<h3>Projet</h3>
+							<h4>#{projectPageBean.project.name}</h4>
 						</div>
 						<h:graphicImage
 							url="https://ellibrepensador.com/wp-content/uploads/2012/05/msf200x200.jpg"></h:graphicImage>
