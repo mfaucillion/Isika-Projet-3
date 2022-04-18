@@ -23,5 +23,4 @@ public class ProjectRepository {
 				.createQuery("SELECT pro FROM Project pro", Project.class)
 				.getResultList();
 	}
-
 }

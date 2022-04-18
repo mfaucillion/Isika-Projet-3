@@ -79,4 +79,7 @@ public class AccountRepository {
 		em.merge(orgSpace);
 	}
 
+	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
+		return em.createQuery("SELECT org FROM OrganizationAccount org INNER JOIN FETCH org.organizationSpace space INNER JOIN FETCH space.shop WHERE org.id=:id", OrganizationAccount.class).setParameter("id", id).getSingleResult();
+	}
 }

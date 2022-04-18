@@ -12,7 +12,7 @@ public class ProjectPageBean {
 
 	@Inject
 	private ProjectService projectCreationService;
-
+	
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
 
 }

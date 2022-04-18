@@ -23,23 +23,17 @@ public class OrganizationSpaceBean {
 	ShopService shopService;
 	
 	OrganizationAccount orgAccount;
+	
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
 	
+	/* Loading OrganizationAccount an*/
 	public void onLoad(String id) {
-
-		orgAccount = accountService.findOrganizationccount(Long.parseLong(id));
-		items = shopService.getShopItemList(orgAccount.getOrganizationSpace().getShop().getId());
-
-		for (GenericProject gp : orgAccount.getOrganizationSpace().getGenericProjects()) {
-			if (gp.getClass().equals(Project.class)) {
-				projects.add((Project) gp);
-			}
-			if (gp.getClass().equals(Event.class)) {
-				events.add((Event) gp);
-			}
-		}
+		orgAccount = accountService.loadOrganizationAccountWithChildren(Long.parseLong(id));
+		projects = orgAccount.getOrganizationSpace().getProjects();
+		events = orgAccount.getOrganizationSpace().getEvents();
+		items = orgAccount.getOrganizationSpace().getShop().getItems();
 	}
 	
 	public OrganizationAccount getOrgAccount() {
