@@ -33,7 +33,7 @@ public class ProjectService {
 		newProject.setTargetAmount(projectCreationFormVM.getTargetAmount());
 		newProject.setProjectStatus(ProjectStatus.DRAFT);
 		newProject.setCreationDate(new Date());
-		
+
 		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 		
 		newProject.setOrganizationSpace(orgSpace);
@@ -43,6 +43,10 @@ public class ProjectService {
 
 	public List<Project> findAll() {
 		return projectRepo.findAll();
+	}
+
+	public Project findProjet(Long id) {
+		return projectRepo.findProject(id);
 	}
 
 }

@@ -1,9 +1,12 @@
 
 package fr.isika.cda14.efund.managedbeans;
 
+import java.util.Optional;
+
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -11,8 +14,17 @@ import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 public class ProjectPageBean {
 
 	@Inject
-	private ProjectService projectCreationService;
-	
+	private ProjectService projectService;
+
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
 
+	private Project project;
+
+	public void onLoad(String id) {
+		project = projectService.findProjet(Long.parseLong(id));
+	}
+
+	public Project getProject() {
+		return project;
+	}
 }
