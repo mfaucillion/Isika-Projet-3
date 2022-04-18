@@ -11,6 +11,7 @@ import javax.persistence.PersistenceContext;
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
+import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Stateless
@@ -79,7 +80,47 @@ public class AccountRepository {
 		em.merge(orgSpace);
 	}
 
+	/* */
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
-		return em.createQuery("SELECT org FROM OrganizationAccount org INNER JOIN FETCH org.organizationSpace space INNER JOIN FETCH space.shop WHERE org.id=:id", OrganizationAccount.class).setParameter("id", id).getSingleResult();
+		String query = "SELECT distinct shop "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN space.shop shop "
+				+ "INNER JOIN FETCH shop.items "
+				+ "WHERE org.id=:id";
+		Shop shop = em.createQuery(query, Shop.class)
+				.setParameter("id", id)
+				.getSingleResult();
+		
+		query = "SELECT distinct space "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN FETCH space.projects "
+				+ "INNER JOIN space.shop shop "
+				+ "WHERE space.shop in :shop";	
+		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class)
+				.setParameter("shop", shop)
+				.getSingleResult();
+		
+		query = "SELECT distinct space "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN FETCH space.events "
+				+ "INNER JOIN space.shop shop "
+				+ "WHERE org.organizationSpace in :space";
+		space = em.createQuery(query, OrganizationSpace.class)
+				.setParameter("space", space)
+				.getSingleResult();
+		
+		query = "SELECT distinct org "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN space.shop shop "
+				+ "WHERE org.organizationSpace in :space";
+		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
+				.setParameter("space", space)
+				.getSingleResult();
+		
+		return account;
 	}
 }

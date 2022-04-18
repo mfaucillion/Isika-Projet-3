@@ -35,6 +35,7 @@ public class Project extends GenericProject {
 	protected List<StretchGoal> stretchGoals;
 	
 	@ManyToOne
+	@JoinColumn(name = "organization_space_id")
 	private OrganizationSpace organizationSpace;
 
 	public void setTargetAmount(BigDecimal targetAmount) {
