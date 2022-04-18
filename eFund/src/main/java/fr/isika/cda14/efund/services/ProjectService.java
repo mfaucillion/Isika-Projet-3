@@ -22,7 +22,6 @@ public class ProjectService {
 	private AccountRepository accountRepo;
 
 	public void create(ProjectCreationFormVM projectCreationFormVM, Long id) {
-		System.out.println("Service projet " + projectCreationFormVM);
 		Project newProject = new Project();
 		newProject.setName(projectCreationFormVM.getName());
 		newProject.setEndDate(projectCreationFormVM.getEndDate());
@@ -37,10 +36,9 @@ public class ProjectService {
 		
 		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 		
-		newProject.setOrgSpace(orgSpace);
+		newProject.setOrganizationSpace(orgSpace);
 		
 		projectRepo.create(newProject);
-
 	}
 
 	public List<Project> findAll() {

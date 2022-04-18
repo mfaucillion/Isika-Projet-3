@@ -38,7 +38,7 @@ public class EventCreationService {
 		
 		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 
-		newEvent.setOrgSpace(orgSpace);
+		newEvent.setOrganizationSpace(orgSpace);
 		
 		eventRepo.create(newEvent);
 	}
