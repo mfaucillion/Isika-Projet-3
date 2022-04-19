@@ -22,6 +22,18 @@
 
 					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:steps activeIndex="1" styleClass="Custom">
+								<p:menuitem value="Création du compte" />
+								<p:menuitem value="Enregistrement des informations" />
+							</p:steps>
+						</div>
+					</div>
+
+					<br />
+
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-3">
 							<div class="ui-inputgroup">
 								<div class="ui-inputgroup-addon">
@@ -62,7 +74,7 @@
 								id="OrgDescriptionInput" />
 						</div>
 					</div>
-					
+
 					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
@@ -70,9 +82,8 @@
 								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
 								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
 								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
-								label="Choisissez une image"
-								mode="advanced" sizeLimit="5000000" fileLimit="1"
-								accept=".gif,.jpg,.jpeg,.png"
+								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
 								listener="#{createOrganizationAccountBean.upload}" />
 
@@ -94,7 +105,7 @@
 								value="Valider" />
 						</div>
 					</div>
-					
+
 				</h:form>
 
 			</div>
