@@ -27,4 +27,8 @@ public class ProjectRepository {
 	public Project findProject(Long id) {
 		return this.em.find(Project.class, id);
 	}
+
+	public void remove(Project project) {
+		em.remove(project);
+	}
 }

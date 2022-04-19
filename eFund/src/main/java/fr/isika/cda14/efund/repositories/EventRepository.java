@@ -24,4 +24,12 @@ public class EventRepository {
 		return events;
 	}
 
+	public Event find(Long id) {
+		return em.find(Event.class, id);
+	}
+
+	public void remove(Event event) {
+		em.remove(event);
+	}
+
 }
