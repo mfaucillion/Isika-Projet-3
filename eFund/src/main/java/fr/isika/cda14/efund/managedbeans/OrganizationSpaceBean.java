@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+
+import org.primefaces.model.ResponsiveOption;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Event;
@@ -42,7 +45,18 @@ public class OrganizationSpaceBean {
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
 	
+	private List<ResponsiveOption> responsiveOptions;
+	
 	private Boolean isOwner;
+	
+	@PostConstruct
+    public void init() {
+        responsiveOptions = new ArrayList<>();
+        responsiveOptions.add(new ResponsiveOption("3000px", 4, 4));
+        responsiveOptions.add(new ResponsiveOption("2000px", 3, 3));
+        responsiveOptions.add(new ResponsiveOption("1240px", 2, 2));
+        responsiveOptions.add(new ResponsiveOption("768px", 1, 1));
+    }
 
 	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
@@ -98,6 +112,10 @@ public class OrganizationSpaceBean {
 
 	public Boolean getIsOwner() {
 		return isOwner;
+	}
+	
+	public List<ResponsiveOption> getResponsiveOptions() {
+		return responsiveOptions;
 	}
 
 }
