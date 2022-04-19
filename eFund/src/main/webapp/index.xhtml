@@ -11,36 +11,152 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<h1>eFund Welcome page</h1>
-			<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
-			<br />
-			<h:link outcome="login.xhtml">Se connecter</h:link>
-			<br />
-			<h:link outcome="createUser.xhtml">Création d'utilisateur</h:link>
-			<br />
-			<h:link outcome="createItem.xhtml">Création de produit</h:link>
-			<br />
-			<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
-			<br />
-			<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
-			<br />
-			<h:link outcome="paymentPage">Formulaire de paiement</h:link>
-			<br />
-			<h:link outcome="orgaListe.xhtml">Liste de mes organisations</h:link>
-			<br />
-			<h:link outcome="userProfil">UserProfil</h:link>
-			<i class="fa-solid fa-thumbs-up"></i>
+
+
+
+			<div class="container shadow p-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Bienvenue sur e-Fund lol</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
+						<br />
+						<h:link outcome="login.xhtml">Se connecter</h:link>
+						<br />
+						<h:link outcome="createUser.xhtml">Création d'utilisateur</h:link>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="createItem.xhtml">Création de produit</h:link>
+						<br />
+						<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
+						<br />
+						<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="paymentPage">Formulaire de paiement</h:link>
+						<br />
+						<h:link outcome="orgaListe.xhtml">Liste de mes organisations</h:link>
+						<br />
+						<h:link outcome="userProfil">UserProfil</h:link>
+						<i class="fa-solid fa-thumbs-up"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Les Stats projets</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 1</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 2</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 3</h1>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Coup de projecteur sur les meilleurs
+						projets</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+						<h1 class="text-center">Carousel Projets</h1>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Les Stats évènement</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 1</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 2</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 3</h1>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Coup de projecteur sur les meilleurs
+						évènement</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+						<h1 class="text-center">Carousel Evènement</h1>
+					</div>
+				</div>
+
+			</div>
+			
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Les Stats Assos/ONGs</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 1</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 2</h1>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h1 class="text-center">STAT 3</h1>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Coup de projecteur sur Assos/ONGs</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+						<h1 class="text-center">Carousel Assos/ONGs</h1>
+					</div>
+				</div>
+
+			</div>
 
 
 			<h:form>
-				<h:commandButton
-					action="#{loginBean.readFromSession()}"
+				<h:commandButton action="#{loginBean.readFromSession()}"
 					value="Afficher en console" />
-				<h:commandButton
-					action="#{loginBean.resetSessionAttributes()}"
+				<h:commandButton action="#{loginBean.resetSessionAttributes()}"
 					value="Invalider session" />
 			</h:form>
-
 		</ui:define>
 
 	</ui:composition>
