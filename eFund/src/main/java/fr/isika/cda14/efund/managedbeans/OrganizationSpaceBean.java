@@ -1,26 +1,22 @@
 package fr.isika.cda14.efund.managedbeans;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.services.EventService;
 import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.services.ShopService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
 @ViewScoped
@@ -45,13 +41,23 @@ public class OrganizationSpaceBean {
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
+	
+	private Boolean isOwner;
 
-	/* Loading OrganizationAccount an */
+	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
 		orgAccount = accountService.loadOrganizationAccountWithChildren(Long.parseLong(id));
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();
 		items = orgAccount.getOrganizationSpace().getShop().getItems();
+		System.out.println("SessionID : " + SessionTool.getUserId());
+		System.out.println("OngID : " + orgAccount.getId());
+		if (orgAccount.getId().equals(SessionTool.getUserId())) {
+			isOwner = true;
+		} else {
+			isOwner = false;
+		}
+		System.out.println(isOwner);
 	}
 
 	public void deleteItem(String id) {
@@ -89,4 +95,9 @@ public class OrganizationSpaceBean {
 	public String getBgcolor() {
 		return bgcolor;
 	}
+
+	public Boolean getIsOwner() {
+		return isOwner;
+	}
+
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
 public class LoginBean {
@@ -29,7 +30,7 @@ public class LoginBean {
 			if (account.getEmail().equals(email) && account.getPassword().equals(password)) {
 				
 				// Si même email et mot de passe -> On redirige vers l'Index
-				writeInSession(account);
+				SessionTool.writeInSession(account);
 				return "index";
 			} else {
 				// En cas d'erreur on ajoute des messages au formulaire pour indiquer l'erreur
@@ -57,38 +58,9 @@ public class LoginBean {
 //		FacesContext.getCurrentInstance().me
 		
 	}
-
-	public void writeInSession(Account account) {
-		// Si on veut accèder à la session http
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-
-		// Si on veut mémoriser (écrire) une information dans lasession http
-
-		// le nom de l'attribut doit être unique, et le même partout
-		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_ID, account.getId());
-		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_NAME, account.getDisplayedName());
-		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_ROLE, account.getRole().toString());
-	}
-
+	
 	public void readFromSession() {
-		// Si on veut accèder à la session http
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		// Si on veut lire une valeur de la session
-		// attention si rien n'a été écrit dans cet attribut => null
-		Long id = (Long) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_ID);
-		String userName = (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_NAME);
-		String role = (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_ROLE);
-		if (id != null) {
-			System.out.println("Utilisateur connecté : " + id + " - " + userName + " - " + role );
-		} else {
-			System.out.println("PAs d'id dans la session");
-		}
-	}
-
-	public void resetSessionAttributes() {
-		// Si on veut accèder à la session http
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		session.invalidate();
+		SessionTool.readFromSession();
 	}
 
 	public String getEmail() {

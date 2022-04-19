@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.Shop;
-import fr.isika.cda14.efund.repositories.ItemRepository;
 import fr.isika.cda14.efund.repositories.ShopRepository;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 

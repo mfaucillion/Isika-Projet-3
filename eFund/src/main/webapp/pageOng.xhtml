@@ -28,7 +28,7 @@
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
-							<p:link outcome="MODELE.xhtml">
+							<p:link outcome="MODELE.xhtml" rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
@@ -46,7 +46,7 @@
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
 						<p:link
 							outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}&#38;orgId=#{id}faces-redirect=true"
-							id="newProduct">
+							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProduct" value="Nouveau Produit"
@@ -62,12 +62,13 @@
 											<div class="clearfix">
 												#{item.label} #{item.id}
 												<div class="float-end">
-													<h:form>
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteItem(item.id)}"
 															id="delete-item-#{item.id}">
-															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" 
+															/>
 														</h:commandLink>
 													</h:form>
 												</div>
@@ -107,7 +108,7 @@
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
 							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
-							id="newProject">
+							id="newProject" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProject" value="Nouveau Projet" />
@@ -125,7 +126,7 @@
 											#{project.name}
 												<div class="float-end">
 												<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-													<h:form >
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink action="#{organizationSpaceBean.deleteProject(project.id)}" id="delete-project-#{project.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
 													</h:form>
@@ -162,8 +163,9 @@
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
 							outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
-							id="newEvent">
-							<i class="fa-solid fa-plus" />
+							id="newEvent"
+							rendered="#{organizationSpaceBean.isOwner}">
+							<i class="fa-solid fa-plus"/>
 						</p:link>
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
@@ -175,7 +177,7 @@
 										<f:facet name="title">
 											#{event.name}
 											<div class="float-end">
-													<h:form >
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 													<!-- ONLY IF EVENT.STATUS == DRAFT -->
 														<h:commandLink action="#{organizationSpaceBean.deleteEvent(event.id)}" id="delete-event-#{event.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
