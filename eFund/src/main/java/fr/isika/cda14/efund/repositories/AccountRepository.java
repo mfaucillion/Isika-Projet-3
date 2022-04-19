@@ -21,15 +21,15 @@ public class AccountRepository {
 	private EntityManager em;
 
 	/* Persistance des comptes User */
-	public Long persist(UserAccount newUser) {
+	public UserAccount persist(UserAccount newUser) {
 		em.persist(newUser);
-		return newUser.getId();
+		return newUser;
 	}
 
 	/* Persistance des comptes Organization */
-	public Long persist(OrganizationAccount newOrg) {
+	public OrganizationAccount persist(OrganizationAccount newOrg) {
 		em.persist(newOrg);
-		return newOrg.getId();
+		return newOrg;
 	}
 
 	/* Mise à jour des comptes User */
