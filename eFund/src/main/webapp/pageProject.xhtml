@@ -46,16 +46,38 @@
 
 					</div>
 					<div class="col-12 col-md-4 mt-3" style="background-color: orange;">
-						<h5>deuxieme partie</h5>
-						l'OrganizationSpace id est =
-						#{projectPageBean.project.organizationSpace.id} <br /> Le nom de
-						l'ONG est
-						#{projectPageBean.getOrgAccount(id).organizationInfo.name} <br />
+						<div class="row">
+							<div class="col-12 col-md-6 mt-3">
+								<img class="im-fluid w-75"
+									src="#{projectPageBean.getOrgAccount(id).imagePath}" alt="" />
+							</div>
+							<div class="col-12 col-md-6 mt-3">
+								#{projectPageBean.getOrgAccount(id).organizationInfo.name} <br />
+							</div>
+						</div>
+						<div>Montant en cours :
+							#{projectPageBean.project.currentAmount}</div>
+						<div>Date de fin : #{projectPageBean.project.endDate}</div>
+						<div>
+							<div class="p-field p-col-12 p-md-4">
+								<h5>Collecte actuelle</h5>
+								<div class="knob-container ui-corner-all">
+									<p:knob disabled="true" value="#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}" />
+								</div>
+							</div>
+							<div>
+								<p:progressBar value="50" labelTemplate="{value}%"
+									displayOnly="true" />
+							</div>
+						</div>
 
 					</div>
+
+
 				</div>
 			</div>
-			<div class="row"></div>
+
+
 		</ui:define>
 
 	</ui:composition>
