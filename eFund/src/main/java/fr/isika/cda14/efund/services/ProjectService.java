@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
@@ -38,9 +39,9 @@ public class ProjectService {
 		newProject.setCreationDate(new Date());
 
 		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
-		
+
 		newProject.setOrganizationSpace(orgSpace);
-		
+
 		projectRepo.create(newProject);
 	}
 
@@ -51,6 +52,10 @@ public class ProjectService {
 	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
 	}
+
+	public OrganizationAccount getOrgFromProjectEvent(Long id) {
+		System.out.println("Service projet");
+		return accountRepo.getOrgFromProjectOrEvent(id);
 
 	public void deleteProject(Long id) {
 		Project project = findProject(id);
