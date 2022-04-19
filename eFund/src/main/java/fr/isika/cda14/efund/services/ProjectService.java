@@ -56,6 +56,7 @@ public class ProjectService {
 	public OrganizationAccount getOrgFromProjectEvent(Long id) {
 		System.out.println("Service projet");
 		return accountRepo.getOrgFromProjectOrEvent(id);
+	}
 
 	public void deleteProject(Long id) {
 		Project project = findProject(id);
