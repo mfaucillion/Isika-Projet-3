@@ -6,17 +6,19 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="id" />
+	<f:event listener="#{organizationSpaceBean.onLoad(id)}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-			<f:metadata>
-				<f:viewParam name="id" />
-				<f:event listener="#{organizationSpaceBean.onLoad(id)}"
-					type="preRenderView"></f:event>
-			</f:metadata>
 
+			<h:link outcome="login.xhtml">Se connecter</h:link>
 
 			<div class="container-fluid p-5" id="ongPageBody">
 				<div class="row">
@@ -28,7 +30,8 @@
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
-							<p:link outcome="MODELE.xhtml" rendered="#{organizationSpaceBean.isOwner}">
+							<p:link outcome="MODELE.xhtml"
+								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
@@ -67,8 +70,7 @@
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteItem(item.id)}"
 															id="delete-item-#{item.id}">
-															<i class="fa-solid fa-circle-minus fa-2xl text-danger" 
-															/>
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
 														</h:commandLink>
 													</h:form>
 												</div>
@@ -123,12 +125,16 @@
 										</f:facet>
 										<f:facet name="title">
 											<div class="clearfix">
-											#{project.name}
+												#{project.name}
 												<div class="float-end">
-												<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
 													<h:form rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
-														<h:commandLink action="#{organizationSpaceBean.deleteProject(project.id)}" id="delete-project-#{project.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteProject(project.id)}"
+															id="delete-project-#{project.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+														</h:commandLink>
 													</h:form>
 												</div>
 											</div>
@@ -163,9 +169,8 @@
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
 							outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
-							id="newEvent"
-							rendered="#{organizationSpaceBean.isOwner}">
-							<i class="fa-solid fa-plus"/>
+							id="newEvent" rendered="#{organizationSpaceBean.isOwner}">
+							<i class="fa-solid fa-plus" />
 						</p:link>
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
@@ -177,12 +182,16 @@
 										<f:facet name="title">
 											#{event.name}
 											<div class="float-end">
-													<h:form rendered="#{organizationSpaceBean.isOwner}">
-														<h:inputHidden name="id" value="#{id}" />
+												<h:form rendered="#{organizationSpaceBean.isOwner}">
+													<h:inputHidden name="id" value="#{id}" />
 													<!-- ONLY IF EVENT.STATUS == DRAFT -->
-														<h:commandLink action="#{organizationSpaceBean.deleteEvent(event.id)}" id="delete-event-#{event.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
-													</h:form>
-												</div>
+													<h:commandLink
+														action="#{organizationSpaceBean.deleteEvent(event.id)}"
+														id="delete-event-#{event.id}">
+														<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+													</h:commandLink>
+												</h:form>
+											</div>
 										</f:facet>
 										<f:facet name="subtitle">
 											#{event.projectCategory}
@@ -201,6 +210,77 @@
 						</div>
 					</p:tab>
 
+					<p:tab title="ContentFlow">
+						<div class="card">
+							<p:contentFlow value="#{organizationSpaceBean.projects}"
+								var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
+						</div>
+					</p:tab>
+					<p:tab title="CarouselBasic">
+						<div class="card">
+							<p:carousel value="#{organizationSpaceBean.projects}" var="project"
+								numVisible="3" numScroll="3"
+								responsiveOptions="#{organizationSpaceBean.responsiveOptions}">
+								<f:facet name="header">
+									<h5>Basic</h5>
+								</f:facet>
+								<p:card styleClass="shadow mx-3">
+										<f:facet name="header">
+											<img src="#{project.imagePath}" class="ratio"
+												style="object-fit: cover;" />
+										</f:facet>
+										<f:facet name="title">
+											<div class="clearfix">
+												#{project.name}
+												<div class="float-end">
+													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteProject(project.id)}"
+															id="delete-project-#{project.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+														</h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</f:facet>
+										<f:facet name="subtitle">
+											#{project.projectCategory}
+										</f:facet>
+										<p>#{project.summary}</p>
+										<f:facet name="footer">
+											<div class="m-3">
+												<div class="progress">
+													<div
+														class="progress-bar progress-bar-striped progress-bar-animated"
+														style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
+														project.targetAmount)}%</div>
+												</div>
+												#{project.currentAmount}€ collecté sur
+												#{project.targetAmount}€
+												<p:button outcome="pageProject?id=#{project.id}"
+													styleClass="float-end" icon="pi pi-check" value="Explorer" />
+											</div>
+										</f:facet>
+									</p:card>
+							</p:carousel>
+						</div>
+					</p:tab>
+					<p:tab title="NEWTAB">
+						<div class="card">
+							<p:contentFlow value="#{organizationSpaceBean.projects}"
+								var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
+						</div>
+					</p:tab>
 					<p:tab title="NEWTAB">
 						<div class="card">
 							<p:contentFlow value="#{organizationSpaceBean.projects}"
