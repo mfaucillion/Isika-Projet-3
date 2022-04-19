@@ -9,7 +9,7 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
+		<h:outputStylesheet library="css" name="style.css" />
 		<ui:define name="content">
 			<div class="container-fluid p-5">
 
@@ -23,10 +23,13 @@
 							border="" />
 
 
+
 						<p:button value="Changer mon adresse email"
-							styleClass="ui-button-raised ui-button-secondary ui-button-flat" style="width:100%" />
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+							style="width:100%" />
 						<p:button value="Changer mon mot de passe"
-							styleClass="ui-button-raised ui-button-secondary ui-button-flat" style="width:100%" />
+							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
+							style="width:100%" />
 
 
 					</div>
@@ -39,13 +42,19 @@
 					<div class="clo-12 col-md-9">
 						<!-- les tab -->
 						<p:tabView>
-							<p:tab title="Favoris"><i class="fa-solid fa-star"></i>
+							<!-- J'aimerai bien mettre un fonteawsome à coté du nom du tab -->
+							<p:tab title="Favoris">
+								<f:facet name="title">
+
+									<i class="fa-solid fa-star"></i>
+									<h:outputText value="Favoris" />
+								</f:facet>
 								<div class="card">
 									<h:form>
 										<p:growl>
 											<p:autoUpdate />
 										</p:growl>
-										<p:panelMenu style="width:300px">
+										<p:panelMenu>
 											<p:submenu label="Projects">
 												<p:menuitem value="Le projet des pingouins" />
 												<p:menuitem value="Le projet des requins" />
@@ -59,6 +68,10 @@
 								</div>
 							</p:tab>
 							<p:tab title="Mes donations">
+								<f:facet name="title">
+									<i class="fa-solid fa-euro-sign"></i>
+									<h:outputText value="Mes donations" />
+								</f:facet>
 								<div class="row">
 									<div class="col-12 col-md-6">
 										<p:button value="Ma donation pour le projet des dauphins"
@@ -70,13 +83,14 @@
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-1">
+									<div class="col-12 col-md-2">
 										<p:button value="Date"
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-3">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									<div class="col-12 col-md-2">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 								<div class="row">
@@ -90,13 +104,14 @@
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-1">
+									<div class="col-12 col-md-2">
 										<p:button value="Date"
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-3">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									<div class="col-12 col-md-2">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 								<div class="row">
@@ -111,19 +126,24 @@
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-1">
+									<div class="col-12 col-md-2">
 										<p:button value="Date"
 											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 											style="width:100%" />
 									</div>
-									<div class="col-12 col-md-3">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus" />
+									<div class="col-12 col-md-2">
+										<p:button icon="fa-solid fa-plus" title="En savoir plus"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 
 
 							</p:tab>
 							<p:tab title="Mes évènements">
+								<f:facet name="title">
+									<i class="fa-regular fa-calendar-check"></i>
+									<h:outputText value="Mes évènements" />
+								</f:facet>
 								<div class="row">
 									<div class="col-12 col-md-9">
 										<p:button
@@ -138,8 +158,8 @@
 											style="width:100%" />
 									</div>
 									<div class="col-12 col-md-1">
-										<p:button  icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"/>
+										<p:button icon="fa-solid fa-pen"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 								<div class="row">
@@ -155,8 +175,8 @@
 											style="width:100%" />
 									</div>
 									<div class="col-12 col-md-1">
-										<p:button  icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"/>
+										<p:button icon="fa-solid fa-pen"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 								<div class="row">
@@ -172,12 +192,17 @@
 											style="width:100%" />
 									</div>
 									<div class="col-12 col-md-1">
-										<p:button  icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"/>
+										<p:button icon="fa-solid fa-pen"
+											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
 									</div>
 								</div>
 							</p:tab>
+							<!-- Mes commandes dataTable -->
 							<p:tab title="Mes commandes">
+								<f:facet name="title">
+									<i class="fa-solid fa-cart-shopping"></i>
+									<h:outputText value="Mes commandes" />
+								</f:facet>
 								<p>Lorem Ipsum is simply dummy text of the printing and
 									typesetting industry. Lorem Ipsum has been the industry's
 									standard dummy text ever since the 1500s, when an unknown
@@ -188,7 +213,7 @@
 									release of Letraset sheets containing Lorem Ipsum passages, and
 									more recently with desktop publishing software like Aldus
 									PageMaker including versions of Lorem Ipsum.</p>
-									<p>Lorem Ipsum is simply dummy text of the printing and
+								<p>Lorem Ipsum is simply dummy text of the printing and
 									typesetting industry. Lorem Ipsum has been the industry's
 									standard dummy text ever since the 1500s, when an unknown
 									printer took a galley of type and scrambled it to make a type
@@ -198,7 +223,7 @@
 									release of Letraset sheets containing Lorem Ipsum passages, and
 									more recently with desktop publishing software like Aldus
 									PageMaker including versions of Lorem Ipsum.</p>
-									<p>Lorem Ipsum is simply dummy text of the printing and
+								<p>Lorem Ipsum is simply dummy text of the printing and
 									typesetting industry. Lorem Ipsum has been the industry's
 									standard dummy text ever since the 1500s, when an unknown
 									printer took a galley of type and scrambled it to make a type
@@ -208,9 +233,14 @@
 									release of Letraset sheets containing Lorem Ipsum passages, and
 									more recently with desktop publishing software like Aldus
 									PageMaker including versions of Lorem Ipsum.</p>
-									
+
 							</p:tab>
-							<p:tab title="Mes infos personnelles" icon-on="fa-solid fa-minus">
+							<p:tab title="Mon historique personnel">
+								<f:facet name="title">
+									<i class="fa-solid fa-clock-rotate-left"></i>
+									<h:outputText value="Mon historique personnel" />
+								</f:facet>
+
 								<p>Lorem Ipsum is simply dummy text of the printing and
 									typesetting industry. Lorem Ipsum has been the industry's
 									standard dummy text ever since the 1500s, when an unknown
