@@ -22,12 +22,11 @@
 
 					<div class="col-12 col-md-8">
 						<div class="row">
-							<h3>Projet</h3>
 							<h4>#{projectPageBean.project.name}</h4>
 						</div>
 						<img class="im-fluid w-75"
 							src="#{projectPageBean.project.imagePath}" />
-						<div class="col-12 col-md-8 mt-3"
+						<div class="col-12 col-md-7 mt-3"
 							style="background-color: graytext;">
 
 							<p:tabView>
@@ -48,6 +47,11 @@
 					</div>
 					<div class="col-12 col-md-4 mt-3" style="background-color: orange;">
 						<h5>deuxieme partie</h5>
+						l'OrganizationSpace id est =
+						#{projectPageBean.project.organizationSpace.id} <br /> Le nom de
+						l'ONG est
+						#{projectPageBean.getOrgAccount(id).organizationInfo.name} <br />
+
 					</div>
 				</div>
 			</div>
