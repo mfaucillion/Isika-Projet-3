@@ -18,6 +18,7 @@ public class ProjectService {
 
 	@Inject
 	private ProjectRepository projectRepo;
+	
 	@Inject
 	private AccountRepository accountRepo;
 
@@ -44,5 +45,4 @@ public class ProjectService {
 	public List<Project> findAll() {
 		return projectRepo.findAll();
 	}
-
 }

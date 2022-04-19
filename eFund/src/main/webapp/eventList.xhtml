@@ -9,9 +9,10 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
 		<ui:define name="content">
-			<h:dataTable value="#{eventListBean.events}" var="event"> 
+		
+			<h:dataTable value="#{eventListBean.events}" var="event">
+			 
 				<h:column>
 					<f:facet name="header">id</f:facet>
 					#{event.id}
@@ -28,14 +29,10 @@
 					<f:facet name="header">Date</f:facet>
 					#{event.eventStartDate}
 				</h:column>
-				
-				
-				
+					
 			</h:dataTable>
 			
-			
-		</ui:define>
-			
+		</ui:define>	
 	</ui:composition>
 </h:body>
 </html>

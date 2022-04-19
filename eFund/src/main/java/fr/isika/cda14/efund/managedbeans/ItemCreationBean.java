@@ -2,7 +2,9 @@ package fr.isika.cda14.efund.managedbeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -20,9 +22,9 @@ public class ItemCreationBean {
 	
 	private ItemCreationForm itemCreationForm = new ItemCreationForm();
 
-	public String createItem(String id) {
+	public String createItem(String id, String orgId) {
 		creationService.create(itemCreationForm, Long.parseLong(id));
-		return "createItem.xhtml";
+		return "pageOng?id=" + orgId + "faces-redirect=true";
 	}
 	
 	public void upload(FileUploadEvent event) {

@@ -19,6 +19,7 @@ public class EventCreationFormVM {
 	private ProjectCategory projectCategory;
 	private ProjectRange projectRange;
 
+	
 	public ProjectCategory[] getProjectCategories() {
 		return ProjectCategory.values();
 	}

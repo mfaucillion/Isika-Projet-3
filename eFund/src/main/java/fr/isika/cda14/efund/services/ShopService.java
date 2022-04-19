@@ -38,4 +38,9 @@ public class ShopService {
 	public List<Item> getShopItemList(Long id) {
 		return shopRepo.getShopItemList(id);
 	}
+
+	public void deleteItem(Long id) {
+		Item item = shopRepo.findItem(id);
+		shopRepo.removeItem(item);
+	}
 }
