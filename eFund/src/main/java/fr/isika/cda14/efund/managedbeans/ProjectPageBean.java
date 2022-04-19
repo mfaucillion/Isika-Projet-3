@@ -21,7 +21,7 @@ public class ProjectPageBean {
 	private Project project;
 
 	public void onLoad(String id) {
-		project = projectService.findProjet(Long.parseLong(id));
+		project = projectService.findProject(Long.parseLong(id));
 	}
 
 	public Project getProject() {

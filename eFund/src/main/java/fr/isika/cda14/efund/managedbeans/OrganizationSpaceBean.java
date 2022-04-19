@@ -18,6 +18,7 @@ import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.services.EventService;
 import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.services.ShopService;
 
@@ -29,6 +30,9 @@ public class OrganizationSpaceBean {
 	
 	@Inject
 	ProjectService projectService;
+	
+	@Inject
+	EventService eventService;
 
 	@Inject
 	ShopService shopService;
@@ -59,7 +63,7 @@ public class OrganizationSpaceBean {
 	}
 	
 	public void deleteEvent(String id) {
-		projectService.deleteEvent(Long.parseLong(id));
+		eventService.deleteEvent(Long.parseLong(id));
 	}
 
 	public int pourcentage(BigDecimal current, BigDecimal target) {
