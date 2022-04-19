@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.services;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class ProjectService {
 
 	@Inject
 	private ProjectRepository projectRepo;
+	
 	@Inject
 	private AccountRepository accountRepo;
 
@@ -31,6 +33,7 @@ public class ProjectService {
 		newProject.setLocation(projectCreationFormVM.getLocation());
 		newProject.setProjectCategory(projectCreationFormVM.getProjectCategory());
 		newProject.setProjectRange(projectCreationFormVM.getProjectRange());
+		newProject.setCurrentAmount(new BigDecimal(0));
 		newProject.setTargetAmount(projectCreationFormVM.getTargetAmount());
 		newProject.setProjectStatus(ProjectStatus.DRAFT);
 		newProject.setCreationDate(new Date());
@@ -46,13 +49,17 @@ public class ProjectService {
 		return projectRepo.findAll();
 	}
 
-	public Project findProjet(Long id) {
+	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
 	}
 
 	public OrganizationAccount getOrgFromProjectEvent(Long id) {
 		System.out.println("Service projet");
 		return accountRepo.getOrgFromProjectOrEvent(id);
+
+	public void deleteProject(Long id) {
+		Project project = findProject(id);
+		projectRepo.remove(project);
 	}
 
 }

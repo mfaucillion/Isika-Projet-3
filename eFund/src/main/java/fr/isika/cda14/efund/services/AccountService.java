@@ -29,7 +29,7 @@ public class AccountService {
 	@Inject
 	private AccountRepository repo;
 
-	public Long createOrg(OrganizationForm inputOrg) {
+	public OrganizationAccount createOrg(OrganizationForm inputOrg) {
 
 		OrganizationAccount org = new OrganizationAccount();
 
@@ -60,7 +60,7 @@ public class AccountService {
 		repo.update(org);
 	}
 
-	public Long createUser(CreateUserViewModel inputUser) throws UserAlreadyExistsException {
+	public UserAccount createUser(CreateUserViewModel inputUser) throws UserAlreadyExistsException {
 		Optional<Account> account = repo.findByEmail(inputUser.getEmail());
 		if (account.isPresent()) {
 			throw new UserAlreadyExistsException("Le compte d'utilisateur existe déjà");

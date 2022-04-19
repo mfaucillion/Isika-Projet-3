@@ -1,8 +1,6 @@
 
 package fr.isika.cda14.efund.managedbeans;
 
-import java.util.Optional;
-
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
@@ -24,7 +22,7 @@ public class ProjectPageBean {
 	private OrganizationAccount organizationAccount;
 
 	public void onLoad(String id) {
-		project = projectService.findProjet(Long.parseLong(id));
+		project = projectService.findProject(Long.parseLong(id));
 	}
 
 	public Project getProject() {

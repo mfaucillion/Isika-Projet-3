@@ -1,41 +1,81 @@
 package fr.isika.cda14.efund.managedbeans;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.services.EventService;
+import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.services.ShopService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
+@ViewScoped
 public class OrganizationSpaceBean {
 	@Inject
 	AccountService accountService;
 	
 	@Inject
+	ProjectService projectService;
+	
+	@Inject
+	EventService eventService;
+
+	@Inject
 	ShopService shopService;
-	
+
+	/* Test for themed CSS */
+	private String bgcolor = "";
+
 	OrganizationAccount orgAccount;
-	
+
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
 	
-	/* Loading OrganizationAccount an*/
+	private Boolean isOwner;
+
+	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
 		orgAccount = accountService.loadOrganizationAccountWithChildren(Long.parseLong(id));
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();
 		items = orgAccount.getOrganizationSpace().getShop().getItems();
+		System.out.println("SessionID : " + SessionTool.getUserId());
+		System.out.println("OngID : " + orgAccount.getId());
+		if (orgAccount.getId().equals(SessionTool.getUserId())) {
+			isOwner = true;
+		} else {
+			isOwner = false;
+		}
+		System.out.println(isOwner);
+	}
+
+	public void deleteItem(String id) {
+		shopService.deleteItem(Long.parseLong(id));
 	}
 	
+	public void deleteProject(String id) {
+		projectService.deleteProject(Long.parseLong(id));
+	}
+	
+	public void deleteEvent(String id) {
+		eventService.deleteEvent(Long.parseLong(id));
+	}
+
+	public int pourcentage(BigDecimal current, BigDecimal target) {
+		return (current.intValue() * 100 / target.intValue());
+	}
+
 	public OrganizationAccount getOrgAccount() {
 		return orgAccount;
 	}
@@ -51,4 +91,13 @@ public class OrganizationSpaceBean {
 	public List<Item> getItems() {
 		return items;
 	}
+
+	public String getBgcolor() {
+		return bgcolor;
+	}
+
+	public Boolean getIsOwner() {
+		return isOwner;
+	}
+
 }

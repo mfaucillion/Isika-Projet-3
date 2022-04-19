@@ -6,7 +6,6 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
-
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
@@ -18,55 +17,83 @@
 					type="preRenderView"></f:event>
 			</f:metadata>
 
-			<div class="container-fluid p-5">
+
+			<div class="container-fluid p-5" id="ongPageBody">
 				<div class="row">
-					<div class="col-12 col-md-5">
-						<img class="img-fluid"
+					<div class="col-12 col-md-5 mb-3">
+						<img class="img-fluid rounded-3 shadow"
 							src="#{organizationSpaceBean.orgAccount.imagePath}" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
-							<p:link outcome="MODELE.xhtml">
+							<p:link outcome="MODELE.xhtml" rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
 						<p>#{organizationSpaceBean.orgAccount.organizationInfo.description}</p>
 					</div>
 				</div>
-				<hr />
-				<p:tabView>
 
+				<p:tabView styleClass="rounded">
 					<!-- Onglet Boutique -->
-					<p:tab title="Boutique">
+					<p:tab>
+						<f:facet name="title">
+							<i class="fa-solid fa-basket-shopping" /> Boutique
+						</f:facet>
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
-						<p:link outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}" id="newProduct">
+						<p:link
+							outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}&#38;orgId=#{id}faces-redirect=true"
+							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
 							<p:repeat var="item" value="#{organizationSpaceBean.items}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-												<img src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"/>								
+											<img src="#{item.imagePath}" />
 										</f:facet>
 										<f:facet name="title">
-											<i class="fa-solid fa-minus"></i>Sushi
+											<div class="clearfix">
+												#{item.label} #{item.id}
+												<div class="float-end">
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteItem(item.id)}"
+															id="delete-item-#{item.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" 
+															/>
+														</h:commandLink>
+													</h:form>
+												</div>
+											</div>
 										</f:facet>
 										<f:facet name="subtitle">
-											Nourriture
+											#{item.itemCategory}
 										</f:facet>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Fusce a urna eget massa tempus faucibus.</p>
+										<p>#{item.description}</p>
 										<f:facet name="footer">
-											<div class="m-3">
-												Prix : 20.00€
-												<p:commandButton styleClass="float-end" icon="pi pi-check"
-													value="Acheter" />
+											<div class="m-3 clearfix">
+												<div class="float-start">Prix : #{item.price}€</div>
+												<div class="float-end">
+
+													<p:commandButton id="delete-products-button"
+														value="Retirer" icon="pi pi-trash" actionListener="#"
+														styleClass="ui-button-danger">
+														<p:confirm header="Confirmation"
+															message="Voulez vous supprimer ce produit ?"
+															icon="pi pi-exclamation-triangle" />
+
+													</p:commandButton>
+													<p:commandButton icon="pi pi-check" value="Ajouter"
+														actionListener="#" />
+												</div>
 											</div>
 										</f:facet>
 									</p:card>
@@ -79,29 +106,49 @@
 
 					<p:tab title="Projets">
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
+						<p:link
+							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
+							id="newProject" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
-						<p:tooltip for="newProject" value="Nouveau Projet"/>
+						<p:tooltip for="newProject" value="Nouveau Projet" />
 						<div class="row">
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3 d-flex align-items-stretch">
+								<div
+									class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3 d-flex align-items-stretch">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-											<img src="#{project.imagePath}" class="ratio" style="object-fit:cover;"/>
+											<img src="#{project.imagePath}" class="ratio"
+												style="object-fit: cover;" />
 										</f:facet>
 										<f:facet name="title">
-												#{project.name}
-											</f:facet>
+											<div class="clearfix">
+											#{project.name}
+												<div class="float-end">
+												<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink action="#{organizationSpaceBean.deleteProject(project.id)}" id="delete-project-#{project.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</f:facet>
 										<f:facet name="subtitle">
-												#{project.projectCategory}
-											</f:facet>
+											#{project.projectCategory}
+										</f:facet>
 										<p>#{project.summary}</p>
 										<f:facet name="footer">
 											<div class="m-3">
-												#{project.currentAmount}€ collecté sur #{project.targetAmount}€
-												<p:button outcome="pageProject?id=#{project.id}" styleClass="float-end" icon="pi pi-check"
-													value="Explorer" />
+												<div class="progress">
+													<div
+														class="progress-bar progress-bar-striped progress-bar-animated"
+														style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
+														project.targetAmount)}%</div>
+												</div>
+												#{project.currentAmount}€ collecté sur
+												#{project.targetAmount}€
+												<p:button outcome="pageProject?id=#{project.id}"
+													styleClass="float-end" icon="pi pi-check" value="Explorer" />
 											</div>
 										</f:facet>
 									</p:card>
@@ -112,30 +159,38 @@
 
 					<!-- Onglet Evénements -->
 					<p:tab title="Evénements">
-					
-					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
-							<i class="fa-solid fa-plus" />
+
+						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
+						<p:link
+							outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
+							id="newEvent"
+							rendered="#{organizationSpaceBean.isOwner}">
+							<i class="fa-solid fa-plus"/>
 						</p:link>
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-											<img
-												src="https://www.ville-montreuil-juigne.fr/var/ayaline/storage/images/media/images/actualites/recherche-de-benevoles/117162-1-fre-FR/recherche-de-benevoles_image_full.jpg"></img>
+											<img src="#{event.imagePath}"></img>
 										</f:facet>
 										<f:facet name="title">
-											Mon Evénement
+											#{event.name}
+											<div class="float-end">
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+													<!-- ONLY IF EVENT.STATUS == DRAFT -->
+														<h:commandLink action="#{organizationSpaceBean.deleteEvent(event.id)}" id="delete-event-#{event.id}"><i class="fa-solid fa-circle-minus fa-2xl text-danger"/></h:commandLink>
+													</h:form>
+												</div>
 										</f:facet>
 										<f:facet name="subtitle">
-											Humanitaire
+											#{event.projectCategory}
 										</f:facet>
-										<p>Description : Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+										<p>#{event.summary}</p>
 										<f:facet name="footer">
 											<div class="m-3">
-												4 bénévoles inscrits sur 30
+												XXX bénévoles inscrits sur #{event.volunteerTarget}
 												<p:commandButton styleClass="float-end" icon="pi pi-check"
 													value="Explorer" />
 											</div>
@@ -145,13 +200,15 @@
 							</p:repeat>
 						</div>
 					</p:tab>
-					
+
 					<p:tab title="NEWTAB">
 						<div class="card">
-						    <p:contentFlow value="#{organizationSpaceBean.projects}" var="project">
-						        <img src="#{project.imagePath}" class="content"/>
-						        <div class="caption text-dark">#{project.summary}</div>
-						    </p:contentFlow>
+							<p:contentFlow value="#{organizationSpaceBean.projects}"
+								var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
 						</div>
 					</p:tab>
 				</p:tabView>

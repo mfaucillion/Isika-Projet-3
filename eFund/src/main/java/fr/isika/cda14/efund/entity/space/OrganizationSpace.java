@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Shop;
 
