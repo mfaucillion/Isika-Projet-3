@@ -1,6 +1,8 @@
 
 package fr.isika.cda14.efund.managedbeans;
 
+import java.math.BigDecimal;
+
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
@@ -32,6 +34,10 @@ public class ProjectPageBean {
 	public OrganizationAccount getOrgAccount(Long id) {
 		System.out.println("coucou " + organizationAccount);
 		return projectService.getOrgFromProjectEvent(id);
-
+	}
+	
+	public int percentage(BigDecimal currentCollect, BigDecimal target) {
+		return (currentCollect.intValue() * 100)/target.intValue();
+		
 	}
 }
