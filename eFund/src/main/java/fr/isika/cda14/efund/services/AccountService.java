@@ -119,4 +119,8 @@ public class AccountService {
 		return repo.loadOrganizationAccountWithChildren(id);
 	}
 
+	public List<UserAccount> getAllUsers() {
+		return repo.getAllUsers();
+	}
+
 }

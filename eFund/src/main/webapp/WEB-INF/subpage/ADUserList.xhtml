@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:body>
+<h:form>
+    <div class="card">
+        <p:dataTable var="user" value="#{adminDashboardBean.users}">
+            <p:column headerText="Id">
+                <h:outputText value="#{user.id}" />
+            </p:column>
+            <p:column headerText="Image">
+                <h:outputText value="#{user.imagePath}" />
+            </p:column>
+
+            <p:column headerText="UserName">
+                <h:outputText value="#{user.displayedName}" />
+            </p:column>
+
+            <p:column headerText="Email">
+                <h:outputText value="#{user.email}" />
+            </p:column>
+
+            <p:column headerText="Status">
+                <h:outputText value="#{user.accountStatus}" />
+            </p:column>
+            
+             <p:column exportable="false">
+                <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
+                                 oncomplete="PF('manageProductDialog').show()"
+                                 styleClass="edit-button rounded-button ui-button-success" process="@this">
+                    <f:setPropertyActionListener value="#{product}" target="#{crudView.selectedProduct}"/>
+                    <p:resetInput target=":form:manage-product-content"/>
+                </p:commandButton>
+                <p:commandButton class="ui-button-warning rounded-button" icon="pi pi-trash" process="@this"
+                                 oncomplete="PF('deleteProductDialog').show()">
+                    <f:setPropertyActionListener value="#{product}" target="#{crudView.selectedProduct}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </div>
+</h:form>
+</h:body>
+
+</html>
