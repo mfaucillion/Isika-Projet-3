@@ -56,7 +56,8 @@
 									src="#{projectPageBean.getOrgAccount(id).imagePath}" alt="" />
 							</div>
 							<div class="col-12 col-md-6 mt-3">
-								#{projectPageBean.getOrgAccount(id).organizationInfo.name} <br />
+								<h2>#{projectPageBean.getOrgAccount(id).organizationInfo.name} </h2><br />
+								<p>#{projectPageBean.getOrgAccount(id).organizationInfo.description}</p>
 							</div>
 						</div>
 						<div>Montant en cours :
@@ -74,6 +75,11 @@
 								<p:progressBar value="50" labelTemplate="{value}%"
 									displayOnly="true" />
 							</div>
+							<h:form>
+							<div>
+							<h:commandButton action="#{projectPageBean.calculRemainingDays(projectPageBean.project.endDate)}" value="Test date" />
+							</div>
+							</h:form>
 						</div>
 					</div>
 				</div>
