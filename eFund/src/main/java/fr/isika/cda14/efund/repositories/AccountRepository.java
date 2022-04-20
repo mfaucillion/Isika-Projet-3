@@ -131,13 +131,12 @@ public class AccountRepository {
 		return account;
 	}
 
-	public OrganizationAccount getOrgFromProjectOrEvent(Long id) {
+	public OrganizationAccount getOrgFromProject(Long id) {
 		String query = "SELECT orgAcc "
 				+ "FROM OrganizationAccount orgAcc "
 				+ "JOIN orgAcc.organizationSpace orgSpace "
 				+ "JOIN orgSpace.projects pro "
 				+ "WHERE pro.id =:id ";
-		System.out.println("c'est id projet: " + id +" " + query);
 		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
 				.setParameter("id", id)
 				.getSingleResult();
