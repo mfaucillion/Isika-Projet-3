@@ -6,12 +6,21 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{indexBean.onLoad}" type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/index.css" />
+		</ui:define>
+
 		<ui:define name="content">
 
-			<div class="container shadow p-5 mt-5">
+			<div class="img-fond">
 
 				<div class="ui-fuild row">
 					<h1 class="text-center">Bienvenue sur e-Fund lol</h1>
@@ -42,22 +51,26 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="container shadow py-3 5px-5 mt-5">
+			<h5> Présentation:</h5>
+			<p> Bla bla bla bla Bla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla bla</p>
+			</div>
 
-			<div class="container shadow py-3 px-5 mt-5">
+			<div class="container shadow py-3 5px-5 mt-5">
 
-				<div class="ui-fuild row">
-					<h1 class="text-center">Les Stats projets</h1>
-				</div>
-
-				<div class="ui-fluid row">
+				<div class="ui-fluid row pb-3">
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 1</h1>
+						<h5 class="text-center">Nombre de projets</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 2</h1>
+						<h5 class="text-center">Montant total récolté</h5>
+						
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 3</h1>
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 				</div>
 
@@ -66,33 +79,39 @@
 			<div class="container shadow py-3 px-5 mt-5">
 
 				<div class="ui-fuild row">
-					<h1 class="text-center">Coup de projecteur sur les meilleurs
-						projets</h1>
+					<h1 class="text-center">Nos projets récents</h1>
 				</div>
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
-						<h1 class="text-center">Carousel Projets</h1>
+
+						<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.projects}" var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
+						</div>
+
 					</div>
 				</div>
 
 			</div>
-			
-			<div class="container shadow py-3 px-5 mt-5">
 
-				<div class="ui-fuild row">
-					<h1 class="text-center">Les Stats évènement</h1>
-				</div>
+			<div class="container shadow py-3 px-5 mt-5">
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 1</h1>
+						<h5 class="text-center">Nombre d'évènement</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 2</h1>
+						<h5 class="text-center">Nombre de volontaires</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 3</h1>
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 				</div>
 
@@ -101,33 +120,39 @@
 			<div class="container shadow py-3 px-5 mt-5">
 
 				<div class="ui-fuild row">
-					<h1 class="text-center">Coup de projecteur sur les meilleurs
-						évènement</h1>
+					<h1 class="text-center">Nos évènements en cours</h1>
 				</div>
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
-						<h1 class="text-center">Carousel Evènement</h1>
+						
+					<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.events}" var="event">
+								<p:graphicImage styleClass="content shadow"
+									value="#{event.imagePath}" />
+								<div class="caption text-dark">#{event.summary}</div>
+							</p:contentFlow>
+						</div>
+
 					</div>
 				</div>
 
 			</div>
-			
-			<div class="container shadow py-3 px-5 mt-5">
 
-				<div class="ui-fuild row">
-					<h1 class="text-center">Les Stats Assos/ONGs</h1>
-				</div>
+			<div class="container shadow py-3 px-5 mt-5">
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 1</h1>
+						<h5 class="text-center">Nombre d'associations</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 2</h1>
+						<h5 class="text-center">STAT 2</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">STAT 3</h1>
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
 					</div>
 				</div>
 
@@ -141,7 +166,13 @@
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
-						<h1 class="text-center">Carousel Assos/ONGs</h1>
+						<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.orgs}" var="org">
+								<p:graphicImage styleClass="content shadow"
+									value="#{org.imagePath}" />
+								<div class="caption text-dark">#{org.organizationInfo.summary}</div>
+							</p:contentFlow>
+						</div>
 					</div>
 				</div>
 

@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class AccountService {
 		org.setRole(Role.ASSOC);
 		org.setAccountStatus(AccountStatus.ACTIVE);
 		org.setImagePath("/img/organization/default.jpg");
+		org.setCreationDate(new Date());
 		return repo.persist(org);
 	}
 
@@ -121,6 +123,10 @@ public class AccountService {
 
 	public UserAccount findUserAccountById(Long id) {
 		return repo.findUser(id);
+	}
+
+	public List<OrganizationAccount> getTopOrgs() {
+		return repo.getTopOrgs();
 	}
 
 }
