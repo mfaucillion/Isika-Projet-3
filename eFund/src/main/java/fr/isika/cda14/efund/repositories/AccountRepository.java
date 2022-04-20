@@ -81,8 +81,9 @@ public class AccountRepository {
 		em.merge(orgSpace);
 	}
 
-	/* */
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
+		
+		/* On force le Fetching de la collection d'Items dans le Shop */
 		String query = "SELECT distinct shop "
 				+ "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "
@@ -91,6 +92,7 @@ public class AccountRepository {
 				+ "WHERE org.id=:id";
 		Shop shop = em.createQuery(query, Shop.class).setParameter("id", id).getSingleResult();
 
+		/* On force le Fetching de la collection de Projects dans le Space */
 		query = "SELECT distinct space " + "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "
 				+ "INNER JOIN FETCH space.projects "
@@ -99,6 +101,7 @@ public class AccountRepository {
 		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class).setParameter("shop", shop)
 				.getSingleResult();
 
+		/* On force le Fetching de la collection d'Events dans le Space */
 		query = "SELECT distinct space "
 				+ "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "
@@ -107,6 +110,16 @@ public class AccountRepository {
 				+ "WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
 
+		/* On force le Fetching de la collection de ContentTabs dans le Space */
+		query = "SELECT distinct space "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN FETCH space.contentTabs "
+				+ "INNER JOIN space.shop shop "
+				+ "WHERE org.organizationSpace in :space";
+		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
+		
+		/* On relie le tout et on sort notre OrganizationAccount */
 		query = "SELECT distinct org "
 				+ "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "

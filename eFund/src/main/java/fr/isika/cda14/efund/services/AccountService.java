@@ -84,7 +84,6 @@ public class AccountService {
 	}
 
 	public void updateUser(Long id, CreateUserViewModel inputUser) {
-
 		UserAccount user = repo.findUser(id);
 
 		user.getUserInfo().setFirstName(inputUser.getFirstName());

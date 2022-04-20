@@ -7,11 +7,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.primefaces.model.ResponsiveOption;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
@@ -44,6 +47,7 @@ public class OrganizationSpaceBean {
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
+	List<ContentTab> tabs = new ArrayList<ContentTab>();
 	
 	private List<ResponsiveOption> responsiveOptions;
 	
@@ -56,7 +60,7 @@ public class OrganizationSpaceBean {
         responsiveOptions.add(new ResponsiveOption("2000px", 3, 3));
         responsiveOptions.add(new ResponsiveOption("1240px", 2, 2));
         responsiveOptions.add(new ResponsiveOption("768px", 1, 1));
-    }
+	}
 
 	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
@@ -64,14 +68,12 @@ public class OrganizationSpaceBean {
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();
 		items = orgAccount.getOrganizationSpace().getShop().getItems();
-		System.out.println("SessionID : " + SessionTool.getUserId());
-		System.out.println("OngID : " + orgAccount.getId());
+		tabs = orgAccount.getOrganizationSpace().getContentTabs();
 		if (orgAccount.getId().equals(SessionTool.getUserId())) {
 			isOwner = true;
 		} else {
 			isOwner = false;
 		}
-		System.out.println(isOwner);
 	}
 
 	public void deleteItem(String id) {
@@ -102,8 +104,15 @@ public class OrganizationSpaceBean {
 		return events;
 	}
 
-	public List<Item> getItems() {
+	public List<Item> getItems() {		
 		return items;
+	}
+	
+	public List<ContentTab> getTabs() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		onLoad(request.getParameter("id"));
+		System.out.println(tabs.size());
+		return tabs;
 	}
 
 	public String getBgcolor() {
@@ -117,5 +126,5 @@ public class OrganizationSpaceBean {
 	public List<ResponsiveOption> getResponsiveOptions() {
 		return responsiveOptions;
 	}
-
+	
 }

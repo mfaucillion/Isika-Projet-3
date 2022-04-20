@@ -9,19 +9,57 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class ContentBlock {
+@Table(name = "content_block")
+public class ContentBlock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	protected Long id;
-
+	private Long id;
+	
 	@Column(name = "post_date")
 	@Temporal(TemporalType.DATE)
-	protected Date postDate;
+	private Date postDate;
+	
+	/*image video texte*/
+	private String type;
+	
+	private String content;
 
+	public ContentBlock() {
+		this.postDate = new Date();
+	}
+	
+	public Date getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	
 }
