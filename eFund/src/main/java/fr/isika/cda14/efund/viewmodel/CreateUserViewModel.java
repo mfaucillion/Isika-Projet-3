@@ -25,6 +25,7 @@ public class CreateUserViewModel implements Serializable {
 	private String city;
 
 	private String country;
+	private String imagePath;
 
 	public String getEmail() {
 		return email;
@@ -104,6 +105,14 @@ public class CreateUserViewModel implements Serializable {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 }

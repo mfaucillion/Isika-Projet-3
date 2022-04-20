@@ -119,4 +119,8 @@ public class AccountService {
 		return repo.loadOrganizationAccountWithChildren(id);
 	}
 
+	public UserAccount findUserAccountById(Long id) {
+		return repo.findUser(id);
+	}
+
 }
