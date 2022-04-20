@@ -11,25 +11,36 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<h:outputStylesheet library="css" name="style.css" />
 		<ui:define name="content">
+			<f:metadata>
+				<f:viewParam name="userId"></f:viewParam>
+				<f:event listener="#{userProfilBean.onLoad(userId)}"
+					type="preRenderView"></f:event>
+			</f:metadata>
 			<div class="container-fluid p-5">
 
 				<div class="row">
 					<div class="col-12 col-md-3">
-						<!--user's photo, on mettre l'image Path au lieu du lien-->
-						<img class="img-fluid"
-							src="https://64.media.tumblr.com/5c595f61ea7d0695c8965451907165cc/7817ce05b3ebe1ed-95/s540x810/be9ffe07a6d73629f7309a6bdf470da5760ae0f7.jpg"
-							alt="user's photo"
-							onclick="this.src='https://www.computerhope.com/jargon/p/plus.png';"
-							border="" />
+						<!--user's photo, on mettre l'image Path as lieu du lien-->
 
+						<p:fileUpload skinSimple="true"
+							uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
+							chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
+							cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
+							label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+							fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
+							invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
+							listener="#{userProfilBean.upload}" />
 
-
+						<h3 align="center">Bienvue
+							#{userProfilBean.userAccount.userInfo.firstName}
+							#{userProfilBean.userAccount.userInfo.lastName} !</h3>
 						<p:button value="Changer mon adresse email"
 							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-							style="width:100%" />
+							style="width:100%" contentEditable="true" />
 						<p:button value="Changer mon mot de passe"
 							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
 							style="width:100%" />
+						<div contenteditable="true" style="color: grey">Changer mon adresse mail</div>
 
 
 					</div>
@@ -218,11 +229,7 @@
 												</f:facet>
 												<p:menuitem value="a remplacer" />
 												<p:menuitem value="a remplacer">
-													<div class="card">
-														<h5>Left Align</h5>
-														<p:chronoline  >
-														 </p:chronoline>
-													</div>
+													<!-- chronoline mettre un de primeFaces -->
 													<p>Lorem Ipsum is simply dummy text of the printing and
 														typesetting industry. Lorem Ipsum has been the industry's
 														standard dummy text ever since the 1500s, when an unknown
@@ -244,26 +251,6 @@
 									</h:form>
 								</div>
 
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
 								<p>Lorem Ipsum is simply dummy text of the printing and
 									typesetting industry. Lorem Ipsum has been the industry's
 									standard dummy text ever since the 1500s, when an unknown
