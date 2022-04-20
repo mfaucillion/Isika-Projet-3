@@ -114,7 +114,7 @@ public class AccountRepository {
 		query = "SELECT distinct space "
 				+ "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN FETCH space.contentTabs "
+				+ "LEFT JOIN FETCH space.contentTabs "
 				+ "INNER JOIN space.shop shop "
 				+ "WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
