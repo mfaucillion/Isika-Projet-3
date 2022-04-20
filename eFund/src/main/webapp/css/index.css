@@ -1,5 +1,5 @@
 .img-fond {
-    background-image: url("../img/background-rainbow.jpg");
+    background-image: url("../img/Background50Alpha.png");
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center;
@@ -13,6 +13,6 @@
 	border-radius: 5px;
 }
 
-h5, h1{
+h5{
 	color:#4f4f4f;
 }
