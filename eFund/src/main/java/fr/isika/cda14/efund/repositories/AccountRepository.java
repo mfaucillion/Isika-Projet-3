@@ -143,5 +143,13 @@ public class AccountRepository {
 				.getSingleResult();
 		return account;
 	}
+
+	public List<OrganizationAccount> getTopOrgs() {
+		String query = "SELECT org "
+				+ "FROM OrganizationAccount org "
+				+ "ORDER BY org.creationDate";
+		return em.createQuery(query, OrganizationAccount.class).setMaxResults(3).getResultList();
+	}
+
 	
 }

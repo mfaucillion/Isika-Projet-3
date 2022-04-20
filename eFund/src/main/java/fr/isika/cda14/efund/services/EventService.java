@@ -28,4 +28,8 @@ public class EventService {
 		eventRepo.remove(event);		
 	}
 
+	public List<Event> getTopEvents() {
+		return eventRepo.getTopEvents();
+	}
+
 }
