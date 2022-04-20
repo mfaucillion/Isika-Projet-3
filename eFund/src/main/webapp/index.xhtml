@@ -40,7 +40,11 @@
 						<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
 						<br />
 						<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
+						<br />
+						<h:link outcome="projectsList.xhtml">Liste des projets</h:link>
+						<br />
 					</div>
+
 					<div class="col-12 col-md-4 mt-3">
 						<h:link outcome="paymentPage">Formulaire de paiement</h:link>
 						<br />
@@ -51,10 +55,12 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<div class="container shadow py-3 5px-5 mt-5">
-			<h5> Présentation:</h5>
-			<p> Bla bla bla bla Bla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla bla</p>
+				<h5>Présentation:</h5>
+				<p>Bla bla bla bla Bla bla bla blaBla bla bla blaBla bla bla
+					blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla
+					bla bla blaBla bla bla blaBla bla bla blaBla bla bla bla</p>
 			</div>
 
 			<div class="container shadow py-3 5px-5 mt-5">
@@ -66,7 +72,7 @@
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h5 class="text-center">Montant total récolté</h5>
-						
+
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h5 class="text-center">STAT 3</h5>
@@ -125,8 +131,8 @@
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
-						
-					<div class="card pb-3">
+
+						<div class="card pb-3">
 							<p:contentFlow value="#{indexBean.events}" var="event">
 								<p:graphicImage styleClass="content shadow"
 									value="#{event.imagePath}" />
