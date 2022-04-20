@@ -23,17 +23,17 @@
 	
 }
 
-#ongPageBody .ui-card-header img{
+.ui-card-header img{
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 }
 
-#ongPageBody .ui-card {
+.ui-card {
 	border-radius: 20px !important;
 	border: 2px solid;
 }
 
-#ongPageBody body .ui-card {
+body .ui-card {
 
 }
 

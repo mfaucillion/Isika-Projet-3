@@ -15,3 +15,11 @@ body{
 .navbar{
 	border-bottom: 1px solid #000000;
 }
+
+a{
+	text-decoration: none;
+}
+
+.progress{
+	background-color: grey;
+}

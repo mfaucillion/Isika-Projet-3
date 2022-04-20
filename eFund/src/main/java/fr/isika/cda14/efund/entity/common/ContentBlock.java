@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +29,8 @@ public class ContentBlock {
 	/*image video texte*/
 	private String type;
 	
+	@Lob
+	@Column(length = 5000)
 	private String content;
 
 	public ContentBlock() {
