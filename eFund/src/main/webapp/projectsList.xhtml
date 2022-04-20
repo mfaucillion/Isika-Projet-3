@@ -6,6 +6,11 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{projectsListBean.onLoad()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
@@ -16,43 +21,60 @@
 			<hr />
 			<h:dataTable value="#{projectsListBean.projectList}" var="pro">
 				<h:column>
-				<f:facet name="header">Nom projet</f:facet>
+					<f:facet name="header">Nom projet</f:facet>
 				#{pro.name}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Date de fin</f:facet>
+					<f:facet name="header">Date de fin</f:facet>
 				#{pro.endDate}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Localisation</f:facet>
+					<f:facet name="header">Localisation</f:facet>
 				#{pro.location}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Categorie</f:facet>
+					<f:facet name="header">Categorie</f:facet>
 				#{pro.projectCategory}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Portée</f:facet>
+					<f:facet name="header">Portée</f:facet>
 				#{pro.projectRange}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Montant à atteindre</f:facet>
+					<f:facet name="header">Montant à atteindre</f:facet>
 				#{pro.targetAmount}
 				</h:column>
-				
+
 				<h:column>
-				<f:facet name="header">Satut</f:facet>
+					<f:facet name="header">Satut</f:facet>
 				#{pro.projectStatus}
 				</h:column>
-				
-				
+
+
 			</h:dataTable>
 
+			<div class="container-fluid p-5">
+				<div class="row">
+					<p:repeat var="project" value="#{projectsListBean.projectList}">
+						<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
+							<p:card styleClass="shadow">
+								<f:facet name="subtitle">
+											#{project.name}
+										</f:facet>
+								<f:facet name="header">
+									<img src="#{project.imagePath}" class="ratio"
+										style="object-fit: cover;" />
+								</f:facet>
+							</p:card>
+						</div>
+					</p:repeat>
+				</div>
+			</div>
 		</ui:define>
 
 	</ui:composition>
