@@ -19,7 +19,7 @@
 				paginatorPosition="bottom" widgetVar="dtOrgs">
 				
 				<f:attribute name="orgAttr" value="#{org}" />
-				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onOrgCellEdit}" update="j_idt17:orgForm:messagesOrg"/>
+				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onOrgCellEdit}" update="@form:messagesOrg"/>
 
 				<p:column headerText="Id">
 					<h:outputText value="#{org.id}" />
