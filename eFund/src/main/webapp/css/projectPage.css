@@ -47,3 +47,9 @@
 #projectPageBody {
 	background-color: #ededed;
 }
+
+.knob-container{
+	margin: auto;
+width: 45%;
+
+}
