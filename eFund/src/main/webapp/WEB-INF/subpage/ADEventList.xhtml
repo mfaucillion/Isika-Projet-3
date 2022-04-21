@@ -19,7 +19,7 @@
 				paginatorPosition="bottom" widgetVar="dtEvents">
 				
 				<f:attribute name="eventAttr" value="#{event}" />
-				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onEventCellEdit}" update="j_idt17:eventForm:messagesEvent"/>
+				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onEventCellEdit}" update="@form:messagesEvent"/>
 
 				<p:column headerText="Id">
 					<h:outputText value="#{event.id}" />

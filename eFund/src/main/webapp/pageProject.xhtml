@@ -6,77 +6,171 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="id" />
+	<f:event listener="#{projectPageBean.onLoad(id)}" type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
-	<h2>Page projet</h2>
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/projectPage.css" />
+		</ui:define>
+
 		<ui:define name="content">
-			<f:metadata>
-				<f:viewParam name="id" />
-				<f:event listener="#{projectPageBean.onLoad(id)}"
-					type="preRenderView"></f:event>
 
-			</f:metadata>
 
-			<div class="container-fluid p-5">
+			<div class="container-fluid p-5" id="projectPageBody">
+
+
+
+
 				<div class="row">
 
 					<div class="col-12 col-md-8">
-						<div class="row">
-							<h4>#{projectPageBean.project.name}</h4>
-						</div>
-						<img class="im-fluid w-75"
-							src="#{projectPageBean.project.imagePath}" />
-						<div class="col-12 col-md-7 mt-3"
-							style="background-color: graytext;">
+						<div class="container shadow">
+							<div class="row">
+								<div class="col-12 col-md-12">
+									<h1>#{projectPageBean.project.name}</h1>
+								</div>
+							</div>
 
+							<img class="im-fluid w-100 mb-3"
+								src="#{projectPageBean.project.imagePath}" /> <br />
+						</div>
+						<br />
+
+						<div class="row mb-1">
+							<p:commandButton icon="fa-solid fa-minus"
+								styleClass="rounded-button ui-button-danger ui-button-outlined"
+								title="Editer" action="#" />
+						</div>
+
+						<div class="col-12 col-md-12">
 							<p:tabView>
 								<p:tab>
 									<f:facet name="title">
-										<i class="fa-solid fa-business-time" /> Résumé</f:facet>
-									<p class="p-m-5">#{projectPageBean.project.summary}</p>
+										<i class="fa-solid fa-business-time" /> Description
+									</f:facet>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la Description" action="#" />
+									<p>Description longue: bla bla bla</p>
 								</p:tab>
 
 
-								<p:tab title="Résumé">
+								<p:tab>
 									<f:facet name="title">
-										<i class="fa-solid fa-euro-sign" />Objectifs</f:facet>
-									<p class="p-m-5">#{projectPageBean.project.targetAmount}</p>
+										<i class="fa-solid fa-euro-sign" /> Objectifs
+									</f:facet>
+
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer le palier 1" action="#" />
+									<div class="row">
+
+										<h6>Palier 1</h6>
+										<p>Blablabla</p>
+									</div>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer le palier 2" action="#" />
+									<div class="row">
+
+										<h6>Palier 2</h6>
+										<p>Blablabla</p>
+									</div>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer le palier 3" action="#" />
+									<div class="row">
+
+										<h6>Palier 3</h6>
+										<p>Blablabla</p>
+									</div>
+								</p:tab>
+
+								<p:tab>
+									<f:facet name="title">
+										<i class="fa-solid fa-question" /> FAQ
+									</f:facet>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la FAQ" action="#" />
+									<p>FAQ: bla bla bla</p>
+
 								</p:tab>
 
 							</p:tabView>
 						</div>
 					</div>
-					<div class="col-12 col-md-4 mt-3">
+					<div class="col-12 col-md-4">
 						<div class="row">
-							<div class="col-12 col-md-6 mt-3">
-								<img class="im-fluid w-75"
+							<div class="col-12 col-md-5">
+								<img class="im-fluid w-100"
 									src="#{projectPageBean.organizationAccount.imagePath}" alt="" />
 							</div>
-							<div class="col-12 col-md-6 mt-3">
-								<h2>#{projectPageBean.organizationAccount.organizationInfo.name}
-								</h2>
-								<br />
-								<p>#{projectPageBean.organizationAccount.organizationInfo.description}</p>
+							<div class="col-12 col-md-7 my-auto">
+								<h4>#{projectPageBean.organizationAccount.organizationInfo.name}</h4>
+								<p>#{projectPageBean.organizationAccount.organizationInfo.summary}</p>
 							</div>
 						</div>
-						<div>Montant en cours :
-							#{projectPageBean.project.currentAmount}</div>
-						<div>
-							<div class="p-field p-col-12 p-md-4">
-								<h5>Collecte actuelle</h5>
-								<div class="knob-container ui-corner-all">
-									<p:knob disabled="true"
-										value="#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}" />
+
+						<div class="row">
+							<div class="col-12 col-md-1" />
+							<div class="col-12 col-md-10">
+								<br />
+
+								<div class="row justify-content-center mt-3 mb-5">
+
+									<div class="knob-container ui-corner-all">
+										<p:knob disabled="true" value="#" />
+										Il reste : #{projectPageBean.remainingDays} jours
+									</div>
 								</div>
+								<br />
+
+								<div class="progress bg-secondary">
+									<div
+										class="progress-bar progress-bar-striped progress-bar-animated"
+										style="width:#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}%">#{projectPageBean.percentage(projectPageBean.project.currentAmount,
+										projectPageBean.project.targetAmount)}%</div>
+								</div>
+								<div class="row justify-content-center">
+
+									#{projectPageBean.project.currentAmount}€ collectés sur
+									#{projectPageBean.project.targetAmount}€</div>
+
+								<div class="row mt-3 mb-5">
+									<div class="col-12 col-md-2" />
+									<div class="col-12 col-md-8 mx-auto">
+										<p:commandButton icon="pi pi-euro"
+											styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+											value="Effectuer un don" action="#" />
+									</div>
+								</div>
+
+								<div class="row mt-5">
+									<div class="col-12 col-md-4" />
+									<div class="col-12 col-md-2">
+										<p:commandButton icon="fa-regular fa-heart"
+											styleClass="rounded-button ui-button-danger ui-button-outlined"
+											title="Ajouter aux favoris" action="#" />
+									</div>
+									<div class="col-12 col-md-2">
+										<p:commandButton icon="fa-regular fa-thumbs-up"
+											styleClass="rounded-button ui-button-primary ui-button-outlined"
+											title="J'aime" action="#" />
+									</div>
+								</div>
+
 							</div>
-							<div>Date de fin : #{projectPageBean.project.endDate}</div>
-							<div>
-								<p>Il reste : #{projectPageBean.remainingDays} jours avant
-									la fin de la collecte</p>
-							</div>
-							<h:form>
-							</h:form>
 						</div>
 					</div>
 				</div>

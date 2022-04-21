@@ -45,7 +45,7 @@ public class AdminDashboardBean {
 	private UserAccount selectedUser;
 	private OrganizationAccount selectedOrg;
 
-	private MailForm mailForm;
+	private MailForm mailForm = new MailForm();
 
 	public void onLoad() {
 		this.users = accountService.getAllUsers();
@@ -61,7 +61,7 @@ public class AdminDashboardBean {
 		UserAccount user = (UserAccount) event.getComponent().getAttributes().get("userAttr");
 		user.setAccountStatus(newValue);
 
-		accountService.updateUser(user);
+		this.accountService.updateUser(user);
 
 		if (newValue != null && !newValue.equals(oldValue)) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cellule modifiée",
@@ -93,7 +93,7 @@ public class AdminDashboardBean {
 		Project proj = (Project) event.getComponent().getAttributes().get("projAttr");
 		proj.setProjectStatus(newValue);
 
-		projectService.update(proj);
+		this.projectService.update(proj);
 
 		if (newValue != null && !newValue.equals(oldValue)) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cellule modifiée",
@@ -109,7 +109,7 @@ public class AdminDashboardBean {
 		Event myEvent = (Event) event.getComponent().getAttributes().get("eventAttr");
 		myEvent.setProjectStatus(newValue);
 
-		eventService.update(myEvent);
+		this.eventService.update(myEvent);
 
 		if (newValue != null && !newValue.equals(oldValue)) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cellule modifiée",
@@ -123,7 +123,13 @@ public class AdminDashboardBean {
 		this.users.remove(this.selectedUser);
 		this.selectedUser = null;
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Compte utilisateur supprimé"));
-		PrimeFaces.current().ajax().update("j_idt17:form:messagesUser", "j_idt17:form:dt-users");
+		PrimeFaces.current().ajax().update("@form:messagesUser", "@form:dt-users");
+	}
+	
+	public void sendingMail() {
+		EmailTool.sendMail(mailForm.getToMail(), mailForm.getSubject(), mailForm.getMessage());
+		System.out.println("mail" + selectedUser.getId());
+		this.selectedUser = null;
 	}
 	
 	/* Getting Enum Values to populate Selected List */
@@ -141,6 +147,8 @@ public class AdminDashboardBean {
 
 	public void setSelectedUser(UserAccount selectedUser) {
 		this.selectedUser = selectedUser;
+		this.mailForm.setToMail(selectedUser.getEmail());
+		System.out.println(selectedUser.getId());
 	}
 	
 	public OrganizationAccount getSelectedOrg() {
@@ -149,10 +157,6 @@ public class AdminDashboardBean {
 
 	public void setSelectedOrg(OrganizationAccount selectedOrg) {
 		this.selectedOrg = selectedOrg;
-	}
-
-	public void sendingMail() {
-		EmailTool.sendMail(mailForm.getToMail(), mailForm.getSubject(), mailForm.getMessage());
 	}
 
 	public MailForm getMailForm() {
