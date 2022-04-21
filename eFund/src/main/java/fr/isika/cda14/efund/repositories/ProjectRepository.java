@@ -30,4 +30,8 @@ public class ProjectRepository {
 	public void remove(Project project) {
 		em.remove(project);
 	}
+
+	public void update(Project proj) {
+		em.merge(proj);		
+	}
 }
