@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import fr.isika.cda14.efund.entity.project.Comment;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.UserLike;
 import fr.isika.cda14.efund.entity.report.Report;
@@ -42,9 +43,8 @@ public class UserSpace {
 	@JoinColumn(name = "user_space_id")
 	private List<UserLike> userLikes;
 
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "user_space_id")
-	private List<Event> events;
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "userSpace")
+	private List<EventRegistration> eventRegistrations;
 
 	@OneToMany(mappedBy = "userSpace")
 	private List<Donation> donations;
@@ -89,12 +89,12 @@ public class UserSpace {
 		this.userLikes = userLikes;
 	}
 
-	public List<Event> getEvents() {
-		return events;
+	public List<EventRegistration> getEventRegistrations() {
+		return eventRegistrations;
 	}
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
+	public void setEventRegistrations(List<EventRegistration> eventRegistrations) {
+		this.eventRegistrations = eventRegistrations;
 	}
 
 	public List<Donation> getDonations() {

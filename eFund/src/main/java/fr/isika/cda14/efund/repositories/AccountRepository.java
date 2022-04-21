@@ -12,6 +12,7 @@ import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.Donation;
+import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
@@ -168,5 +169,10 @@ public class AccountRepository {
 	public List<Donation> getDonations(Long userSpaceId) {
 		String query = "SELECT don FROM Donation don JOIN don.userSpace usr  WHERE usr.id=:id";
 		return em.createQuery(query, Donation.class).setParameter("id", userSpaceId).getResultList();
+	}
+
+	public List<EventRegistration> getRegistrations(Long userSpaceId) {
+		String query = "SELECT reg FROM EventRegistration reg JOIN reg.userSpace usr  WHERE usr.id=:id";
+		return em.createQuery(query, EventRegistration.class).setParameter("id", userSpaceId).getResultList();
 	}
 }

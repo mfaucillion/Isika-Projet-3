@@ -1,11 +1,14 @@
 package fr.isika.cda14.efund.entity.project;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +27,9 @@ public class Event extends GenericProject {
 
 	@Column(name = "volunteer_target")
 	private Integer volunteerTarget;
+	
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "event")
+	private List<EventRegistration> eventRegistrations;
 	
 	@ManyToOne
 	@JoinColumn(name = "organization_space_id")

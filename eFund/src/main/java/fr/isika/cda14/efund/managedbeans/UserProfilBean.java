@@ -12,6 +12,7 @@ import org.primefaces.model.file.UploadedFile;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
@@ -33,6 +34,8 @@ public class UserProfilBean {
 	private List<Favorite> favorites;
 	
 	private List<Donation> donations;
+	
+	private List<EventRegistration> registrations;
 
 	private CreateUserViewModel userViewModel = new CreateUserViewModel();
 
@@ -41,6 +44,7 @@ public class UserProfilBean {
 		Long userSpaceId = userAccount.getUserSpace().getId();
 		this.favorites = accService.getFavorites(userSpaceId);
 		this.donations = accService.getDonations(userSpaceId);
+		this.registrations = accService.getRegistrations(userSpaceId);
 	}
 	
 	public void upload(FileUploadEvent event) {
@@ -62,17 +66,21 @@ public class UserProfilBean {
 	public List<Favorite> getFavorites() {
 		return favorites;
 	}
+	
+	public UserAccount getUserAccount() {
+		return userAccount;
+	}
 
 	public void setFavorites(List<Favorite> favorites) {
 		this.favorites = favorites;
 	}
 	
-	public UserAccount getUserAccount() {
-		return userAccount;
-	}
-	
 	public List<Donation> getDonations() {
 		return donations;
+	}
+	
+	public List<EventRegistration> getRegistrations() {
+		return registrations;
 	}
 	
 }

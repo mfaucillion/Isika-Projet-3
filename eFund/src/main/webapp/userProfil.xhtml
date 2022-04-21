@@ -104,19 +104,7 @@
 									<i class="fa-regular fa-calendar-check" /> Mes évènements
 								</f:facet>
 
-								<div class="card">
-									<p:dataTable var="évènement" value="#" allowUnsorting="true" sortMode="single">
-										<p:column sortBy="#" headerText="Nom de l'évènement">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Date de l'évènement" width="300">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Durée de l'évènement" width="300">
-											<h:outputText value="#" />
-										</p:column>
-									</p:dataTable>
-								</div>
+								<ui:include src="WEB-INF/subpage/userProfile/eventRegistrations.xhtml" />
 							</p:tab>
 
 							<!-- Mes commandes dataTable -->
