@@ -19,7 +19,7 @@
 				paginatorPosition="bottom" widgetVar="dtProjs">
 				
 				<f:attribute name="projAttr" value="#{proj}" />
-				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onProjCellEdit}" update="j_idt17:projForm:messagesProj"/>
+				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onProjCellEdit}" update="@form:messagesProj"/>
 
 				<p:column headerText="Id">
 					<h:outputText value="#{proj.id}" />
