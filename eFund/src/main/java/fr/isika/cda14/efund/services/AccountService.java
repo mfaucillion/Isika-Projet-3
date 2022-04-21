@@ -1,5 +1,9 @@
 package fr.isika.cda14.efund.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +25,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 import fr.isika.cda14.efund.exception.UserAlreadyExistsException;
 import fr.isika.cda14.efund.repositories.AccountRepository;
+import fr.isika.cda14.efund.tool.EmailTool;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -58,8 +63,12 @@ public class AccountService {
 		if (inputOrg.getImagePath() != null) {
 			org.setImagePath(inputOrg.getImagePath());
 		}
-		
+
 		repo.update(org);
+	}
+	
+	public void updateOrg(OrganizationAccount org) {
+		repo.updateOrg(org);		
 	}
 
 	public UserAccount createUser(CreateUserViewModel inputUser) throws UserAlreadyExistsException {
@@ -99,26 +108,44 @@ public class AccountService {
 		repo.update(user);
 	}
 
+	/* UserAccount already ready for em.merge() */
+	public void updateUser(UserAccount newValue) {
+		repo.update(newValue);
+	}
+
 	public Optional<Account> findByEmail(String email) {
 		return repo.findByEmail(email);
 	}
-  
-	//pour trouver ma liste d'orga
-	public List<OrganizationAccount> findAll(){
+
+	// pour trouver ma liste d'orga
+	public List<OrganizationAccount> findAll() {
 		return repo.findAll();
 	}
-	
+
 	public Long getOrgSpaceId(Long id) {
 		return repo.findOrgSpace(id).getId();
-  }
-  
-	//pour trouver mon orga
+	}
+
+	// pour trouver mon orga
 	public OrganizationAccount findOrganizationAccount(Long id) {
 		return repo.findOrganization(id);
 	}
 
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
 		return repo.loadOrganizationAccountWithChildren(id);
+	}
+
+	public List<UserAccount> getAllUsers() {
+		return repo.getAllUsers();
+	}
+
+	public List<OrganizationAccount> getAllOrgs() {
+		return repo.getAllOrgs();
+	}
+
+	public void deleteUser(Long id) {
+		UserAccount user = repo.findUser(id);
+		repo.removeUser(user);
 	}
 
 	public UserAccount findUserAccountById(Long id) {
@@ -128,5 +155,4 @@ public class AccountService {
 	public List<OrganizationAccount> getTopOrgs() {
 		return repo.getTopOrgs();
 	}
-
 }

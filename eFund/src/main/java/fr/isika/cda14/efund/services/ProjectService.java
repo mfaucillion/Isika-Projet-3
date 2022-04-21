@@ -62,8 +62,10 @@ public class ProjectService {
 		projectRepo.remove(project);
 	}
 
+	public void update(Project proj) {
+		projectRepo.update(proj);
+		
 	public List<Project> getTopProjects() {
 		return projectRepo.getTopProjects();
 	}
-
 }

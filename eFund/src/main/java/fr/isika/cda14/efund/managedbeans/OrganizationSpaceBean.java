@@ -111,7 +111,6 @@ public class OrganizationSpaceBean {
 	public List<ContentTab> getTabs() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		onLoad(request.getParameter("id"));
-		System.out.println(tabs.size());
 		return tabs;
 	}
 

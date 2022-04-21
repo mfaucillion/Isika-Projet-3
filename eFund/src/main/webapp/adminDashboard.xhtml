@@ -6,12 +6,18 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{adminDashboardBean.onLoad}" type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/admin.css"/>
+		</ui:define>
 		<ui:define name="content">
-
+	
 			<div class="dashboard-container">
 				<p:tabView orientation="left">
 
@@ -28,8 +34,9 @@
 						<f:facet name="title">
 							<i class="fa-solid fa-user"></i> Utilisateurs
 						</f:facet>
-						<div class="container shadow p-5 mt-5">
+						<div class="container-fluid shadow p-5 mt-5 mx-auto">
 							<h1>Liste utilisateurs</h1>
+							<ui:include src="WEB-INF/subpage/ADUserList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -39,6 +46,7 @@
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
 							<h1>Liste associations</h1>
+							<ui:include src="WEB-INF/subpage/ADOrgList.xhtml" />
 						</div>
 					</p:tab>
 					
@@ -48,6 +56,7 @@
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
 							<h1>Liste projets</h1>
+							<ui:include src="WEB-INF/subpage/ADProjectList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -56,7 +65,8 @@
 							<i class="fa-solid fa-hand-holding-hand"></i> Evènements
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
-							<h1>Liste projets</h1>
+							<h1>Liste évènements</h1>
+							<ui:include src="WEB-INF/subpage/ADEventList.xhtml" />
 						</div>
 					</p:tab>
 					

@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.EventRepository;
 
 @Stateless
@@ -28,8 +29,10 @@ public class EventService {
 		eventRepo.remove(event);		
 	}
 
+	public void update(Event myEvent) {
+		eventRepo.update(myEvent);		
+    
 	public List<Event> getTopEvents() {
 		return eventRepo.getTopEvents();
 	}
-
 }

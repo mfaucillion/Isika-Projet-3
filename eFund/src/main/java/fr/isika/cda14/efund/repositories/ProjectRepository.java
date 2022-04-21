@@ -31,6 +31,9 @@ public class ProjectRepository {
 		em.remove(project);
 	}
 
+	public void update(Project proj) {
+		em.merge(proj);		
+
 	public List<Project> getTopProjects() {
 		String query = "SELECT proj "
 				+ "FROM Project proj "
