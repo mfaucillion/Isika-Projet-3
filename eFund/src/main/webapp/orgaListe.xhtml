@@ -6,6 +6,11 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{organizationsListBean.onLoad()}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
@@ -13,30 +18,32 @@
 		<ui:define name="content">
 			<h3>Available Organizations</h3>
 			<hr />
-			<h:dataTable value="#{organizationsListBean.organizationsList}"
-				var="orgAcc">
-
-				<h:column>
-					<f:facet name="header">Id</f:facet>#{orgAcc.id}
-		</h:column>
-
-				<h:column>
-					<f:facet name="header">Name</f:facet><h:link value="#{orgAcc.organizationInfo.name}" outcome="pageOng?id=#{orgAcc.id}faces-redirect=true" includeViewParams="true"/>
-			
-		</h:column>
-
-				<h:column>
-					<f:facet name="header">Description</f:facet>#{orgAcc.organizationInfo.description}
-			
-		</h:column>
-
-				<h:column>
-					<f:facet name="header">Aperçu</f:facet>#{orgAcc.organizationInfo.summary}
-		</h:column>
-
-			</h:dataTable>
+			<div class="container p-5">
+				<div class="row">
+					<p:repeat var="organization"
+						value="#{organizationsListBean.organizationsList}">
+						<div class="col-12 col-md-3 my-3">
+							<h:link
+								outcome="pageOng.xhtml?id=#{organization.id}faces-redirect=true">
+								<p:card style="margin-right: 30px; height: 100%"
+									styleClass="shadow">
+									<f:facet name="header">
+										<img src="#{organization.imagePath}" class="ratio"
+											style="object-fit: cover; height: 20% !important" />
+									</f:facet>
+									<f:facet name="title">
+											#{organization.displayedName}
+										</f:facet>
+									<f:facet name="subtitle">
+											#{organization.organizationInfo.summary}
+										</f:facet>
+								</p:card>
+							</h:link>
+						</div>
+					</p:repeat>
+				</div>
+			</div>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

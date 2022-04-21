@@ -7,8 +7,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:viewParam name="searchId"/>
-	<f:event listener="#{projectsListBean.onLoad(searchId)}" type="preRenderView"></f:event>
+	<f:viewParam name="searchId" />
+	<f:event listener="#{projectsListBean.onLoad(searchId)}"
+		type="preRenderView"></f:event>
 </f:metadata>
 
 <h:body>
@@ -22,16 +23,18 @@
 
 			<div class="container p-5">
 				<div class="row">
-				<h:form>
-				 <!-- <h:outputLabel for="txt1" value="searchOnPageProject"/> -->
-				 <i class="fa-solid fa-magnifying-glass"></i>
-                <p:inputText id="txt1" value="#{projectsListBean.searchRequest}" required="true" label="Text 1" style="width: 12rem">
-                    <f:validateLength minimum="2"/>
-                </p:inputText>
-                <p:message for="txt1"/>
-               <!--  <h:outputText value="#{searchView.text1}"/> -->
-                <h:commandButton action="#{projectsListBean.search()}" value="Rechercher" />
-				</h:form>
+					<h:form>
+						<!-- <h:outputLabel for="txt1" value="searchOnPageProject"/> -->
+						<i class="fa-solid fa-magnifying-glass"></i>
+						<p:inputText id="txt1" value="#{projectsListBean.searchRequest}"
+							required="true" label="Text 1" style="width: 12rem">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="txt1" />
+						<!--  <h:outputText value="#{searchView.text1}"/> -->
+						<h:commandButton action="#{projectsListBean.search()}"
+							value="Rechercher" />
+					</h:form>
 					<div class="row">
 						<p:repeat var="project" value="#{projectsListBean.projectList}">
 							<div class="col-12 col-md-3 my-3">
@@ -45,10 +48,10 @@
 										</f:facet>
 										<f:facet name="title">
 											#{project.name}
-									</f:facet>
+										</f:facet>
 										<f:facet name="subtitle">
 											#{project.summary}
-									</f:facet>
+										</f:facet>
 										<f:facet name="footer">
 											<div class="progress">
 												<div
