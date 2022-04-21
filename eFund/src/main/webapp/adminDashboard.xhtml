@@ -13,7 +13,9 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/admin.css"/>
+		</ui:define>
 		<ui:define name="content">
 	
 			<div class="dashboard-container">
@@ -32,7 +34,7 @@
 						<f:facet name="title">
 							<i class="fa-solid fa-user"></i> Utilisateurs
 						</f:facet>
-						<div class="container shadow p-5 mt-5">
+						<div class="container-fluid shadow p-5 mt-5 mx-auto">
 							<h1>Liste utilisateurs</h1>
 							<ui:include src="WEB-INF/subpage/ADUserList.xhtml" />
 						</div>

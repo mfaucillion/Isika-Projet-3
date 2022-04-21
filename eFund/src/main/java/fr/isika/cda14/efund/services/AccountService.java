@@ -1,5 +1,9 @@
 package fr.isika.cda14.efund.services;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -96,7 +100,12 @@ public class AccountService {
 
 		repo.update(user);
 	}
-
+	
+	/* UserAccount already ready for em.merge() */
+	public void updateUser(UserAccount newValue) {
+		repo.update(newValue);
+	}
+	
 	public Optional<Account> findByEmail(String email) {
 		return repo.findByEmail(email);
 	}
@@ -123,4 +132,10 @@ public class AccountService {
 		return repo.getAllUsers();
 	}
 
+	public void deleteUser(Long id) {
+		UserAccount user = repo.findUser(id);
+		repo.removeUser(user);		
+	}
+
+	
 }

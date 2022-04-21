@@ -2,6 +2,7 @@ package fr.isika.cda14.efund.entity.space;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class UserSpace {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<BasketOrder> basketOrders;
 
@@ -34,15 +35,15 @@ public class UserSpace {
 	@JoinColumn(name = "user_space_id")
 	private List<Comment> comments;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<Favorite> favorites;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<UserLike> userLikes;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<Event> events;
 
@@ -50,11 +51,11 @@ public class UserSpace {
 	@JoinColumn(name = "user_space_id")
 	private List<Donation> donations;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<Follow> follows;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "user_space_id")
 	private List<Report> reports;
 

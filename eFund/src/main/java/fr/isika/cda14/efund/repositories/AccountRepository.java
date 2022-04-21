@@ -148,5 +148,9 @@ public class AccountRepository {
 		String query = "SELECT acc FROM UserAccount acc";
 		return em.createQuery(query, UserAccount.class).getResultList();
 	}
+
+	public void removeUser(UserAccount user) {
+		em.remove(user);		
+	}
 	
 }

@@ -23,7 +23,7 @@ public class UserAccount extends Account {
 	@JoinColumn(name = "user_info_id")
 	private UserInfo userInfo;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_account_id")
 	private List<PaymentMethod> paymentMethods;
 
