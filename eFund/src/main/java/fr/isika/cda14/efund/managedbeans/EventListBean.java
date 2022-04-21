@@ -11,25 +11,26 @@ import fr.isika.cda14.efund.services.EventService;
 
 @ManagedBean
 public class EventListBean {
-	
-	@Inject 
+
+	@Inject
 	private EventService eventService;
-	
-	
-	private List<Event> events;
-	
-	@PostConstruct
-	private void init() {	
-		events = eventService.getAllEvents();
+
+	private List<Event> eventsList;
+
+	public void onLoad() {
+		eventsList = eventService.getAllEvents();
 	}
-	 
+
+	private List<Event> getAllEvents() {
+		return this.eventService.getAllEvents();
+	}
+
 	public List<Event> getEvents() {
-		return events;
+		return eventsList;
 	}
-	
+
 	public void setEvents(List<Event> events) {
-		this.events = events;
+		this.eventsList = events;
 	}
-	
 
 }
