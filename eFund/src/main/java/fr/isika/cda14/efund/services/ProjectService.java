@@ -53,9 +53,8 @@ public class ProjectService {
 		return projectRepo.findProject(id);
 	}
 
-	public OrganizationAccount getOrgFromProjectEvent(Long id) {
-		System.out.println("Service projet");
-		return accountRepo.getOrgFromProjectOrEvent(id);
+	public OrganizationAccount getOrgFromProject(Long id) {
+		return accountRepo.getOrgFromProject(id);
 	}
 
 	public void deleteProject(Long id) {
@@ -66,6 +65,7 @@ public class ProjectService {
 	public void update(Project proj) {
 		projectRepo.update(proj);
 		
+	public List<Project> getTopProjects() {
+		return projectRepo.getTopProjects();
 	}
-
 }

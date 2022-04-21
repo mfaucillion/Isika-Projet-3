@@ -15,6 +15,7 @@
 				<f:viewParam name="id" />
 				<f:event listener="#{projectPageBean.onLoad(id)}"
 					type="preRenderView"></f:event>
+
 			</f:metadata>
 
 			<div class="container-fluid p-5">
@@ -30,56 +31,57 @@
 							style="background-color: graytext;">
 
 							<p:tabView>
-								<p:tab title="Résumé">
-									<p class="p-m-5">test #{projectPageBean.project.summary}</p>
+								<p:tab>
+									<f:facet name="title">
+										<i class="fa-solid fa-business-time" /> Résumé</f:facet>
+									<p class="p-m-5">#{projectPageBean.project.summary}</p>
 								</p:tab>
+
 
 								<p:tab title="Résumé">
 									<f:facet name="title">
 										<i class="fa-solid fa-euro-sign" />Objectifs</f:facet>
-									<p class="p-m-5">test
-										#{projectPageBean.project.targetAmount}</p>
+									<p class="p-m-5">#{projectPageBean.project.targetAmount}</p>
 								</p:tab>
 
 							</p:tabView>
 						</div>
-
 					</div>
-					<div class="col-12 col-md-4 mt-3" style="background-color: orange;">
+					<div class="col-12 col-md-4 mt-3">
 						<div class="row">
 							<div class="col-12 col-md-6 mt-3">
 								<img class="im-fluid w-75"
-									src="#{projectPageBean.getOrgAccount(id).imagePath}" alt="" />
+									src="#{projectPageBean.organizationAccount.imagePath}" alt="" />
 							</div>
 							<div class="col-12 col-md-6 mt-3">
-								#{projectPageBean.getOrgAccount(id).organizationInfo.name} <br />
+								<h2>#{projectPageBean.organizationAccount.organizationInfo.name}
+								</h2>
+								<br />
+								<p>#{projectPageBean.organizationAccount.organizationInfo.description}</p>
 							</div>
 						</div>
 						<div>Montant en cours :
 							#{projectPageBean.project.currentAmount}</div>
-						<div>Date de fin : #{projectPageBean.project.endDate}</div>
 						<div>
 							<div class="p-field p-col-12 p-md-4">
 								<h5>Collecte actuelle</h5>
 								<div class="knob-container ui-corner-all">
-									<p:knob disabled="true" value="#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}" />
+									<p:knob disabled="true"
+										value="#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}" />
 								</div>
 							</div>
+							<div>Date de fin : #{projectPageBean.project.endDate}</div>
 							<div>
-								<p:progressBar value="50" labelTemplate="{value}%"
-									displayOnly="true" />
+								<p>Il reste : #{projectPageBean.remainingDays} jours avant
+									la fin de la collecte</p>
 							</div>
+							<h:form>
+							</h:form>
 						</div>
-
 					</div>
-
-
 				</div>
 			</div>
-
-
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

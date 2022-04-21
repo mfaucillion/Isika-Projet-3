@@ -31,6 +31,8 @@ public class EventService {
 
 	public void update(Event myEvent) {
 		eventRepo.update(myEvent);		
+    
+	public List<Event> getTopEvents() {
+		return eventRepo.getTopEvents();
 	}
-
 }

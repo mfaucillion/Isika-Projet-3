@@ -33,5 +33,11 @@ public class ProjectRepository {
 
 	public void update(Project proj) {
 		em.merge(proj);		
+
+	public List<Project> getTopProjects() {
+		String query = "SELECT proj "
+				+ "FROM Project proj "
+				+ "ORDER BY proj.creationDate";
+		return em.createQuery(query, Project.class).setMaxResults(3).getResultList();
 	}
 }

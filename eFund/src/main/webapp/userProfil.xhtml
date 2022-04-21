@@ -6,252 +6,165 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:viewParam name="userId" />
+	<f:event listener="#{userProfilBean.onLoad(userId)}"
+		type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-		<h:outputStylesheet library="css" name="style.css" />
+
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/userProfil.css" />
+		</ui:define>
+
+
 		<ui:define name="content">
-			<div class="container-fluid p-5">
+
+			<div class="container-fluid p-5" id="userProfilBody">
 
 				<div class="row">
-					<div class="col-12 col-md-3">
-						<!--user's photo, on mettre l'image Path au lieu du lien-->
-						<img class="img-fluid"
-							src="https://64.media.tumblr.com/5c595f61ea7d0695c8965451907165cc/7817ce05b3ebe1ed-95/s540x810/be9ffe07a6d73629f7309a6bdf470da5760ae0f7.jpg"
-							alt="user's photo"
-							onclick="this.src='https://www.computerhope.com/jargon/p/plus.png';"
-							border="" />
+					<div class="col-12 col-md-2 mb-3">
+						<img class="img-fluid rounded-3 shadow"
+							src="#{userProfilBean.userAccount.imagePath}" />
+					</div>
 
+					<div class="col-12 col-md-9">
+						<div class="row">
+							<div class="col-12 col-md-1 my-auto ps-5 pe-0">
+								<p:commandButton icon="pi pi-cog"
+									styleClass="rounded-button ui-button-secondary ui-button-flat"
+									title="Modifier mes informations" action="#" />
+							</div>
+							<div class="col-12 col-md-4">
+								<h1>#{userProfilBean.userAccount.userInfo.firstName}
+									#{userProfilBean.userAccount.userInfo.lastName}</h1>
+							</div>
+							<div class="col-12 col-md-4 my-auto">
+								<p:commandButton
+									styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+									action="#" value="Changer mon mot de passe" />
+							</div>
 
-
-						<p:button value="Changer mon adresse email"
-							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-							style="width:100%" />
-						<p:button value="Changer mon mot de passe"
-							styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-							style="width:100%" />
-
-
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-12 col-md-1"></div>
+							<div class="col-12 col-md-4">
+								<h5>#{userProfilBean.userAccount.email}</h5>
+							</div>
+						</div>
+						<br />
+						<div class="row">
+							<div class="col-12 col-md-1"></div>
+							<div class="col-12 col-md-4">
+								<h5>Adresse:</h5>
+								<h5>#{userProfilBean.userAccount.userInfo.userAddress.address}</h5>
+								<h5>#{userProfilBean.userAccount.userInfo.userAddress.zipcode}
+									#{userProfilBean.userAccount.userInfo.userAddress.city} -
+									#{userProfilBean.userAccount.userInfo.userAddress.country}</h5>
+							</div>
+							<div class="col-12 col-md-6">
+								<h5>Téléphone:</h5>
+								<h5>#{userProfilBean.userAccount.userInfo.phone}</h5>
+							</div>
+						</div>
 					</div>
 				</div>
 
+				<br />
+
 				<div class="row">
-					<div class="col-12 col-md-3">
-						<!-- vide c'est normal c à coté des tabs-->
-					</div>
-					<div class="clo-12 col-md-9">
+
+					<div class="clo-12 col-md-12">
 						<!-- les tab -->
 						<p:tabView>
-							<!-- J'aimerai bien mettre un fonteawsome à coté du nom du tab -->
-							<p:tab title="Favoris">
+							
+							<!-- Mes favoris dataTable -->
+							<p:tab>
 								<f:facet name="title">
-
-									<i class="fa-solid fa-star"></i>
-									<h:outputText value="Favoris" />
+									<i class="fa-solid fa-star" /> Favoris
 								</f:facet>
+
 								<div class="card">
-									<h:form>
-										<p:growl>
-											<p:autoUpdate />
-										</p:growl>
-										<p:panelMenu>
-											<p:submenu label="Projects">
-												<p:menuitem value="Le projet des pingouins" />
-												<p:menuitem value="Le projet des requins" />
-											</p:submenu>
-											<p:submenu label="Events">
-												<p:menuitem value="Marche pour la liberté des électrons" />
-												<p:menuitem value="Marathon -Tous contre les pauvres-" />
-											</p:submenu>
-										</p:panelMenu>
-									</h:form>
+									<p:dataTable var="favori" value="#" allowUnsorting="true" sortMode="single">
+										<p:column sortBy="#" headerText="Nom">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Type" width="300">
+											<h:outputText value="#" />
+										</p:column>
+									</p:dataTable>
 								</div>
-							</p:tab>
-							<p:tab title="Mes donations">
-								<f:facet name="title">
-									<i class="fa-solid fa-euro-sign"></i>
-									<h:outputText value="Mes donations" />
-								</f:facet>
-								<div class="row">
-									<div class="col-12 col-md-6">
-										<p:button value="Ma donation pour le projet des dauphins"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Montant"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12 col-md-6">
-										<p:button value="Ma donation pour le projet des pingouins"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Montant"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12 col-md-6">
-										<p:button
-											value="Ma donation pour le projet des poissons-rouges"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Montant"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-2">
-										<p:button icon="fa-solid fa-plus" title="En savoir plus"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
-								</div>
+								</p:tab>
 
-
-							</p:tab>
-							<p:tab title="Mes évènements">
+							<!-- Mes donnations dataTable -->
+							<p:tab>
 								<f:facet name="title">
-									<i class="fa-regular fa-calendar-check"></i>
-									<h:outputText value="Mes évènements" />
+									<i class="fa-solid fa-euro-sign" /> Mes donations
 								</f:facet>
-								<div class="row">
-									<div class="col-12 col-md-9">
-										<p:button
-											value="Journée de sensibilisation au droit à la bêtise"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<!-- ajouter la duree de l'event -->
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-1">
-										<p:button icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12 col-md-9">
-										<p:button value="Marche pour la liberté des électrons"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<!-- ajouter la duree de l'event -->
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-1">
-										<p:button icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12 col-md-9">
-										<p:button value="Marathon -Tous contre les pauvres-"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<!-- ajouter la duree de l'event -->
-									<div class="col-12 col-md-2">
-										<p:button value="Date"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat"
-											style="width:100%" />
-									</div>
-									<div class="col-12 col-md-1">
-										<p:button icon="fa-solid fa-pen"
-											styleClass="ui-button-raised ui-button-secondary ui-button-flat" />
-									</div>
+
+								<div class="card">
+									<p:dataTable var="don" value="#" allowUnsorting="true" sortMode="single">
+										<p:column sortBy="#" headerText="Nom du projet">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Date du don" width="300">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Montant du don" width="300">
+											<h:outputText value="#" />
+										</p:column>
+									</p:dataTable>
 								</div>
 							</p:tab>
+
+							<!-- Mes évènements dataTable -->
+							<p:tab>
+								<f:facet name="title">
+									<i class="fa-regular fa-calendar-check" /> Mes évènements
+								</f:facet>
+
+								<div class="card">
+									<p:dataTable var="évènement" value="#" allowUnsorting="true" sortMode="single">
+										<p:column sortBy="#" headerText="Nom de l'évènement">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Date de l'évènement" width="300">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Durée de l'évènement" width="300">
+											<h:outputText value="#" />
+										</p:column>
+									</p:dataTable>
+								</div>
+							</p:tab>
+
 							<!-- Mes commandes dataTable -->
 							<p:tab title="Mes commandes">
 								<f:facet name="title">
-									<i class="fa-solid fa-cart-shopping"></i>
-									<h:outputText value="Mes commandes" />
-								</f:facet>
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
-
-							</p:tab>
-							<p:tab title="Mon historique personnel">
-								<f:facet name="title">
-									<i class="fa-solid fa-clock-rotate-left"></i>
-									<h:outputText value="Mon historique personnel" />
+									<i class="fa-solid fa-cart-shopping" /> Mes commandes
 								</f:facet>
 
-								<p>Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book. It has survived not only five centuries, but
-									also the leap into electronic typesetting, remaining
-									essentially unchanged. It was popularised in the 1960s with the
-									release of Letraset sheets containing Lorem Ipsum passages, and
-									more recently with desktop publishing software like Aldus
-									PageMaker including versions of Lorem Ipsum.</p>
+								<div class="card">
+									<p:dataTable var="commandes" value="#" allowUnsorting="true" sortMode="single">
+										<p:column headerText="Détail de la commande">
+											<p:commandButton icon="pi pi-list"
+												styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+												value="Détail de la commande" action="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Date de la commande" width="300">
+											<h:outputText value="#" />
+										</p:column>
+										<p:column sortBy="#" headerText="Montant de la commande" width="300">
+											<h:outputText value="#" />
+										</p:column>
+									</p:dataTable>
+								</div>
 							</p:tab>
+
 						</p:tabView>
 					</div>
 				</div>

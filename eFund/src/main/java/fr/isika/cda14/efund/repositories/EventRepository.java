@@ -35,6 +35,11 @@ public class EventRepository {
 
 	public void update(Event myEvent) {
 		em.merge(myEvent);
-	}
 
+	public List<Event> getTopEvents() {
+		String query = "SELECT event "
+				+ "FROM Event event "
+				+ "ORDER BY event.creationDate";
+		return em.createQuery(query, Event.class).setMaxResults(3).getResultList();
+	}
 }

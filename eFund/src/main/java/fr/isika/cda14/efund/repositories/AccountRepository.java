@@ -105,8 +105,12 @@ public class AccountRepository {
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
 
 		/* On force le Fetching de la collection de ContentTabs dans le Space */
-		query = "SELECT distinct space " + "FROM OrganizationAccount org " + "INNER JOIN org.organizationSpace space "
-				+ "LEFT JOIN FETCH space.contentTabs " + "INNER JOIN space.shop shop "
+
+		query = "SELECT distinct space "
+				+ "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space "
+				+ "LEFT JOIN FETCH space.contentTabs "
+				+ "INNER JOIN space.shop shop "
 				+ "WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
 
@@ -119,12 +123,16 @@ public class AccountRepository {
 		return account;
 	}
 
-	public OrganizationAccount getOrgFromProjectOrEvent(Long id) {
-		String query = "SELECT orgAcc " + "FROM OrganizationAccount orgAcc " + "JOIN orgAcc.organizationSpace orgSpace "
-				+ "JOIN orgSpace.projects pro " + "WHERE pro.id =:id ";
-		System.out.println("c'est id projet: " + id + " " + query);
-		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("id", id)
+	public OrganizationAccount getOrgFromProject(Long id) {
+		String query = "SELECT orgAcc "
+				+ "FROM OrganizationAccount orgAcc "
+				+ "JOIN orgAcc.organizationSpace orgSpace "
+				+ "JOIN orgSpace.projects pro "
+				+ "WHERE pro.id =:id ";
+		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
+				.setParameter("id", id)
 				.getSingleResult();
+    
 		return account;
 	}
 
@@ -140,6 +148,13 @@ public class AccountRepository {
 
 	public void removeUser(UserAccount user) {
 		em.remove(user);
+	}
+
+	public List<OrganizationAccount> getTopOrgs() {
+		String query = "SELECT org "
+				+ "FROM OrganizationAccount org "
+				+ "ORDER BY org.creationDate";
+		return em.createQuery(query, OrganizationAccount.class).setMaxResults(3).getResultList();
 	}
 
 }

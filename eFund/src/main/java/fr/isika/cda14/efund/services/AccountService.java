@@ -3,6 +3,7 @@ package fr.isika.cda14.efund.services;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +48,7 @@ public class AccountService {
 		org.setRole(Role.ASSOC);
 		org.setAccountStatus(AccountStatus.ACTIVE);
 		org.setImagePath("/img/organization/default.jpg");
+		org.setCreationDate(new Date());
 		return repo.persist(org);
 	}
 
@@ -146,6 +148,11 @@ public class AccountService {
 		repo.removeUser(user);
 	}
 
+	public UserAccount findUserAccountById(Long id) {
+		return repo.findUser(id);
+	}
 
-
+	public List<OrganizationAccount> getTopOrgs() {
+		return repo.getTopOrgs();
+	}
 }
