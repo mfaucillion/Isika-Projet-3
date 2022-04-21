@@ -18,6 +18,7 @@ import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
+import fr.isika.cda14.efund.entity.shop.OrderLine;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.services.EventService;
 import fr.isika.cda14.efund.services.ProjectService;
@@ -44,6 +45,7 @@ public class OrganizationSpaceBean {
 
 	OrganizationAccount orgAccount;
 
+	
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
@@ -76,6 +78,19 @@ public class OrganizationSpaceBean {
 		}
 	}
 
+	
+	
+	
+	
+	public OrderLine createOrderLine(Item item) {
+		
+		return shopService.createOrderLine(item);
+		
+	}
+	public OrderLine createOrderLine(Long id) {
+		return shopService.createOrderLine(id);
+	}
+	
 	public void deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
 	}
