@@ -15,6 +15,9 @@ import fr.isika.cda14.efund.entity.account.UserInfo;
 import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.enums.Role;
+import fr.isika.cda14.efund.entity.project.Donation;
+import fr.isika.cda14.efund.entity.project.EventRegistration;
+import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
@@ -149,5 +152,17 @@ public class AccountService {
 
 	public List<OrganizationAccount> getTopOrgs() {
 		return repo.getTopOrgs();
+	}
+
+	public List<Favorite> getFavorites(Long userSpaceId) {
+		return repo.getFavorites(userSpaceId);
+	}
+
+	public List<Donation> getDonations(Long userSpaceId) {
+		return repo.getDonations(userSpaceId);
+	}
+
+	public List<EventRegistration> getRegistrations(Long userSpaceId) {
+		return repo.getRegistrations(userSpaceId);
 	}
 }

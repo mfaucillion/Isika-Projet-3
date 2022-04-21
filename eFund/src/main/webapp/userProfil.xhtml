@@ -7,8 +7,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:viewParam name="userId" />
-	<f:event listener="#{userProfilBean.onLoad(userId)}"
+	<f:viewParam name="id" />
+	<f:event listener="#{userProfilBean.onLoad(id)}"
 		type="preRenderView"></f:event>
 </f:metadata>
 
@@ -19,7 +19,6 @@
 		<ui:define name="css">
 			<link rel="stylesheet" href="css/userProfil.css" />
 		</ui:define>
-
 
 		<ui:define name="content">
 
@@ -87,17 +86,7 @@
 								<f:facet name="title">
 									<i class="fa-solid fa-star" /> Favoris
 								</f:facet>
-
-								<div class="card">
-									<p:dataTable var="favori" value="#" allowUnsorting="true" sortMode="single">
-										<p:column sortBy="#" headerText="Nom">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Type" width="300">
-											<h:outputText value="#" />
-										</p:column>
-									</p:dataTable>
-								</div>
+									<ui:include src="WEB-INF/subpage/userProfile/favorites.xhtml" />
 								</p:tab>
 
 							<!-- Mes donnations dataTable -->
@@ -105,20 +94,8 @@
 								<f:facet name="title">
 									<i class="fa-solid fa-euro-sign" /> Mes donations
 								</f:facet>
-
-								<div class="card">
-									<p:dataTable var="don" value="#" allowUnsorting="true" sortMode="single">
-										<p:column sortBy="#" headerText="Nom du projet">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Date du don" width="300">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Montant du don" width="300">
-											<h:outputText value="#" />
-										</p:column>
-									</p:dataTable>
-								</div>
+									<ui:include src="WEB-INF/subpage/userProfile/donations.xhtml" />
+								
 							</p:tab>
 
 							<!-- Mes évènements dataTable -->
@@ -127,19 +104,7 @@
 									<i class="fa-regular fa-calendar-check" /> Mes évènements
 								</f:facet>
 
-								<div class="card">
-									<p:dataTable var="évènement" value="#" allowUnsorting="true" sortMode="single">
-										<p:column sortBy="#" headerText="Nom de l'évènement">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Date de l'évènement" width="300">
-											<h:outputText value="#" />
-										</p:column>
-										<p:column sortBy="#" headerText="Durée de l'évènement" width="300">
-											<h:outputText value="#" />
-										</p:column>
-									</p:dataTable>
-								</div>
+								<ui:include src="WEB-INF/subpage/userProfile/eventRegistrations.xhtml" />
 							</p:tab>
 
 							<!-- Mes commandes dataTable -->
@@ -164,11 +129,9 @@
 									</p:dataTable>
 								</div>
 							</p:tab>
-
 						</p:tabView>
 					</div>
 				</div>
-
 			</div>
 		</ui:define>
 

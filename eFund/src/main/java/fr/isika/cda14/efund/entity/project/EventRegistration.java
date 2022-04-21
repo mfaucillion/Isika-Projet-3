@@ -6,25 +6,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Entity
-public class Favorite {
+@Table(name = "event_registration")
+public class EventRegistration {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name = "generic_project_id")
-	private GenericProject genericProject;
+	private Event event;
 	
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
 	
-	public GenericProject getGenericProject() {
-		return genericProject;
+	public Event getEvent() {
+		return event;
 	}
 }

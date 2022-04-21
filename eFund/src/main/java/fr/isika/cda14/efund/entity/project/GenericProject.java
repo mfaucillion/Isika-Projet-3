@@ -75,8 +75,7 @@ public abstract class GenericProject {
 	@JoinColumn(name = "generic_project_id")
 	protected List<ContentTab> contentTabs;
 
-	@OneToMany
-	@JoinColumn(name = "generic_project_id")
+	@OneToMany(mappedBy = "genericProject")
 	protected List<Favorite> favorites;
 
 	public void setName(String name) {
