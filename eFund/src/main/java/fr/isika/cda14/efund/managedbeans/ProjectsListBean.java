@@ -28,6 +28,8 @@ public class ProjectsListBean {
 
 	private Long remainingDays;
 
+	private String searchRequest;
+
 	private List<Project> projectsList;
 
 	public void onLoad() {
@@ -54,7 +56,20 @@ public class ProjectsListBean {
 		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
 	}
 
+	public Project searchResult(String searchProject) {
+		System.out.println("Contenu de recherche : " + searchProject);
+		return projectService.searchProjectFromPage(searchProject);
+	}
+
 	public Long getRemainingDays() {
 		return remainingDays;
+	}
+
+	public String getSearchRequest() {
+		return searchRequest;
+	}
+
+	public void setSearchRequest(String searchRequest) {
+		this.searchRequest = searchRequest;
 	}
 }

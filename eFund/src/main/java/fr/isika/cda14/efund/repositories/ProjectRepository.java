@@ -26,6 +26,13 @@ public class ProjectRepository {
 	public Project findProject(Long id) {
 		return this.em.find(Project.class, id);
 	}
+	
+	// recherche d'un projet à partir de la page ProjectsList
+	public Project searchProjectFromPage(String searchProject) {
+		String query = "SELECT projName FROM Project projName WHERE projName.name=:searchProject ";
+		Project project = em.createQuery(query, Project.class).setParameter("searchProject", searchProject).getSingleResult();
+		return project;
+	}
 
 	public void remove(Project project) {
 		em.remove(project);

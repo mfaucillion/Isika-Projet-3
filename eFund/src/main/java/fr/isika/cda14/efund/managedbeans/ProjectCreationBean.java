@@ -21,7 +21,6 @@ public class ProjectCreationBean {
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
 
 	public String createProject(String id) {
-		System.out.println("Je crée le projet avec le spaceId: " + id);
 		projectCreationService.create(projectCreationFormVM, Long.parseLong(id));
 		return "projectCreationForm.xhtml";
 	}
