@@ -28,10 +28,9 @@ public class ProjectRepository {
 	}
 	
 	// recherche d'un projet à partir de la page ProjectsList
-	public Project searchProjectFromPage(String searchProject) {
-		String query = "SELECT projName FROM Project projName WHERE projName.name=:searchProject ";
-		Project project = em.createQuery(query, Project.class).setParameter("searchProject", searchProject).getSingleResult();
-		return project;
+	public List<Project> searchProjectFromPage(String searchProject) {
+		String query = "SELECT projName FROM Project projName WHERE projName.name in :searchProject ";
+		return em.createQuery(query, Project.class).setParameter("searchProject", searchProject).getResultList();
 	}
 
 	public void remove(Project project) {

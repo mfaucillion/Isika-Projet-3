@@ -53,7 +53,7 @@ public class ProjectService {
 		return projectRepo.findProject(id);
 	}
 	
-	public Project searchProjectFromPage(String searchProject) {
+	public List<Project> searchProjectFromPage(String searchProject) {
 		return projectRepo.searchProjectFromPage(searchProject);
 	}
 
