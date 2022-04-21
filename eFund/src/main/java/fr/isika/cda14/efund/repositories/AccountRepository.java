@@ -11,8 +11,11 @@ import javax.persistence.PersistenceContext;
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
+import fr.isika.cda14.efund.entity.project.Donation;
+import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
+import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Stateless
 public class AccountRepository {
@@ -157,4 +160,13 @@ public class AccountRepository {
 		return em.createQuery(query, OrganizationAccount.class).setMaxResults(3).getResultList();
 	}
 
+	public List<Favorite> getFavorites(Long userSpaceId) {
+		String query = "SELECT fav FROM Favorite fav JOIN fav.userSpace usr  WHERE usr.id=:id";
+		return em.createQuery(query, Favorite.class).setParameter("id", userSpaceId).getResultList();
+	}
+
+	public List<Donation> getDonations(Long userSpaceId) {
+		String query = "SELECT don FROM Donation don JOIN don.userSpace usr  WHERE usr.id=:id";
+		return em.createQuery(query, Donation.class).setParameter("id", userSpaceId).getResultList();
+	}
 }
