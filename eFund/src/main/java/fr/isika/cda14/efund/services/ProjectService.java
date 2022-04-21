@@ -52,6 +52,10 @@ public class ProjectService {
 	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
 	}
+	
+	public List<Project> searchProjectFromPage(String searchProject) {
+		return projectRepo.searchProjectFromPage(searchProject);
+	}
 
 	public OrganizationAccount getOrgFromProject(Long id) {
 		return accountRepo.getOrgFromProject(id);
