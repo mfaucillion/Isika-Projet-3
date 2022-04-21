@@ -1,10 +1,5 @@
 package fr.isika.cda14.efund.entity.common;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
-
 //@Entity
 //@Table(name = "text_block")
 public class TextBlock extends ContentBlock {

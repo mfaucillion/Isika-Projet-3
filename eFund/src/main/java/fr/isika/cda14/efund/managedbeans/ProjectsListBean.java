@@ -3,7 +3,6 @@ package fr.isika.cda14.efund.managedbeans;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;

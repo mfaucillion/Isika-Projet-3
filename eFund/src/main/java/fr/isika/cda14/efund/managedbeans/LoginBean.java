@@ -9,8 +9,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.services.AccountService;

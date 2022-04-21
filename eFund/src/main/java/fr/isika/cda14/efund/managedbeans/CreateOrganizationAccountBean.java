@@ -2,7 +2,6 @@ package fr.isika.cda14.efund.managedbeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;

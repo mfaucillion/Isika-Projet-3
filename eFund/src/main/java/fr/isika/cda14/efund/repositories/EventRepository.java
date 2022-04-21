@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.Project;
 
 @Stateless
 public class EventRepository {
@@ -35,6 +34,7 @@ public class EventRepository {
 
 	public void update(Event myEvent) {
 		em.merge(myEvent);
+	}
 
 	public List<Event> getTopEvents() {
 		String query = "SELECT event "
