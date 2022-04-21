@@ -6,43 +6,190 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{indexBean.onLoad}" type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/index.css" />
+		</ui:define>
+
 		<ui:define name="content">
-			<h1>eFund Welcome page</h1>
-			<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
-			<br />
-			<h:link outcome="login.xhtml">Se connecter</h:link>
-			<br />
-			<h:link outcome="createUser.xhtml">Création d'utilisateur</h:link>
-			<br />
-			<h:link outcome="createItem.xhtml">Création de produit</h:link>
-			<br />
-			<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
-			<br />
-			<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
-			<br />
-			<h:link outcome="paymentPage">Formulaire de paiement</h:link>
-			<br />
-			<h:link outcome="orgaListe.xhtml">Liste de mes organisations</h:link>
-			<br />
-			<h:link outcome="userProfil">UserProfil</h:link>
-			<i class="fa-solid fa-thumbs-up"></i>
+
+			<div class="img-fond">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Bienvenue sur e-Fund lol</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
+						<br />
+						<h:link outcome="login.xhtml">Se connecter</h:link>
+						<br />
+						<h:link outcome="createUser.xhtml">Création d'utilisateur</h:link>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="createItem.xhtml">Création de produit</h:link>
+						<br />
+						<h:link outcome="projectCreationForm.xhtml">Création de projet</h:link>
+						<br />
+						<h:link outcome="eventCreationForm.xhtml">Création d'évènement</h:link>
+						<br />
+						<h:link outcome="projectsList.xhtml">Liste des projets</h:link>
+						<br />
+					</div>
+
+					<div class="col-12 col-md-4 mt-3">
+						<h:link outcome="paymentPage">Formulaire de paiement</h:link>
+						<br />
+						<h:link outcome="orgaListe.xhtml">Liste de mes organisations</h:link>
+						<br />
+						<h:link outcome="userProfil">UserProfil</h:link>
+						<i class="fa-solid fa-thumbs-up"></i>
+					</div>
+				</div>
+			</div>
+
+			<div class="container shadow py-3 5px-5 mt-5">
+				<h5>Présentation:</h5>
+				<p>Bla bla bla bla Bla bla bla blaBla bla bla blaBla bla bla
+					blaBla bla bla blaBla bla bla blaBla bla bla blaBla bla bla blaBla
+					bla bla blaBla bla bla blaBla bla bla blaBla bla bla bla</p>
+			</div>
+
+			<div class="container shadow py-3 5px-5 mt-5">
+
+				<div class="ui-fluid row pb-3">
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">Nombre de projets</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">Montant total récolté</h5>
+
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Nos projets récents</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+
+						<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.projects}" var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">Nombre d'évènement</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">Nombre de volontaires</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Nos évènements en cours</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+
+						<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.events}" var="event">
+								<p:graphicImage styleClass="content shadow"
+									value="#{event.imagePath}" />
+								<div class="caption text-dark">#{event.summary}</div>
+							</p:contentFlow>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">Nombre d'associations</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">STAT 2</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+					<div class="col-12 col-md-4 mt-3">
+						<h5 class="text-center">STAT 3</h5>
+						<h5 class="text-center">XXX</h5>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="container shadow py-3 px-5 mt-5">
+
+				<div class="ui-fuild row">
+					<h1 class="text-center">Coup de projecteur sur Assos/ONGs</h1>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-12 mt-3">
+						<div class="card pb-3">
+							<p:contentFlow value="#{indexBean.orgs}" var="org">
+								<p:graphicImage styleClass="content shadow"
+									value="#{org.imagePath}" />
+								<div class="caption text-dark">#{org.organizationInfo.summary}</div>
+							</p:contentFlow>
+						</div>
+					</div>
+				</div>
+
+			</div>
 
 
 			<h:form>
-				<h:commandButton
-					action="#{loginBean.readFromSession()}"
+				<h:commandButton action="#{loginBean.readFromSession()}"
 					value="Afficher en console" />
-				<h:commandButton
-					action="#{loginBean.resetSessionAttributes()}"
-					value="Invalider session" />
 			</h:form>
-
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

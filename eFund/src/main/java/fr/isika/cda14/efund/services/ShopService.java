@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
 import fr.isika.cda14.efund.entity.shop.Item;
+import fr.isika.cda14.efund.entity.shop.OrderLine;
 import fr.isika.cda14.efund.entity.shop.Shop;
-import fr.isika.cda14.efund.repositories.ItemRepository;
 import fr.isika.cda14.efund.repositories.ShopRepository;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 
@@ -17,6 +17,7 @@ public class ShopService {
 
 	@Inject
 	private ShopRepository shopRepo;
+	private Integer index=-1;
 
 	public void create(ItemCreationForm itemCreationForm, Long id) {
 		Item newItem = new Item();
@@ -38,4 +39,19 @@ public class ShopService {
 	public List<Item> getShopItemList(Long id) {
 		return shopRepo.getShopItemList(id);
 	}
+
+	public void deleteItem(Long id) {
+		Item item = shopRepo.findItem(id);
+		shopRepo.removeItem(item);
+	}
+	/*creer un orderline à partir d'un item */
+	public OrderLine createOrderLine(Item item) {
+		OrderLine orderLine=new OrderLine();
+		orderLine.setItem(item);
+		shopRepo.add(orderLine);
+		return orderLine;
+
+	}
+	/*Ecrire une methode pour verifier s'il y a un orderLine
+	 *  où l'item existe, si oui, incrmeneter la quantité*/
 }

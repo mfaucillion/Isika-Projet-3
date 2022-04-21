@@ -1,7 +1,6 @@
 package fr.isika.cda14.efund.repositories;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -26,5 +25,18 @@ public class ProjectRepository {
 	// recherche d'un projet à partir d'un id
 	public Project findProject(Long id) {
 		return this.em.find(Project.class, id);
+	}
+
+	public void remove(Project project) {
+		em.remove(project);
+	}
+
+	public void update(Project proj) {
+		em.merge(proj);
+	}
+
+	public List<Project> getTopProjects() {
+		String query = "SELECT proj " + "FROM Project proj " + "ORDER BY proj.creationDate";
+		return em.createQuery(query, Project.class).setMaxResults(3).getResultList();
 	}
 }

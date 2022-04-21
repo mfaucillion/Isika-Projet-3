@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.entity.account;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.enums.Role;
@@ -32,6 +36,10 @@ public abstract class Account {
 
 	@Column(name = "image_path", length = 260)
 	protected String imagePath;
+	
+	@Column(name = "creation_date")
+	@Temporal(TemporalType.DATE)
+	protected Date creationDate;
 
 	@Enumerated(EnumType.STRING)
 	protected Role role;
@@ -90,6 +98,14 @@ public abstract class Account {
 	
 	public Long getId() {
 		return id;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }

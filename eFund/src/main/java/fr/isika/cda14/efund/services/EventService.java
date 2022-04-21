@@ -19,4 +19,20 @@ public class EventService {
 		return eventRepo.findAll();
 	}
 
+	public Event findEvent(Long id) {
+		return eventRepo.find(id);
+	}
+	
+	public void deleteEvent(Long id) {
+		Event event = findEvent(id);
+		eventRepo.remove(event);		
+	}
+
+	public void update(Event myEvent) {
+		eventRepo.update(myEvent);
+	}
+    
+	public List<Event> getTopEvents() {
+		return eventRepo.getTopEvents();
+	}
 }

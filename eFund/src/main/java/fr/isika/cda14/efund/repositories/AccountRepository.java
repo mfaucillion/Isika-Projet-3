@@ -21,15 +21,15 @@ public class AccountRepository {
 	private EntityManager em;
 
 	/* Persistance des comptes User */
-	public Long persist(UserAccount newUser) {
+	public UserAccount persist(UserAccount newUser) {
 		em.persist(newUser);
-		return newUser.getId();
+		return newUser;
 	}
 
 	/* Persistance des comptes Organization */
-	public Long persist(OrganizationAccount newOrg) {
+	public OrganizationAccount persist(OrganizationAccount newOrg) {
 		em.persist(newOrg);
-		return newOrg.getId();
+		return newOrg;
 	}
 
 	/* Mise à jour des comptes User */
@@ -79,48 +79,82 @@ public class AccountRepository {
 	public void update(OrganizationSpace orgSpace) {
 		em.merge(orgSpace);
 	}
+	
+	public void updateOrg(OrganizationAccount org) {
+		em.merge(org);		
+	}
 
-	/* */
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
-		String query = "SELECT distinct shop "
-				+ "FROM OrganizationAccount org "
-				+ "INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN space.shop shop "
-				+ "INNER JOIN FETCH shop.items "
-				+ "WHERE org.id=:id";
-		Shop shop = em.createQuery(query, Shop.class)
-				.setParameter("id", id)
+
+		/* On force le Fetching de la collection d'Items dans le Shop */
+		String query = "SELECT distinct shop " + "FROM OrganizationAccount org "
+				+ "INNER JOIN org.organizationSpace space " + "INNER JOIN space.shop shop "
+				+ "INNER JOIN FETCH shop.items " + "WHERE org.id=:id";
+		Shop shop = em.createQuery(query, Shop.class).setParameter("id", id).getSingleResult();
+
+		/* On force le Fetching de la collection de Projects dans le Space */
+		query = "SELECT distinct space " + "FROM OrganizationAccount org " + "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN FETCH space.projects " + "INNER JOIN space.shop shop " + "WHERE space.shop in :shop";
+		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class).setParameter("shop", shop)
 				.getSingleResult();
-		
+
+		/* On force le Fetching de la collection d'Events dans le Space */
+		query = "SELECT distinct space " + "FROM OrganizationAccount org " + "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN FETCH space.events " + "INNER JOIN space.shop shop "
+				+ "WHERE org.organizationSpace in :space";
+		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
+
+		/* On force le Fetching de la collection de ContentTabs dans le Space */
+
 		query = "SELECT distinct space "
 				+ "FROM OrganizationAccount org "
 				+ "INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN FETCH space.projects "
-				+ "INNER JOIN space.shop shop "
-				+ "WHERE space.shop in :shop";	
-		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class)
-				.setParameter("shop", shop)
-				.getSingleResult();
-		
-		query = "SELECT distinct space "
-				+ "FROM OrganizationAccount org "
-				+ "INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN FETCH space.events "
+				+ "LEFT JOIN FETCH space.contentTabs "
 				+ "INNER JOIN space.shop shop "
 				+ "WHERE org.organizationSpace in :space";
-		space = em.createQuery(query, OrganizationSpace.class)
-				.setParameter("space", space)
+		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
+
+		/* On relie le tout et on sort notre OrganizationAccount */
+		query = "SELECT distinct org " + "FROM OrganizationAccount org " + "INNER JOIN org.organizationSpace space "
+				+ "INNER JOIN space.shop shop " + "WHERE org.organizationSpace in :space";
+		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("space", space)
 				.getSingleResult();
-		
-		query = "SELECT distinct org "
-				+ "FROM OrganizationAccount org "
-				+ "INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN space.shop shop "
-				+ "WHERE org.organizationSpace in :space";
-		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
-				.setParameter("space", space)
-				.getSingleResult();
-		
+
 		return account;
 	}
+
+	public OrganizationAccount getOrgFromProject(Long id) {
+		String query = "SELECT orgAcc "
+				+ "FROM OrganizationAccount orgAcc "
+				+ "JOIN orgAcc.organizationSpace orgSpace "
+				+ "JOIN orgSpace.projects pro "
+				+ "WHERE pro.id =:id ";
+		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
+				.setParameter("id", id)
+				.getSingleResult();
+    
+		return account;
+	}
+
+	public List<UserAccount> getAllUsers() {
+		String query = "SELECT acc FROM UserAccount acc";
+		return em.createQuery(query, UserAccount.class).getResultList();
+	}
+
+	public List<OrganizationAccount> getAllOrgs() {
+		String query = "SELECT acc FROM OrganizationAccount acc";
+		return em.createQuery(query, OrganizationAccount.class).getResultList();
+	}
+
+	public void removeUser(UserAccount user) {
+		em.remove(user);
+	}
+
+	public List<OrganizationAccount> getTopOrgs() {
+		String query = "SELECT org "
+				+ "FROM OrganizationAccount org "
+				+ "ORDER BY org.creationDate";
+		return em.createQuery(query, OrganizationAccount.class).setMaxResults(3).getResultList();
+	}
+
 }

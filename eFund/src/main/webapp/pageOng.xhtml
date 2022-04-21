@@ -4,69 +4,99 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
+<f:metadata>
+	<f:viewParam name="id" />
+	<f:event listener="#{organizationSpaceBean.onLoad(id)}"
+		type="preRenderView"></f:event>
+</f:metadata>
 
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
-
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/ongTabView-#{organizationSpaceBean.bgcolor}.css"/>
+		</ui:define>
 		<ui:define name="content">
-			<f:metadata>
-				<f:viewParam name="id" />
-				<f:event listener="#{organizationSpaceBean.onLoad(id)}"
-					type="preRenderView"></f:event>
-			</f:metadata>
-
-			<div class="container-fluid p-5">
+			
+			<div class="container-fluid p-5" id="ongPageBody">
 				<div class="row">
-					<div class="col-12 col-md-5">
-						<img class="img-fluid"
+					<div class="col-12 col-md-5 mb-3">
+						<img class="img-fluid rounded-3 shadow"
 							src="#{organizationSpaceBean.orgAccount.imagePath}" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
-							<p:link outcome="MODELE.xhtml">
+							<p:link outcome="MODELE.xhtml"
+								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
 						<p>#{organizationSpaceBean.orgAccount.organizationInfo.description}</p>
 					</div>
 				</div>
-				<hr />
-				<p:tabView>
 
+				<p:tabView styleClass="rounded">
 					<!-- Onglet Boutique -->
-					<p:tab title="Boutique">
+					<p:tab>
+						<f:facet name="title">
+							<i class="fa-solid fa-basket-shopping" /> Boutique
+						</f:facet>
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
-						<p:link outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}" id="newProduct">
+						<p:link
+							outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}&#38;orgId=#{id}faces-redirect=true"
+							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
 							<p:repeat var="item" value="#{organizationSpaceBean.items}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-												<img src="https://www.kikkoman.fr/fileadmin/_processed_/b/f/csm_WEB_Tamago_Sushi_521191d0a1.jpg"/>								
+											<img src="#{item.imagePath}" />
 										</f:facet>
 										<f:facet name="title">
-											<i class="fa-solid fa-minus"></i>Sushi
+											<div class="clearfix">
+												#{item.label} #{item.id}
+												<div class="float-end">
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteItem(item.id)}"
+															id="delete-item-#{item.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+														</h:commandLink>
+													</h:form>
+												</div>
+											</div>
 										</f:facet>
 										<f:facet name="subtitle">
-											Nourriture
+											#{item.itemCategory}
 										</f:facet>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-											Fusce a urna eget massa tempus faucibus.</p>
+										<p>#{item.description}</p>
 										<f:facet name="footer">
-											<div class="m-3">
-												Prix : 20.00€
-												<p:commandButton styleClass="float-end" icon="pi pi-check"
-													value="Acheter" />
+											<div class="m-3 clearfix">
+												<div class="float-start">Prix : #{item.price}€</div>
+												<div class="float-end">
+
+													<p:commandButton id="delete-products-button"
+														value="Retirer" icon="pi pi-trash" actionListener="#"
+														styleClass="ui-button-danger">
+														<p:confirm header="Confirmation"
+															message="Voulez vous supprimer ce produit ?"
+															icon="pi pi-exclamation-triangle" />
+
+													</p:commandButton>
+													<p:commandButton icon="pi pi-check" value="Ajouter"
+														actionListener="#" />
+												</div>
 											</div>
 										</f:facet>
 									</p:card>
@@ -79,29 +109,53 @@
 
 					<p:tab title="Projets">
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
+						<p:link
+							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
+							id="newProject" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
-						<p:tooltip for="newProject" value="Nouveau Projet"/>
+						<p:tooltip for="newProject" value="Nouveau Projet" />
 						<div class="row">
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3 d-flex align-items-stretch">
+								<div
+									class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3 d-flex align-items-stretch">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-											<img src="#{project.imagePath}" class="ratio" style="object-fit:cover;"/>
+											<img src="#{project.imagePath}" class="ratio"
+												style="object-fit: cover;" />
 										</f:facet>
 										<f:facet name="title">
+											<div class="clearfix">
 												#{project.name}
-											</f:facet>
+												<div class="float-end">
+													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteProject(project.id)}"
+															id="delete-project-#{project.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+														</h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</f:facet>
 										<f:facet name="subtitle">
-												#{project.projectCategory}
-											</f:facet>
+											#{project.projectCategory}
+										</f:facet>
 										<p>#{project.summary}</p>
 										<f:facet name="footer">
 											<div class="m-3">
-												#{project.currentAmount}€ collecté sur #{project.targetAmount}€
-												<p:button outcome="pageProject?id=#{project.id}" styleClass="float-end" icon="pi pi-check"
-													value="Explorer" />
+												<div class="progress bg-secondary">
+													<div
+														class="progress-bar progress-bar-striped progress-bar-animated"
+														style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
+														project.targetAmount)}%</div>
+												</div>
+												#{project.currentAmount}€ collecté sur
+												#{project.targetAmount}€
+												<p:button outcome="pageProject?id=#{project.id}"
+													styleClass="float-end" icon="pi pi-check" value="Explorer" />
 											</div>
 										</f:facet>
 									</p:card>
@@ -112,30 +166,41 @@
 
 					<!-- Onglet Evénements -->
 					<p:tab title="Evénements">
-					
-					<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}" id="newProject">
+
+						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
+						<p:link
+							outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
+							id="newEvent" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
-								<div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 my-3">
+								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
 									<p:card styleClass="shadow">
 										<f:facet name="header">
-											<img
-												src="https://www.ville-montreuil-juigne.fr/var/ayaline/storage/images/media/images/actualites/recherche-de-benevoles/117162-1-fre-FR/recherche-de-benevoles_image_full.jpg"></img>
+											<img src="#{event.imagePath}"></img>
 										</f:facet>
 										<f:facet name="title">
-											Mon Evénement
+											#{event.name}
+											<div class="float-end">
+												<h:form rendered="#{organizationSpaceBean.isOwner}">
+													<h:inputHidden name="id" value="#{id}" />
+													<!-- ONLY IF EVENT.STATUS == DRAFT -->
+													<h:commandLink
+														action="#{organizationSpaceBean.deleteEvent(event.id)}"
+														id="delete-event-#{event.id}">
+														<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+													</h:commandLink>
+												</h:form>
+											</div>
 										</f:facet>
 										<f:facet name="subtitle">
-											Humanitaire
+											#{event.projectCategory}
 										</f:facet>
-										<p>Description : Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit. Fusce a urna eget massa tempus faucibus.</p>
+										<p>#{event.summary}</p>
 										<f:facet name="footer">
 											<div class="m-3">
-												4 bénévoles inscrits sur 30
+												XXX bénévoles inscrits sur #{event.volunteerTarget}
 												<p:commandButton styleClass="float-end" icon="pi pi-check"
 													value="Explorer" />
 											</div>
@@ -145,19 +210,102 @@
 							</p:repeat>
 						</div>
 					</p:tab>
-					
-					<p:tab title="NEWTAB">
+
+					<p:tab title="ContentFlow">
 						<div class="card">
-						    <p:contentFlow value="#{organizationSpaceBean.projects}" var="project">
-						        <img src="#{project.imagePath}" class="content"/>
-						        <div class="caption text-dark">#{project.summary}</div>
-						    </p:contentFlow>
+							<p:contentFlow value="#{organizationSpaceBean.projects}"
+								var="project">
+								<p:graphicImage styleClass="content shadow"
+									value="#{project.imagePath}" />
+								<div class="caption text-dark">#{project.summary}</div>
+							</p:contentFlow>
 						</div>
 					</p:tab>
+					<p:tab title="CarouselBasic">
+						<div class="card">
+							<p:carousel value="#{organizationSpaceBean.projects}" var="project"
+								numVisible="3" numScroll="3"
+								responsiveOptions="#{organizationSpaceBean.responsiveOptions}">
+								<f:facet name="header">
+									<h5>Basic</h5>
+								</f:facet>
+								<p:card styleClass="shadow mx-3">
+										<f:facet name="header">
+											<img src="#{project.imagePath}" class="ratio"
+												style="object-fit: cover;" />
+										</f:facet>
+										<f:facet name="title">
+											<div class="clearfix">
+												#{project.name}
+												<div class="float-end">
+													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+													<h:form rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteProject(project.id)}"
+															id="delete-project-#{project.id}">
+															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+														</h:commandLink>
+													</h:form>
+												</div>
+											</div>
+										</f:facet>
+										<f:facet name="subtitle">
+											#{project.projectCategory}
+										</f:facet>
+										<p>#{project.summary}</p>
+										<f:facet name="footer">
+											<div class="m-3">
+												<div class="progress">
+													<div
+														class="progress-bar progress-bar-striped progress-bar-animated"
+														style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
+														project.targetAmount)}%</div>
+												</div>
+												#{project.currentAmount}€ collecté sur
+												#{project.targetAmount}€
+												<p:button outcome="pageProject?id=#{project.id}"
+													styleClass="float-end" icon="pi pi-check" value="Explorer" />
+											</div>
+										</f:facet>
+									</p:card>
+							</p:carousel>
+						</div>
+					</p:tab>
+					<c:forEach  items="#{organizationSpaceBean.tabs}" var="tab">
+						<p:tab title="#{tab.name}">
+						
+							<p:button outcome="createBlockTxt?tabId=#{tab.id}" value="Ajouter un bloc de text"/>
+							<p:button outcome="createBlockImg?tabId=#{tab.id}" value="Ajouter une image"/>
+							<p:button outcome="createBlockVideo?tabId=#{tab.id}" value="Ajouter une video"/>
+							<div class="container mx-auto text-center">
+								<h2 class="text-center">#{tab.name}</h2>
+								<hr style="border:2px"/>
+								<c:forEach var="block" items="#{tab.contentBlocks}">
+										<c:if test="#{block.type == 'txt'}">
+											<p style="font-size:25px">#{block.content}</p>
+										</c:if>
+										<c:if test="#{block.type == 'img'}">
+											<img class="img-fluid rounded img-thumbnail shadow" style="max-width:60%" src="#{block.content}"/>
+										</c:if>
+										<c:if test="#{block.type == 'vid'}">
+											<p:video value="#{block.content}"
+												player="mp4" controls="true" width="600"
+												onplay="console.log('MP4 Started Playing')"
+												onpause="console.log('MP4 Stopped Playing')">
+												Your browser does not support the video element. See: 
+												<h:outputLink value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+											</p:video>
+										</c:if>
+										<hr style="border:2px"/>
+								</c:forEach>
+								
+							</div>
+						</p:tab>
+					</c:forEach>
 				</p:tabView>
 			</div>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

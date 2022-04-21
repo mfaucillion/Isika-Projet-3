@@ -20,9 +20,9 @@ public class ItemCreationBean {
 	
 	private ItemCreationForm itemCreationForm = new ItemCreationForm();
 
-	public String createItem(String id) {
+	public String createItem(String id, String orgId) {
 		creationService.create(itemCreationForm, Long.parseLong(id));
-		return "createItem.xhtml";
+		return "pageOng?id=" + orgId + "faces-redirect=true";
 	}
 	
 	public void upload(FileUploadEvent event) {

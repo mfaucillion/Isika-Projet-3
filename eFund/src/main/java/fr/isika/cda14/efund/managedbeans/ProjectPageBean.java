@@ -1,30 +1,60 @@
 
 package fr.isika.cda14.efund.managedbeans;
 
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.ProjectService;
-import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
 @ManagedBean
+@ViewScoped
 public class ProjectPageBean {
 
 	@Inject
 	private ProjectService projectService;
 
-	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
-
 	private Project project;
 
+	private OrganizationAccount organizationAccount;
+
+	private Long remainingDays;
+
 	public void onLoad(String id) {
-		project = projectService.findProjet(Long.parseLong(id));
+		this.project = projectService.findProject(Long.parseLong(id));
+		this.organizationAccount = projectService.getOrgFromProject(Long.parseLong(id));
+		this.remainingDays = calculRemainingDays();
+	}
+
+	public OrganizationAccount getOrganizationAccount() {
+		return organizationAccount;
 	}
 
 	public Project getProject() {
 		return project;
+	}
+
+	public Long getRemainingDays() {
+		return remainingDays;
+	}
+
+	public int percentage(BigDecimal currentCollect, BigDecimal target) {
+		return (currentCollect.intValue() * 100) / target.intValue();
+	}
+
+	private Long calculRemainingDays() {
+		Date endDate = new Date(this.project.getEndDate().getTime());
+		System.out.println(endDate);
+		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
+
+		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
 	}
 }

@@ -24,4 +24,22 @@ public class EventRepository {
 		return events;
 	}
 
+	public Event find(Long id) {
+		return em.find(Event.class, id);
+	}
+
+	public void remove(Event event) {
+		em.remove(event);
+	}
+
+	public void update(Event myEvent) {
+		em.merge(myEvent);
+	}
+
+	public List<Event> getTopEvents() {
+		String query = "SELECT event "
+				+ "FROM Event event "
+				+ "ORDER BY event.creationDate";
+		return em.createQuery(query, Event.class).setMaxResults(3).getResultList();
+	}
 }

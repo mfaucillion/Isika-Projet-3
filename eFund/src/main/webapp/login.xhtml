@@ -6,24 +6,70 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{loginBean.onLoad()}" type="preRenderView"></f:event>
+</f:metadata>
+
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
+			<div class="container shadow p-5 mt-5">
+			<h1>Connectez-vous</h1>
+			<hr class="bg-primary" />
+				<h:form id="loginForm">
+				
+				<div class="ui-fluid row">
 
-			<h:form id="loginForm">
-				<h:outputLabel for="emailInput" value="Adresse email" />
-				<h:inputText id="emailInput" a:placeholder="Entrez votre adresse Email" value="#{loginBean.email}" />
-				<h:message for="emailInput"/>
-				<br/>
-				<h:outputLabel for="passwordInput" value="Mot de passe" />
-				<h:inputSecret id="passwordInput" a:placeholder="Entrez votre adresse Mot de Passe" value="#{loginBean.password}" />
-				<h:message for="passwordInput"/>
-				<br/>
-				<h:commandButton action="#{loginBean.login()}" value="Se Connecter" />
-			</h:form>
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup ">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-at"></i>
+								</div>
+								<p:inputText placeholder="Email"
+									value="#{loginBean.email}"
+									id="LoginEmailInput" />
+							</div>
+						</div>
 
+					</div>
+				
+										<div class="ui-fluid row">
+
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-6 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-key"></i>
+								</div>
+								<p:inputText placeholder="Mot de passe" type="password"
+									value="#{loginBean.password}"
+									id="LoginPasswordInput" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-12 col-md-3 mt-3"></div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#"
+								value="Annuler" />
+						</div>
+						<div class="col-12 col-md-3 mt-4 d-grid">
+							<p:commandButton
+								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								action="#{loginBean.login()}"
+								value="Valider" />
+						</div>
+					</div>
+
+				</h:form>
+
+			</div>
 		</ui:define>
 
 	</ui:composition>

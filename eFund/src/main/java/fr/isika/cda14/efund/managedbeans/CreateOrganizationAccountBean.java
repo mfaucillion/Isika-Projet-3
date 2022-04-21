@@ -2,14 +2,15 @@ package fr.isika.cda14.efund.managedbeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
+import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.tool.FileUpload;
+import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
 @ManagedBean
@@ -23,9 +24,9 @@ public class CreateOrganizationAccountBean {
 
 	public String create() {
 
-		Long newOrgID = accountService.createOrg(organization);
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("viewmodel", organization);
-		return "createOrgBis?id=" + newOrgID + "faces-redirect=true";
+		OrganizationAccount account = accountService.createOrg(organization);
+		SessionTool.writeInSession(account);
+		return "createOrgBis?id=" + account.getId() + "faces-redirect=true";
 	}
 
 	public String modify(Long id) {
