@@ -51,7 +51,9 @@ public class ProjectPageBean {
 	}
 
 	public int countDown(BigDecimal remaining, BigDecimal duration) {
-
+		if (duration.intValue() == 0) {
+			return 0;
+		}
 		return ((remaining.intValue() * 100) / duration.intValue());
 	}
 
