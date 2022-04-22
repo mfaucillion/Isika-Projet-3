@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.entity.project;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +20,20 @@ public class Donation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "full_name")
+	private String fullName;
+
+	@Column(name = "credit_card_number")
+	private String creditCardNumber;
+
 	@Column(scale = 2)
 	private BigDecimal amount;
+
+	@Column(name = "expiration_date")
+	private Date expirationDate;
+
+	@Column(name = "cryptogram")
+	private String cryptogram;
 
 	@ManyToOne
 	private Project project;
@@ -55,6 +68,42 @@ public class Donation {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getCreditCardNumber() {
+		return creditCardNumber;
+	}
+
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber = creditCardNumber;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getCryptogram() {
+		return cryptogram;
+	}
+
+	public void setCryptogram(String cryptogram) {
+		this.cryptogram = cryptogram;
 	}
 
 }
