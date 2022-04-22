@@ -61,8 +61,12 @@ public class ProjectPageBean {
 		Date endDate = new Date(this.project.getEndDate().getTime());
 		System.out.println(endDate);
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
-
-		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
+		Long remainingDays = ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
+		
+		if (remainingDays < 0) {
+			remainingDays = 0L;
+		}
+		return remainingDays;
 	}
 
 	public Project getProject() {
