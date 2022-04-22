@@ -72,6 +72,10 @@ public class LoginBean {
 		return SessionTool.getImagePath();
 	}
 	
+	public String getSessionDashBoardURL() {
+		return SessionTool.getDashBoardURL();
+	}
+	
 	public void disconnectSession() {
 		SessionTool.resetSessionAttributes();
 		try {

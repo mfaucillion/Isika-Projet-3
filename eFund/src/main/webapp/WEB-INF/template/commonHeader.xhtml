@@ -54,7 +54,6 @@
 		<ui:include src="/login.xhtml" />
 	</p:dialog>
 
-
 	<div class="offcanvas offcanvas-end rounded-bottom"
 		style="max-height: 250px; max-width: 250px" id="profileOC">
 		<div class="offcanvas-header">
@@ -64,7 +63,7 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="float-start col mt-4">
-				<p:link outcome="userProfil.xhtml?id=#{loginBean.sessionUserId}">
+				<p:link outcome="#{loginBean.sessionDashBoardURL}">
 					<p>Voir profil</p>
 				</p:link>
 				<h:form>
