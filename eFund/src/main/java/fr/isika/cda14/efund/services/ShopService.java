@@ -55,12 +55,12 @@ public class ShopService {
 	/*Ecrire une methode pour verifier s'il y a un orderLine
 	 *  où l'item existe, si oui, incrmeneter la quantité*/
 
-	public OrderLine createOrderLine(Long id) {
-		Item item=shopRepo.findItem(id);
+	//public OrderLine createOrderLine(Long id) {
+		//Item item=shopRepo.findItem(id);
 		/* si l'id de l'item exist, je ne cree pas d'orderLine sinon ok*/
-		OrderLine orderLine=new OrderLine();
-		orderLine.setItem(item);
-		shopRepo.add(orderLine);
-		return orderLine;
-	}
+		//OrderLine orderLine=new OrderLine();
+		//orderLine.setItem(item);
+		//shopRepo.add(orderLine);
+		//return orderLine;
+	//}
 }
