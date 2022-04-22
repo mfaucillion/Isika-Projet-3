@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
+import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
 import fr.isika.cda14.efund.entity.shop.Shop;
@@ -17,7 +18,7 @@ public class ShopService {
 
 	@Inject
 	private ShopRepository shopRepo;
-	private Integer index=-1;
+	private Integer index = -1;
 
 	public void create(ItemCreationForm itemCreationForm, Long id) {
 		Item newItem = new Item();
@@ -44,23 +45,32 @@ public class ShopService {
 		Item item = shopRepo.findItem(id);
 		shopRepo.removeItem(item);
 	}
-	/*creer un orderline à partir d'un item */
+
+	/* creer un orderline à partir d'un item */
 	public OrderLine createOrderLine(Item item) {
-		OrderLine orderLine=new OrderLine();
+		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		shopRepo.add(orderLine); //je l'ai enlevé pour ne pas persisters
+		shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
 		return orderLine;
 
 	}
-	/*Ecrire une methode pour verifier s'il y a un orderLine
-	 *  où l'item existe, si oui, incrmeneter la quantité*/
+
+	public void createBasketOrder(BasketOrder basketOrder) {
+		shopRepo.create(basketOrder);
+
+	}
+
+	/*
+	 * Ecrire une methode pour verifier s'il y a un orderLine où l'item existe, si
+	 * oui, incrmeneter la quantité
+	 */
 
 	//public OrderLine createOrderLine(Long id) {
-		//Item item=shopRepo.findItem(id);
-		/* si l'id de l'item exist, je ne cree pas d'orderLine sinon ok*/
-		//OrderLine orderLine=new OrderLine();
-		//orderLine.setItem(item);
-		//shopRepo.add(orderLine);
-		//return orderLine;
+	//Item item = shopRepo.findItem(id);
+	/* si l'id de l'item exist, je ne cree pas d'orderLine sinon ok */
+	//	OrderLine orderLine = new OrderLine();
+	//orderLine.setItem(item);
+	//shopRepo.add(orderLine);
+	//return orderLine;
 	//}
 }
