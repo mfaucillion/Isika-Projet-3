@@ -53,3 +53,14 @@
 width: 45%;
 
 }
+
+hr{
+	opacity: 1;
+	background-color: #426CB4;
+	height: 1px !important;
+	border: none;
+}
+
+.img-fluid{
+	border-radius: 5px;
+}

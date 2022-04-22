@@ -28,14 +28,31 @@ public class ProjectPageBean {
 
 	private Long remainingDays;
 
+	private Long donationDuration;
+
 	public void onLoad(String id) {
 		this.project = projectService.findProject(Long.parseLong(id));
 		this.organizationAccount = projectService.getOrgFromProject(Long.parseLong(id));
 		this.remainingDays = calculRemainingDays();
+		this.donationDuration = calculdonationDuration();
 	}
 
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
 		return (currentCollect.intValue() * 100) / target.intValue();
+	}
+
+	public Long calculdonationDuration() {
+		Date endDate = new Date(this.project.getEndDate().getTime());
+		Date startDate = new Date(this.project.getCreationDate().getTime());
+		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
+		ZonedDateTime startDateTime = ZonedDateTime.ofInstant(startDate.toInstant(), ZoneId.of("UTC"));
+
+		return ChronoUnit.DAYS.between(startDateTime, endDateTime);
+	}
+
+	public int countDown(BigDecimal remaining, BigDecimal duration) {
+
+		return ((remaining.intValue() * 100) / duration.intValue());
 	}
 
 	private Long calculRemainingDays() {
@@ -45,16 +62,21 @@ public class ProjectPageBean {
 
 		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
 	}
-	
+
 	public Project getProject() {
 		return project;
 	}
-	
+
 	public OrganizationAccount getOrganizationAccount() {
 		return organizationAccount;
 	}
-	
+
 	public Long getRemainingDays() {
 		return remainingDays;
 	}
+
+	public Long getDonationDuration() {
+		return donationDuration;
+	}
+
 }
