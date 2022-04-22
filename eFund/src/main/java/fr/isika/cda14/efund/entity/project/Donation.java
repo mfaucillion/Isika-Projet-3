@@ -19,11 +19,18 @@ public class Donation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(name = "full_name")
+	private String fullName;
+	
+	@Column(name = "credit_card_number")
+	private String creditCardNumber;
+
 	@Column(scale = 2)
 	private BigDecimal amount;
 
 	@ManyToOne
 	private Project project;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
