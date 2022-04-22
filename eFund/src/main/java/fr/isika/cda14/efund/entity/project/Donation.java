@@ -21,7 +21,7 @@ public class Donation {
 
 	@Column(name = "full_name")
 	private String fullName;
-	
+
 	@Column(name = "credit_card_number")
 	private String creditCardNumber;
 
@@ -30,7 +30,6 @@ public class Donation {
 
 	@ManyToOne
 	private Project project;
-	
 
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")

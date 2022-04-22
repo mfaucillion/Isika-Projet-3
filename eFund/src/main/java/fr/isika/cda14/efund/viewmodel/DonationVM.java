@@ -2,8 +2,6 @@ package fr.isika.cda14.efund.viewmodel;
 
 import java.math.BigDecimal;
 
-import fr.isika.cda14.efund.entity.space.UserSpace;
-
 public class DonationVM {
 
 	private BigDecimal amount;
