@@ -17,8 +17,7 @@ public class OrganizationsListBean {
 
 	private List<OrganizationAccount> organizationsList;
 
-	@PostConstruct
-	private void init() {
+	public void onLoad() {
 		organizationsList=getAllOrganizations();
 	}
 

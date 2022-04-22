@@ -6,33 +6,50 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
+<f:metadata>
+	<f:event listener="#{eventListBean.onLoad()}" type="preRenderView"></f:event>
+</f:metadata>
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
+	<ui:define name="css">
+			<link rel="stylesheet" href="css/genericTabsCards.css" />
+		</ui:define>
 		<ui:define name="content">
-		
-			<h:dataTable value="#{eventListBean.events}" var="event">
-			 
-				<h:column>
-					<f:facet name="header">id</f:facet>
-					#{event.id}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Nom de l'évènement</f:facet>
-					#{event.name}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Lieu de l'évènement</f:facet>
-					#{event.location}
-				</h:column>
-				<h:column>
-					<f:facet name="header">Date</f:facet>
-					#{event.eventStartDate}
-				</h:column>
-					
-			</h:dataTable>
-			
-		</ui:define>	
+			<br/>
+			<h3>Evènements</h3>
+
+			<div class="container p-5">
+				<div class="row">
+					<p:repeat var="event" value="#{eventListBean.events}">
+						<div class="col-12 col-md-3 my-3">
+							<h:link outcome="">
+								<p:card style="margin-right: 30px; height: 100%"
+									styleClass="shadow">
+									<f:facet name="header">
+										<img src="#{event.imagePath}" class="ratio"
+											style="object-fit: cover; height: 20% !important" />
+									</f:facet>
+									<f:facet name="title">
+											#{event.name}
+									</f:facet>
+									<f:facet name="subtitle">
+										#{event.summary}
+									</f:facet>
+									<f:facet name="footer">
+										L'évènement se déroule<br />
+										<h:outputText value="#{event.eventStartDate}">
+											<f:convertDateTime type="date" dateStyle="full" />
+										</h:outputText>
+									</f:facet>
+								</p:card>
+							</h:link>
+						</div>
+					</p:repeat>
+				</div>
+			</div>
+
+		</ui:define>
 	</ui:composition>
 </h:body>
 </html>

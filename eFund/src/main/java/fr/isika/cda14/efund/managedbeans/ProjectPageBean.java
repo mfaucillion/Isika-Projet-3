@@ -38,13 +38,6 @@ public class ProjectPageBean {
 		return organizationAccount;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public Long getRemainingDays() {
-		return remainingDays;
-	}
 
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
 		return (currentCollect.intValue() * 100) / target.intValue();
@@ -56,5 +49,13 @@ public class ProjectPageBean {
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
 
 		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
+	}
+	
+	public Project getProject() {
+		return project;
+	}
+	
+	public Long getRemainingDays() {
+		return remainingDays;
 	}
 }

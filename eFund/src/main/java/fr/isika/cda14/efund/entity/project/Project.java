@@ -3,6 +3,7 @@ package fr.isika.cda14.efund.entity.project;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,10 +23,9 @@ public class Project extends GenericProject {
 	@Column(name = "current_amount", scale = 2)
 	private BigDecimal currentAmount;
 
-	@OneToMany
-	@JoinColumn(name = "project_id")
+	@OneToMany(mappedBy = "project")
 	private List<Donation> donations;
-
+	
 	@OneToMany
 	@JoinColumn(name = "project_id")
 	protected List<CounterPart> counterParts;
@@ -84,5 +84,14 @@ public class Project extends GenericProject {
 
 	public void setOrganizationSpace(OrganizationSpace organizationSpace) {
 		this.organizationSpace = organizationSpace;
+	}
+
+	public List<Favorite> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(List<Favorite> favorites) {
+		this.favorites = favorites;
 	}	
+	
 }

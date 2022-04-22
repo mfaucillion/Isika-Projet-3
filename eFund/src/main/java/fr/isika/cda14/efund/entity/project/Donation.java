@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Entity
 public class Donation {
@@ -17,5 +21,40 @@ public class Donation {
 
 	@Column(scale = 2)
 	private BigDecimal amount;
+
+	@ManyToOne
+	private Project project;
+
+	@ManyToOne
+	@JoinColumn(name = "user_space_id")
+	private UserSpace userSpace;
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+
+	public UserSpace getUserSpace() {
+		return userSpace;
+	}
+
+	public void setUserSpace(UserSpace userSpace) {
+		this.userSpace = userSpace;
+	}
+
+	public Long getId() {
+		return id;
+	}
 
 }

@@ -33,15 +33,17 @@
 	border: 2px solid;
 }
 
-#userProfilBody body .ui-card {
-
-}
-
 #userProfilBody .ui-tabs-nav:before {
 	border: 0px !important;
 }
 
 #userProfilBody {
 	background-color: #ededed;
+}
+
+td img {
+	object-fit: cover;
+	object-position: center;
+	max-height: 120px;
 }
 

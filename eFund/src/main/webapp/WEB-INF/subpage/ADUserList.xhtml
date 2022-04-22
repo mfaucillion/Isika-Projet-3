@@ -12,14 +12,16 @@
 	<div class="card">
 		<h:form id="userForm" styleClass="shadow">
 
-			<p:growl id="messagesUser" showDetail="true"/>
+			<p:growl id="messagesUser" showDetail="true" />
 			<p:dataTable var="user" value="#{adminDashboardBean.users}"
-				id="dt-users" reflow="true" editable="true" editMode="cell" editInitEvent="dblclick"
-				rowKey="#{user.id}" paginator="true" rows="7"
-				paginatorPosition="bottom" widgetVar="dtUsers">
-				
+				id="dt-users" reflow="true" editable="true" editMode="cell"
+				editInitEvent="dblclick" rowKey="#{user.id}" paginator="true"
+				rows="7" paginatorPosition="bottom" widgetVar="dtUsers">
+
 				<f:attribute name="userAttr" value="#{user}" />
-				<p:ajax event="cellEdit" listener="#{adminDashboardBean.onUserCellEdit}" update="j_idt17:userForm:messagesUser"/>
+				<p:ajax event="cellEdit"
+					listener="#{adminDashboardBean.onUserCellEdit}"
+					update="@form:messagesUser" />
 
 				<p:column headerText="Id">
 					<h:outputText value="#{user.id}" />
@@ -39,36 +41,46 @@
 				</p:column>
 
 				<p:column headerText="Status">
-                <p:cellEditor>
-                    <f:facet name="output">
-                        <h:outputText value="#{user.accountStatus}"/>
-                    </f:facet>
-                    <f:facet name="input">
-                        <h:selectOneMenu value="#{user.accountStatus}" style="width:100%">
-                            <f:selectItems value="#{adminDashboardBean.accountStatus}" var="status"
-                                           itemLabel="#{status.name()}" itemValue="#{status}"/>
-                        </h:selectOneMenu>
-                    </f:facet>
-                </p:cellEditor>
-            </p:column>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{user.accountStatus}" />
+						</f:facet>
+						<f:facet name="input">
+							<h:selectOneMenu value="#{user.accountStatus}" style="width:100%">
+								<f:selectItems value="#{adminDashboardBean.accountStatus}"
+									var="status" itemLabel="#{status.name()}" itemValue="#{status}" />
+							</h:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
 
 
 				<p:column exportable="false">
-					<p:commandButton class="ui-button-warning rounded-button"
-						icon="pi pi-envelope" action="#"/>
-						
-					<p:commandButton class="ui-button-danger rounded-button"
-						icon="pi pi-trash" process="@this"
-						oncomplete="PF('deleteUserDialog').show()">
-						<f:setPropertyActionListener value="#{user}"
-							target="#{adminDashboardBean.selectedUser}" />
-					</p:commandButton>
+					<div class="row">
+						<div class="col-12 col-sm">
+							<p:commandButton class="ui-button-warning rounded-button"
+								icon="pi pi-envelope" oncomplete="PF('sendMailDialog').show()"
+								process="@this">
+								<f:setPropertyActionListener value="#{user}"
+									target="#{adminDashboardBean.selectedUser}" />
+							</p:commandButton>
+						</div>
+						<div class="col-12 col-sm">
+							<p:commandButton class="ui-button-danger rounded-button"
+								icon="pi pi-trash" process="@this"
+								oncomplete="PF('deleteUserDialog').show()">
+								<f:setPropertyActionListener value="#{user}"
+									target="#{adminDashboardBean.selectedUser}" />
+							</p:commandButton>
+						</div>
+					</div>
 				</p:column>
 			</p:dataTable>
-			
+
 			<p:confirmDialog widgetVar="deleteUserDialog" showEffect="fade"
 				width="300" message="Supprimer le compte Utilisateur ?"
-				header="Confirm" severity="warn">
+				header="Confirmer" severity="warn">
+				<h:outputText value="#{adminDashboardBean.selectedUser}" />
 				<p:commandButton value="Yes" icon="pi pi-check"
 					actionListener="#{adminDashboardBean.deleteUser}" process="@this"
 					oncomplete="PF('deleteUserDialog').hide()" />
@@ -84,7 +96,51 @@
 					styleClass="ui-confirmdialog-no ui-button-secondary"
 					icon="pi pi-times" />
 			</p:confirmDialog>
+
+
 		</h:form>
+
+		<h:form id="mailFormDialog">
+			<p:dialog header="Envoyer un mail" showEffect="fade" modal="true"
+				widgetVar="sendMailDialog" responsive="true" dynamic="true">
+				<div class="container shadow p-5 mt-5">
+					<h5 class="text-primary">
+						à :
+						<h:outputText value="#{adminDashboardBean.selectedUser.email}" />
+					</h5>
+					<hr class="bg-primary" />
+					<h:inputHidden value="#{adminDashboardBean.mailForm.toMail}" />
+
+					<div class="ui-fluid row d-grid">
+
+						<div class="ui-inputgroup ">
+							<div class="ui-inputgroup-addon">
+								<i class="fa-solid fa-heading"></i>
+							</div>
+							<p:inputText placeholder="Sujet"
+								value="#{adminDashboardBean.mailForm.subject}"
+								id="LoginEmailInput" />
+						</div>
+					</div>
+
+					<div class="ui-fluid row mt-3 d-grid">
+						<div class="col-12">
+							<p:outputLabel for="message" value="Message : " />
+							<p:inputTextarea placeholder="Ecrivez votre message..."
+								value="#{adminDashboardBean.mailForm.message}" id="message" />
+						</div>
+					</div>
+
+					<div class="mt-3 d-grid">
+						<p:commandButton
+							styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+							actionListener="#{adminDashboardBean.sendingMail}" value="Envoyer" oncomplete="PF('sendMailDialog').hide()"/>
+					</div>
+
+				</div>
+			</p:dialog>
+		</h:form>
+
 	</div>
 </h:body>
 

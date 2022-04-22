@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
+import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.AccountRepository;
@@ -51,6 +52,10 @@ public class ProjectService {
 
 	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
+	}
+	
+	public List<Project> searchProjectFromPage(String searchProject) {
+		return projectRepo.searchProjectFromPage(searchProject);
 	}
 
 	public OrganizationAccount getOrgFromProject(Long id) {

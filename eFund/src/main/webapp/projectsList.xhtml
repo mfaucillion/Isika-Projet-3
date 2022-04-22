@@ -7,7 +7,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:event listener="#{projectsListBean.onLoad()}"
+	<f:viewParam name="searchId" />
+	<f:event listener="#{projectsListBean.onLoad(searchId)}"
 		type="preRenderView"></f:event>
 </f:metadata>
 
@@ -15,45 +16,64 @@
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<ui:define name="css">
-			<link rel="stylesheet" href="css/ongTabView-.css" />
+			<link rel="stylesheet" href="css/genericTabsCards.css" />
 
 		</ui:define>
 		<ui:define name="content">
 
-			<div class="container-fluid p-5">
+			<div class="container p-5">
 				<div class="row">
-					<p:repeat var="project" value="#{projectsListBean.projectList}">
-						<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
-							<h:link
-								outcome="pageProject.xhtml?id=#{project.id}faces-redirect=true">
-								<p:card styleClass="shadow">
-									<f:facet name="header">
-										<img src="#{project.imagePath}" class="ratio"
-											style="object-fit: cover;" />
-									</f:facet>
-									<f:facet name="title">
+					<h:form>
+						<!-- <h:outputLabel for="txt1" value="searchOnPageProject"/> -->
+						<i class="fa-solid fa-magnifying-glass"></i>
+						<p:inputText id="txt1" value="#{projectsListBean.searchRequest}"
+							required="true" label="Text 1" style="width: 12rem">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="txt1" />
+						<!--  <h:outputText value="#{searchView.text1}"/> -->
+						<h:commandButton action="#{projectsListBean.search()}"
+							value="Rechercher" />
+					</h:form>
+					<div class="row">
+						<p:repeat var="project" value="#{projectsListBean.projectList}">
+							<div class="col-12 col-md-3 my-3">
+								<h:link
+									outcome="pageProject.xhtml?id=#{project.id}faces-redirect=true">
+									<p:card style="margin-right: 30px; height: 100%"
+										styleClass="shadow">
+										<f:facet name="header">
+											<img src="#{project.imagePath}" class="ratio"
+												style="object-fit: cover; height: 20% !important" />
+										</f:facet>
+										<f:facet name="title">
 											#{project.name}
-									</f:facet>
-									<f:facet name="subtitle">
+										</f:facet>
+										<f:facet name="subtitle">
 											#{project.summary}
-									<div>#{project.endDate}</div>
+										</f:facet>
+										<f:facet name="footer">
+											<div class="progress">
+												<div
+													class="progress-bar progress-bar-striped progress-bar-animated"
+													style="width:#{projectsListBean.percentage(project.currentAmount, project.targetAmount)}%">
+													#{projectsListBean.percentage(project.currentAmount,
+													project.targetAmount)}%</div>
+											</div>
+											<div class="row">
 
-									</f:facet>
-									<f:facet name="footer">
-										<div>#{project.currentAmount.intValue()} € récoltés sur
-											#{project.targetAmount.intValue()}</div>
-										<div class="progress">
-											<div
-												class="progress-bar progress-bar-striped progress-bar-animated"
-												style="width:#{projectsListBean.percentage(project.currentAmount, project.targetAmount)}%">
-												#{projectsListBean.percentage(project.currentAmount,
-												project.targetAmount)}%</div>
-										</div>
-									</f:facet>
-								</p:card>
-							</h:link>
-						</div>
-					</p:repeat>
+												<div class="col-12 col-md-8">
+													#{project.currentAmount.intValue()} € sur
+													#{project.targetAmount.intValue()}</div>
+												<div class="col-12 col-md-4">J -
+													#{projectsListBean.calculRemainingDays(project.endDate)}</div>
+											</div>
+										</f:facet>
+									</p:card>
+								</h:link>
+							</div>
+						</p:repeat>
+					</div>
 				</div>
 			</div>
 		</ui:define>
