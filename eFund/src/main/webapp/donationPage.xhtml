@@ -17,20 +17,20 @@
 
 
 
-		<ui:composition template="/WEB-INF/template/layout.xhtml">
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
 			<div class="container shadow p-5 mt-5">
 				<h1>Donations</h1>
 				<hr class="bg-primary" />
-				<h:form id="createOrgForm">
-				
-				<div class="ui-fluid row">
+
+				<h:form id="createDon">
+					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
 							<p:steps activeIndex="0" styleClass="Custom">
 								<p:menuitem value="Dons" />
-							<!--<p:menuitem value="Enregistrement des informations" /> -->
+								<!--<p:menuitem value="Enregistrement des informations" /> -->
 							</p:steps>
 						</div>
 					</div>
@@ -43,29 +43,14 @@
 						<div class="col-12 col-md-6 mt-3">
 							<div class="ui-inputgroup ">
 								<div class="ui-inputgroup-addon">
-									<i class="fa-solid fa-at"></i>
+									<i class="fa-solid fa-euro-sign"></i>
 								</div>
-								<p:inputText placeholder="Email"
-									value="#{createOrganizationAccountBean.organization.email}"
-									id="OrgEmailInput" />
+								<p:inputText placeholder="Montant"
+									value="#{donationBean.donationVM.amount}"
+									id="AmountDonation" />
 							</div>
 						</div>
 
-					</div>
-
-					<div class="ui-fluid row">
-
-						<div class="col-12 col-md-3 mt-3"></div>
-						<div class="col-12 col-md-6 mt-3">
-							<div class="ui-inputgroup ">
-								<div class="ui-inputgroup-addon">
-									<i class="fa-solid fa-key"></i>
-								</div>
-								<p:inputText placeholder="Mot de passe" type="password"
-									value="#{createOrganizationAccountBean.organization.password}"
-									id="OrgPasswordInput" />
-							</div>
-						</div>
 					</div>
 
 					<div class="ui-fluid row">
@@ -77,9 +62,9 @@
 									<i class="fa-solid fa-user"></i>
 								</div>
 								<p:inputText placeholder="Nom"
-									value="#{createOrganizationAccountBean.organization.displayedName}"
-									id="OrgDisplayedNameInput" />
-									
+									value="#"
+									id="NameInput" />
+
 							</div>
 						</div>
 					</div>
@@ -89,13 +74,12 @@
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-								action="#"
-								value="Annuler" />
+								action="#" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-								action="#{createOrganizationAccountBean.create()}"
+								action="#{donationBean.createDonation(id)}"
 								value="Valider" />
 						</div>
 					</div>
