@@ -87,9 +87,6 @@ public class OrganizationSpaceBean {
 		return shopService.createOrderLine(item);
 		
 	}
-	public OrderLine createOrderLine(Long id) {
-		return shopService.createOrderLine(id);
-	}
 	
 	public void deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
