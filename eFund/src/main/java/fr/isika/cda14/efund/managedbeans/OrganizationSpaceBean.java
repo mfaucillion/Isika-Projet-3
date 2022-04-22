@@ -78,10 +78,6 @@ public class OrganizationSpaceBean {
 		}
 	}
 
-	
-	
-	
-	
 	public OrderLine createOrderLine(Item item) {
 		
 		return shopService.createOrderLine(item);
@@ -120,6 +116,7 @@ public class OrganizationSpaceBean {
 		return items;
 	}
 	
+	/* Ugly Code, Je devais le faire pour être certain que la méthode s'appelait avant le PreRenderer (c:ForEach est exécuté avant)*/
 	public List<ContentTab> getTabs() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		onLoad(request.getParameter("id"));

@@ -17,6 +17,7 @@ public class SessionTool {
 		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_ID, account.getId());
 		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_NAME, account.getDisplayedName());
 		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_ROLE, account.getRole().toString());
+		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_IMAGE, account.getImagePath());
 	}
 
 	public static void readFromSession() {
@@ -27,11 +28,18 @@ public class SessionTool {
 		Long id = (Long) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_ID);
 		String userName = (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_NAME);
 		String role = (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_ROLE);
+		String imgPath = (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_IMAGE);
 		if (id != null) {
 			System.out.println("Utilisateur connecté : " + id + " - " + userName + " - " + role);
 		} else {
 			System.out.println("PAs d'id dans la session");
 		}
+	}
+	
+	public static void resetSessionAttributes() {
+		// Si on veut accèder à la session http
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.invalidate();
 	}
 	
 	public static Long getUserId() {
@@ -48,9 +56,17 @@ public class SessionTool {
 		return (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_ROLE);
 	}
 
-	public static void resetSessionAttributes() {
-		// Si on veut accèder à la session http
+	public static String getUserName() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		session.invalidate();
+
+		return (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_NAME);
+		
+	}
+	
+	public static String getImagePath() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+
+		return (String) session.getAttribute(SessionAttributesUtils.CONNECTED_USER_IMAGE);
+		
 	}
 }

@@ -9,11 +9,10 @@
 	xmlns:o="http://java.sun.com/jsf/html">
 
 <f:metadata>
-	<f:viewParam name="id"  />
+	<f:viewParam name="id"/>
 	<f:viewParam name="itemId"/>
 	<f:event listener="#{organizationSpaceBean.onLoad(id)}" type="preRenderView"></f:event>
 	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView"/>
-
 </f:metadata>
 
 <h:body>
@@ -21,7 +20,7 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<ui:define name="css">
 			<link rel="stylesheet"
-				href="css/genericTabsCards.css" />
+				href="css/ongTabView-#{organizationSpaceBean.bgcolor}.css"/>
 		</ui:define>
 		<ui:define name="content">
 
@@ -99,7 +98,7 @@
 															icon="pi pi-exclamation-triangle" />
 													</p:commandButton>
 													<p:linkButton icon="pi pi-check" value="Ajouter" outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
-														action="#{shopBean.addOrderLineToCart(item.id)}" />
+														action="#{shopBean.createOrderLine(item.id)}" />
 
 
 												</div>

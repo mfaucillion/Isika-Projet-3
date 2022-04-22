@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.Account;
+import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.tool.SessionTool;
 
@@ -25,20 +26,12 @@ public class LoginBean {
 	private String email;
 	private String password;
 
-	private String returnUrl;
-
-	public void onLoad() {
-		this.returnUrl = FacesContext.getCurrentInstance().getExternalContext().getRequestHeaderMap().get("referer");
-	}
-
-	public String login() throws IOException{		
+	public void login() throws IOException{		
 		Optional<Account> optional = accountService.findByEmail(email);
 		if (optional.isPresent()) {
 			Account account = optional.get();
 			if (account.getEmail().equals(email) && account.getPassword().equals(password)) {
-				
 				SessionTool.writeInSession(account);
-				FacesContext.getCurrentInstance().getExternalContext().redirect(returnUrl);				
 			} else {
 				UIComponent formulaire = FacesContext.getCurrentInstance().getViewRoot().findComponent("loginForm");
 				FacesContext.getCurrentInstance().addMessage(formulaire.getClientId(),
@@ -49,9 +42,44 @@ public class LoginBean {
 			FacesContext.getCurrentInstance().addMessage(formulaire.getClientId(),
 					new FacesMessage("Utilisateur non reconnu"));
 		}
-
-		return "login";
-
+	}
+	
+	public Boolean isUser() {
+		if (SessionTool.getRole().equals(Role.USER.toString())) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
+	public Boolean isLogged() {
+		if (SessionTool.getUserId() != null) {
+			return true;
+		} else {
+			return false;
+		}		
+	}
+	
+	public String getSessionUserName() {
+		return SessionTool.getUserName();
+	}
+	
+	public Long getSessionUserId() {
+		return SessionTool.getUserId();
+	}
+	
+	public String getSessionUserImagePath() {
+		return SessionTool.getImagePath();
+	}
+	
+	public void disconnectSession() {
+		SessionTool.resetSessionAttributes();
+		try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(SERVER_HOME_URL);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void readFromSession() {

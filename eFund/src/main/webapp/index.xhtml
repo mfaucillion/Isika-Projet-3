@@ -30,7 +30,7 @@
 					<div class="col-12 col-md-4 mt-3">
 						<h:link outcome="createOrg.xhtml">Création d'organization (Base)</h:link>
 						<br />
-						<h:link outcome="login.xhtml">Se connecter</h:link>
+						<h:link outcome="loginNoDialog.xhtml">Se connecter</h:link>
 						<br />
 						<h:link outcome="createUser.xhtml">Création d'utilisateur</h:link>
 					</div>
@@ -188,8 +188,8 @@
 
 
 			<h:form>
-				<h:commandButton action="#{loginBean.readFromSession()}"
-					value="Afficher en console" />
+				<h:commandButton action="#{loginBean.disconnectSession()}"
+					value="Déconnecter" />
 			</h:form>
 		</ui:define>
 	</ui:composition>
