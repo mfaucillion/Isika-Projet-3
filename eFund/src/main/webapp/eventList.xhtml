@@ -23,7 +23,7 @@
 				<div class="row">
 					<p:repeat var="event" value="#{eventListBean.events}">
 						<div class="col-12 col-md-3 my-3">
-							<h:link outcome="">
+							<h:link outcome="eventPage.xhtml?id=#{event.id}faces-redirect=true">
 								<p:card style="margin-right: 30px; height: 100%"
 									styleClass="shadow">
 									<f:facet name="header">

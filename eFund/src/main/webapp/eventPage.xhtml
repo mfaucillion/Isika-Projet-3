@@ -31,13 +31,30 @@
 					<div class="col-12 col-md-8">
 						<div class="container shadow">
 							<div class="row">
-								<div class="col-12 col-md-12">
+								<div class="col-12 col-md-12 my-2">
 									<h1>#{eventPageBean.event.name}</h1>
 								</div>
 							</div>
 
-							<img class="im-fluid w-100 mb-3"
-								src="#{eventPageBean.event.imagePath}" /> <br />
+							<div class="row">
+								<div class="col-12 col-md-6">
+									<img class="img-fluid w-100 mb-4"
+										src="#{eventPageBean.event.imagePath}" />
+								</div>
+								<div class="col-12 col-md-6 my-auto pb-4">
+									<h5>Description: bla bla blabla bla blabla bla blabla bla
+										blabla bla blabla bla blabla bla blabla bla blabla bla blabla
+										bla blabla bla blabla bla bla bla bla bla bla bla bla bla bla
+										bla bla bla bla bla bla bla bla bla bla bla bla bla</h5>
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la Description" action="#" />
+								</div>
+
+
+							</div>
+
+
 						</div>
 						<br />
 
@@ -76,9 +93,9 @@
 						</div>
 					</div>
 					<div class="col-12 col-md-4">
-						<div class="row">
+						<div class="row mb-5">
 							<div class="col-12 col-md-5">
-								<img class="im-fluid w-100"
+								<img class="img-fluid w-100"
 									src="#{eventPageBean.organizationAccount.imagePath}" alt="" />
 							</div>
 							<div class="col-12 col-md-7 my-auto">
@@ -87,24 +104,25 @@
 							</div>
 						</div>
 
+						<hr />
+
 						<div class="row">
 							<div class="col-12 col-md-1" />
 							<div class="col-12 col-md-10">
 								<br />
 
-								<div class="row justify-content-center mt-3 mb-5">
+								<div class="row justify-content-center mt-5 mb-5">
 
 									<div class="knob-container ui-corner-all">
-										<p:knob 
-										foregroundColor="#426CB4"
-										backgroundColor="#4f4f4f"
-										disabled="true"
-										labelTemplate="#{eventPageBean.remainingDays}"
-										value="#{eventPageBean.countDown(eventPageBean.remainingDays,eventPageBean.registerDuration)}" />
+										<p:knob foregroundColor="#426CB4" backgroundColor="#4f4f4f"
+											disabled="true"
+											labelTemplate="#{eventPageBean.remainingDays}"
+											value="#{eventPageBean.countDown(eventPageBean.remainingDays,eventPageBean.registerDuration)}" />
 									</div>
 								</div>
 								<div class="row justify-content-center mb-5">Il vous reste
-									#{eventPageBean.remainingDays} jours pour vous inscrire !</div>
+									#{eventPageBean.remainingDays} jours (sur
+									#{eventPageBean.registerDuration}) pour vous inscrire !</div>
 
 								<br />
 
