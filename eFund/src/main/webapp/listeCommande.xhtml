@@ -5,18 +5,23 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
+	<f:metadata>
+	
+	<f:viewParam name="itemId"/>
 
+	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView"/>
+
+</f:metadata>
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<ui:define name="css">
 			<link rel="stylesheet" href="css/listeCommandePage.css" />
-
 		</ui:define>
 		<ui:define name="content">
 
 			<div class="card">
-				<p:dataTable var="orderLine" value="#{shopBean.cart}">
+				<p:dataTable id="cart" var="orderLine" value="#{shopBean.cart}">
 					<p:column headerText="ID du produit">
 						<p:outputLabel value="#{orderLine.item.id}" />
 					</p:column>
@@ -41,9 +46,8 @@
 
 				</p:dataTable>
 				<h:form>
-					<p:commandLink type="button" action="#{shopBean.sumOfmyCart()}">
-
-						<h:outputText  value="Payer" />
+					<p:commandLink type="button" action="#{shopBean.payMyCart(shopBean.cart)}">
+						<h:outputText  value="#{shopBean.sumOfmyCart(shopBean.cart)}" />
 					</p:commandLink>
 				</h:form>
 			</div>
