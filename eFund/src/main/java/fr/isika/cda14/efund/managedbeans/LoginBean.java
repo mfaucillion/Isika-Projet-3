@@ -7,8 +7,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.enums.Role;
@@ -18,7 +20,7 @@ import fr.isika.cda14.efund.tool.SessionTool;
 @ManagedBean
 @ViewScoped
 public class LoginBean {
-	private static final String SERVER_HOME_URL = "http://127.0.0.1:8080/eFund/";
+	private static final String SERVER_HOME_URL = "http://127.0.0.1:8080/eFund/index.xhtml";
 
 	@Inject
 	private AccountService accountService;
@@ -32,6 +34,7 @@ public class LoginBean {
 			Account account = optional.get();
 			if (account.getEmail().equals(email) && account.getPassword().equals(password)) {
 				SessionTool.writeInSession(account);
+				
 			} else {
 				UIComponent formulaire = FacesContext.getCurrentInstance().getViewRoot().findComponent("loginForm");
 				FacesContext.getCurrentInstance().addMessage(formulaire.getClientId(),
@@ -42,6 +45,17 @@ public class LoginBean {
 			FacesContext.getCurrentInstance().addMessage(formulaire.getClientId(),
 					new FacesMessage("Utilisateur non reconnu"));
 		}
+		refreshWithQuery();
+	}
+	
+	private void refreshWithQuery() {
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		String url = request.getRequestURL().toString();
+		System.out.println("URL-" + url);
+		String uri = request.getRequestURI();
+		System.out.println("URI-" + uri);
+		//ec.redirect(redirectURL);
 	}
 	
 	public Boolean isUser() {
@@ -73,7 +87,11 @@ public class LoginBean {
 	}
 	
 	public String getSessionDashBoardURL() {
-		return SessionTool.getDashBoardURL();
+		String redirectURL = SessionTool.getDashBoardURL();
+		if (redirectURL == null) {
+			redirectURL = "index.xhtml?";
+		}
+		return redirectURL;
 	}
 	
 	public void disconnectSession() {
@@ -81,7 +99,6 @@ public class LoginBean {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(SERVER_HOME_URL);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -37,7 +37,7 @@
 						</a>
 					</c:if>
 					<a class="navbar-brand" data-bs-toggle="offcanvas" data-bs-target="#profileOC">
-						<img src="#{loginBean.sessionUserImagePath}"
+						<img src="#{request.contextPath}#{loginBean.sessionUserImagePath}"
 						alt="Avatar Logo" style="width: 40px;" class="rounded-pill" />
 					</a>
 				</c:if>
@@ -63,7 +63,7 @@
 		</div>
 		<div class="offcanvas-body">
 			<div class="float-start col mt-4">
-				<p:link outcome="#{loginBean.sessionDashBoardURL}">
+				<p:link outcome="#{loginBean.sessionDashBoardURL}&amp;faces-redirect=true">
 					<p>Voir profil</p>
 				</p:link>
 				<h:form>
@@ -74,7 +74,7 @@
 			</div>
 			<div class="col">
 				<img class="rounded-circle float-end"
-					style="width: 80px; height: 80px" src="#{loginBean.sessionUserImagePath}" />
+					style="width: 80px; height: 80px" src="#{request.contextPath}#{loginBean.sessionUserImagePath}" />
 			</div>
 		</div>
 	</div>

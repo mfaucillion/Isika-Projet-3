@@ -70,7 +70,7 @@
 											<div class="clearfix">
 												#{item.label} #{item.id}
 												<div class="float-end">
-													<h:form rendered="#{organizationSpaceBean.isOwner}">
+													<h:form id="delItem" rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteItem(item.id)}"
@@ -135,7 +135,7 @@
 												#{project.name}
 												<div class="float-end">
 													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-													<h:form rendered="#{organizationSpaceBean.isOwner}">
+													<h:form id="delProject" rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteProject(project.id)}"
@@ -189,7 +189,7 @@
 										<f:facet name="title">
 											#{event.name}
 											<div class="float-end">
-												<h:form rendered="#{organizationSpaceBean.isOwner}">
+												<h:form id="delEvent" rendered="#{organizationSpaceBean.isOwner}">
 													<h:inputHidden name="id" value="#{id}" />
 													<!-- ONLY IF EVENT.STATUS == DRAFT -->
 													<h:commandLink
@@ -245,7 +245,7 @@
 											#{project.name}
 											<div class="float-end">
 												<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-												<h:form rendered="#{organizationSpaceBean.isOwner}">
+												<h:form id="delProjectCarou" rendered="#{organizationSpaceBean.isOwner}">
 													<h:inputHidden name="id" value="#{id}" />
 													<h:commandLink
 														action="#{organizationSpaceBean.deleteProject(project.id)}"

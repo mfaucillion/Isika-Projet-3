@@ -11,6 +11,7 @@ public class SessionTool {
 	public static void writeInSession(Account account) {
 
 		String dashBoardURL = generateDashBoardURL(account.getRole(), account.getId());
+		System.out.println(dashBoardURL);
 
 		// Si on veut accèder à la session http
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -29,7 +30,7 @@ public class SessionTool {
 		if (role == Role.ADMIN) {
 			return "adminDashboard?id=" + id;
 		} else if (role == Role.ASSOC) {
-			return "pageOng?id" + id;
+			return "pageOng?id=" + id;
 		} else {
 			return "userProfil?id=" + id;
 		}
