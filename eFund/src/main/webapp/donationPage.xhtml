@@ -46,8 +46,7 @@
 									<i class="fa-solid fa-euro-sign"></i>
 								</div>
 								<p:inputText placeholder="Montant"
-									value="#{donationBean.donationVM.amount}"
-									id="AmountDonation" />
+									value="#{donationBean.donationVM.amount}" id="AmountDonation" />
 							</div>
 						</div>
 
@@ -61,14 +60,15 @@
 								<div class="ui-inputgroup-addon">
 									<i class="fa-solid fa-user"></i>
 								</div>
-								<p:inputText placeholder="Nom"
-									value="#"
-									id="NameInput" />
+								<p:inputText placeholder="Nom" value="#" id="NameInput" />
 
 							</div>
 						</div>
 					</div>
-
+					<div>
+					<h3>Ici, c'est caché</h3>
+						<!-- <h:inputHidden value="#{donationBean.donationVM.userSpace}" id="idPourClass" class="userId-class"></h:inputHidden> -->
+					</div>
 					<div class="row">
 						<div class="col-12 col-md-3 mt-3"></div>
 						<div class="col-12 col-md-3 mt-4 d-grid">
@@ -79,8 +79,7 @@
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-								action="#{donationBean.createDonation(id)}"
-								value="Valider" />
+								action="#{donationBean.createDonation(id)}" value="Valider" />
 						</div>
 					</div>
 

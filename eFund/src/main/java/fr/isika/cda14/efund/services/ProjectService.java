@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Favorite;
@@ -16,6 +17,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.DonationRepository;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
+import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -67,6 +69,13 @@ public class ProjectService {
 	public void createDonation(DonationVM donationVM, Long id) {
 		Donation newDon = new Donation();
 		newDon.setAmount(donationVM.getAmount());
+		
+		//UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
+		UserAccount userAccount = accountRepo.findUser(1000L);
+		newDon.setUserSpace(userAccount.getUserSpace());
+		
+		Project project = projectRepo.findProject(id);
+		newDon.setProject(project);
 
 		donationRepo.createDonationRepo(newDon);
 		

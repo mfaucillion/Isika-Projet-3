@@ -8,10 +8,10 @@ import fr.isika.cda14.efund.entity.project.Donation;
 
 @Stateless
 public class DonationRepository {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	public void createDonationRepo(Donation donation) {
 		em.persist(donation);
 	}
