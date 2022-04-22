@@ -76,6 +76,7 @@ public class ProjectService {
 		
 		Project project = projectRepo.findProject(id);
 		newDon.setProject(project);
+		project.setCurrentAmount(project.getCurrentAmount().add(newDon.getAmount()));
 
 		donationRepo.createDonationRepo(newDon);
 		

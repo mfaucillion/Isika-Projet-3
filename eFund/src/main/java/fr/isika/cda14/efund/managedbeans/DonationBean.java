@@ -20,7 +20,7 @@ public class DonationBean {
 	public String createDonation(String id) {
 		System.out.println("Id passé : " + id);
 		projectService.createDonation(donationVM, Long.parseLong(id));
-		return "pageProject.xhtml";
+		return "pageProject.xhtml?id="+ id + "faces-redirect=true";
 	}
 	
 	public DonationVM getDonationVM() {
