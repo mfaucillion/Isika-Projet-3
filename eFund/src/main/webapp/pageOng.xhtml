@@ -9,18 +9,18 @@
 	xmlns:o="http://java.sun.com/jsf/html">
 
 <f:metadata>
-	<f:viewParam name="id"/>
-	<f:viewParam name="itemId"/>
-	<f:event listener="#{organizationSpaceBean.onLoad(id)}" type="preRenderView"></f:event>
-	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView"/>
+	<f:viewParam name="id" />
+	<f:viewParam name="itemId" />
+	<f:event listener="#{organizationSpaceBean.onLoad(id)}"
+		type="preRenderView"></f:event>
+	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView" />
 </f:metadata>
 
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<ui:define name="css">
-			<link rel="stylesheet"
-				href="css/ongTabView-#{organizationSpaceBean.bgcolor}.css"/>
+			<link rel="stylesheet" href="css/genericTabsCards.css" />
 		</ui:define>
 		<ui:define name="content">
 
@@ -44,6 +44,33 @@
 				</div>
 
 				<p:tabView styleClass="rounded">
+
+					<p:tab title="Contenu">
+						<p:button outcome="createBlockTxt?tabId=#{tab.id}"
+							value="Ajouter un bloc de text" />
+						<p:button outcome="createBlockImg?tabId=#{tab.id}"
+							value="Ajouter une image" />
+						<p:button outcome="createBlockVideo?tabId=#{tab.id}"
+							value="Ajouter une video" />
+						<div class="container mx-auto text-center">
+							<h2 class="text-center">#{tab.name}</h2>
+							<hr style="border: 2px" />
+							<p:repeat var="block" value="#{organizationSpaceBean.blocks}">
+									<p:outputLabel rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}" style="font-size: 25px !important">#{block.content}</p:outputLabel>
+									<p:graphicImage rendered="#{organizationSpaceBean.isOfType(block.type, 'img')}" class="img-fluid rounded img-thumbnail shadow" style="max-width: 60% !important" value="#{block.content}" />
+									<p:video rendered="#{organizationSpaceBean.isOfType(block.type, 'vid')}" value="#{block.content}" player="mp4" controls="true"
+										width="600" onplay="console.log('MP4 Started Playing')"
+										onpause="console.log('MP4 Stopped Playing')">
+												Your browser does not support the video element. See: 
+												<h:outputLink
+											value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+									</p:video>
+								<hr style="border: 2px" />
+							</p:repeat>
+						</div>
+					</p:tab>
+
+
 					<!-- Onglet Boutique -->
 					<p:tab>
 						<f:facet name="title">
@@ -70,7 +97,8 @@
 											<div class="clearfix">
 												#{item.label} #{item.id}
 												<div class="float-end">
-													<h:form id="delItem" rendered="#{organizationSpaceBean.isOwner}">
+													<h:form id="delItem"
+														rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteItem(item.id)}"
@@ -97,7 +125,8 @@
 															message="Voulez vous supprimer ce produit ?"
 															icon="pi pi-exclamation-triangle" />
 													</p:commandButton>
-													<p:linkButton icon="pi pi-check" value="Ajouter" outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
+													<p:linkButton icon="pi pi-check" value="Ajouter"
+														outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
 														action="#{shopBean.createOrderLine(item.id)}" />
 
 
@@ -135,7 +164,8 @@
 												#{project.name}
 												<div class="float-end">
 													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-													<h:form id="delProject" rendered="#{organizationSpaceBean.isOwner}">
+													<h:form id="delProject"
+														rendered="#{organizationSpaceBean.isOwner}">
 														<h:inputHidden name="id" value="#{id}" />
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteProject(project.id)}"
@@ -189,7 +219,8 @@
 										<f:facet name="title">
 											#{event.name}
 											<div class="float-end">
-												<h:form id="delEvent" rendered="#{organizationSpaceBean.isOwner}">
+												<h:form id="delEvent"
+													rendered="#{organizationSpaceBean.isOwner}">
 													<h:inputHidden name="id" value="#{id}" />
 													<!-- ONLY IF EVENT.STATUS == DRAFT -->
 													<h:commandLink
@@ -216,103 +247,6 @@
 							</p:repeat>
 						</div>
 					</p:tab>
-
-					<p:tab title="ContentFlow">
-						<div class="card">
-							<p:contentFlow value="#{organizationSpaceBean.projects}"
-								var="project">
-								<p:graphicImage styleClass="content shadow"
-									value="#{project.imagePath}" />
-								<div class="caption text-dark">#{project.summary}</div>
-							</p:contentFlow>
-						</div>
-					</p:tab>
-					<p:tab title="CarouselBasic">
-						<div class="card">
-							<p:carousel value="#{organizationSpaceBean.projects}"
-								var="project" numVisible="3" numScroll="3"
-								responsiveOptions="#{organizationSpaceBean.responsiveOptions}">
-								<f:facet name="header">
-									<h5>Basic</h5>
-								</f:facet>
-								<p:card styleClass="shadow mx-3">
-									<f:facet name="header">
-										<img src="#{project.imagePath}" class="ratio"
-											style="object-fit: cover;" />
-									</f:facet>
-									<f:facet name="title">
-										<div class="clearfix">
-											#{project.name}
-											<div class="float-end">
-												<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-												<h:form id="delProjectCarou" rendered="#{organizationSpaceBean.isOwner}">
-													<h:inputHidden name="id" value="#{id}" />
-													<h:commandLink
-														action="#{organizationSpaceBean.deleteProject(project.id)}"
-														id="delete-project-#{project.id}">
-														<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
-													</h:commandLink>
-												</h:form>
-											</div>
-										</div>
-									</f:facet>
-									<f:facet name="subtitle">
-											#{project.projectCategory}
-										</f:facet>
-									<p>#{project.summary}</p>
-									<f:facet name="footer">
-										<div class="m-3">
-											<div class="progress">
-												<div
-													class="progress-bar progress-bar-striped progress-bar-animated"
-													style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
-													project.targetAmount)}%</div>
-											</div>
-											#{project.currentAmount}€ collecté sur
-											#{project.targetAmount}€
-											<p:button outcome="pageProject?id=#{project.id}"
-												styleClass="float-end" icon="pi pi-check" value="Explorer" />
-										</div>
-									</f:facet>
-								</p:card>
-							</p:carousel>
-						</div>
-					</p:tab>
-					<c:forEach items="#{organizationSpaceBean.tabs}" var="tab">
-						<p:tab title="#{tab.name}">
-
-							<p:button outcome="createBlockTxt?tabId=#{tab.id}"
-								value="Ajouter un bloc de text" />
-							<p:button outcome="createBlockImg?tabId=#{tab.id}"
-								value="Ajouter une image" />
-							<p:button outcome="createBlockVideo?tabId=#{tab.id}"
-								value="Ajouter une video" />
-							<div class="container mx-auto text-center">
-								<h2 class="text-center">#{tab.name}</h2>
-								<hr style="border: 2px" />
-								<c:forEach var="block" items="#{tab.contentBlocks}">
-									<c:if test="#{block.type == 'txt'}">
-										<p style="font-size: 25px">#{block.content}</p>
-									</c:if>
-									<c:if test="#{block.type == 'img'}">
-										<img class="img-fluid rounded img-thumbnail shadow"
-											style="max-width: 60%" src="#{block.content}" />
-									</c:if>
-									<c:if test="#{block.type == 'vid'}">
-										<p:video value="#{block.content}" player="mp4" controls="true"
-											width="600" onplay="console.log('MP4 Started Playing')"
-											onpause="console.log('MP4 Stopped Playing')">
-												Your browser does not support the video element. See: 
-												<h:outputLink
-												value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
-										</p:video>
-									</c:if>
-									<hr style="border: 2px" />
-								</c:forEach>
-
-							</div>
-						</p:tab>
-					</c:forEach>
 				</p:tabView>
 			</div>
 		</ui:define>

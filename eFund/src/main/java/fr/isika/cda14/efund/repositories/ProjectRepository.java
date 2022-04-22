@@ -1,13 +1,11 @@
 package fr.isika.cda14.efund.repositories;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.Project;
 
 @Stateless
@@ -44,7 +42,12 @@ public class ProjectRepository {
 	}
 
 	public List<Project> getTopProjects() {
-		String query = "SELECT proj " + "FROM Project proj " + "ORDER BY proj.creationDate";
+		String query = "SELECT proj FROM Project proj ORDER BY proj.creationDate";
 		return em.createQuery(query, Project.class).setMaxResults(3).getResultList();
+	}
+
+	public List<Project> getOrgsProjects(Long orgSpaceId) {
+		String query = "SELECT projs FROM OrganizationSpace os JOIN os.projects projs WHERE os.id=:id";
+		return em.createQuery(query, Project.class).setParameter("id", orgSpaceId).getResultList();
 	}
 }

@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import fr.isika.cda14.efund.entity.common.ContentTab;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectCategory;
 import fr.isika.cda14.efund.entity.enums.ProjectRange;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
@@ -61,10 +61,6 @@ public abstract class GenericProject {
 
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
-	protected List<ContentTab> listContentTab;
-
-	@OneToMany
-	@JoinColumn(name = "generic_project_id")
 	protected List<UserLike> likes;
 
 	@OneToMany
@@ -73,7 +69,7 @@ public abstract class GenericProject {
 
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
-	protected List<ContentTab> contentTabs;
+	protected List<ContentBlock> contentBlocks;
 
 	@OneToMany(mappedBy = "genericProject")
 	protected List<Favorite> favorites;
@@ -154,9 +150,6 @@ public abstract class GenericProject {
 		return projectStatus;
 	}
 
-	public List<ContentTab> getListContentTab() {
-		return listContentTab;
-	}
 
 	public List<UserLike> getLikes() {
 		return likes;
@@ -166,8 +159,8 @@ public abstract class GenericProject {
 		return comments;
 	}
 
-	public List<ContentTab> getContentTabs() {
-		return contentTabs;
+	public List<ContentBlock> getContentBlocks() {
+		return contentBlocks;
 	}
 
 	public List<Favorite> getFavorites() {

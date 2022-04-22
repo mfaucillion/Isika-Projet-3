@@ -4,17 +4,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-
-import org.primefaces.model.ResponsiveOption;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.common.ContentTab;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
@@ -49,33 +44,36 @@ public class OrganizationSpaceBean {
 	List<Project> projects = new ArrayList<Project>();
 	List<Event> events = new ArrayList<Event>();
 	List<Item> items = new ArrayList<Item>();
-	List<ContentTab> tabs = new ArrayList<ContentTab>();
-	
-	private List<ResponsiveOption> responsiveOptions;
-	
+	List<ContentBlock> blocks = new ArrayList<ContentBlock>();
+		
 	private Boolean isOwner;
 	
-	@PostConstruct
-    public void init() {
-        responsiveOptions = new ArrayList<>();
-        responsiveOptions.add(new ResponsiveOption("3000px", 4, 4));
-        responsiveOptions.add(new ResponsiveOption("2000px", 3, 3));
-        responsiveOptions.add(new ResponsiveOption("1240px", 2, 2));
-        responsiveOptions.add(new ResponsiveOption("768px", 1, 1));
-	}
-
 	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
-		orgAccount = accountService.loadOrganizationAccountWithChildren(Long.parseLong(id));
+		System.out.println("OnloadBeforeParseLong");
+		Long orgId = Long.parseLong(id);
+		System.out.println("OnloadAfterParseLong");
+		orgAccount = accountService.loadOrganizationAccountWithChildren(orgId);
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();
 		items = orgAccount.getOrganizationSpace().getShop().getItems();
-		tabs = orgAccount.getOrganizationSpace().getContentTabs();
+		blocks = orgAccount.getOrganizationSpace().getContentBlocks();
+//		Long orgAccountId = Long.parseLong(id);
+//		orgAccount = accountService.findOrganizationAccount(orgAccountId);
+//		projects = projectService.getOrgsProjects(orgAccount.getOrganizationSpace().getId());
+//		events = eventService.getOrgsEvents(orgAccount.getOrganizationSpace().getId());
+//		items = shopService.getShopItemList(orgAccount.getOrganizationSpace().getShop().getId());
+//		tabs = accountService.getOrgsContentTabs(orgAccount.getOrganizationSpace().getId());
+		
 		if (orgAccount.getId().equals(SessionTool.getUserId())) {
 			isOwner = true;
 		} else {
 			isOwner = false;
 		}
+	}
+	
+	public Boolean isOfType(String blockType, String tagType) {
+		return blockType.equals(tagType);
 	}
 
 	public OrderLine createOrderLine(Item item) {
@@ -116,11 +114,8 @@ public class OrganizationSpaceBean {
 		return items;
 	}
 	
-	/* Ugly Code, Je devais le faire pour être certain que la méthode s'appelait avant le PreRenderer (c:ForEach est exécuté avant)*/
-	public List<ContentTab> getTabs() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		onLoad(request.getParameter("id"));
-		return tabs;
+	public List<ContentBlock> getBlocks() {
+		return blocks;
 	}
 
 	public String getBgcolor() {
@@ -130,9 +125,5 @@ public class OrganizationSpaceBean {
 	public Boolean getIsOwner() {
 		return isOwner;
 	}
-	
-	public List<ResponsiveOption> getResponsiveOptions() {
-		return responsiveOptions;
-	}
-	
+		
 }

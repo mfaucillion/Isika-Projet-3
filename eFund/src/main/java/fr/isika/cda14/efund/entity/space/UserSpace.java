@@ -13,7 +13,6 @@ import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.project.Comment;
 import fr.isika.cda14.efund.entity.project.Donation;
-import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.UserLike;

@@ -15,9 +15,7 @@ import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.GenericProject;
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.AccountService;
-import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 

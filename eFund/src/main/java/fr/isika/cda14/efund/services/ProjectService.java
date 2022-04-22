@@ -11,13 +11,11 @@ import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Donation;
-import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.DonationRepository;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
-import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -101,5 +99,9 @@ public class ProjectService {
 
 	public List<Project> getTopProjects() {
 		return projectRepo.getTopProjects();
+	}
+
+	public List<Project> getOrgsProjects(Long orgSpaceId) {
+		return projectRepo.getOrgsProjects(orgSpaceId);
 	}
 }

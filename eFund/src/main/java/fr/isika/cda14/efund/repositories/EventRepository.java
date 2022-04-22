@@ -40,4 +40,9 @@ public class EventRepository {
 		String query = "SELECT event " + "FROM Event event " + "ORDER BY event.creationDate";
 		return em.createQuery(query, Event.class).setMaxResults(3).getResultList();
 	}
+
+	public List<Event> getOrgsEvents(Long orgSpaceId) {
+		String query = "SELECT events FROM OrganizationSpace os JOIN os.events events WHERE os.id=:id";
+		return em.createQuery(query, Event.class).setParameter("id", orgSpaceId).getResultList();
+	}
 }
