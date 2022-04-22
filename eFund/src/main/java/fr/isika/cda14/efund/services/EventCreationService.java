@@ -30,6 +30,7 @@ public class EventCreationService {
 		newEvent.setLocation(eventCreationFormVM.getLocation());
 		newEvent.setProjectCategory(eventCreationFormVM.getProjectCategory());
 		newEvent.setProjectRange(eventCreationFormVM.getProjectRange());
+		newEvent.setVolunteerCurrent(0);
 		newEvent.setVolunteerTarget(eventCreationFormVM.getVolunteerTarget());
 		newEvent.setEventStartDate(eventCreationFormVM.getEventStartDate());
 		newEvent.setDuration(eventCreationFormVM.getDuration());

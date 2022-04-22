@@ -13,8 +13,8 @@ import fr.isika.cda14.efund.entity.shop.Item;
 @Table(name = "item_report")
 public class ItemReport extends Report {
 
-	@OneToOne
-	@JoinColumn(name = "item_id")
-	private Item item;
+//	@OneToOne
+//	@JoinColumn(name = "item_id")
+//	private Item item;
 
 }

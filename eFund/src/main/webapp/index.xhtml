@@ -43,6 +43,8 @@
 						<br />
 						<h:link outcome="projectsList.xhtml">Liste des projets</h:link>
 						<br />
+						<h:link outcome="donationPage.xhtml">Dons</h:link>
+						<br />
 						<h:link outcome="eventList.xhtml">Liste des evènements</h:link>
 						<br />
 					</div>
@@ -169,7 +171,7 @@
 			<div class="container shadow py-3 px-5 mt-5">
 
 				<div class="ui-fuild row">
-					<h1 class="text-center">Coup de projecteur sur Assos/ONGs</h1>
+					<h1 class="text-center">Nos associations récemment inscrites</h1>
 				</div>
 
 				<div class="ui-fluid row">
@@ -183,14 +185,8 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-
-
-			<h:form>
-				<h:commandButton action="#{loginBean.disconnectSession()}"
-					value="Déconnecter" />
-			</h:form>
+			<br/>
 		</ui:define>
 	</ui:composition>
 </h:body>

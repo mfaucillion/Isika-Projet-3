@@ -8,14 +8,14 @@
 
 <f:metadata>
 	<f:viewParam name="id" />
-	<f:event listener="#{projectPageBean.onLoad(id)}" type="preRenderView"></f:event>
+	<f:event listener="#{eventPageBean.onLoad(id)}" type="preRenderView"></f:event>
 </f:metadata>
 
 <h:body>
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="css">
-			<link rel="stylesheet" href="css/projectPage.css" />
+			<link rel="stylesheet" href="css/eventPage.css" />
 		</ui:define>
 
 		<ui:define name="content">
@@ -32,14 +32,14 @@
 						<div class="container shadow">
 							<div class="row">
 								<div class="col-12 col-md-12 my-2">
-									<h1>#{projectPageBean.project.name}</h1>
+									<h1>#{eventPageBean.event.name}</h1>
 								</div>
 							</div>
 
 							<div class="row">
 								<div class="col-12 col-md-6">
 									<img class="img-fluid w-100 mb-4"
-										src="#{projectPageBean.project.imagePath}" />
+										src="#{eventPageBean.event.imagePath}" />
 								</div>
 								<div class="col-12 col-md-6 my-auto pb-4">
 									<h5>Description: bla bla blabla bla blabla bla blabla bla
@@ -50,6 +50,8 @@
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
 										title="Editer la Description" action="#" />
 								</div>
+
+
 							</div>
 
 
@@ -75,41 +77,6 @@
 									<p>Description longue: bla bla bla</p>
 								</p:tab>
 
-
-								<p:tab>
-									<f:facet name="title">
-										<i class="fa-solid fa-euro-sign" /> Objectifs
-									</f:facet>
-
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 1" action="#" />
-									<div class="row">
-
-										<h6>Palier 1</h6>
-										<p>Blablabla</p>
-									</div>
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 2" action="#" />
-									<div class="row">
-
-										<h6>Palier 2</h6>
-										<p>Blablabla</p>
-									</div>
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 3" action="#" />
-									<div class="row">
-
-										<h6>Palier 3</h6>
-										<p>Blablabla</p>
-									</div>
-								</p:tab>
-
 								<p:tab>
 									<f:facet name="title">
 										<i class="fa-solid fa-question" /> FAQ
@@ -129,11 +96,11 @@
 						<div class="row mb-5">
 							<div class="col-12 col-md-5">
 								<img class="img-fluid w-100"
-									src="#{projectPageBean.organizationAccount.imagePath}" alt="" />
+									src="#{eventPageBean.organizationAccount.imagePath}" alt="" />
 							</div>
 							<div class="col-12 col-md-7 my-auto">
-								<h4>#{projectPageBean.organizationAccount.organizationInfo.name}</h4>
-								<p>#{projectPageBean.organizationAccount.organizationInfo.summary}</p>
+								<h4>#{eventPageBean.organizationAccount.organizationInfo.name}</h4>
+								<p>#{eventPageBean.organizationAccount.organizationInfo.summary}</p>
 							</div>
 						</div>
 
@@ -149,35 +116,33 @@
 									<div class="knob-container ui-corner-all">
 										<p:knob foregroundColor="#426CB4" backgroundColor="#4f4f4f"
 											disabled="true"
-											labelTemplate="#{projectPageBean.remainingDays}"
-											value="#{projectPageBean.countDown(projectPageBean.remainingDays, projectPageBean.donationDuration)}" />
+											labelTemplate="#{eventPageBean.remainingDays}"
+											value="#{eventPageBean.countDown(eventPageBean.remainingDays,eventPageBean.registerDuration)}" />
 									</div>
 								</div>
-
 								<div class="row justify-content-center mb-5">Il vous reste
-									#{projectPageBean.remainingDays} jours (sur
-									#{projectPageBean.donationDuration}) pour participer !</div>
+									#{eventPageBean.remainingDays} jours (sur
+									#{eventPageBean.registerDuration}) pour vous inscrire !</div>
 
 								<br />
 
 								<div class="progress bg-secondary">
 									<div
 										class="progress-bar progress-bar-striped progress-bar-animated"
-										style="width:#{projectPageBean.percentage(projectPageBean.project.currentAmount, projectPageBean.project.targetAmount)}%">#{projectPageBean.percentage(projectPageBean.project.currentAmount,
-										projectPageBean.project.targetAmount)}%</div>
+										style="width:#{eventPageBean.percentage(eventPageBean.event.volunteerCurrent, eventPageBean.event.volunteerTarget)}%">#{eventPageBean.percentage(eventPageBean.event.volunteerCurrent,
+										eventPageBean.event.volunteerTarget)}%</div>
 								</div>
 								<div class="row justify-content-center">
 
-									#{projectPageBean.project.currentAmount}€ collectés sur
-									#{projectPageBean.project.targetAmount}€</div>
+									#{eventPageBean.event.volunteerCurrent} bénévoles inscrits sur
+									#{eventPageBean.event.volunteerTarget}</div>
 
 								<div class="row mt-3 mb-5">
 									<div class="col-12 col-md-2" />
 									<div class="col-12 col-md-8 mx-auto">
-										<p:linkButton icon="pi pi-euro"
+										<p:commandButton icon="fa-solid fa-hand-holding-hand"
 											styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-											value="Effectuer un don"
-											outcome="donationPage.xhtml?id=#{id}faces-redirect=true" />
+											value="S'inscrire comme bénévole" action="#" />
 									</div>
 								</div>
 

@@ -139,6 +139,19 @@ public class AccountRepository {
     
 		return account;
 	}
+	
+	public OrganizationAccount getOrgFromEvent(Long id) {
+		String query = "SELECT orgAcc "
+				+ "FROM OrganizationAccount orgAcc "
+				+ "JOIN orgAcc.organizationSpace orgSpace "
+				+ "JOIN orgSpace.events ev "
+				+ "WHERE ev.id =:id ";
+		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class)
+				.setParameter("id", id)
+				.getSingleResult();
+    
+		return account;
+	}
 
 	public List<UserAccount> getAllUsers() {
 		String query = "SELECT acc FROM UserAccount acc";

@@ -1,4 +1,3 @@
-
 package fr.isika.cda14.efund.managedbeans;
 
 import java.math.BigDecimal;
@@ -12,71 +11,76 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.project.Project;
-import fr.isika.cda14.efund.services.ProjectService;
+import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.services.EventService;
 
 @ManagedBean
 @ViewScoped
-public class ProjectPageBean {
-
+public class EventPageBean {
+	
 	@Inject
-	private ProjectService projectService;
-
-	private Project project;
-
+	private EventService eventService;
+	
+	private Event event;
+	
 	private OrganizationAccount organizationAccount;
-
+	
 	private Long remainingDays;
-
-	private Long donationDuration;
-
+	
+	private Long registerDuration;
+	
 	public void onLoad(String id) {
-		this.project = projectService.findProject(Long.parseLong(id));
-		this.organizationAccount = projectService.getOrgFromProject(Long.parseLong(id));
+		this.event = eventService.findEvent(Long.parseLong(id));
+		this.organizationAccount=eventService.getOrgFromEvent(Long.parseLong(id));
 		this.remainingDays = calculRemainingDays();
-		this.donationDuration = calculdonationDuration();
+		this.registerDuration = calculRegisterDuration();
 	}
-
-	public int percentage(BigDecimal currentCollect, BigDecimal target) {
-		return (currentCollect.intValue() * 100) / target.intValue();
+	
+	public int percentage(Integer volunteerCurrent, Integer volunteerTarget) {
+		return (volunteerCurrent * 100) / volunteerTarget;
 	}
-
-	public Long calculdonationDuration() {
-		Date endDate = new Date(this.project.getEndDate().getTime());
-		Date startDate = new Date(this.project.getCreationDate().getTime());
+	
+	public Long calculRegisterDuration() {
+		Date endDate = new Date(this.event.getEndDate().getTime());
+		Date startDate = new Date(this.event.getCreationDate().getTime());
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
 		ZonedDateTime startDateTime = ZonedDateTime.ofInstant(startDate.toInstant(), ZoneId.of("UTC"));
-
+		
 		return ChronoUnit.DAYS.between(startDateTime, endDateTime);
 	}
-
+	
 	public int countDown(BigDecimal remaining, BigDecimal duration) {
-
+		
 		return ((remaining.intValue() * 100) / duration.intValue());
 	}
-
+	
 	private Long calculRemainingDays() {
-		Date endDate = new Date(this.project.getEndDate().getTime());
-		System.out.println(endDate);
+		Date endDate = new Date(this.event.getEndDate().getTime());
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
 
 		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
 	}
 
-	public Project getProject() {
-		return project;
+	public Event getEvent() {
+		return event;
 	}
 
 	public OrganizationAccount getOrganizationAccount() {
 		return organizationAccount;
 	}
-
+	
 	public Long getRemainingDays() {
 		return remainingDays;
 	}
 
-	public Long getDonationDuration() {
-		return donationDuration;
+	public EventService getEventService() {
+		return eventService;
 	}
+
+	public Long getRegisterDuration() {
+		return registerDuration;
+	}
+	
+
 
 }
