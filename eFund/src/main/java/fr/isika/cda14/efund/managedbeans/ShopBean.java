@@ -17,11 +17,11 @@ import fr.isika.cda14.efund.services.ShopService;
 @SessionScoped
 public class ShopBean {
 
-	Integer sumOfCart;
-	OrganizationSpaceBean orgSpace;
-	AccountRepository repo;
+	private Integer sumOfCart;
+	private OrganizationSpaceBean orgSpace;
+	private AccountRepository repo;
 	@Inject
-	ShopRepository shopRepo;
+	private ShopRepository shopRepo;
 
 	@Inject
 	private ShopService shopService;
@@ -50,25 +50,27 @@ public class ShopBean {
 			orderLine.setQuantity(1);
 			cart.add(orderLine);
 			System.out.println(id);
+
 		}
 		else if(cart.indexOf(orderLine)!=-1){
 			orderLine.setQuantity(orderLine.getQuantity()+1);
 			cart.add(orderLine);
 		}
-
+		sumOfCart+=orderLine.getItem().getPrice().intValue();
 
 	}
 	/* Calcul du prix total de mon cart*/
-	public Integer sumOfmyCart() {
+	public String sumOfmyCart() {
 		if(cart.isEmpty()) {
 			sumOfCart=0;
 		}else {
-		for(int i=0; i<cart.size();i++) {
-			sumOfCart+=(cart.get(i).getQuantity()*cart.get(i).getItem().getPrice().intValueExact());
+			for(int i=0; i<cart.size();i++) {
+				//sumOfCart+=(cart.get(i).getQuantity()*cart.get(i).getItem().getPrice().intValueExact());
+			}
 		}
-		}
-		return sumOfCart;
-		
+		//return sumOfCart;
+		return "index";
+
 	}
 
 	public List<OrderLine> getCart() {
@@ -86,6 +88,6 @@ public class ShopBean {
 	public void setSumOfCart(Integer sumOfCart) {
 		this.sumOfCart = sumOfCart;
 	}
-	
-	
+
+
 }
