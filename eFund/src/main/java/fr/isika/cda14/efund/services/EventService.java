@@ -44,4 +44,7 @@ public class EventService {
 		return accountRepo.getOrgFromEvent(id);
 	}
 
+	public List<Event> getOrgsEvents(Long orgSpaceId) {
+		return eventRepo.getOrgsEvents(orgSpaceId);
+	}
 }

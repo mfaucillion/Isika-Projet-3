@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import fr.isika.cda14.efund.entity.common.ContentTab;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Shop;
@@ -34,7 +34,7 @@ public class OrganizationSpace {
 
 	@OneToMany
 	@JoinColumn(name = "organization_space_id")
-	private List<ContentTab> contentTabs;
+	private List<ContentBlock> contentBlocks;
 	
 	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
 	private List<Project> projects;
@@ -58,12 +58,12 @@ public class OrganizationSpace {
 		this.follows = follows;
 	}
 
-	public List<ContentTab> getContentTabs() {
-		return contentTabs;
+	public List<ContentBlock> getContentBlocks() {
+		return contentBlocks;
 	}
 
-	public void setContentTabs(List<ContentTab> contentTabs) {
-		this.contentTabs = contentTabs;
+	public void setContentBlocks(List<ContentBlock> contentBlocks) {
+		this.contentBlocks = contentBlocks;
 	}
 
 	public List<Project> getProjects() {
