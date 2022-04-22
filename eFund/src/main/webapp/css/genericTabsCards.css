@@ -23,20 +23,6 @@
 	
 }
 
-.ui-card-header img{
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-}
-
-.ui-card {
-	border-radius: 20px !important;
-	border: 2px solid;
-}
-
-body .ui-card {
-
-}
-
 #ongPageBody .ui-tabs-nav:before {
 	border: 0px !important;
 }
@@ -45,3 +31,13 @@ body .ui-card {
 	background-color: #ededed;
 }
 
+.ui-card-header img{
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+}
+
+.ui-card {
+	border-radius: 20px !important;
+	border: 2px solid;
+	border-color: #426CB4;
+}

@@ -13,11 +13,12 @@
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 	<ui:define name="css">
-			<link rel="stylesheet" href="css/ongTabView-.css" />
+			<link rel="stylesheet" href="css/genericTabsCards.css" />
 		</ui:define>
 		<ui:define name="content">
+			<br/>
 			<h3>Evènements</h3>
-			<hr />
+
 			<div class="container p-5">
 				<div class="row">
 					<p:repeat var="event" value="#{eventListBean.events}">

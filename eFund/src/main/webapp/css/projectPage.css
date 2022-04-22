@@ -33,19 +33,19 @@
 	border: 2px solid;
 }
 
-.container {
-	border-style:solid;
-	border-width:1px;
-	border-color: grey;
-	border-radius: 5px;
-}
-
 #projectPageBody .ui-tabs-nav:before {
 	border: 0px !important;
 }
 
 #projectPageBody {
 	background-color: #ededed;
+}
+
+.container {
+	border-style:solid;
+	border-width:1px;
+	border-color: #426CB4;
+	border-radius: 5px;
 }
 
 .knob-container{

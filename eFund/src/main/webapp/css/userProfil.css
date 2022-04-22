@@ -33,10 +33,6 @@
 	border: 2px solid;
 }
 
-#userProfilBody body .ui-card {
-
-}
-
 #userProfilBody .ui-tabs-nav:before {
 	border: 0px !important;
 }
