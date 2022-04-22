@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:metadata>
+	<f:viewParam name="id" />
+	<f:event listener="#{eventPageBean.onLoad(id)}" type="preRenderView"></f:event>
+</f:metadata>
+
+<h:body>
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<ui:define name="css">
+			<link rel="stylesheet" href="css/eventPage.css" />
+		</ui:define>
+
+		<ui:define name="content">
+
+
+			<div class="container-fluid p-5" id="projectPageBody">
+
+
+
+
+				<div class="row">
+
+					<div class="col-12 col-md-8">
+						<div class="container shadow">
+							<div class="row">
+								<div class="col-12 col-md-12">
+									<h1>#{eventPageBean.event.name}</h1>
+								</div>
+							</div>
+
+							<img class="im-fluid w-100 mb-3"
+								src="#{eventPageBean.event.imagePath}" /> <br />
+						</div>
+						<br />
+
+						<div class="row mb-1">
+							<p:commandButton icon="fa-solid fa-minus"
+								styleClass="rounded-button ui-button-danger ui-button-outlined"
+								title="Editer" action="#" />
+						</div>
+
+						<div class="col-12 col-md-12">
+							<p:tabView>
+								<p:tab>
+									<f:facet name="title">
+										<i class="fa-solid fa-business-time" /> Description
+									</f:facet>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la Description" action="#" />
+									<p>Description longue: bla bla bla</p>
+								</p:tab>
+
+								<p:tab>
+									<f:facet name="title">
+										<i class="fa-solid fa-question" /> FAQ
+									</f:facet>
+
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la FAQ" action="#" />
+									<p>FAQ: bla bla bla</p>
+
+								</p:tab>
+
+							</p:tabView>
+						</div>
+					</div>
+					<div class="col-12 col-md-4">
+						<div class="row">
+							<div class="col-12 col-md-5">
+								<img class="im-fluid w-100"
+									src="#{eventPageBean.organizationAccount.imagePath}" alt="" />
+							</div>
+							<div class="col-12 col-md-7 my-auto">
+								<h4>#{eventPageBean.organizationAccount.organizationInfo.name}</h4>
+								<p>#{eventPageBean.organizationAccount.organizationInfo.summary}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-12 col-md-1" />
+							<div class="col-12 col-md-10">
+								<br />
+
+								<div class="row justify-content-center mt-3 mb-5">
+
+									<div class="knob-container ui-corner-all">
+										<p:knob 
+										foregroundColor="#426CB4"
+										backgroundColor="#4f4f4f"
+										disabled="true"
+										labelTemplate="#{eventPageBean.remainingDays}"
+										value="#{eventPageBean.countDown(eventPageBean.remainingDays,eventPageBean.registerDuration)}" />
+									</div>
+								</div>
+								<div class="row justify-content-center mb-5">Il vous reste
+									#{eventPageBean.remainingDays} jours pour vous inscrire !</div>
+
+								<br />
+
+								<div class="progress bg-secondary">
+									<div
+										class="progress-bar progress-bar-striped progress-bar-animated"
+										style="width:#{eventPageBean.percentage(eventPageBean.event.volunteerCurrent, eventPageBean.event.volunteerTarget)}%">#{eventPageBean.percentage(eventPageBean.event.volunteerCurrent,
+										eventPageBean.event.volunteerTarget)}%</div>
+								</div>
+								<div class="row justify-content-center">
+
+									#{eventPageBean.event.volunteerCurrent} bénévoles inscrits sur
+									#{eventPageBean.event.volunteerTarget}</div>
+
+								<div class="row mt-3 mb-5">
+									<div class="col-12 col-md-2" />
+									<div class="col-12 col-md-8 mx-auto">
+										<p:commandButton icon="fa-solid fa-hand-holding-hand"
+											styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+											value="S'inscrire comme bénévole" action="#" />
+									</div>
+								</div>
+
+								<div class="row mt-5">
+									<div class="col-12 col-md-4" />
+									<div class="col-12 col-md-2">
+										<p:commandButton icon="fa-regular fa-heart"
+											styleClass="rounded-button ui-button-danger ui-button-outlined"
+											title="Ajouter aux favoris" action="#" />
+									</div>
+									<div class="col-12 col-md-2">
+										<p:commandButton icon="fa-regular fa-thumbs-up"
+											styleClass="rounded-button ui-button-primary ui-button-outlined"
+											title="J'aime" action="#" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

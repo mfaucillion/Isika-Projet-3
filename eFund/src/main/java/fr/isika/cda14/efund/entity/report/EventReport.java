@@ -13,8 +13,8 @@ import fr.isika.cda14.efund.entity.project.Event;
 @Table(name = "event_report")
 public class EventReport extends Report {
 
-	@OneToOne
-	@JoinColumn(name = "event_id")
-	private Event event;
+//	@OneToOne
+//	@JoinColumn(name = "event_id")
+//	private Event event;
 
 }
