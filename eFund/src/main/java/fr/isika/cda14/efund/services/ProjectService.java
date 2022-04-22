@@ -26,10 +26,10 @@ public class ProjectService {
 
 	@Inject
 	private ProjectRepository projectRepo;
-	
+
 	@Inject
 	private AccountRepository accountRepo;
-	
+
 	@Inject
 	private DonationRepository donationRepo;
 
@@ -61,25 +61,25 @@ public class ProjectService {
 	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
 	}
-	
+
 	public List<Project> searchProjectFromPage(String searchProject) {
 		return projectRepo.searchProjectFromPage(searchProject);
 	}
-	
+
 	public void createDonation(DonationVM donationVM, Long id) {
 		Donation newDon = new Donation();
 		newDon.setAmount(donationVM.getAmount());
-		
-		//UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
+
+		// UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
 		UserAccount userAccount = accountRepo.findUser(1000L);
 		newDon.setUserSpace(userAccount.getUserSpace());
-		
+
 		Project project = projectRepo.findProject(id);
 		newDon.setProject(project);
 		project.setCurrentAmount(project.getCurrentAmount().add(newDon.getAmount()));
 
 		donationRepo.createDonationRepo(newDon);
-		
+
 	}
 
 	public OrganizationAccount getOrgFromProject(Long id) {
@@ -94,7 +94,7 @@ public class ProjectService {
 	public void update(Project proj) {
 		projectRepo.update(proj);
 	}
-		
+
 	public List<Project> getTopProjects() {
 		return projectRepo.getTopProjects();
 	}
