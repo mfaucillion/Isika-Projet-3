@@ -69,6 +69,10 @@ public class ProjectService {
 	public void createDonation(DonationVM donationVM, Long id) {
 		Donation newDon = new Donation();
 		newDon.setAmount(donationVM.getAmount());
+		newDon.setFullName(donationVM.getFullName());
+		newDon.setCreditCardNumber(donationVM.getCreditCardNumber());
+		newDon.setExpirationDate(donationVM.getExpirationDate());
+		newDon.setCryptogram(donationVM.getCryptogram());
 
 		// UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
 		UserAccount userAccount = accountRepo.findUser(1000L);
