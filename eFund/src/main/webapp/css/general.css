@@ -19,3 +19,7 @@ a{
 .progress{
 	background-color: grey;
 }
+
+.ui-dialog {
+    width: auto !important;
+}
