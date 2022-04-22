@@ -13,7 +13,7 @@ import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 @Table(name = "organization_report")
 public class OrganizationReport extends Report {
 
-	@OneToOne
-	@JoinColumn(name = "organization_id")
-	private OrganizationAccount organizationAccount;
+//	@OneToOne
+//	@JoinColumn(name = "organization_id")
+//	private OrganizationAccount organizationAccount;
 }

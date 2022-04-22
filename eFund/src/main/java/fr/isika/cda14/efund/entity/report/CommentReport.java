@@ -13,8 +13,8 @@ import fr.isika.cda14.efund.entity.project.Comment;
 @Table(name = "comment_report")
 public class CommentReport extends Report {
 
-	@OneToOne
-	@JoinColumn(name = "comment_id")
-	private Comment comment;
+//	@OneToOne
+//	@JoinColumn(name = "comment_id")
+//	private Comment comment;
 
 }

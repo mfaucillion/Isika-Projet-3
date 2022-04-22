@@ -34,11 +34,6 @@ public class ProjectPageBean {
 		this.remainingDays = calculRemainingDays();
 	}
 
-	public OrganizationAccount getOrganizationAccount() {
-		return organizationAccount;
-	}
-
-
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
 		return (currentCollect.intValue() * 100) / target.intValue();
 	}
@@ -53,6 +48,10 @@ public class ProjectPageBean {
 	
 	public Project getProject() {
 		return project;
+	}
+	
+	public OrganizationAccount getOrganizationAccount() {
+		return organizationAccount;
 	}
 	
 	public Long getRemainingDays() {
