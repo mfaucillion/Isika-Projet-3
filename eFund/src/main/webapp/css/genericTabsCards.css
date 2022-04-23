@@ -41,3 +41,25 @@
 	border: 2px solid;
 	border-color: #426CB4;
 }
+
+.container{
+	border-style:solid;
+	border-width:0px;
+	border-color: #426CB4;
+	border-radius: 5px;
+}
+
+h1{
+	color: #426CB4;
+}
+
+.ui-card-subtitle{
+	height: 100px;
+}
+.ui-card-content{
+	padding: 0px !important;
+}
+
+.ui-card-footer{
+	height: 45px;
+}
