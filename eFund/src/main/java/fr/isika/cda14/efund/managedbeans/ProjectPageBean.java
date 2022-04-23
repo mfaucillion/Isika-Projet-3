@@ -13,7 +13,9 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Project;
+import fr.isika.cda14.efund.services.InteractionService;
 import fr.isika.cda14.efund.services.ProjectService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
 @ViewScoped
@@ -21,6 +23,9 @@ public class ProjectPageBean {
 
 	@Inject
 	private ProjectService projectService;
+
+	@Inject
+	private InteractionService interactionService;
 
 	private Project project;
 
@@ -51,16 +56,55 @@ public class ProjectPageBean {
 	}
 
 	public int countDown(BigDecimal remaining, BigDecimal duration) {
-
+		if (duration.intValue() == 0) {
+			return 0;
+		}
 		return ((remaining.intValue() * 100) / duration.intValue());
 	}
 
 	private Long calculRemainingDays() {
 		Date endDate = new Date(this.project.getEndDate().getTime());
-		System.out.println(endDate);
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
+		Long remainingDays = ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
 
-		return ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
+		if (remainingDays < 0) {
+			remainingDays = 0L;
+		}
+		return remainingDays;
+	}
+
+	/* Méthodes d'interaction User -> Project */
+
+	/* Section Favoris */
+
+	public void addFavorite() {
+		interactionService.addFavorite(SessionTool.getUserId(), project);
+	}
+
+	public void removeFavorite() {
+		interactionService.removeFavorite(SessionTool.getUserId(), project.getId());
+	}
+
+	public Boolean isFaved() {
+		return interactionService.checkFavorite(SessionTool.getUserId(), project.getId());
+	}
+
+	/* Section Likes */
+
+	public void addLike() {
+		interactionService.addLike(SessionTool.getUserId(), project);
+	}
+
+	public void removeLike() {
+		interactionService.removeLike(SessionTool.getUserId(), project.getId());
+	}
+
+	public Boolean isLiked() {
+		return interactionService.checkLike(SessionTool.getUserId(), project.getId());
+	}
+
+	public void updateProject() {
+		projectService.update(project);
 	}
 
 	public Project getProject() {

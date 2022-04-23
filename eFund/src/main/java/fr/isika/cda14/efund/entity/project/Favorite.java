@@ -23,8 +23,21 @@ public class Favorite {
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
-	
+
 	public GenericProject getGenericProject() {
 		return genericProject;
 	}
+
+	public void setGenericProject(GenericProject genericProject) {
+		this.genericProject = genericProject;
+	}
+
+	public UserSpace getUserSpace() {
+		return userSpace;
+	}
+
+	public void setUserSpace(UserSpace userSpace) {
+		this.userSpace = userSpace;
+	}
+
 }
