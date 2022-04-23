@@ -66,7 +66,7 @@ public class InteractionService {
 		return !result.isEmpty();
 	}
 
-
+	/** Supprime un Like à partir d'un UserAccountID et d'un ProjectID **/
 	public void removeLike(Long userId, Long projId) {
 		UserAccount user = accountService.findUserAccountById(userId);
 		UserLike like = repo.getLike(user.getUserSpace().getId(), projId);
