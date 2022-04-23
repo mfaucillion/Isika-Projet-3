@@ -49,9 +49,6 @@ public class BasketOrder {
 	@JoinColumn(name = "billing_address_id")
 	private Address billingAddress;
 
-	@OneToOne
-	private Basket basket;
-
 	@OneToMany
 	@JoinColumn(name = "basket_order_id")
 	private List<OrderLine> orderLines;
@@ -108,13 +105,6 @@ public class BasketOrder {
 		this.billingAddress = billingAddress;
 	}
 
-	public Basket getBasket() {
-		return basket;
-	}
-
-	public void setBasket(Basket basket) {
-		this.basket = basket;
-	}
 
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
