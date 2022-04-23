@@ -2,7 +2,6 @@ package fr.isika.cda14.efund.managedbeans;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
