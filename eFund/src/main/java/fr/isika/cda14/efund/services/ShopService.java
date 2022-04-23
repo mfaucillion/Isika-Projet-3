@@ -1,24 +1,31 @@
 package fr.isika.cda14.efund.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
+import fr.isika.cda14.efund.entity.enums.OrderStatus;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
 import fr.isika.cda14.efund.entity.shop.Shop;
+import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.ShopRepository;
+import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 
 @Stateless
 public class ShopService {
 
+	private Integer sumOfCart;
 	@Inject
 	private ShopRepository shopRepo;
-	private Integer index = -1;
+	@Inject
+	private AccountRepository repo;
 
 	public void create(ItemCreationForm itemCreationForm, Long id) {
 		Item newItem = new Item();
@@ -73,4 +80,40 @@ public class ShopService {
 	//shopRepo.add(orderLine);
 	//return orderLine;
 	//}
+
+	/* Calcul du prix total de mon cart*/
+	public Integer sumOfmyCart(List<OrderLine> cart) {
+		if(cart.isEmpty()) {
+			sumOfCart=0;
+		}else {
+			for(int i=0; i<cart.size();i++) {
+				sumOfCart+=(cart.get(i).getQuantity()*cart.get(i).getItem().getPrice().intValueExact());
+			}
+		}
+		return sumOfCart;
+
+	}
+
+	public BasketOrder payMyCart(List<OrderLine> cart) {
+		BasketOrder basketOrder=new BasketOrder();
+		basketOrder.setOrderLines(cart);
+		Integer totalitemQuantity=0;
+		for(int i=0;i<cart.size();i++) {
+			totalitemQuantity+=cart.get(i).getQuantity();
+		}
+		basketOrder.setTotalItemsQuantity(totalitemQuantity);
+		basketOrder.setTotalPrice(BigDecimal.valueOf(sumOfCart));
+		basketOrder.setStatus(OrderStatus.PROCESSING);
+		basketOrder.setDate(cart.get(0).getDate());// La date du cart est la date de n'importe quel element
+		Address adr=repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
+		basketOrder.setBillingAddress(adr);
+		return basketOrder;
+
+
+	}
+
+	public Item findItem(Long id) {
+		Item item = shopRepo.findItem(id);
+		return item;
+	}
 }
