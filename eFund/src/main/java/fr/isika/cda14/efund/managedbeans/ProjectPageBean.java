@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.ProjectService;
+import fr.isika.cda14.efund.services.InteractionService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
 @ViewScoped
@@ -21,6 +23,9 @@ public class ProjectPageBean {
 
 	@Inject
 	private ProjectService projectService;
+	
+	@Inject
+	private InteractionService interactionService;
 
 	private Project project;
 
@@ -67,6 +72,10 @@ public class ProjectPageBean {
 			remainingDays = 0L;
 		}
 		return remainingDays;
+	}
+	
+	public void addFavorite() {
+		interactionService.addFavorite(SessionTool.getUserId(), project);
 	}
 	
 	public void updateProject() {
