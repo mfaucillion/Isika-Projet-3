@@ -29,7 +29,7 @@ public class ProjectRepository {
 
 	// recherche d'un projet par son nom à partir de la page ProjectsList
 	public List<Project> searchProjectFromPage(String searchProject) {
-		String query = "SELECT projName FROM Project projName WHERE projName.name in :searchProject ";
+		String query = "SELECT projName FROM Project projName WHERE projName.name LIKE CONCAT('%', :searchProject, '%') ";
 		return em.createQuery(query, Project.class).setParameter("searchProject", searchProject).getResultList();
 	}
 

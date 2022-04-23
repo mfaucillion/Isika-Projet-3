@@ -99,9 +99,11 @@
 
 						<div class="card pb-3">
 							<p:contentFlow value="#{indexBean.projects}" var="project">
-								<p:graphicImage styleClass="content shadow"
+								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{project.imagePath}" />
-								<div class="caption text-dark">#{project.summary}</div>
+									<div class="caption text-dark w-25 mx-auto">
+									#{project.name} - #{project.summary}</div>
+								
 							</p:contentFlow>
 						</div>
 
@@ -141,9 +143,10 @@
 
 						<div class="card pb-3">
 							<p:contentFlow value="#{indexBean.events}" var="event">
-								<p:graphicImage styleClass="content shadow"
+								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{event.imagePath}" />
-								<div class="caption text-dark">#{event.summary}</div>
+								<div class="caption text-dark w-25 mx-auto">
+								#{event.name} - #{event.summary}</div>
 							</p:contentFlow>
 						</div>
 
@@ -181,11 +184,13 @@
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
+					
 						<div class="card pb-3">
 							<p:contentFlow value="#{indexBean.orgs}" var="org">
-								<p:graphicImage styleClass="content shadow"
+								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{org.imagePath}" />
-								<div class="caption text-dark">#{org.organizationInfo.summary}</div>
+								<div class="caption text-dark w-25 mx-auto">
+								#{org.organizationInfo.name} - #{org.organizationInfo.summary}</div>
 							</p:contentFlow>
 						</div>
 					</div>

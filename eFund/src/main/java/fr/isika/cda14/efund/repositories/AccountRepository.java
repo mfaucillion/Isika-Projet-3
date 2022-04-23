@@ -15,6 +15,7 @@ import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
@@ -55,6 +56,12 @@ public class AccountRepository {
 	public OrganizationAccount findOrganization(Long id) {
 		return em.find(OrganizationAccount.class, id);
 	}
+	
+	// recherche d'un compte Ornanization par son nom à partir de la page OrgaListe
+		public List<OrganizationAccount> searchOrganizationAccountFromPage(String searchOrganization) {
+			String query = "SELECT orgName FROM OrganizationAccount orgName JOIN orgName.organizationInfo inf WHERE inf.name LIKE CONCAT('%', :searchOrganization, '%') ";
+			return em.createQuery(query, OrganizationAccount.class).setParameter("searchOrganization", searchOrganization).getResultList();
+		}
 
 	/* Recherche d'un compte tout type confondu à partir d'un email */
 	public Optional<Account> findByEmail(String email) {
