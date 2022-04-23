@@ -14,8 +14,6 @@
 			<div class="container-fluid shadow p-5"
 				style="width: 33vw; height: 50vh">
 
-
-
 				<p:inputTextarea placeholder="Description de votre projet"
 					value="#{projectPageBean.project.description}" id="SummaryInput"
 					autoResize="false" style="height:100%; width:100%" />
@@ -25,7 +23,7 @@
 				<div class="col-12 d-grid">
 					<h:commandButton
 						styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-						action="#{projectPageBean.changeDescription}"
+						action="#{projectPageBean.updateProject}"
 						oncomplete="PF('descriptionPop').hide()" value="Valider" />
 				</div>
 

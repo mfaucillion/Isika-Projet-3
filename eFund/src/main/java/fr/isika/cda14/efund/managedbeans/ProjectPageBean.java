@@ -69,8 +69,8 @@ public class ProjectPageBean {
 		return remainingDays;
 	}
 	
-	public void changeDescription() {
-		
+	public void updateProject() {
+		projectService.update(project);
 	}
 
 	public Project getProject() {
