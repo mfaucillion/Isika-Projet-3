@@ -39,13 +39,11 @@
 										src="#{projectPageBean.project.imagePath}" />
 								</div>
 								<div class="col-12 col-md-6 my-auto pb-4">
-									<h5>Description: bla bla blabla bla blabla bla blabla bla
-										blabla bla blabla bla blabla bla blabla bla blabla bla blabla
-										bla blabla bla blabla bla bla bla bla bla bla bla bla bla bla
-										bla bla bla bla bla bla bla bla bla bla bla bla bla</h5>
+									<h5>#{projectPageBean.project.description}</h5>
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la Description" action="#" />
+										title="Editer la Description" type="button"
+										onclick="PF('descriptionPop').show()" />
 								</div>
 							</div>
 
@@ -197,6 +195,12 @@
 					</div>
 				</div>
 			</div>
+
+
+			<ui:include
+				src="WEB-INF/subpage/projectPage/modifDescriptionPopup.xhtml" />
+
+
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -68,6 +68,10 @@ public class ProjectPageBean {
 		}
 		return remainingDays;
 	}
+	
+	public void changeDescription() {
+		
+	}
 
 	public Project getProject() {
 		return project;
