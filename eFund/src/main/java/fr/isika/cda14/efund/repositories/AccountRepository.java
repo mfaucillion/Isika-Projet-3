@@ -96,22 +96,25 @@ public class AccountRepository {
 	}
 
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
-
+		System.out.println("0");
 		/* On force le Fetching de la collection d'Items dans le Shop */
 		String query = "SELECT distinct shop FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN space.shop shop INNER JOIN FETCH shop.items WHERE org.id=:id";
+				+ "INNER JOIN space.shop shop LEFT JOIN FETCH shop.items WHERE org.id=:id";
 		Shop shop = em.createQuery(query, Shop.class).setParameter("id", id).getSingleResult();
+		System.out.println("1");
 
 		/* On force le Fetching de la collection de Projects dans le Space */
 		query = "SELECT distinct space FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN FETCH space.projects INNER JOIN space.shop shop WHERE space.shop in :shop";
+				+ "LEFT JOIN FETCH space.projects INNER JOIN space.shop shop WHERE space.shop in :shop";
 		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class).setParameter("shop", shop)
 				.getSingleResult();
+		System.out.println("2");
 
 		/* On force le Fetching de la collection d'Events dans le Space */
 		query = "SELECT distinct space FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
-				+ "INNER JOIN FETCH space.events INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
+				+ "LEFT JOIN FETCH space.events INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
+		System.out.println("3");
 
 		/* On force le Fetching de la collection de ContentTabs dans le Space */
 
@@ -119,12 +122,14 @@ public class AccountRepository {
 				+ "LEFT JOIN FETCH space.contentBlocks INNER JOIN space.shop shop "
 				+ "WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
+		System.out.println("4");
 
 		/* On relie le tout et on sort notre OrganizationAccount */
 		query = "SELECT distinct org FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
 				+ "INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
 		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("space", space)
 				.getSingleResult();
+		System.out.println("5");
 
 		return account;
 	}
