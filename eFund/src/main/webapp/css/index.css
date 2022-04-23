@@ -20,3 +20,12 @@ h5{
 h1, h4{
 	color: #426CB4;
 }
+
+hr{
+	opacity: 1;
+	background-color: #426CB4;
+	height: 1px !important;
+	border: none;
+	width: 50%;
+	margin:auto;
+}
