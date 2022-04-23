@@ -23,7 +23,7 @@ public class ProjectPageBean {
 
 	@Inject
 	private ProjectService projectService;
-	
+
 	@Inject
 	private InteractionService interactionService;
 
@@ -64,20 +64,35 @@ public class ProjectPageBean {
 
 	private Long calculRemainingDays() {
 		Date endDate = new Date(this.project.getEndDate().getTime());
-		System.out.println(endDate);
 		ZonedDateTime endDateTime = ZonedDateTime.ofInstant(endDate.toInstant(), ZoneId.of("UTC"));
 		Long remainingDays = ChronoUnit.DAYS.between(ZonedDateTime.now(), endDateTime);
-		
+
 		if (remainingDays < 0) {
 			remainingDays = 0L;
 		}
 		return remainingDays;
 	}
+
+	/* Méthodes d'interaction User -> Project */
 	
+	/* Section Favoris */
+
 	public void addFavorite() {
 		interactionService.addFavorite(SessionTool.getUserId(), project);
 	}
-	
+
+	public void removeFavorite() {
+		interactionService.removeFavorite(SessionTool.getUserId(), project.getId());
+	}
+
+	public Boolean isFaved() {
+		return interactionService.checkFavorite(SessionTool.getUserId(), project.getId());
+	}
+
+	public void addLike() {
+		interactionService.addLike(SessionTool.getUserId(), project);
+	}
+
 	public void updateProject() {
 		projectService.update(project);
 	}

@@ -3,7 +3,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
@@ -35,7 +34,7 @@
 
 							<div class="row">
 								<div class="col-12 col-lg-6 text-center">
-									<img class="img-fluid mb-4" style="object-fit:cover"
+									<img class="img-fluid mb-4" style="object-fit: cover"
 										src="#{projectPageBean.project.imagePath}" />
 								</div>
 								<div class="col-12 col-lg-6 my-auto pb-4">
@@ -139,10 +138,10 @@
 							<div class="col-12 col-md-10">
 								<br />
 								<div class="text-center">
-										<p:knob foregroundColor="#426CB4" backgroundColor="#4f4f4f"
-											disabled="true"
-											labelTemplate="#{projectPageBean.remainingDays}"
-											value="#{projectPageBean.countDown(projectPageBean.remainingDays, projectPageBean.donationDuration)}" />
+									<p:knob foregroundColor="#426CB4" backgroundColor="#4f4f4f"
+										disabled="true"
+										labelTemplate="#{projectPageBean.remainingDays}"
+										value="#{projectPageBean.countDown(projectPageBean.remainingDays, projectPageBean.donationDuration)}" />
 								</div>
 
 								<div class="row justify-content-center mb-5">Il vous reste
@@ -175,15 +174,26 @@
 
 								<div class="row mt-3 text-center">
 									<div class="col-12 col-md-4" />
+									
 									<div class="col-6 col-md-2">
-										<p:commandButton icon="fa-regular fa-heart"
-											styleClass="rounded-button ui-button-danger ui-button-outlined"
-											title="Ajouter aux favoris" action="#{projectPageBean.addFavorite}" />
+										<h:form rendered="#{loginBean.isUser()}">
+											<p:commandButton icon="fa-regular fa-heart"
+												styleClass="rounded-button ui-button-danger"
+												title="Ajouter aux favoris"
+												action="#{projectPageBean.addFavorite}" 
+												rendered="#{!projectPageBean.isFaved()}" />
+												
+											<p:commandButton icon="fa-regular fa-heart"
+													styleClass="rounded-button ui-button-danger ui-button-outlined"
+													title="Ajouter aux favoris"
+													action="#{projectPageBean.removeFavorite}"
+													rendered="#{projectPageBean.isFaved()}" />
+										</h:form>
 									</div>
 									<div class="col-6 col-md-2">
 										<p:commandButton icon="fa-regular fa-thumbs-up"
 											styleClass="rounded-button ui-button-primary ui-button-outlined"
-											title="J'aime" action="#" />
+											title="J'aime" action="#{projectPageBean.addLike}" />
 									</div>
 								</div>
 

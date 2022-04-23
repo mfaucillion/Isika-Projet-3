@@ -63,14 +63,15 @@ public abstract class GenericProject {
 	@Column(name = "project_status")
 	protected ProjectStatus projectStatus;
 
-	@OneToMany
-	@JoinColumn(name = "generic_project_id")
-	protected List<UserLike> likes;
+	
 
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Comment> comments;
 
+	@OneToMany(mappedBy = "genericProject")
+	protected List<UserLike> likes;
+	
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<ContentBlock> contentBlocks;
