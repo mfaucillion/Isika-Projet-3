@@ -16,6 +16,7 @@ import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.InteractionService;
 import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.tool.SessionTool;
+import fr.isika.cda14.efund.viewmodel.DonationVM;
 
 @ManagedBean
 @ViewScoped
@@ -26,6 +27,8 @@ public class ProjectPageBean {
 
 	@Inject
 	private InteractionService interactionService;
+	
+	private DonationVM donationVM = new DonationVM();
 
 	private Project project;
 
@@ -102,6 +105,12 @@ public class ProjectPageBean {
 	public Boolean isLiked() {
 		return interactionService.checkLike(SessionTool.getUserId(), project.getId());
 	}
+	
+	/* Ajout de Donation */
+	
+	public void createDonation() {
+		projectService.createDonation(donationVM, project.getId());
+	}
 
 	public void updateProject() {
 		projectService.update(project);
@@ -122,5 +131,15 @@ public class ProjectPageBean {
 	public Long getDonationDuration() {
 		return donationDuration;
 	}
+
+	public DonationVM getDonationVM() {
+		return donationVM;
+	}
+
+	public void setDonationVM(DonationVM donationVM) {
+		this.donationVM = donationVM;
+	}
+	
+	
 
 }

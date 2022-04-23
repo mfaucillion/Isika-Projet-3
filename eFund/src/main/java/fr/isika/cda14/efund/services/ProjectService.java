@@ -17,6 +17,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.DonationRepository;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
+import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -73,8 +74,8 @@ public class ProjectService {
 		newDon.setExpirationDate(donationVM.getExpirationDate());
 		newDon.setCryptogram(donationVM.getCryptogram());
 
-		// UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
-		UserAccount userAccount = accountRepo.findUser(1000L);
+		UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
+		//UserAccount userAccount = accountRepo.findUser(1000L);
 		newDon.setUserSpace(userAccount.getUserSpace());
 
 		Project project = projectRepo.findProject(id);

@@ -8,8 +8,10 @@
 
 <h:body>
 	<h:form id="projDescriptionForm">
-		<p:dialog widgetVar="descriptionPop" modal="true"
-			header="Description du projet">
+		<p:dialog widgetVar="descriptionPop" modal="true">
+			<f:facet name="header">
+				<h1>Description</h1>
+			</f:facet>
 
 			<div class="container-fluid shadow p-5"
 				style="width: 33vw; height: 50vh">
