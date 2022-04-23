@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.managedbeans;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,23 +7,19 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
-import fr.isika.cda14.efund.entity.common.Address;
-import fr.isika.cda14.efund.entity.enums.OrderStatus;
-import fr.isika.cda14.efund.entity.shop.BasketOrder;
+
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
-import fr.isika.cda14.efund.repositories.AccountRepository;
-import fr.isika.cda14.efund.repositories.ShopRepository;
-import fr.isika.cda14.efund.services.AccountService;
+
+
 import fr.isika.cda14.efund.services.ShopService;
-import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
 @SessionScoped
 public class ShopBean {
 
 	private Integer sumOfCart;
-	
+
 	private String orderId;
 
 	@Inject
@@ -46,7 +41,7 @@ public class ShopBean {
 	}
 
 	public void addOrderLineToCart(Long id) {
-		Item item=shopService.findItem(id);
+		Item item = shopService.findItem(id);
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
 		if (cart.isEmpty()) {
@@ -79,9 +74,10 @@ public class ShopBean {
 		System.out.println(Long.toString(shopService.payMyCart(cart).getId()));
 		return "userProfil";
 	}
+
 	public Integer sumOfmyCart(List<OrderLine> cart) {
-		sumOfCart=shopService.sumOfmyCart(cart);
-		return sumOfCart;	
+		sumOfCart = shopService.sumOfmyCart(cart);
+		return sumOfCart;
 	}
 
 	public List<OrderLine> getCart() {
