@@ -28,9 +28,11 @@ public class InteractionService {
 		UserLike like = new UserLike();
 
 		UserAccount user = accountService.findUserAccountById(userId);
-		
+
 		like.setGenericProject(project);
 		like.setUserSpace(user.getUserSpace());
+		
+		repo.persists(like);
 	}
 	
 	
@@ -55,6 +57,20 @@ public class InteractionService {
 		UserAccount user = accountService.findUserAccountById(userId);
 		Favorite fav = repo.getFavorite(user.getUserSpace().getId(), projId);
 		repo.remove(fav);
+	}
+
+
+	public Boolean checkLike(Long userId, Long projId) {
+		UserAccount user = accountService.findUserAccountById(userId);
+		List<UserLike> result = repo.checkLike(user.getUserSpace().getId(), projId);
+		return !result.isEmpty();
+	}
+
+
+	public void removeLike(Long userId, Long projId) {
+		UserAccount user = accountService.findUserAccountById(userId);
+		UserLike like = repo.getLike(user.getUserSpace().getId(), projId);
+		repo.remove(like);
 	}
 
 }

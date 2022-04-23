@@ -13,8 +13,8 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Project;
-import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.services.InteractionService;
+import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.tool.SessionTool;
 
 @ManagedBean
@@ -74,7 +74,7 @@ public class ProjectPageBean {
 	}
 
 	/* Méthodes d'interaction User -> Project */
-	
+
 	/* Section Favoris */
 
 	public void addFavorite() {
@@ -89,8 +89,18 @@ public class ProjectPageBean {
 		return interactionService.checkFavorite(SessionTool.getUserId(), project.getId());
 	}
 
+	/* Section Likes */
+
 	public void addLike() {
 		interactionService.addLike(SessionTool.getUserId(), project);
+	}
+
+	public void removeLike() {
+		interactionService.removeLike(SessionTool.getUserId(), project.getId());
+	}
+
+	public Boolean isLiked() {
+		return interactionService.checkLike(SessionTool.getUserId(), project.getId());
 	}
 
 	public void updateProject() {

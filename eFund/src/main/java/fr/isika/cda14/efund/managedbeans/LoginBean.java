@@ -59,7 +59,8 @@ public class LoginBean {
 	}
 	
 	public Boolean isUser() {
-		if (SessionTool.getRole().equals(Role.USER.toString())) {
+		String role = SessionTool.getRole();
+		if (role != null && role.equals(Role.USER.toString())) {
 			return true;
 		} else {
 			return false;
