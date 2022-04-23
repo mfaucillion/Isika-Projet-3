@@ -161,49 +161,51 @@
 
 									#{projectPageBean.project.currentAmount}€ collectés sur
 									#{projectPageBean.project.targetAmount}€</div>
-									
+
 								<h:form rendered="#{loginBean.isUser()}">
 									<div class="row mt-5 mb-3 text-center">
 										<div class="col-12 col-md-2" />
 										<div class="col-12 col-md-8">
-											<p:linkButton icon="pi pi-euro"
+											<p:commandButton icon="pi pi-euro"
 												styleClass="ui-button-outlined ui-button-secondary rounded-pill"
 												value="Effectuer un don"
-												outcome="donationPage.xhtml?id=#{id}faces-redirect=true" />
+												type="button"
+												onclick="PF('donationPop').show()" />
 										</div>
 									</div>
-								
+
 									<div class="row mt-3 text-center">
 										<div class="col-12 col-md-4" />
-										
+
 										<div class="col-6 col-md-2">
-											
-											<p:commandButton icon="fa-regular fa-heart"
-											type="submit"
+
+											<p:commandButton icon="fa-regular fa-heart" type="submit"
 												styleClass="rounded-button ui-button-danger"
 												title="Ajouter aux favoris"
-												action="#{projectPageBean.addFavorite}" 
-												rendered="#{!projectPageBean.isFaved()}" async="true" oncomplete="location.reload()"/>
-												
-											<p:commandButton icon="fa-regular fa-heart"
-											type="submit"
-													styleClass="rounded-button ui-button-danger ui-button-outlined"
-													title="Retirer des favoris"
-													action="#{projectPageBean.removeFavorite}"
-													rendered="#{projectPageBean.isFaved()}" async="true" oncomplete="location.reload()"/>
-										
+												action="#{projectPageBean.addFavorite}"
+												rendered="#{!projectPageBean.isFaved()}" async="true"
+												oncomplete="location.reload()" />
+
+											<p:commandButton icon="fa-regular fa-heart" type="submit"
+												styleClass="rounded-button ui-button-danger ui-button-outlined"
+												title="Retirer des favoris"
+												action="#{projectPageBean.removeFavorite}"
+												rendered="#{projectPageBean.isFaved()}" async="true"
+												oncomplete="location.reload()" />
+
 										</div>
 										<div class="col-6 col-md-2">
-											<p:commandButton icon="fa-regular fa-thumbs-up"
-											type="submit"
-												styleClass="rounded-button ui-button-primary"
-												title="J'aime" action="#{projectPageBean.addLike}" 
-												rendered="#{!projectPageBean.isLiked()}" async="true" oncomplete="location.reload()"/>
-											<p:commandButton icon="fa-regular fa-thumbs-up"
-											type="submit"
+											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"
+												styleClass="rounded-button ui-button-primary" title="J'aime"
+												action="#{projectPageBean.addLike}"
+												rendered="#{!projectPageBean.isLiked()}" async="true"
+												oncomplete="location.reload()" />
+											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"
 												styleClass="rounded-button ui-button-primary ui-button-outlined"
-												title="Je n'aime plus" action="#{projectPageBean.removeLike}" 
-												rendered="#{projectPageBean.isLiked()}" async="true" oncomplete="location.reload()"/>
+												title="Je n'aime plus"
+												action="#{projectPageBean.removeLike}"
+												rendered="#{projectPageBean.isLiked()}" async="true"
+												oncomplete="location.reload()" />
 										</div>
 									</div>
 								</h:form>
@@ -214,11 +216,11 @@
 				</div>
 			</div>
 
-
 			<ui:include
 				src="WEB-INF/subpage/projectPage/modifDescriptionPopup.xhtml" />
-
-
+			<ui:include
+				src="WEB-INF/subpage/projectPage/donationPopup.xhtml" />
+				
 		</ui:define>
 	</ui:composition>
 </h:body>
