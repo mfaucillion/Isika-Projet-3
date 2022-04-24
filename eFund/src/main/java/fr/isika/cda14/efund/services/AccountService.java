@@ -13,6 +13,7 @@ import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.account.UserInfo;
 import fr.isika.cda14.efund.entity.common.Address;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.entity.project.Donation;
@@ -25,6 +26,7 @@ import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 import fr.isika.cda14.efund.exception.UserAlreadyExistsException;
 import fr.isika.cda14.efund.repositories.AccountRepository;
+import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 import fr.isika.cda14.efund.viewmodel.OrganizationForm;
 
@@ -169,5 +171,20 @@ public class AccountService {
 
 	public List<EventRegistration> getRegistrations(Long userSpaceId) {
 		return repo.getRegistrations(userSpaceId);
+	}
+
+	public void addContent(ContentVM contentVM, OrganizationSpace organizationSpace) {
+		ContentBlock newBlock = new ContentBlock();
+		
+		newBlock.setContent(contentVM.getContent());
+		newBlock.setType(contentVM.getType());
+		
+		organizationSpace.getContentBlocks().add(newBlock);
+		repo.update(organizationSpace);
+	}
+
+	public void removeBlock(Long blockId) {
+		ContentBlock block = repo.findBlock(blockId);
+		repo.removeBlock(block);
 	}
 }

@@ -32,7 +32,7 @@ public class OrganizationSpace {
 	@JoinColumn(name = "organization_space_id")
 	private List<Follow> follows;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_space_id")
 	private List<ContentBlock> contentBlocks;
 	

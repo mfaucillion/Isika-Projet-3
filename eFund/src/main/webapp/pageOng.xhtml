@@ -5,8 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:o="http://java.sun.com/jsf/html">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <f:metadata>
 	<f:viewParam name="id" />
@@ -39,26 +38,46 @@
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
-						
-						<hr/>
-						
+
+						<hr />
+
 						<p>#{organizationSpaceBean.orgAccount.organizationInfo.description}</p>
 					</div>
 				</div>
 
 				<p:tabView styleClass="rounded">
 
-					<p:tab title="Contenu">
-						<p:button outcome="createBlockTxt?tabId=#{tab.id}"
-							value="Ajouter un bloc de text" />
-						<p:button outcome="createBlockImg?tabId=#{tab.id}"
-							value="Ajouter une image" />
-						<p:button outcome="createBlockVideo?tabId=#{tab.id}"
-							value="Ajouter une video" />
+					<p:tab title="Présentation">
+
+						<p:commandButton icon="fa-solid fa-align-justify"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Ajouter un bloc de texte" type="button"
+							onclick="PF('addTxtBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
+
+						<p:commandButton icon="fa-solid fa-image"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Ajouter une image" type="button"
+							onclick="PF('addImgBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
+
+						<p:commandButton icon="fa-solid fa-film"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Ajouter une video" type="button"
+							onclick="PF('addVidBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
+
 						<div class="container mx-auto text-center">
-							<h2 class="text-center">#{tab.name}</h2>
-							<hr style="border: 2px" />
+							<h2 class="text-center">Présentation</h2>
+							<hr />
 							<p:repeat var="block" value="#{organizationSpaceBean.blocks}">
+
+								<h:form>
+									<p:commandButton icon="fa-solid fa-minus"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+										title="Supprimer le bloc"
+										action="#{organizationSpaceBean.removeBlock(block.id)}" ajax="false" rendered="#{organizationSpaceBean.isOwner}"/>
+								</h:form>
 								<p:outputLabel
 									rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}"
 									style="font-size: 25px !important">#{block.content}</p:outputLabel>
@@ -75,7 +94,7 @@
 												<h:outputLink
 										value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
 								</p:video>
-								<hr style="border: 2px" />
+								<hr />
 							</p:repeat>
 						</div>
 					</p:tab>
@@ -93,6 +112,10 @@
 							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
+
+						<h2 class="text-center">Boutique</h2>
+						<hr />
+
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
@@ -160,6 +183,8 @@
 							<i class="fa-solid fa-plus" />
 						</p:link>
 						<p:tooltip for="newProject" value="Nouveau Projet" />
+						<h2 class="text-center">Nos projets</h2>
+						<hr />
 						<div class="row">
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
 								<div
@@ -190,26 +215,29 @@
 												</div>
 											</f:facet>
 											<f:facet name="subtitle">
-											<p>#{project.projectCategory.projectCategoryLabel}</p>
-											<p>#{project.summary}</p>
-										</f:facet>
+												<p>#{project.projectCategory.projectCategoryLabel}</p>
+												<p>#{project.summary}</p>
+											</f:facet>
 											<f:facet name="footer">
-												<div><i class="fa-solid fa-location-dot"></i> #{project.location}</div>
-										<div class="progress">
-											<div
-												class="progress-bar progress-bar-striped progress-bar-animated"
-												style="width:#{projectsListBean.percentage(project.currentAmount, project.targetAmount)}%">
-												#{projectsListBean.percentage(project.currentAmount,
-												project.targetAmount)}%</div>
-										</div>
-										<div
-											class="d-flex justify-content-between align-items-bottom pb-2">
+												<div>
+													<i class="fa-solid fa-location-dot"></i>
+													#{project.location}
+												</div>
+												<div class="progress">
+													<div
+														class="progress-bar progress-bar-striped progress-bar-animated"
+														style="width:#{projectsListBean.percentage(project.currentAmount, project.targetAmount)}%">
+														#{projectsListBean.percentage(project.currentAmount,
+														project.targetAmount)}%</div>
+												</div>
+												<div
+													class="d-flex justify-content-between align-items-bottom pb-2">
 
-											<p>#{project.currentAmount.intValue()} € sur
-												#{project.targetAmount.intValue()}</p>
-											<p>J -
-												#{projectsListBean.calculRemainingDays(project.endDate)}</p>
-										</div>
+													<p>#{project.currentAmount.intValue()} € sur
+														#{project.targetAmount.intValue()}</p>
+													<p>J -
+														#{projectsListBean.calculRemainingDays(project.endDate)}</p>
+												</div>
 											</f:facet>
 										</p:card>
 									</h:link>
@@ -227,6 +255,9 @@
 							id="newEvent" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
+
+						<h2 class="text-center">Nos évènements</h2>
+						<hr />
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
 								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
@@ -277,6 +308,10 @@
 					</p:tab>
 				</p:tabView>
 			</div>
+
+			<ui:include src="WEB-INF/subpage/ongPage/txtBlockPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/ongPage/imgBlockPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/ongPage/vidBlockPopup.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>
