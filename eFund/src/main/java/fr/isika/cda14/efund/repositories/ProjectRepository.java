@@ -88,4 +88,5 @@ public class ProjectRepository {
 	public void removeGoal(StretchGoal goal) {
 		em.remove(goal);		
 	}
+
 }

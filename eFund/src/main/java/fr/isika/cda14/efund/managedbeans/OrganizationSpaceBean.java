@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.swing.JTable;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
@@ -92,9 +93,7 @@ public class OrganizationSpaceBean {
 	}
 
 	public OrderLine createOrderLine(Item item) {
-
 		return shopService.createOrderLine(item);
-
 	}
 
 	public void deleteItem(String id) {
@@ -111,6 +110,11 @@ public class OrganizationSpaceBean {
 
 	public int pourcentage(BigDecimal current, BigDecimal target) {
 		return (current.intValue() * 100 / target.intValue());
+	}
+	
+	public void submitDraftProject(String id) {
+		//projectService.findProject(Long.parseLong(id));
+		projectService.changeStatusToSubmit();
 	}
 
 	public OrganizationAccount getOrgAccount() {

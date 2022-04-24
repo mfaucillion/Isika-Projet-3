@@ -35,6 +35,8 @@ public class ProjectService {
 
 	@Inject
 	private DonationRepository donationRepo;
+	
+	private static final String STATUS = "SUBMITTED";
 
 	public void create(ProjectCreationFormVM projectCreationFormVM, Long id) {
 		Project newProject = new Project();
@@ -144,6 +146,11 @@ public class ProjectService {
 	public void removeGoal(Long goalId) {
 		StretchGoal goal = projectRepo.findGoal(goalId);
 		projectRepo.removeGoal(goal);
+	}
+
+	public void changeStatusToSubmit(Long id) {
+		Project project = projectRepo.findProject(id);
+		project.setProjectStatus(STATUS);
 	}
 
 }

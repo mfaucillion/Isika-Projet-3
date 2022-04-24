@@ -337,9 +337,43 @@
 							</div>
 							<div class="row">
 								<div class="col-12 col-md-9">
-								#{organizationSpaceBean.orgAccount.organizationInfo.summary}
-								</div>
+									#{organizationSpaceBean.orgAccount.organizationInfo.summary}</div>
+								<br />
+								#{organizationSpaceBean.orgAccount.organizationInfo.description}
+
 							</div>
+						</div>
+					</p:tab>
+
+					<p:tab title="Gestion des projets"
+						rendered="#{organizationSpaceBean.isOwner}">
+						<div class="col-12 col-md-9">
+							<h:form>
+								<p:dataTable var="proj"
+									value="#{organizationSpaceBean.projects}">
+									<p:column headerText="id">
+										<h:outputText value="#{proj.id}" />
+									</p:column>
+									<p:column headerText="Nom">
+										<h:outputText value="#{proj.name}" />
+									</p:column>
+									<p:column headerText="Résumé">
+										<h:outputText value="#{proj.summary}" />
+									</p:column>
+									<p:column headerText="Statut">
+										<h:outputText value="#{proj.projectStatus}" />
+									</p:column>
+									<p:column headerText="Action (si besoin)" >
+										<p:commandButton class="ui-button-warning rounded-button"
+											icon="pi pi-envelope" action="#" />
+										<p:commandButton type="button"
+											icon="fa-solid fa-file-arrow-up" action="#" value="Soumettre"
+											styleClass="ui-button-raised ui-button-success" />
+									</p:column>
+								</p:dataTable>
+
+							</h:form>
+
 						</div>
 					</p:tab>
 
