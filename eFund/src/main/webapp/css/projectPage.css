@@ -2,28 +2,25 @@
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	margin: 10px 0px 0px 10px;
-	
-}	
+}
 
 #projectPageBody .ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-state-active {
 	border: 2px solid !important;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	margin: 10px 0px 0px 10px;
-	
 }
 
-#projectPageBody .ui-tabs-nav{
+#projectPageBody .ui-tabs-nav {
 	background-color: #ededed !important;
 }
 
 #projectPageBody .ui-tabs-panels {
-	margin:0px 10px !important;
+	margin: 0px 10px !important;
 	border-radius: 0px 10px 10px 10px !important;
-	
 }
 
-#projectPageBody .ui-card-header img{
+#projectPageBody .ui-card-header img {
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 }
@@ -42,25 +39,24 @@
 }
 
 .container {
-	border-style:solid;
-	border-width:1px;
+	border-style: solid;
+	border-width: 1px;
 	border-color: #426CB4;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 
-.knob-container{
+.knob-container {
 	margin: auto;
-width: 45%;
-
+	width: 45%;
 }
 
-hr{
+hr {
 	opacity: 1;
 	background-color: #426CB4;
 	height: 1px !important;
 	border: none;
 }
 
-.img-fluid{
+.img-fluid {
 	border-radius: 5px;
 }
