@@ -61,6 +61,9 @@ public class ProjectPageBean {
 	
 	/* Calculs pour l'affichage */
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
+		if (target.intValue() == 0) {
+			return 100;
+		}
 		return (currentCollect.intValue() * 100) / target.intValue();
 	}
 
