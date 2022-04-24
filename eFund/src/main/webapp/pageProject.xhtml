@@ -58,10 +58,10 @@
 						<br />
 
 						<div class="col-12 mb-5">
-						
+
 							<!-- DEBUT DE TABVIEW -->
 							<p:tabView>
-							
+
 								<!-- Onglet Campagne -->
 								<p:tab>
 									<f:facet name="title">
@@ -127,35 +127,36 @@
 									<f:facet name="title">
 										<i class="fa-solid fa-euro-sign" /> Objectifs
 									</f:facet>
-									
+
 									<h2 class="text-center">Dépassement des objectifs</h2>
-									
+
 									<p:commandButton icon="fa-solid fa-plus"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un palier d'objectif" type="button"
 										onclick="PF('addGoalPop').show()" />
-										
+
 									<p:repeat var="goal"
 										value="#{projectPageBean.project.stretchGoals}"
 										varStatus="status">
 
 										<ul>
 											<li>
-												<h5>Palier #{status.index + 1} : <b>#{goal.target} €</b></h5>
-												<h:form>
-												<p>
-													<p:commandButton icon="fa-solid fa-minus"
-														styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
-														title="Supprimer le palier d'objectif"
-														action="#{projectPageBean.removeGoal(goal.id)}"
-														ajax="false" />
+												<h5>
+													Palier #{status.index + 1} : <b>#{goal.target} €</b>
+												</h5> <h:form>
+													<p>
+														<p:commandButton icon="fa-solid fa-minus"
+															styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+															title="Supprimer le palier d'objectif"
+															action="#{projectPageBean.removeGoal(goal.id)}"
+															ajax="false" />
 														#{goal.description}
-												</p>
+													</p>
 												</h:form>
 											</li>
 										</ul>
-										<hr/>
-										
+										<hr />
+
 									</p:repeat>
 								</p:tab>
 								<p:tab>
@@ -169,7 +170,7 @@
 									<p>FAQ: bla bla bla</p>
 
 								</p:tab>
-								
+
 								<!-- Onglet FAQ -->
 								<p:tab>
 									<f:facet name="title">
@@ -182,10 +183,10 @@
 									<p>FAQ: bla bla bla</p>
 
 								</p:tab>
-								
+
 							</p:tabView>
 							<!-- FIN DE TABVIEW -->
-							
+
 						</div>
 					</div>
 					<div class="col-12 col-xxl-4">

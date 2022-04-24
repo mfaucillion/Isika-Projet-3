@@ -51,23 +51,33 @@
 
 						<p:commandButton icon="fa-solid fa-align-justify"
 							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
-							title="Ajouter un bloc de text" type="button"
-							onclick="PF('addTxtBlockPop').show()" rendered="#{organizationSpaceBean.isOwner}"/>
+							title="Ajouter un bloc de texte" type="button"
+							onclick="PF('addTxtBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
 
 						<p:commandButton icon="fa-solid fa-image"
 							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 							title="Ajouter une image" type="button"
-							onclick="PF('addImgBlockPop').show()" rendered="#{organizationSpaceBean.isOwner}"/>
+							onclick="PF('addImgBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
 
 						<p:commandButton icon="fa-solid fa-film"
 							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 							title="Ajouter une video" type="button"
-							onclick="PF('addVidBlockPop').show()" rendered="#{organizationSpaceBean.isOwner}"/>
+							onclick="PF('addVidBlockPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
 
 						<div class="container mx-auto text-center">
 							<h2 class="text-center">Présentation</h2>
-							<hr/>
+							<hr />
 							<p:repeat var="block" value="#{organizationSpaceBean.blocks}">
+
+								<h:form>
+									<p:commandButton icon="fa-solid fa-minus"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+										title="Supprimer le bloc"
+										action="#{organizationSpaceBean.removeBlock(block.id)}" ajax="false" rendered="#{organizationSpaceBean.isOwner}"/>
+								</h:form>
 								<p:outputLabel
 									rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}"
 									style="font-size: 25px !important">#{block.content}</p:outputLabel>
@@ -84,7 +94,7 @@
 												<h:outputLink
 										value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
 								</p:video>
-								<hr/>
+								<hr />
 							</p:repeat>
 						</div>
 					</p:tab>
@@ -102,10 +112,10 @@
 							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
-						
+
 						<h2 class="text-center">Boutique</h2>
-						<hr/>
-						
+						<hr />
+
 						<p:tooltip for="newProduct" value="Nouveau Produit"
 							position="right" />
 						<div class="row">
@@ -174,7 +184,7 @@
 						</p:link>
 						<p:tooltip for="newProject" value="Nouveau Projet" />
 						<h2 class="text-center">Nos projets</h2>
-							<hr/>
+						<hr />
 						<div class="row">
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
 								<div
@@ -245,9 +255,9 @@
 							id="newEvent" rendered="#{organizationSpaceBean.isOwner}">
 							<i class="fa-solid fa-plus" />
 						</p:link>
-						
+
 						<h2 class="text-center">Nos évènements</h2>
-							<hr/>
+						<hr />
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
 								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
