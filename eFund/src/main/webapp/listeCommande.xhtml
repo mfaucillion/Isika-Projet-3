@@ -6,8 +6,8 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 	<f:metadata>
-	
 	<f:viewParam name="itemId"/>
+	<f:viewParam name="cart" value="#{shopBean.cart}"/>
 
 	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView"/>
 
@@ -21,7 +21,7 @@
 		<ui:define name="content">
 
 			<div class="card">
-				<p:dataTable id="cart" var="orderLine" value="#{shopBean.cart}">
+				<p:dataTable var="orderLine" value="#{shopBean.cart}">
 					<p:column headerText="ID du produit">
 						<p:outputLabel value="#{orderLine.item.id}" />
 					</p:column>
@@ -46,9 +46,10 @@
 
 				</p:dataTable>
 				<h:form>
-					<p:commandLink type="button" action="#{shopBean.payMyCart(shopBean.cart)}">
+					<p:linkButton type="button" action="#{shopBean.payMyCart(shopBean.cart)}" value="payer" outcome="userProfil?id=#{shopBean.userIdFromSession}faces-redirect=true">
+					
 						<h:outputText  value="payer #{shopBean.sumOfmyCart(shopBean.cart)} euros" />
-					</p:commandLink>
+					</p:linkButton>
 				</h:form>
 			</div>
 

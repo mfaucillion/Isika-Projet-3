@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.services;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -57,7 +58,9 @@ public class ShopService {
 	public OrderLine createOrderLine(Item item) {
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
+		//orderLine.setQuantity(0);
+		//orderLine.setDate(Calendar.getInstance().getTime());
+		//shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
 		return orderLine;
 
 	}
@@ -72,22 +75,22 @@ public class ShopService {
 	 * oui, incrmeneter la quantité
 	 */
 
-	//public OrderLine createOrderLine(Long id) {
-	//Item item = shopRepo.findItem(id);
+	// public OrderLine createOrderLine(Long id) {
+	// Item item = shopRepo.findItem(id);
 	/* si l'id de l'item exist, je ne cree pas d'orderLine sinon ok */
-	//	OrderLine orderLine = new OrderLine();
-	//orderLine.setItem(item);
-	//shopRepo.add(orderLine);
-	//return orderLine;
-	//}
+	// OrderLine orderLine = new OrderLine();
+	// orderLine.setItem(item);
+	// shopRepo.add(orderLine);
+	// return orderLine;
+	// }
 
-	/* Calcul du prix total de mon cart*/
+	/* Calcul du prix total de mon cart */
 	public Integer sumOfmyCart(List<OrderLine> cart) {
-		if(cart.isEmpty()) {
-			sumOfCart=0;
-		}else {
-			for(int i=0; i<cart.size();i++) {
-				sumOfCart+=(cart.get(i).getQuantity()*cart.get(i).getItem().getPrice().intValueExact());
+		if (cart.isEmpty()) {
+			sumOfCart = 0;
+		} else {
+			for (int i = 0; i < cart.size(); i++) {
+				sumOfCart += (cart.get(i).getQuantity() * cart.get(i).getItem().getPrice().intValueExact());
 			}
 		}
 		return sumOfCart;
@@ -95,20 +98,21 @@ public class ShopService {
 	}
 
 	public BasketOrder payMyCart(List<OrderLine> cart) {
-		BasketOrder basketOrder=new BasketOrder();
+		BasketOrder basketOrder = new BasketOrder();
 		basketOrder.setOrderLines(cart);
-		Integer totalitemQuantity=0;
-		for(int i=0;i<cart.size();i++) {
-			totalitemQuantity+=cart.get(i).getQuantity();
+		Integer totalitemQuantity = 0;
+		for (int i = 0; i < cart.size(); i++) {
+			totalitemQuantity += cart.get(i).getQuantity();
 		}
 		basketOrder.setTotalItemsQuantity(totalitemQuantity);
 		basketOrder.setTotalPrice(BigDecimal.valueOf(sumOfCart));
 		basketOrder.setStatus(OrderStatus.PROCESSING);
 		basketOrder.setDate(cart.get(0).getDate());// La date du cart est la date de n'importe quel element
-		Address adr=repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
+		System.out.println("La date de cette commande est le"+basketOrder.getDate());
+		Address adr = repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
+		System.out.println("L'adresse de mon user est"+adr);
 		basketOrder.setBillingAddress(adr);
 		return basketOrder;
-
 
 	}
 
