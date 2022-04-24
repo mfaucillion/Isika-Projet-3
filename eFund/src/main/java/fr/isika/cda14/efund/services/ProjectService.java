@@ -84,7 +84,7 @@ public class ProjectService {
 		newDon.setCryptogram(donationVM.getCryptogram());
 
 		UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
-		//UserAccount userAccount = accountRepo.findUser(1000L);
+
 		newDon.setUserSpace(userAccount.getUserSpace());
 
 		Project project = projectRepo.findProject(id);

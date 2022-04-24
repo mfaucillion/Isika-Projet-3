@@ -66,9 +66,11 @@
 											#{project.name}
 										</f:facet>
 									<f:facet name="subtitle">
-											#{project.summary}
+											<p>#{project.projectCategory.projectCategoryLabel}</p>
+											<p>#{project.summary}</p>
 										</f:facet>
 									<f:facet name="footer">
+										<div><i class="fa-solid fa-location-dot"></i> #{project.location}</div>
 										<div class="progress">
 											<div
 												class="progress-bar progress-bar-striped progress-bar-animated"

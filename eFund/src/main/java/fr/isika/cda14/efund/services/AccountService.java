@@ -18,6 +18,7 @@ import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
@@ -127,6 +128,10 @@ public class AccountService {
 	// pour trouver mon orga
 	public OrganizationAccount findOrganizationAccount(Long id) {
 		return repo.findOrganization(id);
+	}
+	
+	public List<OrganizationAccount> searchOrganizationAccountFromPage(String searchOrganization) {
+		return repo.searchOrganizationAccountFromPage(searchOrganization);
 	}
 
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {

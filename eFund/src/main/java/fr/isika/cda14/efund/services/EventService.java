@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.EventRepository;
 
@@ -25,6 +26,10 @@ public class EventService {
 
 	public Event findEvent(Long id) {
 		return eventRepo.find(id);
+	}
+	
+	public List<Event> searchEventFromPage(String searchEvent) {
+		return eventRepo.searchEventFromPage(searchEvent);
 	}
 
 	public void deleteEvent(Long id) {

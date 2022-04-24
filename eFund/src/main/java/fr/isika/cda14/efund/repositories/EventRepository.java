@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.Project;
 
 @Stateless
 public class EventRepository {
@@ -24,8 +25,15 @@ public class EventRepository {
 		return events;
 	}
 
+	// recherche d'un event à partir d'un id
 	public Event find(Long id) {
 		return em.find(Event.class, id);
+	}
+	
+	// recherche d'un event par son nom à partir de la page EventList
+	public List<Event> searchEventFromPage(String searchEvent) {
+		String query = "SELECT eventName FROM Event eventName WHERE eventName.name LIKE CONCAT('%', :searchEvent, '%') ";
+		return em.createQuery(query, Event.class).setParameter("searchEvent", searchEvent).getResultList();
 	}
 
 	public void remove(Event event) {
