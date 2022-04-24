@@ -2,25 +2,22 @@
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	margin: 10px 0px 0px 10px;
-	
-}	
+}
 
 #ongPageBody .ui-tabs.ui-tabs-top .ui-tabs-nav li.ui-state-active {
 	border: 2px solid !important;
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 	margin: 10px 0px 0px 10px;
-	
 }
 
-#ongPageBody .ui-tabs-nav{
+#ongPageBody .ui-tabs-nav {
 	background-color: #ededed !important;
 }
 
 #ongPageBody .ui-tabs-panels {
-	margin:0px 10px !important;
+	margin: 0px 10px !important;
 	border-radius: 0px 10px 10px 10px !important;
-	
 }
 
 #ongPageBody .ui-tabs-nav:before {
@@ -31,7 +28,7 @@
 	background-color: #ededed;
 }
 
-.ui-card-header img{
+.ui-card-header img {
 	border-top-left-radius: 20px;
 	border-top-right-radius: 20px;
 }
@@ -42,24 +39,39 @@
 	border-color: #426CB4;
 }
 
-.container{
-	border-style:solid;
-	border-width:0px;
+.container {
+	border-style: solid;
+	border-width: 0px;
 	border-color: #426CB4;
 	border-radius: 10px;
 }
 
-h1{
+h1 {
 	color: #426CB4;
 }
 
-.ui-card-subtitle{
+.ui-card-subtitle {
 	height: 100px;
 }
-.ui-card-content{
+
+.ui-card-content {
 	padding: 0px !important;
 }
 
-.ui-card-footer{
-	height: 65px;
+.ui-card-footer {
+	height: 70px;
+}
+
+#imgOng {
+	border-style: solid;
+	border-width: 1px;
+	border-color: #426CB4;
+	border-radius: 10px;
+}
+
+hr {
+	opacity: 1;
+	background-color: #426CB4;
+	height: 1px !important;
+	border: none;
 }
