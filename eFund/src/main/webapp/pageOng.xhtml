@@ -347,13 +347,12 @@
 
 					<p:tab title="Gestion des projets"
 						rendered="#{organizationSpaceBean.isOwner}">
-						<div class="col-12 col-md-9">
+						<div class="col-9">
 							<h:form>
 								<p:dataTable var="proj"
-									value="#{organizationSpaceBean.projects}">
-									<p:column headerText="id">
-										<h:outputText value="#{proj.id}" />
-									</p:column>
+									value="#{organizationSpaceBean.projects}" reflow="true"
+									style="width:100% !important">
+
 									<p:column headerText="Nom">
 										<h:outputText value="#{proj.name}" />
 									</p:column>
@@ -363,15 +362,21 @@
 									<p:column headerText="Statut">
 										<h:outputText value="#{proj.projectStatus}" />
 									</p:column>
-									<p:column headerText="Action (si besoin)">
-										<!-- <p:commandButton class="ui-button-warning rounded-button"
-											icon="pi pi-envelope" action="#" /> -->
-										<p:commandButton 
-										rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
+									<p:column headerText="" style="align:left">
+										<p:commandButton
+											rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
 											icon="fa-solid fa-file-arrow-up"
 											action="#{organizationSpaceBean.submitDraftProject(proj.id)}"
-											value="Soumettre"
-											styleClass="ui-button-raised ui-button-success" />
+											value="Soumettre" update="@form"
+											styleClass="ui-button-outlined rounded-pill ui-button-raised ui-button-success" />
+									</p:column>
+									<p:column headerText="">
+										<p:commandButton class="ui-button-danger rounded-button"
+											action="#{organizationSpaceBean.deleteProject(proj.id)}"
+											update="@form"
+											rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
+											icon="pi pi-trash">
+										</p:commandButton>
 									</p:column>
 								</p:dataTable>
 
