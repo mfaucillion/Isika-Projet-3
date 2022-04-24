@@ -19,7 +19,7 @@
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 		<ui:define name="css">
-			<link rel="stylesheet" href="css/genericTabsCards.css" />
+			<link rel="stylesheet" href="css/ongPage.css" />
 		</ui:define>
 		<ui:define name="content">
 
@@ -27,12 +27,14 @@
 				<div class="row">
 					<div class="col-12 col-md-5 mb-3">
 						<img class="img-fluid" id="imgOng"
-							src="#{organizationSpaceBean.orgAccount.imagePath}" />
+							src="#{request.contextPath}/img/defaultOrgSpace.jpg" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
+							<img class="img-fluid" id="logoOng"
+							src="#{organizationSpaceBean.orgAccount.imagePath}" />
 							<p:link outcome="MODELE.xhtml"
 								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
@@ -76,7 +78,8 @@
 									<p:commandButton icon="fa-solid fa-minus"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
 										title="Supprimer le bloc"
-										action="#{organizationSpaceBean.removeBlock(block.id)}" ajax="false" rendered="#{organizationSpaceBean.isOwner}"/>
+										action="#{organizationSpaceBean.removeBlock(block.id)}"
+										ajax="false" rendered="#{organizationSpaceBean.isOwner}" />
 								</h:form>
 								<p:outputLabel
 									rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}"
@@ -121,52 +124,55 @@
 						<div class="row">
 
 							<p:repeat var="item" value="#{organizationSpaceBean.items}">
-								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
-									<p:card styleClass="shadow">
-										<f:facet name="header">
-											<img src="#{item.imagePath}" />
+								<div class="flip-card m-auto mb-4">
+									<div class="flip-card-inner">
+										<div class="flip-card-front">
+											<div class="col-12 col-md-12">
+												<p:card styleClass="shadow">
+													<f:facet name="header">
+														<img src="#{item.imagePath}" style="height: 150%"/>
+													</f:facet>
+													<f:facet name="title">
+														<div class="clearfix">#{item.label}</div>
+													</f:facet>
+													<f:facet name="subtitle">
+											#{item.itemCategory.label}
 										</f:facet>
-										<f:facet name="title">
-											<div class="clearfix">
-												#{item.label} #{item.id}
-												<div class="float-end">
-													<h:form id="delItem"
-														rendered="#{organizationSpaceBean.isOwner}">
-														<h:inputHidden name="id" value="#{id}" />
-														<h:commandLink
-															action="#{organizationSpaceBean.deleteItem(item.id)}"
-															id="delete-item-#{item.id}">
-															<i class="fa-solid fa-circle-minus fa-lg text-danger" />
-														</h:commandLink>
-													</h:form>
-												</div>
+													<f:facet name="footer">
+														<div class="m-3 clearfix">
+															<div class="float-start">Prix : #{item.price}€</div>
+															<div class="float-end">#{item.itemStatus.itemStatusLabel}</div>
+														</div>
+													</f:facet>
+												</p:card>
 											</div>
-										</f:facet>
-										<f:facet name="subtitle">
-											#{item.itemCategory}
-										</f:facet>
-										<p>#{item.description}</p>
-										<f:facet name="footer">
-											<div class="m-3 clearfix">
-												<div class="float-start">Prix : #{item.price}€</div>
-												<div class="float-end">
-
-													<p:commandButton id="delete-products-button"
-														value="Retirer" icon="pi pi-trash" actionListener="#"
-														styleClass="ui-button-danger">
-														<p:confirm header="Confirmation"
-															message="Voulez vous supprimer ce produit ?"
-															icon="pi pi-exclamation-triangle" />
-													</p:commandButton>
-													<p:linkButton icon="pi pi-check" value="Ajouter"
-														outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
-														action="#{shopBean.createOrderLine(item.id)}" />
-
-
-												</div>
+										</div>
+										<div class="flip-card-back px-4">
+											<div class="row text-end">
+												<h:form id="delItem"
+													rendered="#{organizationSpaceBean.isOwner}">
+													<h:inputHidden name="id" value="#{id}" />
+													<h:commandLink
+														action="#{organizationSpaceBean.deleteItem(item.id)}"
+														id="delete-item-#{item.id}">
+														<i class="fa-solid fa-circle-minus fa-lg text-danger" />
+													</h:commandLink>
+												</h:form>
 											</div>
-										</f:facet>
-									</p:card>
+											<div class="row">
+												<h4>#{item.description}</h4>
+											</div>
+											<div class="row mx-auto">
+												<p:linkButton icon="fa-solid fa-cart-plus"
+													value="Ajouter au panier"
+													styleClass="ui-button-outlined"
+													outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
+													action="#{shopBean.createOrderLine(item.id)}" />
+											</div>
+											&#13;
+											
+										</div>
+									</div>
 								</div>
 							</p:repeat>
 
@@ -306,13 +312,14 @@
 							</p:repeat>
 						</div>
 					</p:tab>
-					
-					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
-					<p:tab title="Nos événements" rendered="#{organizationSpaceBean.isOwner}">
 
-						
+					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
+					<p:tab title="Nos événements"
+						rendered="#{organizationSpaceBean.isOwner}">
+
+
 					</p:tab>
-					
+
 				</p:tabView>
 			</div>
 

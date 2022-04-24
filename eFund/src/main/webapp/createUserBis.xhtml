@@ -12,11 +12,15 @@
 <h:body>
 
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
+	
+	<ui:define name="css">
+			<link rel="stylesheet" href="css/creation.css" />
+		</ui:define>
 
 		<ui:define name="content">
-			<div class="container shadow p-5 mt-5">
+			<div class="container shadow p-5 my-5">
 				<h1>Informations de l'utilisateur</h1>
-				<hr class="bg-primary" />
+				<hr/>
 				<h:form id="createAccountFormBis">
 
 					<div class="ui-fluid row">
@@ -116,12 +120,12 @@
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<p:commandButton
-								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								styleClass="ui-button-outlined rounded-pill"
 								action="#" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<p:commandButton
-								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								styleClass="ui-button-outlined rounded-pill"
 								action="#{createUserBean.modify(id)}" value="Valider" />
 						</div>
 

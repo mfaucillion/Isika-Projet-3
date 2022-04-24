@@ -6,17 +6,23 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:body>
-
-	<ui:composition template="/WEB-INF/template/layout.xhtml">
-		<f:metadata>
+<f:metadata>
 			<f:viewParam name="id"/>
 			<f:viewParam name="orgId"/>
 		</f:metadata>
+
+<h:body>
+
+	<ui:composition template="/WEB-INF/template/layout.xhtml">
+	
+	<ui:define name="css">
+			<link rel="stylesheet" href="css/creation.css" />
+		</ui:define>
+		
 		<ui:define name="content">
-			<div class="container shadow p-5 mt-5">
+			<div class="container shadow p-5 my-5">
 				<h1>Enregistrez votre produit</h1>
-				<hr class="bg-primary" />
+				<hr/>
 				<h:form id="ItemCreationForm">
 
 					<div class="ui-fluid row">
@@ -89,12 +95,12 @@
 						<div class="col-12 col-md-2 mt-3"></div>
 						<div class="col-12 col-md-4 mt-4 d-grid">
 							<p:commandButton
-								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								styleClass="ui-button-outlined rounded-pill"
 								action="#" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-4 mt-4 d-grid">
 							<p:commandButton
-								styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+								styleClass="ui-button-outlined rounded-pill"
 								action="#{itemCreationBean.createItem(id, orgId)}"
 								value="Valider" />
 						</div>
