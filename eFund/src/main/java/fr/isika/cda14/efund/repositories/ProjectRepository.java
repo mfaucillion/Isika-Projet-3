@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Project;
 
 @Stateless
@@ -49,5 +50,13 @@ public class ProjectRepository {
 	public List<Project> getOrgsProjects(Long orgSpaceId) {
 		String query = "SELECT projs FROM OrganizationSpace os JOIN os.projects projs WHERE os.id=:id";
 		return em.createQuery(query, Project.class).setParameter("id", orgSpaceId).getResultList();
+	}
+
+	public ContentBlock findBlock(Long blockId) {
+		return em.find(ContentBlock.class, blockId);
+	}
+	
+	public void removeBlock(ContentBlock block) {
+		em.remove(block);		
 	}
 }

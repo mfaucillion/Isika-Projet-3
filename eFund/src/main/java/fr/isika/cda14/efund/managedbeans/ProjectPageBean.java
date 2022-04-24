@@ -11,11 +11,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
+
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.InteractionService;
 import fr.isika.cda14.efund.services.ProjectService;
+import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.tool.SessionTool;
+import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
 
 @ManagedBean
@@ -28,11 +33,13 @@ public class ProjectPageBean {
 	@Inject
 	private InteractionService interactionService;
 	
-	private DonationVM donationVM = new DonationVM();
-
 	private Project project;
 
 	private OrganizationAccount organizationAccount;
+	
+	private DonationVM donationVM = new DonationVM();
+	
+	private ContentVM contentBlockMV = new ContentVM();
 
 	private Long remainingDays;
 
@@ -41,6 +48,7 @@ public class ProjectPageBean {
 	public void onLoad(String id) {
 		this.project = projectService.findProject(Long.parseLong(id));
 		this.organizationAccount = projectService.getOrgFromProject(Long.parseLong(id));
+		
 		this.remainingDays = calculRemainingDays();
 		this.donationDuration = calculdonationDuration();
 	}
@@ -111,6 +119,28 @@ public class ProjectPageBean {
 	public void createDonation() {
 		projectService.createDonation(donationVM, project.getId());
 	}
+	
+	/* Gestion des blocs de contenu dans l'onglet Contenu */
+	
+	public Boolean isOfType(String blockType, String tagType) {
+		return blockType.equals(tagType);
+	}
+	
+	public void createBlock(String type) {
+		contentBlockMV.setType(type);
+		projectService.addContent(contentBlockMV, project);
+	}
+	
+	public void removeBlock(Long blockId) {
+		projectService.removeBlock(blockId);
+	}
+	
+	public void uploadFile(FileUploadEvent event) {
+		UploadedFile file = event.getFile();
+		String filePath = "/content/" + file.getFileName();
+		contentBlockMV.setContent("img" + filePath);
+		FileUpload.doUpload(file, filePath);
+	}
 
 	public void updateProject() {
 		projectService.update(project);
@@ -139,5 +169,12 @@ public class ProjectPageBean {
 	public void setDonationVM(DonationVM donationVM) {
 		this.donationVM = donationVM;
 	}
-	
+
+	public ContentVM getContentBlockMV() {
+		return contentBlockMV;
+	}
+
+	public void setContentBlockMV(ContentVM contentBlockMV) {
+		this.contentBlockMV = contentBlockMV;
+	}
 }

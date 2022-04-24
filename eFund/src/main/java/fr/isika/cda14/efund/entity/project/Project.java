@@ -27,10 +27,6 @@ public class Project extends GenericProject {
 	
 	@OneToMany
 	@JoinColumn(name = "project_id")
-	protected List<CounterPart> counterParts;
-
-	@OneToMany
-	@JoinColumn(name = "project_id")
 	protected List<StretchGoal> stretchGoals;
 	
 	@ManyToOne

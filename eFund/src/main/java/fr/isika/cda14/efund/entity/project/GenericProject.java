@@ -1,12 +1,15 @@
 package fr.isika.cda14.efund.entity.project;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -50,7 +53,6 @@ public abstract class GenericProject {
 	@Temporal(TemporalType.DATE)
 	protected Date endDate;
 
-
 	@Enumerated(EnumType.STRING)
 	@Column(name = "project_category")
 	protected ProjectCategory projectCategory;
@@ -63,8 +65,6 @@ public abstract class GenericProject {
 	@Column(name = "project_status")
 	protected ProjectStatus projectStatus;
 
-	
-
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
 	protected List<Comment> comments;
@@ -72,13 +72,13 @@ public abstract class GenericProject {
 	@OneToMany(mappedBy = "genericProject")
 	protected List<UserLike> likes;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "generic_project_id")
 	protected List<ContentBlock> contentBlocks;
 
 	@OneToMany(mappedBy = "genericProject")
 	protected List<Favorite> favorites;
-
+	
 	public String getName() {
 		return name;
 	}
