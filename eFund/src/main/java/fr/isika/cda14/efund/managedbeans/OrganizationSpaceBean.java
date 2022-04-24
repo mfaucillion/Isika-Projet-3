@@ -7,12 +7,14 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.swing.JTable;
 
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
+import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
@@ -92,9 +94,7 @@ public class OrganizationSpaceBean {
 	}
 
 	public OrderLine createOrderLine(Item item) {
-
 		return shopService.createOrderLine(item);
-
 	}
 
 	public void deleteItem(String id) {
@@ -111,6 +111,18 @@ public class OrganizationSpaceBean {
 
 	public int pourcentage(BigDecimal current, BigDecimal target) {
 		return (current.intValue() * 100 / target.intValue());
+	}
+	
+	public void submitDraftProject(String id) {
+		System.out.println("suprise de l'id : " + id);
+		projectService.changeStatusToSubmit(Long.parseLong(id));
+	}
+	
+	public Boolean isDraft(ProjectStatus status) {
+		if(status == ProjectStatus.DRAFT) {
+			return true;
+		}
+		return false;
 	}
 
 	public OrganizationAccount getOrgAccount() {
