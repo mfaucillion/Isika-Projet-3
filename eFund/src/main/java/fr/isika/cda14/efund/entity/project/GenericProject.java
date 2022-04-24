@@ -64,6 +64,10 @@ public abstract class GenericProject {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "project_status")
 	protected ProjectStatus projectStatus;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "generic_project_id")
+	protected List<ContentBlock> contentBlocks;
 
 	@OneToMany
 	@JoinColumn(name = "generic_project_id")
@@ -72,10 +76,6 @@ public abstract class GenericProject {
 	@OneToMany(mappedBy = "genericProject")
 	protected List<UserLike> likes;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "generic_project_id")
-	protected List<ContentBlock> contentBlocks;
-
 	@OneToMany(mappedBy = "genericProject")
 	protected List<Favorite> favorites;
 	

@@ -25,10 +25,17 @@
 				<div class="row">
 
 					<div class="col-12 col-xxl-8">
-						<div class="container shadow">
+						<div class="container shadow" id="containerBorder">
 							<div class="row">
 								<div class="col-12 my-2">
-									<h1>#{projectPageBean.project.name}</h1>
+									<h1 style="display: inline">#{projectPageBean.project.name}</h1>
+									&nbsp;
+									<h5 style="display: inline">
+										<a
+											href="https://www.google.com/maps/search/#{projectPageBean.project.location}"
+											target="_blank"><i class="fa-solid fa-location-dot"></i>
+											#{projectPageBean.project.location}</a>
+									</h5>
 								</div>
 							</div>
 
@@ -51,44 +58,53 @@
 						<br />
 
 						<div class="col-12 mb-5">
+						
+							<!-- DEBUT DE TABVIEW -->
 							<p:tabView>
-
-								<p:tab title="Contenu">
+							
+								<!-- Onglet Campagne -->
+								<p:tab>
 									<f:facet name="title">
-										<i class="fa-solid fa-house"/> Détails
+										<i class="fa-solid fa-house" /> Campagne
 									</f:facet>
 									<p:commandButton icon="fa-solid fa-align-justify"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
-										title="Ajouter un bloc de text" type="button" onclick="PF('addTxtBlockPop').show()" />
-										
+										title="Ajouter un bloc de text" type="button"
+										onclick="PF('addTxtBlockPop').show()" />
+
 									<p:commandButton icon="fa-solid fa-image"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
-										title="Ajouter une image" type="button" onclick="PF('addImgBlockPop').show()" />
-										
+										title="Ajouter une image" type="button"
+										onclick="PF('addImgBlockPop').show()" />
+
 									<p:commandButton icon="fa-solid fa-film"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
-										title="Ajouter une video" type="button" onclick="PF('addVidBlockPop').show()" />
-										
+										title="Ajouter une video" type="button"
+										onclick="PF('addVidBlockPop').show()" />
+
 									<div class="container mx-auto text-center">
-										<h2 class="text-center">#{tab.name}</h2>
+										<h2 class="text-center">Campagne de financement</h2>
 										<hr style="border: 2px" />
 
-										<p:repeat var="block" value="#{projectPageBean.project.contentBlocks}">
+										<p:repeat var="block"
+											value="#{projectPageBean.project.contentBlocks}">
 											<h:form>
 												<p:commandButton icon="fa-solid fa-minus"
 													styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
-													title="Supprimer le bloc" action="#{projectPageBean.removeBlock(block.id)}" ajax="false"/>
+													title="Supprimer le bloc"
+													action="#{projectPageBean.removeBlock(block.id)}"
+													ajax="false" />
 											</h:form>
-												
+
 											<p:outputLabel
 												rendered="#{projectPageBean.isOfType(block.type, 'txt')}"
 												style="font-size: 25px !important">#{block.content}</p:outputLabel>
-												
+
 											<p:graphicImage
 												rendered="#{projectPageBean.isOfType(block.type, 'img')}"
 												class="img-fluid rounded img-thumbnail shadow"
 												style="max-width: 60% !important" value="#{block.content}" />
-												
+
 											<p:video
 												rendered="#{projectPageBean.isOfType(block.type, 'vid')}"
 												value="#{block.content}" player="mp4" controls="true"
@@ -98,60 +114,50 @@
 												<h:outputLink
 													value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
 											</p:video>
-											
+
 											<hr style="border: 2px" />
 										</p:repeat>
 
 									</div>
-									
-								</p:tab>
-								
-								<p:tab>
-									<f:facet name="title">
-										<i class="fa-solid fa-business-time" /> Description
-									</f:facet>
 
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la Description" action="#" />
-									<p>Description longue: bla bla bla</p>
 								</p:tab>
 
-
+								<!-- Onglet Objectifs -->
 								<p:tab>
 									<f:facet name="title">
 										<i class="fa-solid fa-euro-sign" /> Objectifs
 									</f:facet>
+									
+									<h2 class="text-center">Dépassement des objectifs</h2>
+									
+									<p:commandButton icon="fa-solid fa-plus"
+										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+										title="Ajouter un palier d'objectif" type="button"
+										onclick="PF('addGoalPop').show()" />
+										
+									<p:repeat var="goal"
+										value="#{projectPageBean.project.stretchGoals}"
+										varStatus="status">
 
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 1" action="#" />
-									<div class="row">
-
-										<h6>Palier 1</h6>
-										<p>Blablabla</p>
-									</div>
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 2" action="#" />
-									<div class="row">
-
-										<h6>Palier 2</h6>
-										<p>Blablabla</p>
-									</div>
-
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer le palier 3" action="#" />
-									<div class="row">
-
-										<h6>Palier 3</h6>
-										<p>Blablabla</p>
-									</div>
+										<ul>
+											<li>
+												<h5>Palier #{status.index + 1} : <b>#{goal.target} €</b></h5>
+												<h:form>
+												<p>
+													<p:commandButton icon="fa-solid fa-minus"
+														styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+														title="Supprimer le palier d'objectif"
+														action="#{projectPageBean.removeGoal(goal.id)}"
+														ajax="false" />
+														#{goal.description}
+												</p>
+												</h:form>
+											</li>
+										</ul>
+										<hr/>
+										
+									</p:repeat>
 								</p:tab>
-
 								<p:tab>
 									<f:facet name="title">
 										<i class="fa-solid fa-question" /> FAQ
@@ -163,15 +169,33 @@
 									<p>FAQ: bla bla bla</p>
 
 								</p:tab>
+								
+								<!-- Onglet FAQ -->
+								<p:tab>
+									<f:facet name="title">
+										<i class="fa-solid fa-question" /> FAQ
+									</f:facet>
 
+									<p:commandButton icon="fa-solid fa-pen-to-square"
+										styleClass="rounded-button ui-button-secondary ui-button-outlined"
+										title="Editer la FAQ" action="#" />
+									<p>FAQ: bla bla bla</p>
+
+								</p:tab>
+								
 							</p:tabView>
+							<!-- FIN DE TABVIEW -->
+							
 						</div>
 					</div>
 					<div class="col-12 col-xxl-4">
 						<div class="row mb-5">
 							<div class="col-12 col-lg-5">
-								<img class="img-fluid w-100"
-									src="#{projectPageBean.organizationAccount.imagePath}" alt="" />
+								<h:link
+									outcome="pageOng.xhtml?id=#{eventPageBean.organizationAccount.id}faces-redirect=true">
+									<img class="img-fluid w-100"
+										src="#{projectPageBean.organizationAccount.imagePath}" alt="" />
+								</h:link>
 							</div>
 							<div class="col-12 col-lg-7 my-auto">
 								<h4>#{projectPageBean.organizationAccount.organizationInfo.name}</h4>
@@ -266,9 +290,12 @@
 			<ui:include
 				src="WEB-INF/subpage/projectPage/modifDescriptionPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/donationPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/projectPage/goalPopup.xhtml" />
+
 			<ui:include src="WEB-INF/subpage/content/txtBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/content/imgBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/content/vidBlockPopup.xhtml" />
+
 
 		</ui:define>
 	</ui:composition>

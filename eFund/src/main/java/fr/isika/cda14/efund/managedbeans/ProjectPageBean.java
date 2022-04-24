@@ -22,6 +22,7 @@ import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
+import fr.isika.cda14.efund.viewmodel.GoalVM;
 
 @ManagedBean
 @ViewScoped
@@ -39,20 +40,26 @@ public class ProjectPageBean {
 	
 	private DonationVM donationVM = new DonationVM();
 	
-	private ContentVM contentBlockMV = new ContentVM();
+	private ContentVM contentBlockVM = new ContentVM();
+	
+	private GoalVM goalVM = new GoalVM();
 
 	private Long remainingDays;
 
 	private Long donationDuration;
 
+	/* Récupération des données nécessaire à l'affichage de la page */
 	public void onLoad(String id) {
-		this.project = projectService.findProject(Long.parseLong(id));
-		this.organizationAccount = projectService.getOrgFromProject(Long.parseLong(id));
+		Long projId = Long.parseLong(id);
+		this.project = projectService.loadProjectWithChildren(projId);
+		this.organizationAccount = projectService.getOrgFromProject(projId);
 		
 		this.remainingDays = calculRemainingDays();
 		this.donationDuration = calculdonationDuration();
 	}
-
+	
+	
+	/* Calculs pour l'affichage */
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
 		return (currentCollect.intValue() * 100) / target.intValue();
 	}
@@ -114,7 +121,7 @@ public class ProjectPageBean {
 		return interactionService.checkLike(SessionTool.getUserId(), project.getId());
 	}
 	
-	/* Ajout de Donation */
+	/* Section des Dons */
 	
 	public void createDonation() {
 		projectService.createDonation(donationVM, project.getId());
@@ -127,25 +134,39 @@ public class ProjectPageBean {
 	}
 	
 	public void createBlock(String type) {
-		contentBlockMV.setType(type);
-		projectService.addContent(contentBlockMV, project);
+		contentBlockVM.setType(type);
+		projectService.addContent(contentBlockVM, project);
 	}
 	
 	public void removeBlock(Long blockId) {
 		projectService.removeBlock(blockId);
 	}
 	
+	// Upload de fichier pour les blocs de contenu
 	public void uploadFile(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/content/" + file.getFileName();
-		contentBlockMV.setContent("img" + filePath);
+		contentBlockVM.setContent("img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
+	
+	/* Gestion des objetctifs ou Stretch Goals */
 
+	public void addGoal() {
+		projectService.addGoal(goalVM, project);
+	}
+	
+	public void removeGoal(Long goalId) {
+		projectService.removeGoal(goalId);
+	}
+	
+	/* Update ProjectEntity in EntityManager */
 	public void updateProject() {
 		projectService.update(project);
 	}
 
+	
+	/* Getters and Setters*/
 	public Project getProject() {
 		return project;
 	}
@@ -166,15 +187,12 @@ public class ProjectPageBean {
 		return donationVM;
 	}
 
-	public void setDonationVM(DonationVM donationVM) {
-		this.donationVM = donationVM;
-	}
-
 	public ContentVM getContentBlockMV() {
-		return contentBlockMV;
+		return contentBlockVM;
 	}
 
-	public void setContentBlockMV(ContentVM contentBlockMV) {
-		this.contentBlockMV = contentBlockMV;
+	public GoalVM getGoalVM() {
+		return goalVM;
 	}
+	
 }

@@ -22,4 +22,25 @@ public class StretchGoal {
 
 	private String description;
 
+	public BigDecimal getTarget() {
+		return target;
+	}
+
+	public void setTarget(BigDecimal target) {
+		this.target = target;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	
 }
