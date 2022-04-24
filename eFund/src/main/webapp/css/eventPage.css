@@ -38,7 +38,7 @@
 	background-color: #ededed;
 }
 
-.container {
+#containerBorder {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #426CB4;

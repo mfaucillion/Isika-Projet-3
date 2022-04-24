@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 
@@ -29,7 +30,17 @@ public class EventRepository {
 	public Event find(Long id) {
 		return em.find(Event.class, id);
 	}
-	
+
+	// HEAVY LOADER - Fetch les collections d'objets
+	public Event loadProjectWithChildren(Long eventId) {
+		/* On force le Fetching de la collection de ContentBlocks dans l'event */
+		String query = "SELECT event " + "FROM Event event " + "LEFT JOIN FETCH event.contentBlocks "
+				+ "WHERE event.id=:id";
+		Event event = em.createQuery(query, Event.class).setParameter("id", eventId).getSingleResult();
+
+		return event;
+	}
+
 	// recherche d'un event par son nom à partir de la page EventList
 	public List<Event> searchEventFromPage(String searchEvent) {
 		String query = "SELECT eventName FROM Event eventName WHERE eventName.name LIKE CONCAT('%', :searchEvent, '%') ";
@@ -52,5 +63,14 @@ public class EventRepository {
 	public List<Event> getOrgsEvents(Long orgSpaceId) {
 		String query = "SELECT events FROM OrganizationSpace os JOIN os.events events WHERE os.id=:id";
 		return em.createQuery(query, Event.class).setParameter("id", orgSpaceId).getResultList();
+	}
+
+	/* ContentBlock Methods */
+	public ContentBlock findBlock(Long blockId) {
+		return em.find(ContentBlock.class, blockId);
+	}
+
+	public void removeBlock(ContentBlock block) {
+		em.remove(block);
 	}
 }

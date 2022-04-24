@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.Favorite;
+import fr.isika.cda14.efund.entity.project.GenericProject;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.project.UserLike;
 import fr.isika.cda14.efund.repositories.InteractionRepository;
@@ -24,7 +25,7 @@ public class InteractionService {
 
 	
 
-	public void addLike(Long userId, Project project) {
+	public void addLike(Long userId, GenericProject project) {
 		UserLike like = new UserLike();
 
 		UserAccount user = accountService.findUserAccountById(userId);
@@ -36,7 +37,7 @@ public class InteractionService {
 	}
 	
 	
-	public void addFavorite(Long userId, Project project) {
+	public void addFavorite(Long userId, GenericProject project) {
 		Favorite fav = new Favorite();
 
 		UserAccount user = accountService.findUserAccountById(userId);
