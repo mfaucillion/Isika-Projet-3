@@ -23,3 +23,8 @@ a{
 .ui-dialog {
     width: auto !important;
 }
+
+.nav-link{
+	font-weight: bold !important;
+	font-size: 18px;
+}
