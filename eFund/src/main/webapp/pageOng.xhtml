@@ -363,11 +363,14 @@
 									<p:column headerText="Statut">
 										<h:outputText value="#{proj.projectStatus}" />
 									</p:column>
-									<p:column headerText="Action (si besoin)" >
-										<p:commandButton class="ui-button-warning rounded-button"
-											icon="pi pi-envelope" action="#" />
-										<p:commandButton type="button"
-											icon="fa-solid fa-file-arrow-up" action="#" value="Soumettre"
+									<p:column headerText="Action (si besoin)">
+										<!-- <p:commandButton class="ui-button-warning rounded-button"
+											icon="pi pi-envelope" action="#" /> -->
+										<p:commandButton 
+										rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
+											icon="fa-solid fa-file-arrow-up"
+											action="#{organizationSpaceBean.submitDraftProject(proj.id)}"
+											value="Soumettre"
 											styleClass="ui-button-raised ui-button-success" />
 									</p:column>
 								</p:dataTable>

@@ -14,6 +14,7 @@ import org.primefaces.model.file.UploadedFile;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
+import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.Item;
@@ -113,8 +114,15 @@ public class OrganizationSpaceBean {
 	}
 	
 	public void submitDraftProject(String id) {
-		//projectService.findProject(Long.parseLong(id));
-		projectService.changeStatusToSubmit();
+		System.out.println("suprise de l'id : " + id);
+		projectService.changeStatusToSubmit(Long.parseLong(id));
+	}
+	
+	public Boolean isDraft(ProjectStatus status) {
+		if(status == ProjectStatus.DRAFT) {
+			return true;
+		}
+		return false;
 	}
 
 	public OrganizationAccount getOrgAccount() {

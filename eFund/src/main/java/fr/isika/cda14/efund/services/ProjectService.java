@@ -150,7 +150,8 @@ public class ProjectService {
 
 	public void changeStatusToSubmit(Long id) {
 		Project project = projectRepo.findProject(id);
-		project.setProjectStatus(STATUS);
+		project.setProjectStatus(ProjectStatus.SUBMITTED);
+		projectRepo.update(project);
 	}
 
 }
