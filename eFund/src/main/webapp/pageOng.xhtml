@@ -27,7 +27,7 @@
 			<div class="container-fluid p-5" id="ongPageBody">
 				<div class="row">
 					<div class="col-12 col-md-5 mb-3">
-						<img class="img-fluid rounded-3 shadow"
+						<img class="img-fluid" id="imgOng"
 							src="#{organizationSpaceBean.orgAccount.imagePath}" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
@@ -39,6 +39,9 @@
 								<i class="fa-solid fa-gear" />
 							</p:link>
 						</h1>
+						
+						<hr/>
+						
 						<p>#{organizationSpaceBean.orgAccount.organizationInfo.description}</p>
 					</div>
 				</div>
@@ -56,15 +59,22 @@
 							<h2 class="text-center">#{tab.name}</h2>
 							<hr style="border: 2px" />
 							<p:repeat var="block" value="#{organizationSpaceBean.blocks}">
-									<p:outputLabel rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}" style="font-size: 25px !important">#{block.content}</p:outputLabel>
-									<p:graphicImage rendered="#{organizationSpaceBean.isOfType(block.type, 'img')}" class="img-fluid rounded img-thumbnail shadow" style="max-width: 60% !important" value="#{block.content}" />
-									<p:video rendered="#{organizationSpaceBean.isOfType(block.type, 'vid')}" value="#{block.content}" player="mp4" controls="true"
-										width="600" onplay="console.log('MP4 Started Playing')"
-										onpause="console.log('MP4 Stopped Playing')">
+								<p:outputLabel
+									rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}"
+									style="font-size: 25px !important">#{block.content}</p:outputLabel>
+								<p:graphicImage
+									rendered="#{organizationSpaceBean.isOfType(block.type, 'img')}"
+									class="img-fluid rounded img-thumbnail shadow"
+									style="max-width: 60% !important" value="#{block.content}" />
+								<p:video
+									rendered="#{organizationSpaceBean.isOfType(block.type, 'vid')}"
+									value="#{block.content}" player="mp4" controls="true"
+									width="600" onplay="console.log('MP4 Started Playing')"
+									onpause="console.log('MP4 Stopped Playing')">
 												Your browser does not support the video element. See: 
 												<h:outputLink
-											value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
-									</p:video>
+										value="https://www.w3schools.com/html/html5_video.asp">HTML5 Video</h:outputLink>
+								</p:video>
 								<hr style="border: 2px" />
 							</p:repeat>
 						</div>
@@ -103,7 +113,7 @@
 														<h:commandLink
 															action="#{organizationSpaceBean.deleteItem(item.id)}"
 															id="delete-item-#{item.id}">
-															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
+															<i class="fa-solid fa-circle-minus fa-lg text-danger" />
 														</h:commandLink>
 													</h:form>
 												</div>
@@ -142,7 +152,7 @@
 
 					<!-- Onglet Projets -->
 
-					<p:tab title="Projets">
+					<p:tab title="Nos projets">
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
 							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
@@ -154,54 +164,62 @@
 							<p:repeat var="project" value="#{organizationSpaceBean.projects}">
 								<div
 									class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3 d-flex align-items-stretch">
-									<p:card styleClass="shadow">
-										<f:facet name="header">
-											<img src="#{project.imagePath}" class="ratio"
-												style="object-fit: cover;" />
-										</f:facet>
-										<f:facet name="title">
-											<div class="clearfix">
-												#{project.name}
-												<div class="float-end">
-													<!-- ONLY IF PROJECT.STATUS == DRAFT -->
-													<h:form id="delProject"
-														rendered="#{organizationSpaceBean.isOwner}">
-														<h:inputHidden name="id" value="#{id}" />
-														<h:commandLink
-															action="#{organizationSpaceBean.deleteProject(project.id)}"
-															id="delete-project-#{project.id}">
-															<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
-														</h:commandLink>
-													</h:form>
+									<h:link
+										outcome="pageProject.xhtml?id=#{project.id}faces-redirect=true">
+										<p:card style="margin-right: 30px; height: 100%"
+											styleClass="shadow">
+											<f:facet name="header">
+												<img src="#{project.imagePath}" class="ratio"
+													style="object-fit: cover; height: 20% !important" />
+											</f:facet>
+											<f:facet name="title">
+												<div class="clearfix">
+													#{project.name}
+													<div class="float-end">
+														<!-- ONLY IF PROJECT.STATUS == DRAFT -->
+														<h:form id="delProject"
+															rendered="#{organizationSpaceBean.isOwner}">
+															<h:inputHidden name="id" value="#{id}" />
+															<h:commandLink
+																action="#{organizationSpaceBean.deleteProject(project.id)}"
+																id="delete-project-#{project.id}">
+																<i class="fa-solid fa-circle-minus fa-lg text-danger" />
+															</h:commandLink>
+														</h:form>
+													</div>
 												</div>
-											</div>
+											</f:facet>
+											<f:facet name="subtitle">
+											<p>#{project.projectCategory.projectCategoryLabel}</p>
+											<p>#{project.summary}</p>
 										</f:facet>
-										<f:facet name="subtitle">
-											#{project.projectCategory}
-										</f:facet>
-										<p>#{project.summary}</p>
-										<f:facet name="footer">
-											<div class="m-3">
-												<div class="progress bg-secondary">
-													<div
-														class="progress-bar progress-bar-striped progress-bar-animated"
-														style="width:#{organizationSpaceBean.pourcentage(project.currentAmount, project.targetAmount)}%">#{organizationSpaceBean.pourcentage(project.currentAmount,
-														project.targetAmount)}%</div>
-												</div>
-												#{project.currentAmount}€ collecté sur
-												#{project.targetAmount}€
-												<p:button outcome="pageProject?id=#{project.id}"
-													styleClass="float-end" icon="pi pi-check" value="Explorer" />
-											</div>
-										</f:facet>
-									</p:card>
+											<f:facet name="footer">
+												<div><i class="fa-solid fa-location-dot"></i> #{project.location}</div>
+										<div class="progress">
+											<div
+												class="progress-bar progress-bar-striped progress-bar-animated"
+												style="width:#{projectsListBean.percentage(project.currentAmount, project.targetAmount)}%">
+												#{projectsListBean.percentage(project.currentAmount,
+												project.targetAmount)}%</div>
+										</div>
+										<div
+											class="d-flex justify-content-between align-items-bottom pb-2">
+
+											<p>#{project.currentAmount.intValue()} € sur
+												#{project.targetAmount.intValue()}</p>
+											<p>J -
+												#{projectsListBean.calculRemainingDays(project.endDate)}</p>
+										</div>
+											</f:facet>
+										</p:card>
+									</h:link>
 								</div>
 							</p:repeat>
 						</div>
 					</p:tab>
 
 					<!-- Onglet Evénements -->
-					<p:tab title="Evénements">
+					<p:tab title="Nos événements">
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
@@ -212,37 +230,47 @@
 						<div class="row">
 							<p:repeat var="event" value="#{organizationSpaceBean.events}">
 								<div class="col-12 col-lg-6 col-xl-4 col-xxl-3 my-3">
-									<p:card styleClass="shadow">
-										<f:facet name="header">
-											<img src="#{event.imagePath}"></img>
-										</f:facet>
-										<f:facet name="title">
+									<h:link
+										outcome="eventPage.xhtml?id=#{event.id}faces-redirect=true">
+										<p:card style="margin-right: 30px; height: 100%"
+											styleClass="shadow">
+											<f:facet name="header">
+												<img src="#{event.imagePath}" class="ratio"
+													style="object-fit: cover; height: 20% !important" />
+											</f:facet>
+											<f:facet name="title">
 											#{event.name}
 											<div class="float-end">
-												<h:form id="delEvent"
-													rendered="#{organizationSpaceBean.isOwner}">
-													<h:inputHidden name="id" value="#{id}" />
-													<!-- ONLY IF EVENT.STATUS == DRAFT -->
-													<h:commandLink
-														action="#{organizationSpaceBean.deleteEvent(event.id)}"
-														id="delete-event-#{event.id}">
-														<i class="fa-solid fa-circle-minus fa-2xl text-danger" />
-													</h:commandLink>
-												</h:form>
-											</div>
+													<h:form id="delEvent"
+														rendered="#{organizationSpaceBean.isOwner}">
+														<h:inputHidden name="id" value="#{id}" />
+														<!-- ONLY IF EVENT.STATUS == DRAFT -->
+														<h:commandLink
+															action="#{organizationSpaceBean.deleteEvent(event.id)}"
+															id="delete-event-#{event.id}">
+															<i class="fa-solid fa-circle-minus fa-lg text-danger" />
+														</h:commandLink>
+													</h:form>
+												</div>
+											</f:facet>
+											<f:facet name="subtitle">
+											#{event.projectCategory.projectCategoryLabel}
 										</f:facet>
-										<f:facet name="subtitle">
-											#{event.projectCategory}
-										</f:facet>
-										<p>#{event.summary}</p>
-										<f:facet name="footer">
-											<div class="m-3">
-												XXX bénévoles inscrits sur #{event.volunteerTarget}
-												<p:commandButton styleClass="float-end" icon="pi pi-check"
-													value="Explorer" />
-											</div>
-										</f:facet>
-									</p:card>
+											<p>#{event.summary}</p>
+											<f:facet name="footer">
+												<div>
+													<i class="fa-solid fa-location-dot"></i> #{event.location}
+												</div>
+												<div
+													class="d-flex justify-content-between align-items-bottom">
+													<h:outputText value="#{event.eventStartDate}">
+														<f:convertDateTime type="date" dateStyle="full" />
+													</h:outputText>
+													<p>#{event.duration} j.</p>
+												</div>
+											</f:facet>
+										</p:card>
+									</h:link>
 								</div>
 							</p:repeat>
 						</div>
