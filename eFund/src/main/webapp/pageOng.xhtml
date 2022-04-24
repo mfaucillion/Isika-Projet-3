@@ -76,7 +76,8 @@
 									<p:commandButton icon="fa-solid fa-minus"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
 										title="Supprimer le bloc"
-										action="#{organizationSpaceBean.removeBlock(block.id)}" ajax="false" rendered="#{organizationSpaceBean.isOwner}"/>
+										action="#{organizationSpaceBean.removeBlock(block.id)}"
+										ajax="false" rendered="#{organizationSpaceBean.isOwner}" />
 								</h:form>
 								<p:outputLabel
 									rendered="#{organizationSpaceBean.isOfType(block.type, 'txt')}"
@@ -306,13 +307,42 @@
 							</p:repeat>
 						</div>
 					</p:tab>
-					
-					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
-					<p:tab title="Nos événements" rendered="#{organizationSpaceBean.isOwner}">
 
-						
+					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
+					<p:tab title="Mes informations"
+						rendered="#{organizationSpaceBean.isOwner}">
+						<div class="col-12 col-md-9">
+							<div class="row">
+								<div class="col-12 col-md-2 mb-3">
+									<img class="img-fluid rounded-3 shadow"
+										src="#{request.contextPath}#{organizationSpaceBean.orgAccount.imagePath}" />
+								</div>
+								<div class="col-12 col-md-4">
+									<h1>Nom de ma structure :
+										#{organizationSpaceBean.orgAccount.organizationInfo.name}</h1>
+									<br />
+									<h5>#{organizationSpaceBean.orgAccount.email}</h5>
+									<br />
+									<h5>Siret :
+										#{organizationSpaceBean.orgAccount.organizationInfo.siret}</h5>
+									<br />
+									<h5>Date de création :
+										#{organizationSpaceBean.orgAccount.creationDate}</h5>
+								</div>
+								<div class="col-12 col-md-5 my-auto">
+									<p:commandButton
+										styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+										action="#" value="blabla" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-md-9">
+								#{organizationSpaceBean.orgAccount.organizationInfo.summary}
+								</div>
+							</div>
+						</div>
 					</p:tab>
-					
+
 				</p:tabView>
 			</div>
 
