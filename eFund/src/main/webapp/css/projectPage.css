@@ -38,9 +38,10 @@
 	background-color: #ededed;
 }
 
-.container {
-	border-style: solid;
-	border-width: 1px;
+#containerBorder {
+	border-style:solid;
+	border-width:1px;
+
 	border-color: #426CB4;
 	border-radius: 10px;
 }

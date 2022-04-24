@@ -6,7 +6,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Project;
+import fr.isika.cda14.efund.entity.project.StretchGoal;
+import fr.isika.cda14.efund.entity.shop.Shop;
+import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Stateless
 public class ProjectRepository {
@@ -18,13 +23,28 @@ public class ProjectRepository {
 		em.persist(project);
 	}
 
-	public List<Project> findAll() {
-		return this.em.createQuery("SELECT pro FROM Project pro", Project.class).getResultList();
-	}
-
 	// recherche d'un projet à partir d'un id
 	public Project findProject(Long id) {
 		return this.em.find(Project.class, id);
+	}
+	
+	// HEAVY LOADER - Fetch les collections d'objets
+	public Project loadProjectWithChildren(Long projId) {
+		/* On force le Fetching de la collection de ContentBlocks dans le Project */
+		String query = "SELECT distinct proj " + "FROM Project proj " + "LEFT JOIN FETCH proj.contentBlocks "
+				+ "WHERE proj.id=:id";
+		Project project = em.createQuery(query, Project.class).setParameter("id", projId).getSingleResult();
+
+		/* On force le Fetching de la collection de StretchGoals dans le Project */
+		query = "SELECT proj FROM Project proj " + "LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
+
+		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
+
+		return project;
+	}
+	
+	public List<Project> findAll() {
+		return this.em.createQuery("SELECT pro FROM Project pro", Project.class).getResultList();
 	}
 
 	// recherche d'un projet par son nom à partir de la page ProjectsList
@@ -49,5 +69,23 @@ public class ProjectRepository {
 	public List<Project> getOrgsProjects(Long orgSpaceId) {
 		String query = "SELECT projs FROM OrganizationSpace os JOIN os.projects projs WHERE os.id=:id";
 		return em.createQuery(query, Project.class).setParameter("id", orgSpaceId).getResultList();
+	}
+
+	/* ContentBlock Methods */
+	public ContentBlock findBlock(Long blockId) {
+		return em.find(ContentBlock.class, blockId);
+	}
+
+	public void removeBlock(ContentBlock block) {
+		em.remove(block);
+	}
+
+	/* StretchGoal Methods */
+	public StretchGoal findGoal(Long goalId) {
+		return em.find(StretchGoal.class, goalId);
+	}
+
+	public void removeGoal(StretchGoal goal) {
+		em.remove(goal);		
 	}
 }

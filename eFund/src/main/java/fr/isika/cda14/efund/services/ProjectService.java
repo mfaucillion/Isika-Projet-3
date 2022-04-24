@@ -9,16 +9,19 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
+import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Donation;
-import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.Project;
+import fr.isika.cda14.efund.entity.project.StretchGoal;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.DonationRepository;
 import fr.isika.cda14.efund.repositories.ProjectRepository;
 import fr.isika.cda14.efund.tool.SessionTool;
+import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
+import fr.isika.cda14.efund.viewmodel.GoalVM;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
 @Stateless
@@ -58,8 +61,14 @@ public class ProjectService {
 		return projectRepo.findAll();
 	}
 
+	/* Find on primary key (FAST) */
 	public Project findProject(Long id) {
 		return projectRepo.findProject(id);
+	}
+	
+	/* HEAVY LOADER => Fetch les collections en LazyLoading*/
+	public Project loadProjectWithChildren(Long projId) {
+		return projectRepo.loadProjectWithChildren(projId);
 	}
 
 	public List<Project> searchProjectFromPage(String searchProject) {
@@ -105,6 +114,36 @@ public class ProjectService {
 
 	public List<Project> getOrgsProjects(Long orgSpaceId) {
 		return projectRepo.getOrgsProjects(orgSpaceId);
+	}
+
+	/* Content Blocks Methods */
+	public void addContent(ContentVM content, Project project) {
+		ContentBlock newBlock = new ContentBlock();
+		
+		newBlock.setContent(content.getContent());
+		newBlock.setType(content.getType());
+		project.getContentBlocks().add(newBlock);
+		projectRepo.update(project);
+	}
+
+	public void removeBlock(Long blockId) {
+		ContentBlock block = projectRepo.findBlock(blockId);
+		projectRepo.removeBlock(block);
+	}
+
+	/* StretchGoals Methods */
+	public void addGoal(GoalVM goalVM, Project project) {
+		StretchGoal newGoal = new StretchGoal();
+		
+		newGoal.setTarget(goalVM.getTarget());
+		newGoal.setDescription(goalVM.getDescription());
+		project.getStretchGoals().add(newGoal);
+		projectRepo.update(project);
+	}
+	
+	public void removeGoal(Long goalId) {
+		StretchGoal goal = projectRepo.findGoal(goalId);
+		projectRepo.removeGoal(goal);
 	}
 
 }

@@ -3,6 +3,7 @@ package fr.isika.cda14.efund.entity.project;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,11 +26,7 @@ public class Project extends GenericProject {
 	@OneToMany(mappedBy = "project")
 	private List<Donation> donations;
 	
-	@OneToMany
-	@JoinColumn(name = "project_id")
-	protected List<CounterPart> counterParts;
-
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
 	protected List<StretchGoal> stretchGoals;
 	
@@ -59,14 +56,6 @@ public class Project extends GenericProject {
 
 	public void setDonations(List<Donation> donations) {
 		this.donations = donations;
-	}
-
-	public List<CounterPart> getCounterParts() {
-		return counterParts;
-	}
-
-	public void setCounterParts(List<CounterPart> counterParts) {
-		this.counterParts = counterParts;
 	}
 
 	public List<StretchGoal> getStretchGoals() {

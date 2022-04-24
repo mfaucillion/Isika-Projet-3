@@ -13,7 +13,6 @@ import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.account.UserInfo;
 import fr.isika.cda14.efund.entity.common.Address;
-import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.entity.project.Donation;
@@ -170,9 +169,5 @@ public class AccountService {
 
 	public List<EventRegistration> getRegistrations(Long userSpaceId) {
 		return repo.getRegistrations(userSpaceId);
-	}
-
-	public List<ContentTab> getOrgsContentTabs(Long orgSpaceId) {
-		return repo.getOrgsContentTabs(orgSpaceId);
 	}
 }

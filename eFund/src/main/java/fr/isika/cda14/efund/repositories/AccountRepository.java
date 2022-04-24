@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContext;
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.account.UserAccount;
-import fr.isika.cda14.efund.entity.common.ContentTab;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
@@ -184,10 +183,5 @@ public class AccountRepository {
 	public List<EventRegistration> getRegistrations(Long userSpaceId) {
 		String query = "SELECT reg FROM EventRegistration reg JOIN reg.userSpace usr  WHERE usr.id=:id";
 		return em.createQuery(query, EventRegistration.class).setParameter("id", userSpaceId).getResultList();
-	}
-
-	public List<ContentTab> getOrgsContentTabs(Long orgSpaceId) {
-		String query = "SELECT tabs FROM OrganizationSpace os JOIN os.contentTabs tabs WHERE os.id=:id";
-		return em.createQuery(query, ContentTab.class).setParameter("id", orgSpaceId).getResultList();
 	}
 }
