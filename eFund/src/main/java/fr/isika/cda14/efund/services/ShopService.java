@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.services;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -57,7 +58,9 @@ public class ShopService {
 	public OrderLine createOrderLine(Item item) {
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
+		//orderLine.setQuantity(0);
+		//orderLine.setDate(Calendar.getInstance().getTime());
+		//shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
 		return orderLine;
 
 	}
@@ -105,7 +108,9 @@ public class ShopService {
 		basketOrder.setTotalPrice(BigDecimal.valueOf(sumOfCart));
 		basketOrder.setStatus(OrderStatus.PROCESSING);
 		basketOrder.setDate(cart.get(0).getDate());// La date du cart est la date de n'importe quel element
+		System.out.println("La date de cette commande est le"+basketOrder.getDate());
 		Address adr = repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
+		System.out.println("L'adresse de mon user est"+adr);
 		basketOrder.setBillingAddress(adr);
 		return basketOrder;
 

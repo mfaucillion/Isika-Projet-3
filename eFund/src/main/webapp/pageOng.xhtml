@@ -11,6 +11,7 @@
 <f:metadata>
 	<f:viewParam name="id" />
 	<f:viewParam name="itemId" />
+	<f:viewParam name="userId"/>
 	<f:event listener="#{organizationSpaceBean.onLoad(id)}"
 		type="preRenderView"></f:event>
 	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView" />
@@ -126,7 +127,7 @@
 															icon="pi pi-exclamation-triangle" />
 													</p:commandButton>
 													<p:linkButton icon="pi pi-check" value="Ajouter"
-														outcome="pageOng?id=#{id}&#38;itemId=#{item.id}faces-redirect=true"
+														outcome="pageOng?id=#{id}&#38;itemId=#{item.id}&#38;userId=#{shopBean.userIdFromSession}faces-redirect=true"
 														action="#{shopBean.createOrderLine(item.id)}" />
 
 
