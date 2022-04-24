@@ -28,8 +28,6 @@ public class ShopBean {
 	@Inject
 	private ShopService shopService;
 
-	@Inject
-	private AccountService accountService;
 	// private List<Item> orgaShop = new ArrayList<Item>();
 	private List<OrderLine> cart = new ArrayList<OrderLine>();
 
@@ -63,7 +61,7 @@ public class ShopBean {
 		return shopService.createOrderLine(item);
 	}
 
-public void addOrderLineToCart(OrderLine orderLine) throws IOException{
+	public void addOrderLineToCart(OrderLine orderLine) throws IOException {
 		boolean orderlineExists = false;
 		if (cart.isEmpty()) {
 			orderLine.setQuantity(1);
@@ -71,8 +69,8 @@ public void addOrderLineToCart(OrderLine orderLine) throws IOException{
 			cart.add(orderLine);
 			System.out.println(
 					"toto new item in empty cart item_name" + cart.get(cart.indexOf(orderLine)).getItem().getLabel()
-					+ " item_quantity : " + cart.get(cart.indexOf(orderLine)).getQuantity() + " , cart_size : "
-					+ cart.size() + "***********************************************************");
+							+ " item_quantity : " + cart.get(cart.indexOf(orderLine)).getQuantity() + " , cart_size : "
+							+ cart.size() + "***********************************************************");
 
 		} else if (cart.isEmpty() == false) {
 			for (int i = 0; i < cart.size(); i++) {
@@ -81,25 +79,28 @@ public void addOrderLineToCart(OrderLine orderLine) throws IOException{
 					// cart.add(orderLine);
 					orderlineExists = true;
 					System.out.println("non_empty cart tata, orderline_id: " + cart.indexOf(cart.get(i)) + "item_name"
-							+ cart.get(i).getItem().getLabel() + " item_quantity : "
-							+ cart.get(i).getQuantity() + " , cart_size : " + cart.size()
+							+ cart.get(i).getItem().getLabel() + " item_quantity : " + cart.get(i).getQuantity()
+							+ " , cart_size : " + cart.size()
 							+ "***********************************************************");
 					System.out.println("non_empty cart tete, order_quantity" + cart.get(i).getQuantity()
 							+ "the item_id is :" + cart.get(i).getItem().getId() + " and the label is "
 							+ cart.get(i).getItem().getLabel()
 							+ "***********************************************************");
-				} 
+				}
 			}
-		}else if (orderlineExists == true) {
-			orderLine.setQuantity(1);
-			orderLine.setDate(Calendar.getInstance().getTime());
-			cart.add(orderLine);
-			System.out.println("new item in non empty cart item_name"
-					+ cart.get(cart.indexOf(orderLine)).getItem().getLabel() + " item_quantity : "
-					+ cart.get(cart.indexOf(orderLine)).getQuantity() + "the size of the cart is " + cart.size()
-					+ "***********************************************************");
+			if (orderlineExists == false) {
+				orderLine.setQuantity(1);
+				orderLine.setDate(Calendar.getInstance().getTime());
+				cart.add(orderLine);
+				System.out.println("new item in non empty cart item_name"
+						+ cart.get(cart.indexOf(orderLine)).getItem().getLabel() + " item_quantity : "
+						+ cart.get(cart.indexOf(orderLine)).getQuantity() + "the size of the cart is " + cart.size()
+						+ "***********************************************************");
+		} 
+		
 		}
-		System.out.println("titi taille de mon cart:" + cart.size() + "***********************************************************");
+		System.out.println("titi taille de mon cart:" + cart.size()
+				+ "***********************************************************");
 	}
 
 	/* Methode pour persister mon cart et redireger vers la page de payment */

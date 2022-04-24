@@ -11,7 +11,8 @@
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
 
 		<ui:define name="content">
-
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<ui:repeat var="orderline" value="#{shopBean.cart}">toto !#{orderline.item.label}</ui:repeat>
 			
 
 		</ui:define>
