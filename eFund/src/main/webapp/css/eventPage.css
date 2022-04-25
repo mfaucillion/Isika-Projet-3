@@ -17,7 +17,7 @@
 
 #projectPageBody .ui-tabs-panels {
 	margin: 0px 10px !important;
-	border-radius: 0px 10px 10px 10px !important;
+	border-radius: 0px 20px 20px 20px !important;
 }
 
 #projectPageBody .ui-card-header img {
@@ -42,7 +42,7 @@
 	border-style: solid;
 	border-width: 1px;
 	border-color: #426CB4;
-	border-radius: 10px;
+	border-radius: 20px;
 }
 
 .knob-container {
@@ -58,5 +58,5 @@ hr {
 }
 
 .img-fluid {
-	border-radius: 10px;
+	border-radius: 20px;
 }

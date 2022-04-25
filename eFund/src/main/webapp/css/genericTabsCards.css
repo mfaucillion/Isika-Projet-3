@@ -17,7 +17,7 @@
 
 #ongPageBody .ui-tabs-panels {
 	margin: 0px 10px !important;
-	border-radius: 0px 10px 10px 10px !important;
+	border-radius: 0px 20px 20px 20px !important;
 }
 
 #ongPageBody .ui-tabs-nav:before {
@@ -29,12 +29,12 @@
 }
 
 .ui-card-header img {
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
 }
 
 .ui-card {
-	border-radius: 10px !important;
+	border-radius: 20px !important;
 	border: 2px solid;
 	border-color: #426CB4;
 }
@@ -43,7 +43,7 @@
 	border-style: solid;
 	border-width: 0px;
 	border-color: #426CB4;
-	border-radius: 10px;
+	border-radius: 20px;
 }
 
 h1 {
@@ -66,7 +66,7 @@ h1 {
 	border-style: solid;
 	border-width: 1px;
 	border-color: #426CB4;
-	border-radius: 10px;
+	border-radius: 20px;
 }
 
 hr {
