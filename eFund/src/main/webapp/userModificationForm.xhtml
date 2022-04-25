@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:viewParam name="id" />
+	<f:event listener="#{createUserBean.onLoad()}" type="preRenderView"></f:event>
 </f:metadata>
 
 <h:body>
@@ -31,7 +31,7 @@
 									<i class="fa-solid fa-align-justify"></i>
 								</div>
 								<p:inputText placeholder="Prénom"
-									value="#{createUserBean.createUser.firstName}"
+									value="#{createUserBean.account.userInfo.firstName}"
 									id="FistNameInput" />
 							</div>
 						</div>
@@ -41,7 +41,7 @@
 									<i class="fa-solid fa-align-justify"></i>
 								</div>
 								<p:inputText placeholder="Nom"
-									value="#{createUserBean.createUser.lastName}"
+									value="#{createUserBean.account.userInfo.lastName}"
 									id="LastNameInput" />
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 									<i class="fa-solid fa-address-card"></i>
 								</div>
 								<p:inputText placeholder="N° et rue"
-									value="#{createUserBean.createUser.address}" id="AddressInput" />
+									value="#{createUserBean.account.userInfo.userAddress.address}" id="AddressInput" />
 							</div>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 									<i class="fa-solid fa-address-card"></i>
 								</div>
 								<p:inputText placeholder="Code postal"
-									value="#{createUserBean.createUser.zipcode}" id="ZipcodeInput" />
+									value="#{createUserBean.account.userInfo.userAddress.zipcode}" id="ZipcodeInput" />
 							</div>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
@@ -77,7 +77,7 @@
 									<i class="fa-solid fa-address-card"></i>
 								</div>
 								<p:inputText placeholder="Ville"
-									value="#{createUserBean.createUser.city}" id="CityInput" />
+									value="#{createUserBean.account.userInfo.userAddress.city}" id="CityInput" />
 							</div>
 						</div>
 					</div>
@@ -90,7 +90,7 @@
 									<i class="fa-solid fa-address-card"></i>
 								</div>
 								<p:inputText placeholder="Pays"
-									value="#{createUserBean.createUser.country}" id="CountryInput" />
+									value="#{createUserBean.account.userInfo.userAddress.country}" id="CountryInput" />
 							</div>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
@@ -99,11 +99,11 @@
 									<i class="fa-solid fa-phone"></i>
 								</div>
 								<p:inputText placeholder="Téléphone"
-									value="#{createUserBean.createUser.phone}" id="PhoneInput" />
+									value="#{createUserBean.account.userInfo.phone}" id="PhoneInput" />
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="ui-fluid row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-10 mt-3">
@@ -116,6 +116,19 @@
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
 								listener="#{createUserBean.upload}" />
 						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton styleClass="ui-button-outlined rounded-pill"
+								type="reset" value="Annuler" />
+						</div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton styleClass="ui-button-outlined rounded-pill"
+								action="#{createUserBean.updateUserModification	}" value="Valider les modifications" validateClient="true" />
+						</div>
+
 					</div>
 
 				</h:form>
