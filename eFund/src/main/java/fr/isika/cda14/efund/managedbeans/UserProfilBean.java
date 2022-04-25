@@ -52,8 +52,7 @@ public class UserProfilBean {
 		FileUpload.doUpload(file, filePath);
 	}
 	
-	public String redirectToProjectPage(GenericProject gProject) {
-		System.out.println(gProject.getId());		
+	public String redirectToProjectPage(GenericProject gProject) {	
 		if (gProject instanceof Event) {
 			return "pageEvent?id=" + gProject.getId() + "faces-redirect=true";
 		} else {

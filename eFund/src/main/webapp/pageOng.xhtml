@@ -105,23 +105,23 @@
 
 
 					<!-- Onglet Boutique -->
-					<p:tab rendered="#{organizationSpaceBean.orgAccount.organizationSpace.shopTab}">
+					<p:tab rendered="#{organizationSpaceBean.orgAccount.organizationSpace.shopTab}" id="shopTab">
 						<f:facet name="title">
 							<i class="fa-solid fa-basket-shopping" /> Boutique
 						</f:facet>
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Produit dans la boutique -->
-						<p:link
-							outcome="createItem?id=#{organizationSpaceBean.orgAccount.organizationSpace.shop.id}&#38;orgId=#{id}faces-redirect=true"
-							id="newProduct" rendered="#{organizationSpaceBean.isOwner}">
-							<i class="fa-solid fa-plus" />
-						</p:link>
+						<p:commandButton icon="fa-solid fa-plus"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Nouveau produit" type="button"
+							onclick="PF('itemCreationPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
+							
 
 						<h2 class="text-center">Boutique</h2>
 						<hr />
 
-						<p:tooltip for="newProduct" value="Nouveau Produit"
-							position="right" />
+						
 						<div class="row">
 
 							<p:repeat var="item" value="#{organizationSpaceBean.items}">
@@ -157,7 +157,7 @@
 													<h:inputHidden name="id" value="#{id}" />
 													<h:commandLink
 														action="#{organizationSpaceBean.deleteItem(item.id)}"
-														id="delete-item-#{item.id}">
+														id="delete-item-#{item.id}" >
 														<i class="fa-solid fa-circle-minus fa-lg text-danger" />
 													</h:commandLink>
 												</h:form>
@@ -317,7 +317,7 @@
 						</div>
 					</p:tab>
 
-					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
+					<!-- ONGLETS ACCESSIBLE UNIQUEMENT PAR LE PROPRIETAIRE DE LA PAGE -->
 
 					<p:tab title="Mes informations"
 						rendered="#{organizationSpaceBean.isOwner}">
@@ -441,6 +441,8 @@
 			<ui:include src="WEB-INF/subpage/ongPage/txtBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/imgBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/vidBlockPopup.xhtml" />
+
+			<ui:include src="WEB-INF/subpage/ongPage/itemCreationPopup.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

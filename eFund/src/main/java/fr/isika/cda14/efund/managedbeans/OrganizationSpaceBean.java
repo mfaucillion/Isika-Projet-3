@@ -96,16 +96,19 @@ public class OrganizationSpaceBean {
 		return shopService.createOrderLine(item);
 	}
 
-	public void deleteItem(String id) {
+	public String deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void deleteProject(String id) {
+	public String deleteProject(String id) {
 		projectService.deleteProject(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void deleteEvent(String id) {
+	public String deleteEvent(String id) {
 		eventService.deleteEvent(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	public int pourcentage(BigDecimal current, BigDecimal target) {
