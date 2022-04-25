@@ -67,7 +67,7 @@ public class AccountRepository {
 	public Optional<Account> findByEmail(String email) {
 		try {
 			Optional<Account> result = Optional
-					.ofNullable(em.createQuery("SELECT acc FROM Account acc WHERE acc.email = :email ", Account.class)
+					.ofNullable(em.createQuery("SELECT acc FROM Account acc WHERE acc.email=:email ", Account.class)
 							.setParameter("email", email).getSingleResult());
 			return result;
 		} catch (NoResultException ex) {

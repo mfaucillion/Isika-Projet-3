@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.entity.account;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,12 @@ import fr.isika.cda14.efund.entity.common.Address;
 
 @Entity
 @Table(name = "user_info")
-public class UserInfo {
+public class UserInfo implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6948872234158978511L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +39,10 @@ public class UserInfo {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_address_id")
 	private Address userAddress;
+	
+	public UserInfo() {
+		this.userAddress = new Address();
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -59,10 +70,6 @@ public class UserInfo {
 
 	public Address getUserAddress() {
 		return userAddress;
-	}
-
-	public void setUserAddress(Address userAddress) {
-		this.userAddress = userAddress;
 	}
 
 	public Long getId() {

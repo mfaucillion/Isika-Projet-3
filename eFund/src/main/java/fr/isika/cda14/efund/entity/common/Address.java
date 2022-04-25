@@ -1,5 +1,7 @@
 package fr.isika.cda14.efund.entity.common;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "user_address")
-public class Address {
+public class Address implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3644118633619485758L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -62,7 +69,4 @@ public class Address {
 	public Long getId() {
 		return id;
 	}
-	
-	
-
 }

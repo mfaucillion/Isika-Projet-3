@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.managedbeans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
@@ -14,18 +15,21 @@ import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 
 @ManagedBean
+@ViewScoped
 public class CreateUserBean {
 
 	@Inject
 	private AccountService accountService;
 
 	private CreateUserViewModel createUser = new CreateUserViewModel();
+	
+	UserAccount account;
 
 	public String create() {
 
 		try {
 			
-			UserAccount account = accountService.createUser(createUser);
+			this.account = accountService.createUser(createUser);
 			SessionTool.writeInSession(account);
 			
 			return "userCreationForm2?id=" + account.getId() + "faces-redirect=true";
@@ -40,12 +44,14 @@ public class CreateUserBean {
 	public void upload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/user/" + file.getFileName();
-		createUser.setImagePath("img" + filePath);
+		
 		FileUpload.doUpload(file, filePath);
+		createUser.setImagePath("/img" + filePath);
 	}
 
 	public String modify(Long id) {
 		accountService.updateUser(id, createUser);
+		SessionTool.updateSessionImage(createUser.getImagePath());
 		return "index.xhtml?faces-redirect=true";
 	}
 

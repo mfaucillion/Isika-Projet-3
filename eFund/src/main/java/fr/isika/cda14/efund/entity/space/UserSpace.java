@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.entity.space;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +22,12 @@ import fr.isika.cda14.efund.entity.shop.BasketOrder;
 
 @Entity
 @Table(name = "user_space")
-public class UserSpace {
+public class UserSpace implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2442454499805984702L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,64 +66,32 @@ public class UserSpace {
 		return basketOrders;
 	}
 
-	public void setBasketOrders(List<BasketOrder> basketOrders) {
-		this.basketOrders = basketOrders;
-	}
-
 	public List<Comment> getComments() {
 		return comments;
-	}
-
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
 	}
 
 	public List<Favorite> getFavorites() {
 		return favorites;
 	}
 
-	public void setFavorites(List<Favorite> favorites) {
-		this.favorites = favorites;
-	}
-
 	public List<UserLike> getUserLikes() {
 		return userLikes;
-	}
-
-	public void setUserLikes(List<UserLike> userLikes) {
-		this.userLikes = userLikes;
 	}
 
 	public List<EventRegistration> getEventRegistrations() {
 		return eventRegistrations;
 	}
 
-	public void setEventRegistrations(List<EventRegistration> eventRegistrations) {
-		this.eventRegistrations = eventRegistrations;
-	}
-
 	public List<Donation> getDonations() {
 		return donations;
-	}
-
-	public void setDonations(List<Donation> donations) {
-		this.donations = donations;
 	}
 
 	public List<Follow> getFollows() {
 		return follows;
 	}
 
-	public void setFollows(List<Follow> follows) {
-		this.follows = follows;
-	}
-
 	public List<Report> getReports() {
 		return reports;
-	}
-
-	public void setReports(List<Report> reports) {
-		this.reports = reports;
 	}
 
 	public Long getId() {

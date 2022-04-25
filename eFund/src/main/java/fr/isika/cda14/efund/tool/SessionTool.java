@@ -25,6 +25,11 @@ public class SessionTool {
 		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_IMAGE, account.getImagePath());
 		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_DASHBOARD, dashBoardURL);
 	}
+	
+	public static void updateSessionImage(String imagePath){
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.setAttribute(SessionAttributesUtils.CONNECTED_USER_IMAGE, imagePath);
+	}
 
 	private static String generateDashBoardURL(Role role, Long id) {
 		if (role == Role.ADMIN) {
