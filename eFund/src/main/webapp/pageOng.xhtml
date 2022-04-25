@@ -10,6 +10,7 @@
 <f:metadata>
 	<f:viewParam name="id" />
 	<f:viewParam name="itemId" />
+	<f:viewParam name="userId"/>
 	<f:event listener="#{organizationSpaceBean.onLoad(id)}"
 		type="preRenderView"></f:event>
 	<f:event listener="#{shopBean.onLoad(itemId)}" type="preRenderView" />
@@ -146,6 +147,8 @@
 													</f:facet>
 												</p:card>
 											</div>
+
+                      
 										</div>
 										<div class="flip-card-back px-4">
 											<div class="row text-end">
@@ -158,6 +161,7 @@
 														<i class="fa-solid fa-circle-minus fa-lg text-danger" />
 													</h:commandLink>
 												</h:form>
+                        
 											</div>
 											<div class="row">
 												<h4>#{item.description}</h4>
@@ -314,10 +318,81 @@
 					</p:tab>
 
 					<!-- STEPHANE TU PEUX RAJOUTER TES ONGLETS LA // RENDERER permet de n'afficher la tab que pour l'ONG owner -->
-					<p:tab title="Nos événements"
+
+					<p:tab title="Mes informations"
 						rendered="#{organizationSpaceBean.isOwner}">
+						<div class="col-12 col-md-9">
+							<div class="row">
+								<div class="col-12 col-md-2 mb-3">
+									<img class="img-fluid rounded-3 shadow"
+										src="#{request.contextPath}#{organizationSpaceBean.orgAccount.imagePath}" />
+								</div>
+								<div class="col-12 col-md-4">
+									<h1>Nom de ma structure :
+										#{organizationSpaceBean.orgAccount.organizationInfo.name}</h1>
+									<br />
+									<h5>#{organizationSpaceBean.orgAccount.email}</h5>
+									<br />
+									<h5>Siret :
+										#{organizationSpaceBean.orgAccount.organizationInfo.siret}</h5>
+									<br />
+									<h5>Date de création :
+										#{organizationSpaceBean.orgAccount.creationDate}</h5>
+								</div>
+								<div class="col-12 col-md-5 my-auto">
+									<p:commandButton
+										styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+										action="#" value="blabla" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-md-9">
+									#{organizationSpaceBean.orgAccount.organizationInfo.summary}</div>
+								<br />
+								#{organizationSpaceBean.orgAccount.organizationInfo.description}
 
+							</div>
+						</div>
+					</p:tab>
 
+					<p:tab title="Gestion des projets"
+						rendered="#{organizationSpaceBean.isOwner}">
+						<div class="col-9">
+							<h:form>
+								<p:dataTable var="proj"
+									value="#{organizationSpaceBean.projects}" reflow="true"
+									style="width:100% !important">
+
+									<p:column headerText="Nom">
+										<h:outputText value="#{proj.name}" />
+									</p:column>
+									<p:column headerText="Résumé">
+										<h:outputText value="#{proj.summary}" />
+									</p:column>
+									<p:column headerText="Statut">
+										<h:outputText value="#{proj.projectStatus}" />
+									</p:column>
+									<p:column headerText="" style="align:left">
+										<p:commandButton
+											rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
+											icon="fa-solid fa-file-arrow-up"
+											action="#{organizationSpaceBean.submitDraftProject(proj.id)}"
+											value="Soumettre" update="@form"
+											styleClass="ui-button-outlined rounded-pill ui-button-raised ui-button-success" />
+									</p:column>
+									<p:column headerText="">
+										<p:commandButton class="ui-button-danger rounded-button"
+											action="#{organizationSpaceBean.deleteProject(proj.id)}"
+											update="@form"
+											rendered="#{organizationSpaceBean.isDraft(proj.projectStatus)}"
+											icon="pi pi-trash">
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+
+							</h:form>
+
+						</div>
 					</p:tab>
 
 				</p:tabView>
