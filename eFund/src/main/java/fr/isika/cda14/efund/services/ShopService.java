@@ -7,6 +7,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
 import fr.isika.cda14.efund.entity.enums.OrderStatus;
@@ -104,10 +105,11 @@ public class ShopService {
 		basketOrder.setStatus(OrderStatus.PROCESSING);
 		// La date du cart est la date de n'importe quel element
 		basketOrder.setDate(new Date());
-		Address adr = repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
-
-		System.out.println("La date de cette commande est le" + basketOrder.getDate());
-		System.out.println("L'adresse de mon user est" + adr);
+		
+		UserAccount uAccount = repo.findUser(SessionTool.getUserId());
+		basketOrder.setUserSpace(uAccount.getUserSpace());
+		
+		Address adr = uAccount.getUserInfo().getUserAddress();
 		basketOrder.setBillingAddress(adr);
 
 		return basketOrder;

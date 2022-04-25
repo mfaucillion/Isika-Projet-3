@@ -33,8 +33,7 @@ public class UserSpace implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "user_space_id")
+	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "userSpace")
 	private List<BasketOrder> basketOrders;
 
 	@OneToMany

@@ -13,6 +13,7 @@ import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
+import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 import fr.isika.cda14.efund.exception.UserAlreadyExistsException;
 import fr.isika.cda14.efund.repositories.AccountRepository;
@@ -154,6 +155,10 @@ public class AccountService {
 	public List<EventRegistration> getRegistrations(Long userSpaceId) {
 		return repo.getRegistrations(userSpaceId);
 	}
+	
+	public List<BasketOrder> getBasketOrders(Long userSpaceId) {
+		return repo.getBasketOrders(userSpaceId);
+	}
 
 	public void addContent(ContentVM contentVM, OrganizationSpace organizationSpace) {
 		ContentBlock newBlock = new ContentBlock();
@@ -169,4 +174,6 @@ public class AccountService {
 		ContentBlock block = repo.findBlock(blockId);
 		repo.removeBlock(block);
 	}
+
+
 }
