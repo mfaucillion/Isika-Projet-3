@@ -12,7 +12,6 @@
 			<link rel="stylesheet" href="css/listeCommandePage.css" />
 		</ui:define>
 		<ui:define name="content">
-			#{shopBean.cart.size()}
 			
 			<div class="card">
 				<p:dataTable var="orderLine" value="#{shopBean.cart}">
@@ -39,10 +38,11 @@
 					</p:column>
 
 				</p:dataTable>
+				
 				<h:form>
 					<p:linkButton type="button" action="#{shopBean.payMyCart(shopBean.cart)}" value="payer" outcome="userProfil?id=#{loginBean.sessionUserId}faces-redirect=true">
 					
-						<h:outputText  value="payer #{shopBean.sumOfmyCart(shopBean.cart)} euros" />
+						<h:outputText  value="payer #{shopBean.sumOfmyCart(shopBean.cart)} euros"/>
 					</p:linkButton>
 				</h:form>
 			</div>
