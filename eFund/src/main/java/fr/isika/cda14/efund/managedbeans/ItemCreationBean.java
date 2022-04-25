@@ -2,6 +2,7 @@ package fr.isika.cda14.efund.managedbeans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import org.primefaces.event.FileUploadEvent;
@@ -20,15 +21,15 @@ public class ItemCreationBean {
 	
 	private ItemCreationForm itemCreationForm = new ItemCreationForm();
 
-	public String createItem(String id, String orgId) {
-		creationService.create(itemCreationForm, Long.parseLong(id));
-		return "pageOng?id=" + orgId + "faces-redirect=true";
+	public String createItem(String shopId) {
+		creationService.create(itemCreationForm, Long.parseLong(shopId));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 	
 	public void upload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/item/" + file.getFileName();
-		itemCreationForm.setImagePath("img" + filePath);
+		itemCreationForm.setImagePath("/img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
 	

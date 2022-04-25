@@ -22,13 +22,13 @@ public class EventCreationBean {
 
 	public String createEvent(String id) {
 		eventCreationService.create(eventCreationFormVM, Long.parseLong(id));
-		return "eventCreationForm.xhtml";
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 	
 	public void uploadFile(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/event/" + file.getFileName();
-		eventCreationFormVM.setImagePath("img" + filePath);
+		eventCreationFormVM.setImagePath("/img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
 

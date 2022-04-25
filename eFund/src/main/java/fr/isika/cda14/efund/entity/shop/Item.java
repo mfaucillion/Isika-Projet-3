@@ -23,7 +23,7 @@ public class Item {
 	private String label;
 
 	@Column(name = "image_path")
-	private String imagePath;
+	private String imagePath = "/img/item/default.jpg";
 
 	@Column(scale = 2)
 	private BigDecimal price;

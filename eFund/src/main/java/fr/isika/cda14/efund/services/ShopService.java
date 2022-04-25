@@ -28,7 +28,7 @@ public class ShopService {
 	@Inject
 	private AccountRepository repo;
 
-	public void create(ItemCreationForm itemCreationForm, Long id) {
+	public void create(ItemCreationForm itemCreationForm, Long shopId) {
 		Item newItem = new Item();
 
 		newItem.setLabel(itemCreationForm.getLabel());
@@ -38,7 +38,7 @@ public class ShopService {
 		newItem.setImagePath(itemCreationForm.getImagePath());
 		newItem.setItemStatus(ItemStatus.AVAILABLE);
 
-		Shop shop = shopRepo.findShop(id);
+		Shop shop = shopRepo.findShop(shopId);
 		shop.getItems().add(newItem);
 
 		shopRepo.update(shop);

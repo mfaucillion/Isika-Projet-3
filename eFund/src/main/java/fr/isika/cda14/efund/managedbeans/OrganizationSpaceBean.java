@@ -75,13 +75,15 @@ public class OrganizationSpaceBean {
 		return blockType.equals(tagType);
 	}
 
-	public void createBlock(String type) {
+	public String createBlock(String type) {
 		contentVM.setType(type);
 		accountService.addContent(contentVM, orgAccount.getOrganizationSpace());
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void removeBlock(Long blockId) {
+	public String removeBlock(Long blockId) {
 		accountService.removeBlock(blockId);
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	// Upload de fichier pour les blocs de contenu
@@ -96,16 +98,19 @@ public class OrganizationSpaceBean {
 		return shopService.createOrderLine(item);
 	}
 
-	public void deleteItem(String id) {
+	public String deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void deleteProject(String id) {
+	public String deleteProject(String id) {
 		projectService.deleteProject(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void deleteEvent(String id) {
+	public String deleteEvent(String id) {
 		eventService.deleteEvent(Long.parseLong(id));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	public int pourcentage(BigDecimal current, BigDecimal target) {
@@ -153,5 +158,4 @@ public class OrganizationSpaceBean {
 	public Boolean getIsOwner() {
 		return isOwner;
 	}
-
 }
