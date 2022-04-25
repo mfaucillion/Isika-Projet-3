@@ -41,7 +41,7 @@
 									<i class="fa-solid fa-at"></i>
 								</div>
 								<p:inputText placeholder="Email"
-									value="#{createUserBean.createUser.email}" id="emailInput" />
+									value="#{createUserBean.createUser.email}" id="emailInput"  required="true"/>
 							</div>
 						</div>
 
@@ -57,7 +57,7 @@
 								</div>
 								<p:inputText placeholder="Mot de passe" type="password"
 									value="#{createUserBean.createUser.password}"
-									id="passwordInput" />
+									id="passwordInput"  required="true"/>
 							</div>
 						</div>
 					</div>
@@ -72,22 +72,23 @@
 								</div>
 								<p:inputText placeholder="Nom d'utilisateur"
 									value="#{createUserBean.createUser.displayedName}"
-									id="displayedNameInput" />
+									id="displayedNameInput" required="true"/>
 							</div>
+							<p:link outcome="orgCreationForm.xhtml">Vous représentez une association ?</p:link>
 						</div>
 					</div>
-
+					
 					<div class="row">
 						<div class="col-12 col-md-3 mt-3"></div>
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined rounded-pill"
-								action="#" value="Annuler" />
+								type="reset" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined rounded-pill"
-								action="#{createUserBean.create()}" value="Valider" />
+								action="#{createUserBean.create()}" value="Valider" validateClient="true"/>
 						</div>
 					</div>
 

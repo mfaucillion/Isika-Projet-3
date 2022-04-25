@@ -42,7 +42,7 @@
 								</div>
 								<p:inputText placeholder="Email"
 									value="#{createOrganizationAccountBean.organization.email}"
-									id="OrgEmailInput" />
+									id="OrgEmailInput" required="true"/>
 							</div>
 						</div>
 
@@ -58,7 +58,7 @@
 								</div>
 								<p:inputText placeholder="Mot de passe" type="password"
 									value="#{createOrganizationAccountBean.organization.password}"
-									id="OrgPasswordInput" />
+									id="OrgPasswordInput" required="true"/>
 							</div>
 						</div>
 					</div>
@@ -73,8 +73,9 @@
 								</div>
 								<p:inputText placeholder="Nom de compte"
 									value="#{createOrganizationAccountBean.organization.displayedName}"
-									id="OrgDisplayedNameInput" />
+									id="OrgDisplayedNameInput" required="true"/>
 							</div>
+							<p:link outcome="userCreationForm.xhtml">Vous souhaitez simplement participer ?</p:link>
 						</div>
 					</div>
 
@@ -87,7 +88,7 @@
 						<div class="col-12 col-md-3 mt-4 d-grid">
 							<p:commandButton styleClass="ui-button-outlined rounded-pill"
 								action="#{createOrganizationAccountBean.create()}"
-								value="Valider" />
+								value="Valider" validateClient="true"/>
 						</div>
 					</div>
 

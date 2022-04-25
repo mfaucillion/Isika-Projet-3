@@ -115,18 +115,34 @@
 							</div>
 						</div>
 					</div>
+					
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:fileUpload skinSimple="true"
+								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
+								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
+								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
+								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
+								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
+								listener="#{createUserBean.upload}" />
+
+						</div>
+
+					</div>
 
 					<div class="row">
 						<div class="col-12 col-md-1 mt-3"></div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined rounded-pill"
-								action="#" value="Annuler" />
+								type="reset" value="Annuler" />
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<p:commandButton
 								styleClass="ui-button-outlined rounded-pill"
-								action="#{createUserBean.modify(id)}" value="Valider" />
+								action="#{createUserBean.modify(id)}" value="Valider" validateClient="true"/>
 						</div>
 
 					</div>
