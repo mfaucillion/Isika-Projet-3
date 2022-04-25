@@ -125,9 +125,23 @@ public class BasketOrder implements Serializable{
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
 	}
+	
+	public void setOrderLines(List<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+	}
 
 	public Date getDate() {
 		return date;
 	}
+
+	public UserSpace getUserSpace() {
+		return userSpace;
+	}
+
+	public void setUserSpace(UserSpace userSpace) {
+		this.userSpace = userSpace;
+	}
+	
+	
 	
 }
