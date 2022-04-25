@@ -14,50 +14,52 @@
 				<h1>Se connecter</h1>
 			</f:facet>
 
-			<div class="container shadow p-5" style="width: 20vw; height: 100%">
+			<div class="container shadow p-5" style="width: 30vw; height: 40vh">
 
-					<div class="ui-fluid row">
-						<div class="col-12 col-md-2 mt-3"></div>
-						<div class="col-12 col-md-8 mt-3">
-							<div class="ui-inputgroup ">
-								<div class="ui-inputgroup-addon">
-									<i class="fa-solid fa-at"></i>
-								</div>
-								<p:inputText placeholder="Email" value="#{loginBean.email}"
-									id="LoginEmailInput" />
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-2 mt-3"></div>
+					<div class="col-12 col-md-8 mt-3">
+						<div class="ui-inputgroup ">
+							<div class="ui-inputgroup-addon">
+								<i class="fa-solid fa-at"></i>
 							</div>
-						</div>
-					</div>
-
-					<div class="ui-fluid row">
-						<div class="col-12 col-md-2 mt-3"></div>
-						<div class="col-12 col-md-8 mt-3">
-							<div class="ui-inputgroup">
-								<div class="ui-inputgroup-addon">
-									<i class="fa-solid fa-key"></i>
-								</div>
-								<p:inputText placeholder="Mot de passe" type="password"
-									value="#{loginBean.password}" id="LoginPasswordInput" />
-							</div>
-						</div>
-					</div>
-
-					<div class="ui-fluid row">
-						<div class="col-12 col-md-2 mt-3"></div>
-						<div class="col-12 col-md-8 mt-3">
-							<p:link outcome="createUser.xhtml">Vous n'avez encore de compte ?</p:link>
+							<p:inputText placeholder="Email" value="#{loginBean.email}"
+								id="LoginEmailInput" required="true"
+								requiredMessage="Champs requis" />
 						</div>
 					</div>
 				</div>
 
-				<f:facet name="footer">
-					<div class="col-12 d-grid">
-						<h:commandButton
-							styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-							action="#{loginBean.login()}"
-							oncomplete="PF('loginPopup').hide()" value="Valider" />
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-2 mt-3"></div>
+					<div class="col-12 col-md-8 mt-3">
+						<div class="ui-inputgroup">
+							<div class="ui-inputgroup-addon">
+								<i class="fa-solid fa-key"></i>
+							</div>
+							<p:inputText placeholder="Mot de passe" type="password"
+								value="#{loginBean.password}" id="LoginPasswordInput"
+								required="true" requiredMessage="Champs requis" />
+						</div>
 					</div>
-				</f:facet>
+				</div>
+
+				<div class="ui-fluid row">
+					<div class="col-12 col-md-2 mt-3"></div>
+					<div class="col-12 col-md-8 mt-3">
+						<p:link outcome="createUser.xhtml">Vous n'avez encore de compte ?</p:link>
+					</div>
+				</div>
+			</div>
+
+			<f:facet name="footer">
+				<div class="col-12 d-grid">
+					<p:commandButton
+						styleClass="ui-button-outlined ui-button-secondary rounded-pill"
+						action="#{loginBean.login()}" oncomplete="PF('loginPopup').hide()"
+						value="Valider" type="submit" validateClient="true" />
+				</div>
+			</f:facet>
 
 
 		</p:dialog>

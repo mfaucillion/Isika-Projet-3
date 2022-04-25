@@ -60,9 +60,10 @@
 						<div class="col-12 col-sm">
 							<p:commandButton class="ui-button-warning rounded-button"
 								icon="pi pi-envelope" oncomplete="PF('sendMailDialog').show()"
-								process="@this">
+								process="@this" update="@([id$=mailFormDialog])">
 								<f:setPropertyActionListener value="#{user}"
 									target="#{adminDashboardBean.selectedUser}" />
+								
 							</p:commandButton>
 						</div>
 						<div class="col-12 col-sm">
@@ -90,7 +91,7 @@
 			</p:confirmDialog>
 
 			<p:confirmDialog global="true" showEffect="fade" width="300">
-				<p:commandButton value="Yes" type="button"
+				<p:commandButton value="Oui" type="button"
 					styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
 				<p:commandButton value="No" type="button"
 					styleClass="ui-confirmdialog-no ui-button-secondary"
@@ -98,47 +99,6 @@
 			</p:confirmDialog>
 
 
-		</h:form>
-
-		<h:form id="mailFormDialog">
-			<p:dialog header="Envoyer un mail" showEffect="fade" modal="true"
-				widgetVar="sendMailDialog" responsive="true" dynamic="true">
-				<div class="container shadow p-5 mt-5">
-					<h5 class="text-primary">
-						à :
-						<h:outputText value="#{adminDashboardBean.selectedUser.email}" />
-					</h5>
-					<hr class="bg-primary" />
-					<h:inputHidden value="#{adminDashboardBean.mailForm.toMail}" />
-
-					<div class="ui-fluid row d-grid">
-
-						<div class="ui-inputgroup ">
-							<div class="ui-inputgroup-addon">
-								<i class="fa-solid fa-heading"></i>
-							</div>
-							<p:inputText placeholder="Sujet"
-								value="#{adminDashboardBean.mailForm.subject}"
-								id="LoginEmailInput" />
-						</div>
-					</div>
-
-					<div class="ui-fluid row mt-3 d-grid">
-						<div class="col-12">
-							<p:outputLabel for="message" value="Message : " />
-							<p:inputTextarea placeholder="Ecrivez votre message..."
-								value="#{adminDashboardBean.mailForm.message}" id="message" />
-						</div>
-					</div>
-
-					<div class="mt-3 d-grid">
-						<p:commandButton
-							styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-							actionListener="#{adminDashboardBean.sendingMail}" value="Envoyer" oncomplete="PF('sendMailDialog').hide()"/>
-					</div>
-
-				</div>
-			</p:dialog>
 		</h:form>
 
 	</div>

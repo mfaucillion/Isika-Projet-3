@@ -148,7 +148,6 @@ public class AdminDashboardBean {
 	public void setSelectedUser(UserAccount selectedUser) {
 		this.selectedUser = selectedUser;
 		this.mailForm.setToMail(selectedUser.getEmail());
-		System.out.println(selectedUser.getId());
 	}
 	
 	public OrganizationAccount getSelectedOrg() {
@@ -157,8 +156,9 @@ public class AdminDashboardBean {
 
 	public void setSelectedOrg(OrganizationAccount selectedOrg) {
 		this.selectedOrg = selectedOrg;
+		this.mailForm.setToMail(selectedOrg.getEmail());
 	}
-
+	
 	public MailForm getMailForm() {
 		return mailForm;
 	}
@@ -182,5 +182,5 @@ public class AdminDashboardBean {
 	public List<Project> getProjects() {
 		return projects;
 	}
-
+	
 }
