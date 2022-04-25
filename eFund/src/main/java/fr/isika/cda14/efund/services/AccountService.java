@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.services;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,21 +8,12 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.Account;
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.account.OrganizationInfo;
 import fr.isika.cda14.efund.entity.account.UserAccount;
-import fr.isika.cda14.efund.entity.account.UserInfo;
-import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
-import fr.isika.cda14.efund.entity.enums.AccountStatus;
-import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
-import fr.isika.cda14.efund.entity.project.Project;
-import fr.isika.cda14.efund.entity.shop.Basket;
-import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
-import fr.isika.cda14.efund.entity.space.UserSpace;
 import fr.isika.cda14.efund.exception.UserAlreadyExistsException;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
@@ -43,13 +33,7 @@ public class AccountService {
 		org.setEmail(inputOrg.getEmail());
 		org.setPassword(inputOrg.getPassword());
 		org.setDisplayedName(inputOrg.getDisplayedName());
-		org.setOrganizationInfo(new OrganizationInfo());
-		org.setOrganizationSpace(new OrganizationSpace());
-		org.getOrganizationSpace().setShop(new Shop());
-		org.setRole(Role.ASSOC);
-		org.setAccountStatus(AccountStatus.ACTIVE);
-		org.setImagePath("/img/organization/default.jpg");
-		org.setCreationDate(new Date());
+		
 		return repo.persist(org);
 	}
 
@@ -67,9 +51,9 @@ public class AccountService {
 
 		repo.update(org);
 	}
-	
+
 	public void updateOrg(OrganizationAccount org) {
-		repo.updateOrg(org);		
+		repo.updateOrg(org);
 	}
 
 	public UserAccount createUser(CreateUserViewModel inputUser) throws UserAlreadyExistsException {
@@ -83,13 +67,6 @@ public class AccountService {
 		user.setEmail(inputUser.getEmail());
 		user.setPassword(inputUser.getPassword());
 		user.setDisplayedName(inputUser.getDisplayedName());
-		user.setUserInfo(new UserInfo());
-		user.getUserInfo().setUserAddress(new Address());
-		user.setUserSpace(new UserSpace());
-		user.setBasket(new Basket());
-		user.setRole(Role.USER);
-		user.setAccountStatus(AccountStatus.ACTIVE);
-		user.setImagePath("defaultImg.jpg");
 
 		return repo.persist(user);
 
@@ -105,6 +82,11 @@ public class AccountService {
 		user.getUserInfo().getUserAddress().setCity(inputUser.getCity());
 		user.getUserInfo().getUserAddress().setZipcode(inputUser.getZipcode());
 		user.getUserInfo().getUserAddress().setCountry(inputUser.getCountry());
+		System.out.println(inputUser.getImagePath());
+
+		if (inputUser.getImagePath() != null) {
+			user.setImagePath(inputUser.getImagePath());
+		}
 
 		repo.update(user);
 	}
@@ -131,7 +113,7 @@ public class AccountService {
 	public OrganizationAccount findOrganizationAccount(Long id) {
 		return repo.findOrganization(id);
 	}
-	
+
 	public List<OrganizationAccount> searchOrganizationAccountFromPage(String searchOrganization) {
 		return repo.searchOrganizationAccountFromPage(searchOrganization);
 	}
@@ -175,10 +157,10 @@ public class AccountService {
 
 	public void addContent(ContentVM contentVM, OrganizationSpace organizationSpace) {
 		ContentBlock newBlock = new ContentBlock();
-		
+
 		newBlock.setContent(contentVM.getContent());
 		newBlock.setType(contentVM.getType());
-		
+
 		organizationSpace.getContentBlocks().add(newBlock);
 		repo.update(organizationSpace);
 	}

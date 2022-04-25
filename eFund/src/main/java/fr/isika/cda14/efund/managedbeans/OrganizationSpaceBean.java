@@ -55,9 +55,8 @@ public class OrganizationSpaceBean {
 
 	/* Loading OrganizationAccount and Session */
 	public void onLoad(String id) {
-		System.out.println("OnloadBeforeParseLong");
 		Long orgId = Long.parseLong(id);
-		System.out.println("OnloadAfterParseLong");
+		
 		orgAccount = accountService.loadOrganizationAccountWithChildren(orgId);
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();

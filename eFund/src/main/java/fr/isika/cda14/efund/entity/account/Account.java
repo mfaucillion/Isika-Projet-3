@@ -36,7 +36,7 @@ public abstract class Account {
 
 	@Column(name = "image_path", length = 260)
 	protected String imagePath;
-	
+
 	@Column(name = "creation_date")
 	@Temporal(TemporalType.DATE)
 	protected Date creationDate;
@@ -46,7 +46,11 @@ public abstract class Account {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "account_status")
-	protected AccountStatus accountStatus;
+	protected AccountStatus accountStatus = AccountStatus.ACTIVE;
+
+	public Account() {
+		this.creationDate = new Date();
+	}
 
 	public String getPassword() {
 		return password;
@@ -80,6 +84,14 @@ public abstract class Account {
 		this.imagePath = imagePath;
 	}
 
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -95,17 +107,8 @@ public abstract class Account {
 	public void setAccountStatus(AccountStatus accountStatus) {
 		this.accountStatus = accountStatus;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
 }

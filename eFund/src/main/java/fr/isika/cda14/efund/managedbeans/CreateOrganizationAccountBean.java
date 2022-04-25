@@ -31,14 +31,16 @@ public class CreateOrganizationAccountBean {
 
 	public String modify(Long id) {
 		accountService.updateOrg(id, organization);
+		SessionTool.updateSessionImage(organization.getImagePath());
 		return "pageOng?id=" + id + "faces-redirect=true";
 	}
 
 	public void upload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/organization/" + file.getFileName();
-		organization.setImagePath("img" + filePath);
+		
 		FileUpload.doUpload(file, filePath);
+		organization.setImagePath("/img" + filePath);
 	}
 	
 	public OrganizationForm getOrganization() {

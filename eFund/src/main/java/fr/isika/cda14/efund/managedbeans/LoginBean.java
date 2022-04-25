@@ -52,9 +52,7 @@ public class LoginBean {
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String url = request.getRequestURL().toString();
-		System.out.println("URL-" + url);
 		String uri = request.getRequestURI();
-		System.out.println("URI-" + uri);
 		//ec.redirect(redirectURL);
 	}
 	

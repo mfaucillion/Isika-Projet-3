@@ -35,7 +35,7 @@
 						<h1>
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
 							<img class="img-fluid" id="logoOng"
-							src="#{organizationSpaceBean.orgAccount.imagePath}" />
+							src="#{request.contextPath}#{organizationSpaceBean.orgAccount.imagePath}" />
 							<p:link outcome="orgSpaceConfig.xhtml"
 								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
