@@ -394,6 +394,46 @@
 
 						</div>
 					</p:tab>
+					
+					<p:tab title="Gestion de mes évènements"
+						rendered="#{organizationSpaceBean.isOwner}">
+						<div class="col-9">
+							<h:form>
+								<p:dataTable var="event"
+									value="#{organizationSpaceBean.events}" reflow="true"
+									style="width:100% !important">
+
+									<p:column headerText="Nom">
+										<h:outputText value="#{event.name}" />
+									</p:column>
+									<p:column headerText="Résumé">
+										<h:outputText value="#{event.summary}" />
+									</p:column>
+									<p:column headerText="Statut">
+										<h:outputText value="#{event.projectStatus}" />
+									</p:column>
+									<p:column headerText="" style="align:left">
+										<p:commandButton
+											rendered="#{organizationSpaceBean.isDraft(event.projectStatus)}"
+											icon="fa-solid fa-file-arrow-up"
+											action="#{organizationSpaceBean.submitDraftEvent(event.id)}"
+											value="Soumettre" update="@form"
+											styleClass="ui-button-outlined rounded-pill ui-button-raised ui-button-success" />
+									</p:column>
+									<p:column headerText="">
+										<p:commandButton class="ui-button-danger rounded-button"
+											action="#{organizationSpaceBean.deleteEvent(event.id)}"
+											update="@form"
+											rendered="#{organizationSpaceBean.isDraft(event.projectStatus)}"
+											icon="pi pi-trash">
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+
+							</h:form>
+
+						</div>
+					</p:tab>
 
 				</p:tabView>
 			</div>
