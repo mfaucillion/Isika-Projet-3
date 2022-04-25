@@ -62,7 +62,9 @@ public class CreateUserBean {
 	/* Rajout les informations de la seconde page de formulaire */
 	public String modify(Long id) {
 		accountService.updateUser(id, createUser);
-		SessionTool.updateSessionImage(createUser.getImagePath());
+		if (createUser.getImagePath() != null) {
+			SessionTool.updateSessionImage(createUser.getImagePath());
+		}
 		return "index.xhtml?faces-redirect=true";
 	}
 

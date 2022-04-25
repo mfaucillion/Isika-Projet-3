@@ -20,15 +20,15 @@ public class ProjectCreationBean {
 
 	private ProjectCreationFormVM projectCreationFormVM = new ProjectCreationFormVM();
 
-	public String createProject(String id) {
-		projectCreationService.create(projectCreationFormVM, Long.parseLong(id));
-		return "projectCreationForm.xhtml";
+	public String createProject(String orgSpaceId) {
+		projectCreationService.create(projectCreationFormVM, Long.parseLong(orgSpaceId));
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	public void uploadFile(FileUploadEvent project) {
 		UploadedFile file = project.getFile();
 		String filePath = "/project/" + file.getFileName();
-		projectCreationFormVM.setImagePath("img" + filePath);
+		projectCreationFormVM.setImagePath("/img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
 

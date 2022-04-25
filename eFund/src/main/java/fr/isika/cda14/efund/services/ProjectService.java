@@ -38,7 +38,7 @@ public class ProjectService {
 	
 	private static final String STATUS = "SUBMITTED";
 
-	public void create(ProjectCreationFormVM projectCreationFormVM, Long id) {
+	public void create(ProjectCreationFormVM projectCreationFormVM, Long orgSpaceId) {
 		Project newProject = new Project();
 		newProject.setName(projectCreationFormVM.getName());
 		newProject.setEndDate(projectCreationFormVM.getEndDate());
@@ -52,7 +52,7 @@ public class ProjectService {
 		newProject.setProjectStatus(ProjectStatus.DRAFT);
 		newProject.setCreationDate(new Date());
 
-		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
+		OrganizationSpace orgSpace = accountRepo.findOrgSpace(orgSpaceId);
 
 		newProject.setOrganizationSpace(orgSpace);
 
