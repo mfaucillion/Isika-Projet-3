@@ -80,7 +80,7 @@
 								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
 								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
-								listener="#{createUserBean.upload}" />
+								listener="#{orgModificationProfileBean.upload}" />
 						</div>
 					</div>
 					<div class="row">
@@ -91,7 +91,7 @@
 						</div>
 						<div class="col-12 col-md-5 mt-4 d-grid">
 							<p:commandButton styleClass="ui-button-outlined rounded-pill"
-								action="#" value="Valider les modifications" validateClient="true" />
+								action="#{orgModificationProfileBean.updateOrgModification}" value="Valider les modifications" validateClient="true" />
 						</div>
 
 					</div>
