@@ -36,7 +36,7 @@
 						</f:facet>
 						<div class="container-fluid shadow p-5 mt-5 mx-auto">
 							<h1>Liste utilisateurs</h1>
-							<ui:include src="WEB-INF/subpage/ADUserList.xhtml" />
+							<ui:include src="WEB-INF/subpage/adminPage/ADUserList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -46,7 +46,7 @@
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
 							<h1>Liste associations</h1>
-							<ui:include src="WEB-INF/subpage/ADOrgList.xhtml" />
+							<ui:include src="WEB-INF/subpage/adminPage/ADOrgList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -56,7 +56,7 @@
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
 							<h1>Liste projets</h1>
-							<ui:include src="WEB-INF/subpage/ADProjectList.xhtml" />
+							<ui:include src="WEB-INF/subpage/adminPage/ADProjectList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -66,7 +66,7 @@
 						</f:facet>
 						<div class="container shadow p-5 mt-5">
 							<h1>Liste évènements</h1>
-							<ui:include src="WEB-INF/subpage/ADEventList.xhtml" />
+							<ui:include src="WEB-INF/subpage/adminPage/ADEventList.xhtml" />
 						</div>
 					</p:tab>
 
@@ -102,6 +102,7 @@
 
 			</div>
 
+			<ui:include src="WEB-INF/subpage/adminPage/mailFormPop.xhtml" />
 		</ui:define>
 
 	</ui:composition>
