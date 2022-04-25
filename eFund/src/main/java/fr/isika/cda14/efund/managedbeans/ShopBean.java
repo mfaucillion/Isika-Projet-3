@@ -1,6 +1,7 @@
 package fr.isika.cda14.efund.managedbeans;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -10,9 +11,9 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
-import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.services.ShopService;
 import fr.isika.cda14.efund.tool.SessionTool;
 
@@ -20,7 +21,7 @@ import fr.isika.cda14.efund.tool.SessionTool;
 @SessionScoped
 public class ShopBean {
 
-	private Integer sumOfCart;
+	private BigDecimal sumOfCartFromBean = new BigDecimal(0);
 
 	private String orderId;
 	private OrganizationAccount orgAccount;
@@ -38,7 +39,7 @@ public class ShopBean {
 	// }
 
 	public void onLoad(String itemId) throws IOException {
-		if (itemId.isEmpty()) {
+		if (itemId == null || itemId.isEmpty()) {
 		} else {
 			this.addOrderLineToCart(this.createOrderLine(Long.parseLong(itemId)));
 		}
@@ -72,7 +73,7 @@ public class ShopBean {
 							+ " item_quantity : " + cart.get(cart.indexOf(orderLine)).getQuantity() + " , cart_size : "
 							+ cart.size() + "***********************************************************");
 
-		} else if (cart.isEmpty() == false) {
+		} else {
 			for (int i = 0; i < cart.size(); i++) {
 				if (cart.get(i).getItem().getId().compareTo(orderLine.getItem().getId()) == 0) {
 					cart.get(i).setQuantity(cart.get(i).getQuantity() + 1);// pourquoi il n'affiche pas tata?
@@ -88,7 +89,7 @@ public class ShopBean {
 							+ "***********************************************************");
 				}
 			}
-			if (orderlineExists == false) {
+			if ( !orderlineExists ) {
 				orderLine.setQuantity(1);
 				orderLine.setDate(Calendar.getInstance().getTime());
 				cart.add(orderLine);
@@ -104,17 +105,27 @@ public class ShopBean {
 	}
 
 	/* Methode pour persister mon cart et redireger vers la page de payment */
-	public String payMyCart(List<OrderLine> cart) {
+	public String payMyCart() {
 
-		shopService.createBasketOrder(shopService.payMyCart(cart));
-		System.out.println(Long.toString(shopService.payMyCart(cart).getId()));
+		BasketOrder createdBasketOrder = shopService.createBasketOrder(this.cart);
+		shopService.persistBasketOrder(createdBasketOrder);
+		//sumOfCartFromBean = persistedBasketOrder.getTotalPrice();
+		//System.out.println("persisted basket : " + persistedBasketOrder.getId());
 		System.out.println("l'id du user est" + SessionTool.getUserId());
-		return "userProfil?id=" + SessionTool.getUserId() + "faces-redirect=true";
+		
+		resetCart();
+		
+		return "userProfil?faces-redirect=true&amp;id=" + SessionTool.getUserId();
 	}
 
-	public Integer sumOfmyCart(List<OrderLine> cart) {
-		sumOfCart = shopService.sumOfmyCart(cart);
-		return sumOfCart;
+	private void resetCart() {
+		this.cart.clear();
+		this.sumOfCartFromBean = BigDecimal.ZERO;
+	}
+
+	public BigDecimal sumOfMyCart() {
+		sumOfCartFromBean = shopService.sumOfmyCart(this.cart);
+		return sumOfCartFromBean;
 	}
 
 	public String getUserIdFromSession() {
@@ -131,16 +142,18 @@ public class ShopBean {
 		this.cart = cart;
 	}
 
-	public Integer getSumOfCart() {
-		return sumOfCart;
-	}
-
-	public void setSumOfCart(Integer sumOfCart) {
-		this.sumOfCart = sumOfCart;
-	}
+	
 
 	public String getOrderId() {
 		return orderId;
+	}
+
+	public BigDecimal getSumOfCartFromBean() {
+		return sumOfCartFromBean;
+	}
+
+	public void setSumOfCartFromBean(BigDecimal sumOfCartFromBean) {
+		this.sumOfCartFromBean = sumOfCartFromBean;
 	}
 
 	public void setOrderId(String orderId) {

@@ -30,9 +30,7 @@ public class ShopRepository {
 	}
 
 	public List<Item> getShopItemList(Long id) {
-		List<Item> myItems = em.createQuery("SELECT items FROM Shop shop WHERE shop.id=:id").setParameter("id", id).getResultList();
-		System.out.println(myItems.size());
-		return myItems;
+		return em.createQuery("SELECT items FROM Shop shop WHERE shop.id=:id", Item.class).setParameter("id", id).getResultList();
 	}
 
 	public void removeItem(Item item) {
@@ -44,9 +42,9 @@ public class ShopRepository {
 		
 	}
 
-	public void create(BasketOrder basketOrder) {
+	public BasketOrder persist(BasketOrder basketOrder) {
 		em.persist(basketOrder);
-		
+		return basketOrder;
 	}
 	
 }
