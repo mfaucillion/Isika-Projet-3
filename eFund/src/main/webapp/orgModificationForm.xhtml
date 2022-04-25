@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <f:metadata>
-	<f:event listener="#" type="preRenderView"></f:event>
+	<f:event listener="#{orgModificationProfileBean.onLoad()}" type="preRenderView"></f:event>
 </f:metadata>
 
 <h:body>
@@ -32,7 +32,7 @@
 								<div class="ui-inputgroup-addon">
 									<i class="fa-solid fa-align-justify"></i>
 								</div>
-								<p:inputText placeholder="Nom" value="#" id="NameInput" />
+								<p:inputText placeholder="Nom" value="#{orgModificationProfileBean.organizationAccount.organizationInfo.name}" id="NameInput" />
 							</div>
 						</div>
 						<div class="col-12 col-md-5 mt-3">
@@ -40,7 +40,7 @@
 								<div class="ui-inputgroup-addon">
 									<i class="fa-solid fa-align-justify"></i>
 								</div>
-								<p:inputText placeholder="Siret" value="#" id="SiretInput" />
+								<p:inputText placeholder="Siret" value="#{orgModificationProfileBean.organizationAccount.organizationInfo.siret}" id="SiretInput" />
 							</div>
 						</div>
 					</div>
@@ -52,10 +52,48 @@
 									<i class="fa-solid fa-address-card"></i>
 								</div>
 								<p:inputText placeholder="Résumé"
-									value="#"
+									value="#{orgModificationProfileBean.organizationAccount.organizationInfo.summary}"
 									id="SummaryInput" />
 							</div>
 						</div>
+					</div>
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<div class="ui-inputgroup">
+								<div class="ui-inputgroup-addon">
+									<i class="fa-solid fa-address-card"></i>
+								</div>
+								<p:inputText placeholder="Description"
+									value="#{orgModificationProfileBean.organizationAccount.organizationInfo.description}"
+									id="DescriptionInput" />
+							</div>
+						</div>
+					</div>
+					<div class="ui-fluid row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-10 mt-3">
+							<p:fileUpload skinSimple="true"
+								uploadButtonStyleClass="ui-button-outlined ui-button-secondary"
+								chooseButtonStyleClass="ui-button-outlined ui-button-secondary"
+								cancelButtonStyleClass="ui-button-outlined ui-button-secondary"
+								label="Choisissez une image" mode="advanced" sizeLimit="5000000"
+								fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
+								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
+								listener="#{createUserBean.upload}" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-md-1 mt-3"></div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton styleClass="ui-button-outlined rounded-pill"
+								type="reset" value="Annuler" />
+						</div>
+						<div class="col-12 col-md-5 mt-4 d-grid">
+							<p:commandButton styleClass="ui-button-outlined rounded-pill"
+								action="#" value="Valider les modifications" validateClient="true" />
+						</div>
+
 					</div>
 				</h:form>
 			</div>

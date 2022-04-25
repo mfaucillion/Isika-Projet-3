@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.services.AccountService;
+import fr.isika.cda14.efund.tool.SessionTool;
 
 @ViewScoped
 @ManagedBean
@@ -16,8 +17,11 @@ public class OrgModificationProfileBean {
 
 	private OrganizationAccount organizationAccount;
 
-	public void onLoad(String id) {
-		this.organizationAccount = accService.findOrganizationAccount(Long.parseLong(id));
+	public void onLoad() {
+		this.organizationAccount = accService.findOrganizationAccount(SessionTool.getUserId());
 	}
 
+	public OrganizationAccount getOrganizationAccount() {
+		return organizationAccount;
+	}
 }
