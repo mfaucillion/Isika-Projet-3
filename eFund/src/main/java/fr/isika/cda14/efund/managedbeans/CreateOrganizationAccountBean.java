@@ -26,7 +26,7 @@ public class CreateOrganizationAccountBean {
 
 		OrganizationAccount account = accountService.createOrg(organization);
 		SessionTool.writeInSession(account);
-		return "createOrgBis?id=" + account.getId() + "faces-redirect=true";
+		return "orgCreationForm2?id=" + account.getId() + "faces-redirect=true";
 	}
 
 	public String modify(Long id) {
