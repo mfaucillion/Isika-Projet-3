@@ -75,13 +75,15 @@ public class OrganizationSpaceBean {
 		return blockType.equals(tagType);
 	}
 
-	public void createBlock(String type) {
+	public String createBlock(String type) {
 		contentVM.setType(type);
 		accountService.addContent(contentVM, orgAccount.getOrganizationSpace());
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
-	public void removeBlock(Long blockId) {
+	public String removeBlock(Long blockId) {
 		accountService.removeBlock(blockId);
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	// Upload de fichier pour les blocs de contenu
@@ -156,5 +158,4 @@ public class OrganizationSpaceBean {
 	public Boolean getIsOwner() {
 		return isOwner;
 	}
-
 }

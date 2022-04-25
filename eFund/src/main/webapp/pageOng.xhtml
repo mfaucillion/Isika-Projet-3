@@ -187,12 +187,12 @@
 
 					<p:tab title="Nos projets" rendered="#{organizationSpaceBean.orgAccount.organizationSpace.projectsTab}">
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link
-							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
-							id="newProject" rendered="#{organizationSpaceBean.isOwner}">
-							<i class="fa-solid fa-plus" />
-						</p:link>
-						<p:tooltip for="newProject" value="Nouveau Projet" />
+						<p:commandButton icon="fa-solid fa-plus"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Nouveau projet" type="button"
+							onclick="PF('projectCreationPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
+							
 						<h2 class="text-center">Nos projets</h2>
 						<hr />
 						<div class="row">
@@ -260,11 +260,11 @@
 					<p:tab title="Nos événements" rendered="#{organizationSpaceBean.orgAccount.organizationSpace.eventsTab}">
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
-						<p:link
-							outcome="eventCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
-							id="newEvent" rendered="#{organizationSpaceBean.isOwner}">
-							<i class="fa-solid fa-plus" />
-						</p:link>
+						<p:commandButton icon="fa-solid fa-plus"
+							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+							title="Nouvel évènement" type="button"
+							onclick="PF('eventCreationPop').show()"
+							rendered="#{organizationSpaceBean.isOwner}" />
 
 						<h2 class="text-center">Nos évènements</h2>
 						<hr />
@@ -443,6 +443,8 @@
 			<ui:include src="WEB-INF/subpage/ongPage/vidBlockPopup.xhtml" />
 
 			<ui:include src="WEB-INF/subpage/ongPage/itemCreationPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/ongPage/projectCreationPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/ongPage/eventCreationPopup.xhtml" />
 		</ui:define>
 	</ui:composition>
 </h:body>

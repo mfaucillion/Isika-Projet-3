@@ -88,7 +88,7 @@
 					<p:commandButton
 						styleClass="ui-button-outlined ui-button-secondary rounded-pill"
 						action="#{itemCreationBean.createItem(organizationSpaceBean.orgAccount.organizationSpace.shop.id)}"
-						update="@(id$=shopTab)" oncomplete="PF('itemCreationPop').hide()" value="Valider" validateClient="true" />
+						oncomplete="PF('itemCreationPop').hide()" value="Valider" validateClient="true" />
 				</div>
 			</f:facet>
 
