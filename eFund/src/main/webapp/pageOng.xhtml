@@ -131,7 +131,7 @@
 											<div class="col-12 col-md-12">
 												<p:card styleClass="shadow">
 													<f:facet name="header">
-														<img src="#{item.imagePath}" style="height: 150%"/>
+														<img src="#{request.contextPath}#{item.imagePath}" style="height: 150%"/>
 													</f:facet>
 													<f:facet name="title">
 														<div class="clearfix">#{item.label}</div>
@@ -204,7 +204,7 @@
 										<p:card style="margin-right: 30px; height: 100%"
 											styleClass="shadow">
 											<f:facet name="header">
-												<img src="#{project.imagePath}" class="ratio"
+												<img src="#{request.contextPath}#{project.imagePath}" class="ratio"
 													style="object-fit: cover; height: 20% !important" />
 											</f:facet>
 											<f:facet name="title">
@@ -276,7 +276,7 @@
 										<p:card style="margin-right: 30px; height: 100%"
 											styleClass="shadow">
 											<f:facet name="header">
-												<img src="#{event.imagePath}" class="ratio"
+												<img src="#{request.contextPath}#{event.imagePath}" class="ratio"
 													style="object-fit: cover; height: 20% !important" />
 											</f:facet>
 											<f:facet name="title">
