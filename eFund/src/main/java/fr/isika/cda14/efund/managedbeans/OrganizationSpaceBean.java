@@ -113,10 +113,12 @@ public class OrganizationSpaceBean {
 	}
 	
 	public void submitDraftProject(String id) {
-		System.out.println("suprise de l'id : " + id);
 		projectService.changeStatusToSubmit(Long.parseLong(id));
 	}
 	
+	public void submitDraftEvent(String id) {
+		eventService.changeStatusToSubmit(Long.parseLong(id));
+	}
 	public Boolean isDraft(ProjectStatus status) {
 		if(status == ProjectStatus.DRAFT) {
 			return true;

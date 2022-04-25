@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
+import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.AccountRepository;
@@ -74,5 +75,11 @@ public class EventService {
 	public void removeBlock(Long blockId) {
 		ContentBlock block = eventRepo.findBlock(blockId);
 		eventRepo.removeBlock(block);
+	}
+
+	public void changeStatusToSubmit(Long id) {
+		Event event = eventRepo.find(id);
+		event.setProjectStatus(ProjectStatus.SUBMITTED);
+		eventRepo.update(event);
 	}
 }
