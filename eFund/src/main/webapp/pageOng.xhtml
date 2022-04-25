@@ -28,7 +28,7 @@
 				<div class="row">
 					<div class="col-12 col-md-5 mb-3">
 						<img class="img-fluid" id="imgOng"
-							src="#{request.contextPath}/img/defaultOrgSpace.jpg" />
+							src="#{request.contextPath}#{organizationSpaceBean.orgAccount.organizationSpace.imagePath}" />
 					</div>
 					<div class="col-12 col-md-7 my-auto">
 						<!-- PROJECT OWNER SEULEMENT : icone AwesomeFont Configuration -->
@@ -36,7 +36,7 @@
 							#{organizationSpaceBean.orgAccount.organizationInfo.name}
 							<img class="img-fluid" id="logoOng"
 							src="#{organizationSpaceBean.orgAccount.imagePath}" />
-							<p:link outcome="MODELE.xhtml"
+							<p:link outcome="index.xhtml"
 								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
 							</p:link>
@@ -50,7 +50,7 @@
 
 				<p:tabView styleClass="rounded">
 
-					<p:tab title="Présentation">
+					<p:tab title="Présentation" rendered="#{organizationSpaceBean.orgAccount.organizationSpace.mainTab}">
 
 						<p:commandButton icon="fa-solid fa-align-justify"
 							styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
@@ -105,7 +105,7 @@
 
 
 					<!-- Onglet Boutique -->
-					<p:tab>
+					<p:tab rendered="#{organizationSpaceBean.orgAccount.organizationSpace.shopTab}">
 						<f:facet name="title">
 							<i class="fa-solid fa-basket-shopping" /> Boutique
 						</f:facet>
@@ -185,7 +185,7 @@
 
 					<!-- Onglet Projets -->
 
-					<p:tab title="Nos projets">
+					<p:tab title="Nos projets" rendered="#{organizationSpaceBean.orgAccount.organizationSpace.projectsTab}">
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
 							outcome="projectCreationForm?id=#{organizationSpaceBean.orgAccount.organizationSpace.id}"
@@ -257,7 +257,7 @@
 					</p:tab>
 
 					<!-- Onglet Evénements -->
-					<p:tab title="Nos événements">
+					<p:tab title="Nos événements" rendered="#{organizationSpaceBean.orgAccount.organizationSpace.eventsTab}">
 
 						<!-- ** PROJECT OWNER SEULEMENT : Ajout de nouveaux Projets -->
 						<p:link
