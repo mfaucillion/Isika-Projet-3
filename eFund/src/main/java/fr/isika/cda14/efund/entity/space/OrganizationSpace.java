@@ -32,19 +32,19 @@ public class OrganizationSpace implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String imagePath;
+	private String imagePath = "/img/space/default.jpg";
 	
-	@Column(name = "presentation_tab")
-	private Boolean mainTab;
+	@Column(name = "main_tab")
+	private Boolean mainTab = true;
 	
 	@Column(name = "shop_tab")
-	private Boolean shopTab;
+	private Boolean shopTab = true;;
 	
 	@Column(name = "projects_tab")
-	private Boolean projectsTab;
+	private Boolean projectsTab = true;;
 	
 	@Column(name = "events_tab")
-	private Boolean eventsTab;
+	private Boolean eventsTab = true;;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Shop shop;
@@ -65,7 +65,6 @@ public class OrganizationSpace implements Serializable{
 	
 	public OrganizationSpace() {
 		this.shop = new Shop();
-		this.imagePath = "/img/space/default.jpg";
 	}
 	
 	public Shop getShop() {
@@ -104,14 +103,6 @@ public class OrganizationSpace implements Serializable{
 		this.imagePath = imagePath;
 	}
 
-	public Boolean getMainTab() {
-		return mainTab;
-	}
-
-	public void setMainTab(Boolean mainTab) {
-		this.mainTab = mainTab;
-	}
-
 	public Boolean getShopTab() {
 		return shopTab;
 	}
@@ -135,6 +126,12 @@ public class OrganizationSpace implements Serializable{
 	public void setEventsTab(Boolean eventsTab) {
 		this.eventsTab = eventsTab;
 	}
-	
 
+	public Boolean getMainTab() {
+		return mainTab;
+	}
+	
+	public void setMainTab(Boolean mainTab) {
+		this.mainTab = mainTab;
+	}
 }
