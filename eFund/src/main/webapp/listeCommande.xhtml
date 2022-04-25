@@ -38,13 +38,11 @@
 					</p:column>
 
 				</p:dataTable>
-				<h4>Total de votre commande #{shopBean.sumOfmyCart(shopBean.cart)} euros</h4>
-				
+				<h4>Total de votre commande #{shopBean.sumOfMyCart()} euros</h4>
+				<h5>persists mon basketOrder:</h5>
 				<h:form>
-					<p:linkButton type="button" action="#{shopBean.payMyCart(shopBean.cart)}" value="payer" outcome="userProfil?id=#{loginBean.sessionUserId}faces-redirect=true">
-					
-						<h:outputText  value="payer #{shopBean.sumOfmyCart(shopBean.cart)} euros"/>
-					</p:linkButton>
+					<h:commandButton action="#{shopBean.payMyCart()}" value="payer">
+					</h:commandButton>
 				</h:form>
 			</div>
 

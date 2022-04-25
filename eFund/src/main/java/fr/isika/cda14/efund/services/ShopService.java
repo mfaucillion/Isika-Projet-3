@@ -1,7 +1,7 @@
 package fr.isika.cda14.efund.services;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -22,7 +22,7 @@ import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 @Stateless
 public class ShopService {
 
-	private Integer sumOfCart;
+	private BigDecimal sumOfCart;
 	@Inject
 	private ShopRepository shopRepo;
 	@Inject
@@ -58,16 +58,15 @@ public class ShopService {
 	public OrderLine createOrderLine(Item item) {
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		//orderLine.setQuantity(0);
-		//orderLine.setDate(Calendar.getInstance().getTime());
-		//shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
+		// orderLine.setQuantity(0);
+		// orderLine.setDate(Calendar.getInstance().getTime());
+		// shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
 		return orderLine;
 
 	}
 
-	public void createBasketOrder(BasketOrder basketOrder) {
-		shopRepo.create(basketOrder);
-
+	public BasketOrder persistBasketOrder(BasketOrder basketOrder) {
+		return shopRepo.persist(basketOrder);
 	}
 
 	/*
@@ -85,35 +84,42 @@ public class ShopService {
 	// }
 
 	/* Calcul du prix total de mon cart */
-	public Integer sumOfmyCart(List<OrderLine> cart) {
-		if (cart.isEmpty()) {
-			sumOfCart = 0;
-		} else {
-			for (int i = 0; i < cart.size(); i++) {
-				sumOfCart += (cart.get(i).getQuantity() * cart.get(i).getItem().getPrice().intValueExact());
-			}
+	public BigDecimal sumOfmyCart(List<OrderLine> cart) {
+		sumOfCart = new BigDecimal(0);
+		for (int i = 0; i < cart.size(); i++) {
+
+			sumOfCart = sumOfCart
+					.add(cart.get(i).getItem().getPrice().multiply(BigDecimal.valueOf(cart.get(i).getQuantity())));
 		}
 		return sumOfCart;
 
 	}
 
-	public BasketOrder payMyCart(List<OrderLine> cart) {
+	public BasketOrder createBasketOrder(List<OrderLine> cart) {
 		BasketOrder basketOrder = new BasketOrder();
 		basketOrder.setOrderLines(cart);
+		basketOrder.setTotalItemsQuantity(computeQuantity(cart));
+		// here
+		basketOrder.setTotalPrice(sumOfmyCart(cart));
+		basketOrder.setStatus(OrderStatus.PROCESSING);
+		// La date du cart est la date de n'importe quel element
+		basketOrder.setDate(new Date());
+		Address adr = repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
+
+		System.out.println("La date de cette commande est le" + basketOrder.getDate());
+		System.out.println("L'adresse de mon user est" + adr);
+		basketOrder.setBillingAddress(adr);
+
+		return basketOrder;
+
+	}
+
+	private Integer computeQuantity(List<OrderLine> cart) {
 		Integer totalitemQuantity = 0;
 		for (int i = 0; i < cart.size(); i++) {
 			totalitemQuantity += cart.get(i).getQuantity();
 		}
-		basketOrder.setTotalItemsQuantity(totalitemQuantity);
-		basketOrder.setTotalPrice(BigDecimal.valueOf(sumOfCart));
-		basketOrder.setStatus(OrderStatus.PROCESSING);
-		basketOrder.setDate(cart.get(0).getDate());// La date du cart est la date de n'importe quel element
-		System.out.println("La date de cette commande est le"+basketOrder.getDate());
-		Address adr = repo.findUser(SessionTool.getUserId()).getUserInfo().getUserAddress();
-		System.out.println("L'adresse de mon user est"+adr);
-		basketOrder.setBillingAddress(adr);
-		return basketOrder;
-
+		return totalitemQuantity;
 	}
 
 	public Item findItem(Long id) {
