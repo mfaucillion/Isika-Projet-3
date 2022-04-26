@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.UserAccount;
+import fr.isika.cda14.efund.entity.account.paiement.Payment;
 import fr.isika.cda14.efund.entity.common.Address;
 import fr.isika.cda14.efund.entity.enums.ItemStatus;
 import fr.isika.cda14.efund.entity.enums.OrderStatus;
@@ -19,6 +20,7 @@ import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.ShopRepository;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
+import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 
 @Stateless
 public class ShopService {
@@ -114,5 +116,9 @@ public class ShopService {
 
 	public BasketOrder getFullBasketOrder(Long orderId) {
 		return shopRepo.getFullBasketOrder(orderId);
+	}
+
+	public Payment saveMyPayment(Payment payment) {
+		return shopRepo.persist(payment);
 	}
 }

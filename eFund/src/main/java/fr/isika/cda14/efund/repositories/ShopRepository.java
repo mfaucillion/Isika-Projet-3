@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.isika.cda14.efund.entity.account.paiement.Payment;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
@@ -54,5 +55,10 @@ public class ShopRepository {
 	public BasketOrder getFullBasketOrder(Long orderId) {
 		String query = "SELECT ord FROM BasketOrder ord JOIN FETCH ord.orderLines WHERE ord.id=:id";
 		return em.createQuery(query, BasketOrder.class).setParameter("id", orderId).getSingleResult();
+	}
+
+	public Payment persist(Payment payment) {
+		em.persist(payment);
+		return payment;
 	}
 }
