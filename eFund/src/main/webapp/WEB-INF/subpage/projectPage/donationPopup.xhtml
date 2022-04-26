@@ -11,9 +11,9 @@
 		<p:dialog widgetVar="donationPop" modal="true">
 			<f:facet name="header">
 				<h1>Donations</h1>
-				<h2>au profit de :
-					#{projectPageBean.project.name}</h2>
+				<h2>au profit de : #{projectPageBean.project.name}</h2>
 			</f:facet>
+
 			<div class="container-fluid shadow p-5"
 				style="width: 40vw; height: 50vh">
 
@@ -85,6 +85,7 @@
 				</div>
 
 			</div>
+			
 			<f:facet name="footer">
 				<div class="col-12 d-grid">
 					<h:commandButton
@@ -92,7 +93,6 @@
 						action="#{projectPageBean.createDonation()}"
 						oncomplete="PF('donationPop').hide()" value="Valider" />
 				</div>
-
 			</f:facet>
 
 		</p:dialog>

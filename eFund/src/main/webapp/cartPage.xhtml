@@ -45,17 +45,12 @@
 					</p:dataTable>
 				</div>
 				<div class="row">
-					<div class="col-12 offset-8 col-md-2 my-auto">Montant total: #</div>
+					<div class="col-12 offset-8 col-md-2 my-auto">Montant total : #{shopBean.sumOfMyCart()}</div>
 					<div class="col-12 col-md-1">
 						<h:form>
-							<p:linkButton icon="fa-solid fa-credit-card" value="payer"
+							<p:commandButton icon="fa-solid fa-credit-card" value="payer"
 								styleClass="ui-button-secondary"
-								outcome="userProfil?id=#{loginBean.sessionUserId}faces-redirect=true"
-								action="#{shopBean.payMyCart(shopBean.cart)}">
-
-								<h:outputText
-									value="payer #{shopBean.sumOfMyCart(shopBean.cart)} euros" />
-							</p:linkButton>
+								action="#{shopBean.payMyCart()}" />
 						</h:form>
 					</div>
 				</div>

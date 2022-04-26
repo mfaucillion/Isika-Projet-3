@@ -17,7 +17,7 @@
 				<p:graphicImage value="#{fav.genericProject.imagePath}" />
 			</p:column>
 
-			<p:column headerText="ProjName" sortBy="#{fav.genericProject.name}">
+			<p:column headerText="Nom" sortBy="#{fav.genericProject.name}">
 				<h:form>
 					<p:commandLink type="button" action="#{userProfilBean.redirectToProjectPage(fav.genericProject)}">
 						<h:outputText value="#{fav.genericProject.name}" />

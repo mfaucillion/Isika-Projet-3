@@ -15,6 +15,7 @@ import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.GenericProject;
+import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
@@ -34,6 +35,8 @@ public class UserProfilBean {
 	private List<Donation> donations;
 	
 	private List<EventRegistration> registrations;
+	
+	private List<BasketOrder> basketOrders;
 
 	private CreateUserViewModel userViewModel = new CreateUserViewModel();
 
@@ -42,6 +45,7 @@ public class UserProfilBean {
 		Long userSpaceId = userAccount.getUserSpace().getId();
 		this.favorites = accService.getFavorites(userSpaceId);
 		this.donations = accService.getDonations(userSpaceId);
+		this.basketOrders = accService.getBasketOrders(userSpaceId);
 		this.registrations = accService.getRegistrations(userSpaceId);
 	}
 	
@@ -52,7 +56,7 @@ public class UserProfilBean {
 		FileUpload.doUpload(file, filePath);
 	}
 	
-	public String redirectToProjectPage(GenericProject gProject) {	
+	public String redirectToProjectPage(GenericProject gProject) {
 		if (gProject instanceof Event) {
 			return "pageEvent?id=" + gProject.getId() + "faces-redirect=true";
 		} else {
@@ -80,4 +84,7 @@ public class UserProfilBean {
 		return registrations;
 	}
 	
+	public List<BasketOrder> getBasketOrders() {
+		return basketOrders;
+	}	
 }
