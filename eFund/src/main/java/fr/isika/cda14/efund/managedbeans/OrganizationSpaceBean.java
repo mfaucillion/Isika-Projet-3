@@ -43,6 +43,8 @@ public class OrganizationSpaceBean {
 	ShopService shopService;
 
 	ContentVM contentVM = new ContentVM();
+	
+	private String orgSpaceImagePath;
 
 	OrganizationAccount orgAccount;
 
@@ -92,6 +94,25 @@ public class OrganizationSpaceBean {
 		String filePath = "/content/" + file.getFileName();
 		contentVM.setContent("img" + filePath);
 		FileUpload.doUpload(file, filePath);
+	}
+	
+	// Upload de fichier pour l'espace Organization
+	public void uploadFileForSpace(FileUploadEvent event) {
+		UploadedFile file = event.getFile();
+		String filePath = "/space/" + file.getFileName();
+		FileUpload.doUpload(file, filePath);
+		this.orgSpaceImagePath = "/img" + filePath;
+		System.out.println("upload" + orgSpaceImagePath);
+	}
+	
+	public String updateOrgSpace() {
+		System.out.println("preupdate" + orgSpaceImagePath);
+		if (orgSpaceImagePath != null) {
+			this.orgAccount.getOrganizationSpace().setImagePath(orgSpaceImagePath);
+		}
+		accountService.updateOrg(orgAccount);
+		System.out.println("postupdate" + orgSpaceImagePath);
+		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
 	public OrderLine createOrderLine(Item item) {
