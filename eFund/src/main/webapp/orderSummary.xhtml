@@ -5,9 +5,15 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:p="http://primefaces.org/ui">
-<h:body>
 
+<h:body>
 	<ui:composition template="/WEB-INF/template/layout.xhtml">
+
+		<f:metadata>
+			<f:viewParam name="id" />
+			<f:event listener="#{orderSummaryBean.onLoad(id)}" type="preRenderView" />
+		</f:metadata>
+
 		<ui:define name="css">
 			<link rel="stylesheet" href="css/cartPage.css" />
 		</ui:define>
@@ -18,18 +24,20 @@
 			</div>
 
 			<div class="container my-5 p-5 shadow rounded" id="containerMain">
-			<div class="ms-3 mb-5"> Date: 
-					<p:outputLabel value="#">
-<!-- 							<f:convertDateTime type="date" dateStyle="full" />	 -->
-							</p:outputLabel>
-					</div>
+				<div class="ms-3 mb-5">
+					Date:
+					<p:outputLabel value="#{orderSummaryBean.order.date}">
+						<f:convertDateTime type="date" dateStyle="full" />
+					</p:outputLabel>
+				</div>
+
 				<div class="m-3 text-center">
-										<p:dataTable var="orderLine" value="#{shopBean.cart}">
+					<p:dataTable var="orderLine" value="#{orderSummaryBean.order.orderLines}" lazy="false">
 						<p:column headerText="Article">
 							<p:outputLabel value="#{orderLine.item.label}" />
 						</p:column>
 						<p:column headerText="Aperçu">
-							<p:graphicImage value="#{orderLine.item.imagePath}"></p:graphicImage>
+							<p:graphicImage value="#{orderLine.item.imagePath}"/>
 						</p:column>
 						<p:column headerText="Prix unitaire">
 							<h:outputLabel value="#{orderLine.item.price}" />
@@ -42,17 +50,18 @@
 							<p:outputLabel value="#{orderLine.item.price*orderLine.quantity}" />
 						€
 					</p:column>
-						
+
 
 					</p:dataTable>
 				</div>
+
 				<div class="row">
-					<div class="col-12 offset-8 col-md-2 my-auto">Montant total: #</div>
+					<div class="col-12 offset-8 col-md-2 my-auto">Montant total:
+						#{orderSummaryBean.order.totalPrice}</div>
 					<div class="col-12 col-md-1">
 						<h:form>
 							<p:linkButton icon="fa-regular fa-file-pdf" value="Facture"
-								styleClass="ui-button-secondary"
-								action="#">
+								styleClass="ui-button-secondary" action="#">
 
 							</p:linkButton>
 						</h:form>

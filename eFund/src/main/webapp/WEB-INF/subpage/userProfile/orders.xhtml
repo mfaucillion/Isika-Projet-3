@@ -13,9 +13,9 @@
 		<p:dataTable var="order" value="#{userProfilBean.basketOrders}" allowUnsorting="true"
 			sortMode="single">
 			<p:column headerText="Détail de la commande">
-				<p:commandButton icon="pi pi-list"
+				<p:linkButton icon="pi pi-list"
 					styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-					value="Détail de la commande" action="#" />
+					value="Détail de la commande" outcome="orderSummary?id=#{order.id}&amp;faces-redirect=true" />
 			</p:column>
 			<p:column sortBy="#{order.date}" headerText="Date de la commande" width="300">
 				<h:outputText value="#{order.date}" />

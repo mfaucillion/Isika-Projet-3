@@ -59,30 +59,13 @@ public class ShopService {
 	public OrderLine createOrderLine(Item item) {
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		// orderLine.setQuantity(0);
-		// orderLine.setDate(Calendar.getInstance().getTime());
-		// shopRepo.add(orderLine); // je l'ai enlevé pour ne pas persisters
+		
 		return orderLine;
-
 	}
 
 	public BasketOrder persistBasketOrder(BasketOrder basketOrder) {
 		return shopRepo.persist(basketOrder);
 	}
-
-	/*
-	 * Ecrire une methode pour verifier s'il y a un orderLine où l'item existe, si
-	 * oui, incrmeneter la quantité
-	 */
-
-	// public OrderLine createOrderLine(Long id) {
-	// Item item = shopRepo.findItem(id);
-	/* si l'id de l'item exist, je ne cree pas d'orderLine sinon ok */
-	// OrderLine orderLine = new OrderLine();
-	// orderLine.setItem(item);
-	// shopRepo.add(orderLine);
-	// return orderLine;
-	// }
 
 	/* Calcul du prix total de mon cart */
 	public BigDecimal sumOfmyCart(List<OrderLine> cart) {
@@ -127,5 +110,9 @@ public class ShopService {
 	public Item findItem(Long id) {
 		Item item = shopRepo.findItem(id);
 		return item;
+	}
+
+	public BasketOrder getFullBasketOrder(Long orderId) {
+		return shopRepo.getFullBasketOrder(orderId);
 	}
 }
