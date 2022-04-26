@@ -6,12 +6,14 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.EventRepository;
+import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
 
 @Stateless
@@ -19,24 +21,24 @@ public class EventService {
 
 	@Inject
 	private EventRepository eventRepo;
-	
+
 	@Inject
 	private AccountRepository accountRepo;
 
 	public List<Event> getAllEvents() {
 		return eventRepo.findAll();
 	}
-	
+
 	/* Find on primary key (FAST) */
 	public Event findEvent(Long id) {
 		return eventRepo.find(id);
 	}
-	
-	/* HEAVY LOADER => Fetch les collections en LazyLoading*/
+
+	/* HEAVY LOADER => Fetch les collections en LazyLoading */
 	public Event loadProjectWithChildren(Long eventId) {
 		return eventRepo.loadProjectWithChildren(eventId);
 	}
-	
+
 	public List<Event> searchEventFromPage(String searchEvent) {
 		return eventRepo.searchEventFromPage(searchEvent);
 	}
@@ -53,7 +55,7 @@ public class EventService {
 	public List<Event> getTopEvents() {
 		return eventRepo.getTopEvents();
 	}
-	
+
 	public OrganizationAccount getOrgFromEvent(Long id) {
 		return accountRepo.getOrgFromEvent(id);
 	}
@@ -65,7 +67,7 @@ public class EventService {
 	/* Content Blocks Methods */
 	public void addContent(ContentVM content, Event event) {
 		ContentBlock newBlock = new ContentBlock();
-		
+
 		newBlock.setContent(content.getContent());
 		newBlock.setType(content.getType());
 		event.getContentBlocks().add(newBlock);
@@ -80,6 +82,13 @@ public class EventService {
 	public void changeStatusToSubmit(Long id) {
 		Event event = eventRepo.find(id);
 		event.setProjectStatus(ProjectStatus.SUBMITTED);
+		eventRepo.update(event);
+	}
+
+	public void addVolunteer(Long id) {
+		UserAccount userAccount = accountRepo.findUser(SessionTool.getUserId());
+		Event event = eventRepo.find(id);
+		event.setVolunteerCurrent(event.getVolunteerCurrent() + 1);
 		eventRepo.update(event);
 	}
 }
