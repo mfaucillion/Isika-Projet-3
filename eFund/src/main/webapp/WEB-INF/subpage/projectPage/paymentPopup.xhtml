@@ -10,9 +10,8 @@
 	<h:form id="donationForm">
 		<p:dialog widgetVar="donationPop" modal="true">
 			<f:facet name="header">
-				<h1>Ma commande</h1>
-				<h2>au profit de :
-					#{organizationBean.orgAccount.displayedName}</h2>
+				
+				<h2> Votre achat au profit de notre organisation</h2>
 			</f:facet>
 			<div class="container-fluid shadow p-5"
 				style="width: 40vw; height: 50vh">
@@ -39,7 +38,7 @@
 								<i class="fa-solid fa-user"></i>
 							</div>
 							<p:inputText placeholder="Nom du détententeur de la carte"
-								value="#{projectPageBean.donationVM.fullName}" id="NameInput" />
+								value="#{shopBean.paymentShopForm.name}" id="NameInput" />
 
 						</div>
 					</div>
@@ -53,8 +52,8 @@
 								<i class="fa-solid fa-credit-card"></i>
 							</div>
 							<p:inputText placeholder="Numéro de carte"
-								value="#{projectPageBean.donationVM.creditCardNumber}"
-								id="cardNumber" />
+								value="#{shopBean.paymentShopForm.cardNumber}"
+								id="cardNumber"/>
 
 						</div>
 					</div>
@@ -68,7 +67,7 @@
 								<i class="pi pi-calendar"></i>
 							</div>
 							<p:datePicker id="month" view="month"
-								value="#{projectPageBean.donationVM.expirationDate}"
+								value="#{shopBean.paymentShopForm.expirationDate}"
 								pattern="MM/yyyy" yearNavigator="true" yearRange="2000:2030" />
 
 						</div>
@@ -79,7 +78,7 @@
 								<i class="fa-solid fa-vr-cardboard"></i>
 							</div>
 							<p:inputText placeholder="Cryptogramme"
-								value="#{projectPageBean.donationVM.cryptogram}" id="crypto" />
+								value="#{shopBean.paymentShopForm.securityCode}" id="crypto"/>
 						</div>
 					</div>
 				</div>

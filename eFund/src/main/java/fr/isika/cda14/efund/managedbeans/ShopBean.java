@@ -16,6 +16,7 @@ import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
 import fr.isika.cda14.efund.services.ShopService;
 import fr.isika.cda14.efund.tool.SessionTool;
+import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 
 @ManagedBean
 @SessionScoped
@@ -24,6 +25,7 @@ public class ShopBean {
 	private BigDecimal sumOfCartFromBean = new BigDecimal(0);
 
 	private String orderId;
+	private PaymentShopVM paymentShopForm;
 	private OrganizationAccount orgAccount;
 
 	@Inject
@@ -175,5 +177,14 @@ public class ShopBean {
 	public void setOrgAccount(OrganizationAccount orgAccount) {
 		this.orgAccount = orgAccount;
 	}
+
+	public PaymentShopVM getPaymentShopForm() {
+		return paymentShopForm;
+	}
+
+	public void setPaymentShopForm(PaymentShopVM paymentShopForm) {
+		this.paymentShopForm = paymentShopForm;
+	}
+	
 
 }
