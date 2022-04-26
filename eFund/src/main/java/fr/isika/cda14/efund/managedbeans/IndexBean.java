@@ -2,8 +2,10 @@ package fr.isika.cda14.efund.managedbeans;
 
 import java.util.List;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
@@ -36,6 +38,12 @@ public class IndexBean {
 		this.orgs = accountService.getTopOrgs();
 	}
 
+	public void redirect(String page, String id) {
+		FacesContext context = FacesContext.getCurrentInstance();
+	    NavigationHandler navigationHandler = context.getApplication().getNavigationHandler();
+	    navigationHandler.handleNavigation(context, null, page + "?faces-redirect=true&id=" + id);
+	}
+	
 	public List<Project> getProjects() {
 		return projects;
 	}
