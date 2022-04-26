@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.account.paiement.Payment;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
@@ -25,7 +26,7 @@ public class ShopBean {
 	private BigDecimal sumOfCartFromBean = new BigDecimal(0);
 
 	private String orderId;
-	private PaymentShopVM paymentShopForm=new PaymentShopVM();
+	private PaymentShopVM paymentVM=new PaymentShopVM();
 	private OrganizationAccount orgAccount;
 
 	@Inject
@@ -110,9 +111,10 @@ public class ShopBean {
 	public String payMyCart() {
 
 		BasketOrder createdBasketOrder = shopService.createBasketOrder(this.cart);
-		shopService.persistBasketOrder(createdBasketOrder);
+		BasketOrder persistedBasketOrder=shopService.persistBasketOrder(createdBasketOrder);
 		//sumOfCartFromBean = persistedBasketOrder.getTotalPrice();
 		//System.out.println("persisted basket : " + persistedBasketOrder.getId());
+		this.saveMyPayment(persistedBasketOrder);
 		System.out.println("l'id du user est" + SessionTool.getUserId());
 		
 		resetCart();
@@ -128,6 +130,19 @@ public class ShopBean {
 	public BigDecimal sumOfMyCart() {
 		sumOfCartFromBean = shopService.sumOfmyCart(this.cart);
 		return sumOfCartFromBean;
+	}
+	public Payment saveMyPayment(BasketOrder basketOrder) {
+		Payment payment= new Payment();
+		payment.setBasketOrder(basketOrder);
+		payment.setCreditCardNumber(paymentVM.getCardNumber());
+		payment.setCryptogram(paymentVM.getSecurityCode());
+		payment.setFullName(paymentVM.getName());
+		payment.setAmount(basketOrder.getTotalPrice());
+		payment.setExpirationDate(paymentVM.getExpirationDate());
+		payment.setPaymentDate(basketOrder.getDate());
+		shopService.saveMyPayment(payment);
+		return payment;
+		
 	}
 
 	public String getUserIdFromSession() {
@@ -179,11 +194,11 @@ public class ShopBean {
 	}
 
 	public PaymentShopVM getPaymentShopForm() {
-		return paymentShopForm;
+		return paymentVM;
 	}
 
 	public void setPaymentShopForm(PaymentShopVM paymentShopForm) {
-		this.paymentShopForm = paymentShopForm;
+		this.paymentVM = paymentShopForm;
 	}
 	
 
