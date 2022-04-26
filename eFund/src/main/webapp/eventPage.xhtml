@@ -199,7 +199,7 @@
 										<div class="col-6 col-md-2">
 
 											<p:commandButton icon="fa-regular fa-heart" type="submit"
-												styleClass="rounded-button ui-button-danger"
+												styleClass="rounded-button ui-button-secondary ui-button-outlined"
 												title="Ajouter aux favoris"
 												action="#{eventPageBean.addFavorite}"
 												rendered="#{!eventPageBean.isFaved()}" async="true"
@@ -215,7 +215,7 @@
 										</div>
 										<div class="col-6 col-md-2">
 											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"
-												styleClass="rounded-button ui-button-primary" title="J'aime"
+												styleClass="rounded-button ui-button-secondary ui-button-outlined" title="J'aime"
 												action="#{eventPageBean.addLike}"
 												rendered="#{!eventPageBean.isLiked()}" async="true"
 												oncomplete="location.reload()" />
