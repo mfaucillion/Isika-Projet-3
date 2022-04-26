@@ -48,13 +48,14 @@
 					<div class="col-12 offset-8 col-md-2 my-auto">Montant total : #{shopBean.sumOfMyCart()}</div>
 					<div class="col-12 col-md-1">
 						<h:form>
-							<p:commandButton icon="fa-solid fa-credit-card" value="payer"
-								styleClass="ui-button-secondary"
-								action="#{shopBean.payMyCart()}" />
+							<p:commandButton icon="fa-solid fa-credit-card" value="Acheter"
+								styleClass="ui-button-secondary" type="button"
+								onclick="PF('paymentPop').show()"/>
 						</h:form>
 					</div>
 				</div>
 			</div>
+			<ui:include src="WEB-INF/subpage/cartPage/paymentPopup.xhtml" />
 		</ui:define>
 
 	</ui:composition>

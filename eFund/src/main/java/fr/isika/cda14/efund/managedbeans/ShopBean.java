@@ -25,7 +25,7 @@ public class ShopBean {
 	private BigDecimal sumOfCartFromBean = new BigDecimal(0);
 
 	private String orderId;
-	private PaymentShopVM paymentShopForm;
+	private PaymentShopVM paymentShopForm=new PaymentShopVM();
 	private OrganizationAccount orgAccount;
 
 	@Inject

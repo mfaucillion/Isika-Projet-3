@@ -8,10 +8,10 @@
 
 <h:body>
 	<h:form id="donationForm">
-		<p:dialog widgetVar="donationPop" modal="true">
+		<p:dialog widgetVar="paymentPop" modal="true">
 			<f:facet name="header">
 				
-				<h2> Votre achat au profit de notre organisation</h2>
+				<h2> Vos achats au profit de notre organisation</h2>
 			</f:facet>
 			<div class="container-fluid shadow p-5"
 				style="width: 40vw; height: 50vh">
@@ -24,7 +24,8 @@
 							<div class="ui-inputgroup-addon">
 								<i class="fa-solid fa-euro-sign"></i>
 							</div>
-							<p:outputText 
+				
+							<p:outputLabel
 								value="#{shopBean.sumOfCartFromBean}" id="AmountPayment" />
 						</div>
 					</div>
@@ -88,8 +89,8 @@
 				<div class="col-12 d-grid">
 					<h:commandButton
 						styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-						action="#{projectPageBean.createDonation()}"
-						oncomplete="PF('donationPop').hide()" value="Valider"/>
+						action="#{shopBean.payMyCart()}"
+						oncomplete="PF('paymentPop').hide()" value="Payer"/>
 				</div>
 
 			</f:facet>
