@@ -65,18 +65,6 @@
 
 						</p:dataTable>
 
-						<p:confirmDialog widgetVar="deleteOrderLineDialog"
-							showEffect="fade" width="300"
-							message="Supprimer cette ligne de commande ?" header="Confirmer"
-							severity="warn">
-							<h:outputText value="#{shopBean.selectedOrderLine}" />
-							<p:commandButton value="Yes" icon="pi pi-check"
-								actionListener="#{shopBean.deleteOrderLine}" process="@this"
-								oncomplete="PF('deleteOrderLineDialog').hide()" />
-							<p:commandButton value="No" type="button"
-								styleClass="ui-button-secondary" icon="pi pi-times"
-								onclick="PF('deleteOrderLineDialog').hide()" />
-						</p:confirmDialog>
 					</h:form>
 				</div>
 				<div class="row">

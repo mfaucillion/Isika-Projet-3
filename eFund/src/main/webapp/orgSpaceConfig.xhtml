@@ -24,7 +24,7 @@
 					<div class="ui-fluid row">
 						<div class="col-12 offset-1 col-md-10 my-3">
 							<p:inputTextarea placeholder="Changez le résumé de l'association"
-								value="" id="SummaryInput" />
+								value="#{organizationSpaceBean.orgAccount.organizationInfo.description}" id="SummaryInput" />
 						</div>
 					</div>
 
@@ -37,20 +37,17 @@
 								label="Changez l'image de l'association" mode="advanced"
 								sizeLimit="5000000" fileLimit="1" accept=".gif,.jpg,.jpeg,.png"
 								invalidSizeMessage="L'image ne doit pas dépasser 5 Mo"
-								listener="#" />
+								listener="#{organizationSpaceBean.uploadFileForSpace}" />
 						</div>
 					</div>
 
 					<div class="ui-fluid row mb-5">
 						<div class="col-12 offset-1 col-md-10 mt-3">
 							<h4>Activez/désactivez les onglets:</h4>
-							<p:selectManyCheckbox id="basic"
-								value="#{checkboxView.selectedOptions}">
-								<f:selectItem itemLabel="Présentation" itemValue="Option 1" />
-								<f:selectItem itemLabel="Boutique" itemValue="Option 2" />
-								<f:selectItem itemLabel="Projets" itemValue="Option 3" />
-								<f:selectItem itemLabel="Evènements" itemValue="Option 4" />
-							</p:selectManyCheckbox>
+							<p:selectBooleanCheckbox itemLabel="Présentation" value="#{organizationSpaceBean.orgAccount.organizationSpace.mainTab}"/>
+							<p:selectBooleanCheckbox itemLabel="Boutique" value="#{organizationSpaceBean.orgAccount.organizationSpace.shopTab}"/>
+							<p:selectBooleanCheckbox itemLabel="Projets" value="#{organizationSpaceBean.orgAccount.organizationSpace.projectsTab}"/>
+							<p:selectBooleanCheckbox itemLabel="Evènements" value="#{organizationSpaceBean.orgAccount.organizationSpace.eventsTab}"/>
 						</div>
 					</div>
 

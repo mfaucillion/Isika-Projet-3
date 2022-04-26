@@ -36,10 +36,10 @@
 							#{organizationSpaceBean.orgAccount.organizationInfo.name} <img
 								class="img-fluid" id="logoOng"
 								src="#{request.contextPath}#{organizationSpaceBean.orgAccount.imagePath}" />
-							<p:link outcome="orgSpaceConfig.xhtml"
+							<p:commandLink type="button" onclick="PF('orgConfigPop').show()"
 								rendered="#{organizationSpaceBean.isOwner}">
 								<i class="fa-solid fa-gear" />
-							</p:link>
+							</p:commandLink>
 						</h1>
 
 						<hr />
@@ -450,7 +450,7 @@
 			<ui:include src="WEB-INF/subpage/ongPage/txtBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/imgBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/vidBlockPopup.xhtml" />
-
+			<ui:include src="WEB-INF/subpage/ongPage/orgSpaceConfig.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/itemCreationPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/projectCreationPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/ongPage/eventCreationPopup.xhtml" />
