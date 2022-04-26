@@ -143,7 +143,8 @@
 								<h:link
 									outcome="pageOng.xhtml?id=#{eventPageBean.organizationAccount.id}faces-redirect=true">
 									<img class="img-fluid w-100" id="containerBorder"
-										src="#{request.contextPath}#{eventPageBean.organizationAccount.imagePath}" alt="" />
+										src="#{request.contextPath}#{eventPageBean.organizationAccount.imagePath}"
+										alt="" />
 								</h:link>
 							</div>
 							<div class="col-12 col-lg-7 my-auto">
@@ -188,8 +189,8 @@
 										<div class="col-12 col-md-8">
 											<p:commandButton icon="fa-solid fa-hand-holding-hand"
 												styleClass="ui-button-outlined ui-button-secondary rounded-pill"
-												value="S'inscrire comme bénévole" type="button"
-												onclick="PF('registerForm').show()" />
+												value="S'inscrire comme bénévole"
+												action="#{eventPageBean.addVolunteer(id)}" />
 										</div>
 									</div>
 
@@ -215,8 +216,8 @@
 										</div>
 										<div class="col-6 col-md-2">
 											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"
-												styleClass="rounded-button ui-button-secondary ui-button-outlined" title="J'aime"
-												action="#{eventPageBean.addLike}"
+												styleClass="rounded-button ui-button-secondary ui-button-outlined"
+												title="J'aime" action="#{eventPageBean.addLike}"
 												rendered="#{!eventPageBean.isLiked()}" async="true"
 												oncomplete="location.reload()" />
 											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"

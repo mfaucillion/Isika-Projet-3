@@ -27,14 +27,14 @@ public class EventPageBean {
 
 	@Inject
 	private EventService eventService;
-	
+
 	@Inject
 	private InteractionService interactionService;
 
 	private Event event;
 
 	private OrganizationAccount organizationAccount;
-	
+
 	private ContentVM contentVM = new ContentVM();
 
 	private Long remainingDays;
@@ -45,7 +45,7 @@ public class EventPageBean {
 		Long eventId = Long.parseLong(id);
 		this.event = eventService.loadProjectWithChildren(eventId);
 		this.organizationAccount = eventService.getOrgFromEvent(eventId);
-		
+
 		this.remainingDays = calculRemainingDays();
 		this.registerDuration = calculRegisterDuration();
 	}
@@ -83,7 +83,7 @@ public class EventPageBean {
 		}
 		return remainingDays;
 	}
-	
+
 	/* Méthodes d'interaction User -> Project */
 
 	/* Section Favoris */
@@ -141,8 +141,14 @@ public class EventPageBean {
 	public void updateEvent() {
 		eventService.update(event);
 	}
-	
-	/* Getters and Setters*/
+
+	/* Ajout de volontaires */
+	public String addVolunteer(Long id) {
+		eventService.addVolunteer(id);
+		return "eventPage?faces-redirect=true&includeViewParams=true";
+	}
+
+	/* Getters and Setters */
 	public Event getEvent() {
 		return event;
 	}
@@ -162,7 +168,7 @@ public class EventPageBean {
 	public Long getRegisterDuration() {
 		return registerDuration;
 	}
-	
+
 	public ContentVM getContentVM() {
 		return contentVM;
 	}
