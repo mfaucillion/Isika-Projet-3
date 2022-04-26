@@ -1,5 +1,6 @@
 package fr.isika.cda14.efund.entity.shop;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -13,7 +14,12 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "order_line")
-public class OrderLine {
+public class OrderLine implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4735988343830078085L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,16 +27,16 @@ public class OrderLine {
 
 	private Integer quantity;
 
+	@Temporal(TemporalType.DATE)
+	private Date date;
+	
 	@OneToOne
 	private Item item;
 
-	public OrderLine() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Long getId() {
+		return id;
 	}
-	@Temporal(TemporalType.DATE)
-	private Date date;
-
+	
 	public Date getDate() {
 		return date;
 	}

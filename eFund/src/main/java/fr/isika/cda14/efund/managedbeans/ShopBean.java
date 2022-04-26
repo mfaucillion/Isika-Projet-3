@@ -6,12 +6,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.primefaces.PrimeFaces;
+import org.primefaces.event.CellEditEvent;
+
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.account.paiement.Payment;
+import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;
@@ -26,22 +34,18 @@ public class ShopBean {
 	private BigDecimal sumOfCartFromBean = new BigDecimal(0);
 
 	private String orderId;
-	private PaymentShopVM paymentVM=new PaymentShopVM();
+	private PaymentShopVM paymentVM = new PaymentShopVM();
 	private OrganizationAccount orgAccount;
 
 	@Inject
 	private ShopService shopService;
 
-	// private List<Item> orgaShop = new ArrayList<Item>();
 	private List<OrderLine> cart = new ArrayList<OrderLine>();
 
-	// public void onLoad1(String id) {
-	// Long orgId = Long.parseLong(id);
-	// orgAccount = accountService.loadOrganizationAccountWithChildren(orgId);
-	// orgaShop = orgAccount.getOrganizationSpace().getShop().getItems();
-	// }
+	private OrderLine selectedOrderLine;
 
 	public void onLoad(String itemId) throws IOException {
+		
 		if (itemId == null || itemId.isEmpty()) {
 		} else {
 			this.addOrderLineToCart(this.createOrderLine(Long.parseLong(itemId)));
@@ -50,75 +54,53 @@ public class ShopBean {
 
 	public OrderLine createOrderLine(Item item) {
 		shopService.createOrderLine(item);
-		System.out.println("mon item item" + item);
-		return shopService.createOrderLine(item);
 
+		return shopService.createOrderLine(item);
 	}
 
 	public OrderLine createOrderLine(Long id) {
 		Item item = shopService.findItem(id);
-		System.out.println("tutu mon item " + item.getLabel() + " grace a l'id" + id
-				+ "***********************************************************");
 		shopService.createOrderLine(item);
-		// this.addOrderLineToCart(item.getId());
-		// System.out.println("mon chariot"+cart);
+
 		return shopService.createOrderLine(item);
 	}
 
 	public void addOrderLineToCart(OrderLine orderLine) throws IOException {
+
 		boolean orderlineExists = false;
+
 		if (cart.isEmpty()) {
 			orderLine.setQuantity(1);
 			orderLine.setDate(Calendar.getInstance().getTime());
 			cart.add(orderLine);
-			System.out.println(
-					"toto new item in empty cart item_name" + cart.get(cart.indexOf(orderLine)).getItem().getLabel()
-							+ " item_quantity : " + cart.get(cart.indexOf(orderLine)).getQuantity() + " , cart_size : "
-							+ cart.size() + "***********************************************************");
-
 		} else {
+			
 			for (int i = 0; i < cart.size(); i++) {
+				
 				if (cart.get(i).getItem().getId().compareTo(orderLine.getItem().getId()) == 0) {
-					cart.get(i).setQuantity(cart.get(i).getQuantity() + 1);// pourquoi il n'affiche pas tata?
-					// cart.add(orderLine);
+					cart.get(i).setQuantity(cart.get(i).getQuantity() + 1);
 					orderlineExists = true;
-					System.out.println("non_empty cart tata, orderline_id: " + cart.indexOf(cart.get(i)) + "item_name"
-							+ cart.get(i).getItem().getLabel() + " item_quantity : " + cart.get(i).getQuantity()
-							+ " , cart_size : " + cart.size()
-							+ "***********************************************************");
-					System.out.println("non_empty cart tete, order_quantity" + cart.get(i).getQuantity()
-							+ "the item_id is :" + cart.get(i).getItem().getId() + " and the label is "
-							+ cart.get(i).getItem().getLabel()
-							+ "***********************************************************");
 				}
 			}
-			if ( !orderlineExists ) {
+			
+			if (!orderlineExists) {
 				orderLine.setQuantity(1);
 				orderLine.setDate(Calendar.getInstance().getTime());
 				cart.add(orderLine);
-				System.out.println("new item in non empty cart item_name"
-						+ cart.get(cart.indexOf(orderLine)).getItem().getLabel() + " item_quantity : "
-						+ cart.get(cart.indexOf(orderLine)).getQuantity() + "the size of the cart is " + cart.size()
-						+ "***********************************************************");
-		} 
-		
+			}
 		}
-		System.out.println("titi taille de mon cart:" + cart.size()
-				+ "***********************************************************");
 	}
 
 	/* Methode pour persister mon cart et redireger vers la page de payment */
 	public String payMyCart() {
 
 		BasketOrder createdBasketOrder = shopService.createBasketOrder(this.cart);
-		BasketOrder persistedBasketOrder=shopService.persistBasketOrder(createdBasketOrder);
-		//sumOfCartFromBean = persistedBasketOrder.getTotalPrice();
-		//System.out.println("persisted basket : " + persistedBasketOrder.getId());
+		BasketOrder persistedBasketOrder = shopService.persistBasketOrder(createdBasketOrder);
+
 		this.saveMyPayment(persistedBasketOrder);
-		System.out.println("l'id du user est" + SessionTool.getUserId());
-		
+
 		resetCart();
-		
+
 		return "userProfil?faces-redirect=true&amp;id=" + SessionTool.getUserId();
 	}
 
@@ -131,8 +113,9 @@ public class ShopBean {
 		sumOfCartFromBean = shopService.sumOfmyCart(this.cart);
 		return sumOfCartFromBean;
 	}
+
 	public Payment saveMyPayment(BasketOrder basketOrder) {
-		Payment payment= new Payment();
+		Payment payment = new Payment();
 		payment.setBasketOrder(basketOrder);
 		payment.setCreditCardNumber(paymentVM.getCardNumber());
 		payment.setCryptogram(paymentVM.getSecurityCode());
@@ -141,8 +124,42 @@ public class ShopBean {
 		payment.setExpirationDate(paymentVM.getExpirationDate());
 		payment.setPaymentDate(basketOrder.getDate());
 		shopService.saveMyPayment(payment);
+
 		return payment;
+	}
+
+	public void onUserCellEdit(CellEditEvent<Integer> event) {
+		Integer oldValue = (Integer) event.getOldValue();
+		Integer newValue = (Integer) event.getNewValue();
+
+		OrderLine orderLine = (OrderLine) event.getComponent().getAttributes().get("orderLineAttr");
+		orderLine.setQuantity(newValue);
 		
+		for (int i = 0; i < cart.size(); i++) {
+			if (cart.get(i).getItem().getId().compareTo(orderLine.getItem().getId()) == 0) {
+				cart.get(i).setQuantity(newValue);
+			}
+		}
+
+		if (newValue != null && !newValue.equals(oldValue)) {
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cellule modifiée",
+					"Avant : " + oldValue + ", Après : " + newValue);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		}
+		try {
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	    
+			externalContext.redirect("cartPage.xhtml");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteOrderLine() {
+		this.cart.remove(this.selectedOrderLine);
+		this.selectedOrderLine = null;
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Compte utilisateur supprimé"));
+		PrimeFaces.current().ajax().update("@form:dt-cart");
 	}
 
 	public String getUserIdFromSession() {
@@ -158,8 +175,6 @@ public class ShopBean {
 	public void setCart(List<OrderLine> cart) {
 		this.cart = cart;
 	}
-
-	
 
 	public String getOrderId() {
 		return orderId;
@@ -177,13 +192,13 @@ public class ShopBean {
 		this.orderId = orderId;
 	}
 
-	// public List<Item> getOrgaShop() {
-	// return orgaShop;
-	// }
+	public OrderLine getSelectedOrderLine() {
+		return selectedOrderLine;
+	}
 
-	// public void setOrgaShop(List<Item> shop) {
-	// this.orgaShop = shop;
-	// }
+	public void setSelectedOrderLine(OrderLine selectedOrderLine) {
+		this.selectedOrderLine = selectedOrderLine;
+	}
 
 	public OrganizationAccount getOrgAccount() {
 		return orgAccount;
@@ -200,6 +215,5 @@ public class ShopBean {
 	public void setPaymentShopForm(PaymentShopVM paymentShopForm) {
 		this.paymentVM = paymentShopForm;
 	}
-	
 
 }

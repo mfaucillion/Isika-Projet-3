@@ -25,7 +25,8 @@ import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 @Stateless
 public class ShopService {
 
-	private BigDecimal sumOfCart;
+	private BigDecimal sumOfCart = new BigDecimal(0);
+	
 	@Inject
 	private ShopRepository shopRepo;
 	@Inject
@@ -71,7 +72,7 @@ public class ShopService {
 
 	/* Calcul du prix total de mon cart */
 	public BigDecimal sumOfmyCart(List<OrderLine> cart) {
-		sumOfCart = new BigDecimal(0);
+		sumOfCart = BigDecimal.ZERO;
 		for (int i = 0; i < cart.size(); i++) {
 
 			sumOfCart = sumOfCart
