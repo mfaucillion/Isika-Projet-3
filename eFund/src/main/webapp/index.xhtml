@@ -19,19 +19,15 @@
 		</ui:define>
 
 		<ui:define name="content">
-		
-				<div class="ui-fuild row text-center  my-5">
-					
-				</div>
 
-				<div class="ui-fuild row text-center  my-5">
-					<h1>Participez maintenant</h1>
-					<h1>et soutenez les actions d'associations et d'ONGs !</h1>
-				</div>
-				
-				<div class="ui-fuild row text-center  my-5">
-					
-				</div>
+			<div class="ui-fuild row text-center  my-5"></div>
+
+			<div class="ui-fuild row text-center  my-5">
+				<h1>Participez maintenant</h1>
+				<h1>et soutenez les actions d'associations et d'ONGs !</h1>
+			</div>
+
+			<div class="ui-fuild row text-center  my-5"></div>
 
 			<div class="container shadow py-3 px-5 mt-5">
 
@@ -65,17 +61,20 @@
 							<p:contentFlow value="#{indexBean.projects}" var="project">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{project.imagePath}" />
-									<div class="caption text-dark w-25 mx-auto">
-									#{project.name} - #{project.summary}</div>
-								
+								<p:link class="caption text-dark w-25 mx-auto"
+									outcome="pageProject?id=#{project.id}">
+
+									#{project.name} - #{project.summary}
+									</p:link>
+
 							</p:contentFlow>
 						</div>
 
 					</div>
 				</div>
 			</div>
-			
-			<hr/>
+
+			<hr />
 
 			<div class="container shadow py-3 px-5 mt-5">
 
@@ -109,8 +108,12 @@
 							<p:contentFlow value="#{indexBean.events}" var="event">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{event.imagePath}" />
-								<div class="caption text-dark w-25 mx-auto">
-								#{event.name} - #{event.summary}</div>
+								<p:link class="caption text-dark w-25 mx-auto"
+									outcome="eventPage?id=#{event.id}">
+									<div class="caption text-dark w-25 mx-auto">
+										#{event.name} - #{event.summary}</div>
+								</p:link>
+
 							</p:contentFlow>
 						</div>
 
@@ -118,8 +121,8 @@
 				</div>
 
 			</div>
-			
-			<hr/>
+
+			<hr />
 
 			<div class="container shadow py-3 px-5 mt-5">
 
@@ -148,19 +151,22 @@
 
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-12 mt-3">
-					
+
 						<div class="card pb-3">
 							<p:contentFlow value="#{indexBean.orgs}" var="org">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{org.imagePath}" />
-								<div class="caption text-dark w-25 mx-auto">
-								#{org.organizationInfo.name}</div>
+								<p:link class="caption text-dark w-25 mx-auto"
+									outcome="pageOng?id=#{org.id}">
+									<div class="caption text-dark w-25 mx-auto">
+										#{org.organizationInfo.name}</div>
+								</p:link>
 							</p:contentFlow>
 						</div>
 					</div>
 				</div>
 			</div>
-			<br/>
+			<br />
 		</ui:define>
 	</ui:composition>
 </h:body>

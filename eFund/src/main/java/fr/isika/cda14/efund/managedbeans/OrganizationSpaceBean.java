@@ -55,7 +55,7 @@ public class OrganizationSpaceBean {
 
 	private Boolean isOwner;
 
-	/* Loading OrganizationAccount and Session */
+	/* Loading OrganizationAccount, all inner collections + Init properties */
 	public void onLoad(String id) {
 		Long orgId = Long.parseLong(id);
 		
@@ -72,17 +72,21 @@ public class OrganizationSpaceBean {
 		}
 	}
 
-	/* Méthode de l'onglet Présentation (Content Blocks) */
+	/* Méthodes de l'onglet Présentation (Content Blocks) */
+	// Booléen utilisé pour utiliser la bonne balise en fonction du contenu du bloc
+	// Certainement une solution plus simple en EL
 	public Boolean isOfType(String blockType, String tagType) {
 		return blockType.equals(tagType);
 	}
 
+	// Créé un bloc de contenu (tout types confondus)
 	public String createBlock(String type) {
 		contentVM.setType(type);
 		accountService.addContent(contentVM, orgAccount.getOrganizationSpace());
 		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
+	// Retire un bloc de contenu
 	public String removeBlock(Long blockId) {
 		accountService.removeBlock(blockId);
 		return "pageOng?faces-redirect=true&includeViewParams=true";
@@ -96,55 +100,65 @@ public class OrganizationSpaceBean {
 		FileUpload.doUpload(file, filePath);
 	}
 	
-	// Upload de fichier pour l'espace Organization
+	// Upload de fichier pour l'espace Organization et prépare chemin à insérer dans l'organizationSpace
 	public void uploadFileForSpace(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/space/" + file.getFileName();
 		FileUpload.doUpload(file, filePath);
 		this.orgSpaceImagePath = "/img" + filePath;
-		System.out.println("upload" + orgSpaceImagePath);
 	}
-	
+
+	// Mets à jour l'entité
 	public String updateOrgSpace() {
-		System.out.println("preupdate" + orgSpaceImagePath);
 		if (orgSpaceImagePath != null) {
 			this.orgAccount.getOrganizationSpace().setImagePath(orgSpaceImagePath);
 		}
 		accountService.updateOrg(orgAccount);
-		System.out.println("postupdate" + orgSpaceImagePath);
 		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
+	//
 	public OrderLine createOrderLine(Item item) {
 		return shopService.createOrderLine(item);
 	}
-
+	
+	// Supprime un objet de la boutique
 	public String deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
 		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
+	// Supprime un Projet (DRAFT Only)
 	public String deleteProject(String id) {
 		projectService.deleteProject(Long.parseLong(id));
 		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
+	// Supprime un Evénement (DRAFT Only)
 	public String deleteEvent(String id) {
 		eventService.deleteEvent(Long.parseLong(id));
 		return "pageOng?faces-redirect=true&includeViewParams=true";
 	}
 
+	// Calcul de pourcentage entre deux BigDecimal
 	public int pourcentage(BigDecimal current, BigDecimal target) {
+		if (target.intValue() == 0) {
+			return 100;
+		}
 		return (current.intValue() * 100 / target.intValue());
 	}
 	
+	// Change le statut du projet pour le soumettre à la publication	
 	public void submitDraftProject(String id) {
 		projectService.changeStatusToSubmit(Long.parseLong(id));
 	}
 	
+	// Change le statut de l'évènement pour le soumettre à la publication
 	public void submitDraftEvent(String id) {
 		eventService.changeStatusToSubmit(Long.parseLong(id));
 	}
+	
+	// Vérifie si le projet est en Draft pour cacher/afficher le bouton de suppression
 	public Boolean isDraft(ProjectStatus status) {
 		if(status == ProjectStatus.DRAFT) {
 			return true;
@@ -152,6 +166,8 @@ public class OrganizationSpaceBean {
 		return false;
 	}
 
+	
+	// Getter Setters
 	public OrganizationAccount getOrgAccount() {
 		return orgAccount;
 	}
