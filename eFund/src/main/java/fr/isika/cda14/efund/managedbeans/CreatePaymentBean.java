@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.services.PaymentService;
-import fr.isika.cda14.efund.viewmodel.PaymentForm;
+import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 
 
 @ManagedBean
@@ -18,7 +18,7 @@ public class CreatePaymentBean implements Serializable {
 	@Inject
 	private PaymentService paymentService;
 
-	private PaymentForm paymentForm = new PaymentForm();
+	private PaymentShopVM paymentForm = new PaymentShopVM();
 
 	
 	public void createInvoice() {
@@ -26,11 +26,11 @@ public class CreatePaymentBean implements Serializable {
 		;
 	}
 
-	public PaymentForm getPaymentForm() {
+	public PaymentShopVM getPaymentForm() {
 		return paymentForm;
 	}
 
-	public void setPaymentForm(PaymentForm paymentForm) {
+	public void setPaymentForm(PaymentShopVM paymentForm) {
 		this.paymentForm = paymentForm;
 	}
 

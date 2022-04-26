@@ -4,7 +4,7 @@ import javax.ejb.Stateless;
 
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.repositories.PaymentRepository;
-import fr.isika.cda14.efund.viewmodel.PaymentForm;
+import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 
 @Stateless
 public class PaymentService {
@@ -14,7 +14,7 @@ public class PaymentService {
 	public PaymentService() {
 		super();
 	}
-public void create(PaymentForm paymentForm) {
+public void create(PaymentShopVM paymentForm) {
 	System.out.println(paymentForm);
 	BasketOrder newbasketOrder=new BasketOrder();
 	newbasketOrder.setDate(null);
