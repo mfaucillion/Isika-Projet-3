@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class PaymentForm implements Serializable {
+public class PaymentShopVM implements Serializable {
 	private static final long serialVersionUID = 0;
 
 	
@@ -43,7 +43,7 @@ public class PaymentForm implements Serializable {
 	@Size(min = 5, max = 5, message = "Doit avoir 5 caractère.")
 	private String zipCode;
 
-	public PaymentForm() {
+	public PaymentShopVM() {
 		super();
 	}
 
