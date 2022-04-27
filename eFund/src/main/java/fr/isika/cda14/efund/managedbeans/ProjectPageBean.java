@@ -22,6 +22,7 @@ import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
+import fr.isika.cda14.efund.viewmodel.FaqVM;
 import fr.isika.cda14.efund.viewmodel.GoalVM;
 
 @ManagedBean
@@ -33,16 +34,17 @@ public class ProjectPageBean {
 
 	@Inject
 	private InteractionService interactionService;
-	
+
 	private Project project;
 
 	private OrganizationAccount organizationAccount;
-	
+
 	private DonationVM donationVM = new DonationVM();
-	
+
 	private ContentVM contentBlockVM = new ContentVM();
-	
+
 	private GoalVM goalVM = new GoalVM();
+	private FaqVM faqVM=new FaqVM();
 
 	private Long remainingDays;
 
@@ -53,12 +55,12 @@ public class ProjectPageBean {
 		Long projId = Long.parseLong(id);
 		this.project = projectService.loadProjectWithChildren(projId);
 		this.organizationAccount = projectService.getOrgFromProject(projId);
-		
+
 		this.remainingDays = calculRemainingDays();
 		this.donationDuration = calculdonationDuration();
 	}
-	
-	
+
+
 	/* Calculs pour l'affichage */
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
 		if (target.intValue() == 0) {
@@ -123,28 +125,28 @@ public class ProjectPageBean {
 	public Boolean isLiked() {
 		return interactionService.checkLike(SessionTool.getUserId(), project.getId());
 	}
-	
+
 	/* Section des Dons */
-	
+
 	public void createDonation() {
 		projectService.createDonation(donationVM, project.getId());
 	}
-	
+
 	/* Gestion des blocs de contenu dans l'onglet Contenu */
-	
+
 	public Boolean isOfType(String blockType, String tagType) {
 		return blockType.equals(tagType);
 	}
-	
+
 	public void createBlock(String type) {
 		contentBlockVM.setType(type);
 		projectService.addContent(contentBlockVM, project);
 	}
-	
+
 	public void removeBlock(Long blockId) {
 		projectService.removeBlock(blockId);
 	}
-	
+
 	// Upload de fichier pour les blocs de contenu
 	public void uploadFile(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
@@ -152,23 +154,27 @@ public class ProjectPageBean {
 		contentBlockVM.setContent("img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
-	
+
 	/* Gestion des objetctifs ou Stretch Goals */
 
 	public void addGoal() {
 		projectService.addGoal(goalVM, project);
 	}
-	
+
 	public void removeGoal(Long goalId) {
 		projectService.removeGoal(goalId);
 	}
-	
 	/* Update ProjectEntity in EntityManager */
 	public void updateProject() {
 		projectService.update(project);
 	}
 
-	
+	public void addFaq() {
+		projectService.addFaq(faqVM,project);
+	}
+	public void removeFaq(Long faqId) {
+		projectService.removeFaq(faqId);		
+	}
 	/* Getters and Setters*/
 	public Project getProject() {
 		return project;
@@ -197,5 +203,15 @@ public class ProjectPageBean {
 	public GoalVM getGoalVM() {
 		return goalVM;
 	}
-	
+
+
+	public FaqVM getFaqVM() {
+		return faqVM;
+	}
+
+	public void setFaqVM(FaqVM faqVM) {
+		this.faqVM = faqVM;
+	}
+
+
 }

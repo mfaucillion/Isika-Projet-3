@@ -12,6 +12,7 @@ import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Donation;
+import fr.isika.cda14.efund.entity.project.FaqElement;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.project.StretchGoal;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;
@@ -21,6 +22,7 @@ import fr.isika.cda14.efund.repositories.ProjectRepository;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
+import fr.isika.cda14.efund.viewmodel.FaqVM;
 import fr.isika.cda14.efund.viewmodel.GoalVM;
 import fr.isika.cda14.efund.viewmodel.ProjectCreationFormVM;
 
@@ -152,6 +154,21 @@ public class ProjectService {
 		Project project = projectRepo.findProject(id);
 		project.setProjectStatus(ProjectStatus.SUBMITTED);
 		projectRepo.update(project);
+	}
+
+	public void addFaq(FaqVM faqVM, Project project) {
+		FaqElement newFaqElement=new FaqElement();
+		newFaqElement.setQuestion(faqVM.getQuestion());
+		newFaqElement.setAnswer(faqVM.getAnswer());
+		project.getFaq().add(newFaqElement);
+		projectRepo.update(project);
+	}
+
+	public void removeFaq(Long faqId) {
+		FaqElement faqElement=projectRepo.findFaq(faqId);
+		projectRepo.removeFaq(faqElement);
+		
+		
 	}
 
 }

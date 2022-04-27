@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.common.ContentBlock;
+import fr.isika.cda14.efund.entity.project.FaqElement;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.project.StretchGoal;
 
@@ -31,6 +32,11 @@ public class ProjectRepository {
 		String query = "SELECT distinct proj " + "FROM Project proj " + "LEFT JOIN FETCH proj.contentBlocks "
 				+ "WHERE proj.id=:id";
 		Project project = em.createQuery(query, Project.class).setParameter("id", projId).getSingleResult();
+		
+		/* On force le Fetching de la collection de FAQs dans le Project */
+		query = "SELECT distinct proj FROM Project proj " + "LEFT JOIN FETCH proj.faq faq WHERE proj in :proj";
+
+		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
 
 		/* On force le Fetching de la collection de StretchGoals dans le Project */
 		query = "SELECT proj FROM Project proj " + "LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
@@ -84,6 +90,16 @@ public class ProjectRepository {
 
 	public void removeGoal(StretchGoal goal) {
 		em.remove(goal);		
+	}
+
+	public FaqElement findFaq(Long faqId) {
+		// TODO Auto-generated method stub
+		return em.find(FaqElement.class, faqId);
+	}
+
+	public void removeFaq(FaqElement faqElement) {
+		em.remove(faqElement);
+		
 	}
 
 }

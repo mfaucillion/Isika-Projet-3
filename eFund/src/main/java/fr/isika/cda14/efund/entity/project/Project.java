@@ -33,6 +33,10 @@ public class Project extends GenericProject {
 	@ManyToOne
 	@JoinColumn(name = "organization_space_id")
 	private OrganizationSpace organizationSpace;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	protected List<FaqElement> faq;
+
 
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
@@ -80,6 +84,14 @@ public class Project extends GenericProject {
 
 	public void setFavorites(List<Favorite> favorites) {
 		this.favorites = favorites;
+	}
+
+	public List<FaqElement> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(List<FaqElement> faq) {
+		this.faq = faq;
 	}	
 	
 }
