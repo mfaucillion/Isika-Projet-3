@@ -30,7 +30,7 @@
 					<p:graphicImage value="#{proj.imagePath}" />
 				</p:column>
 
-				<p:column headerText="ProjName">
+				<p:column headerText="Nom">
 					<p:link outcome="pageProject?id=#{proj.id}faces-redirect=true">
 						<h:outputText value="#{proj.name}" />
 					</p:link>
@@ -40,7 +40,7 @@
 					<h:outputText value="#{proj.currentAmount}" />
 				</p:column>
 
-				<p:column headerText="Status">
+				<p:column headerText="Statut">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{proj.projectStatus}" />
