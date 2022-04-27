@@ -19,7 +19,7 @@
 
 		<ui:define name="content">
 
-			<div class="container-fluid p-5" id="projectPageBody">
+			<div class="container-fluid p-5" id="eventPageBody">
 
 				<div class="row">
 
@@ -49,7 +49,8 @@
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
 										title="Editer la Description" type="button"
-										onclick="PF('descriptionPop').show()" rendered="#{eventPageBean.isOwner()}"/>
+										onclick="PF('descriptionPop').show()"
+										rendered="#{eventPageBean.isOwner()}" />
 								</div>
 							</div>
 
@@ -69,17 +70,20 @@
 									<p:commandButton icon="fa-solid fa-align-justify"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un bloc de text" type="button"
-										onclick="PF('addTxtBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
+										onclick="PF('addTxtBlockPop').show()"
+										rendered="#{eventPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-image"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une image" type="button"
-										onclick="PF('addImgBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
+										onclick="PF('addImgBlockPop').show()"
+										rendered="#{eventPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-film"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une video" type="button"
-										onclick="PF('addVidBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
+										onclick="PF('addVidBlockPop').show()"
+										rendered="#{eventPageBean.isOwner()}" />
 
 									<div class="container mx-auto text-center">
 										<h2 class="text-center">Campagne de recrutement</h2>
@@ -127,10 +131,34 @@
 										<i class="fa-solid fa-question" /> FAQ
 									</f:facet>
 
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la FAQ" action="#" rendered="#{eventPageBean.isOwner()}" />
-									<p>FAQ: bla bla bla</p>
+									<p:commandButton icon="fa-solid fa-plus"
+										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+										title="Ajouter une question/réponse" type="button"
+										onclick="PF('addFaqPop').show()"
+										rendered="#{eventPageBean.isOwner()}" />
+									<p:repeat var="faqElement"
+										value="#{eventPageBean.event.faq}" varStatus="status">
+
+										<ul>
+											<li>
+												<h5>
+													Question #{status.index + 1} : <b>#{faqElement.question}
+													</b>
+												</h5> <h:form>
+													<p>
+														<p:commandButton icon="fa-solid fa-minus"
+															styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+															title="Supprimer la question"
+															action="#{eventPageBean.removeFaq(faqElement.id)}"
+															ajax="false" rendered="#{eventPageBean.isOwner()}" />
+														#{faqElement.answer}
+													</p>
+												</h:form>
+											</li>
+										</ul>
+										<hr />
+
+									</p:repeat>
 
 								</p:tab>
 
@@ -237,6 +265,7 @@
 
 			<ui:include
 				src="WEB-INF/subpage/eventPage/modifDescriptionPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/eventPage/faqPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/eventPage/txtBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/eventPage/imgBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/eventPage/vidBlockPopup.xhtml" />

@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.FaqElement;
 
 @Stateless
 public class EventRepository {
@@ -33,10 +34,12 @@ public class EventRepository {
 	// HEAVY LOADER - Fetch les collections d'objets
 	public Event loadProjectWithChildren(Long eventId) {
 		/* On force le Fetching de la collection de ContentBlocks dans l'event */
-		String query = "SELECT event " + "FROM Event event " + "LEFT JOIN FETCH event.contentBlocks "
+		String query = "SELECT distinct event " + "FROM Event event " + "LEFT JOIN FETCH event.contentBlocks "
 				+ "WHERE event.id=:id";
 		Event event = em.createQuery(query, Event.class).setParameter("id", eventId).getSingleResult();
 
+		query = "SELECT event " + "FROM Event event " + "LEFT JOIN FETCH event.faq " + "WHERE event=:event";
+		event = em.createQuery(query, Event.class).setParameter("event", event).getSingleResult();
 		return event;
 	}
 
@@ -71,5 +74,14 @@ public class EventRepository {
 
 	public void removeBlock(ContentBlock block) {
 		em.remove(block);
+	}
+
+	/* FAQ methods */
+	public FaqElement findFaq(Long faqId) {
+		return em.find(FaqElement.class, faqId);
+	}
+
+	public void removeFaq(FaqElement faqElement) {
+		em.remove(faqElement);
 	}
 }

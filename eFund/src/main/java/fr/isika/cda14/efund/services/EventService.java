@@ -10,10 +10,13 @@ import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.FaqElement;
+import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.EventRepository;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
+import fr.isika.cda14.efund.viewmodel.FaqVM;
 
 @Stateless
 public class EventService {
@@ -23,8 +26,9 @@ public class EventService {
 
 	@Inject
 	private AccountRepository accountRepo;
-	
-	@Inject StatisticsService statsService;
+
+	@Inject
+	StatisticsService statsService;
 
 	public List<Event> getAllEvents() {
 		return eventRepo.findAll();
@@ -92,7 +96,21 @@ public class EventService {
 		Event event = eventRepo.find(id);
 		event.setVolunteerCurrent(event.getVolunteerCurrent() + 1);
 		eventRepo.update(event);
-		
+
 		statsService.addVolunteerToStats();
+	}
+
+	public void addFaq(FaqVM faqVM, Event event) {
+		FaqElement newFaqElement = new FaqElement();
+
+		newFaqElement.setQuestion(faqVM.getQuestion());
+		newFaqElement.setAnswer(faqVM.getAnswer());
+		event.getFaq().add(newFaqElement);
+		eventRepo.update(event);
+	}
+
+	public void removeFaq(Long faqId) {
+		FaqElement faqElement = eventRepo.findFaq(faqId);
+		eventRepo.removeFaq(faqElement);
 	}
 }

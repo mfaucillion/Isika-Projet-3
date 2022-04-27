@@ -45,15 +45,6 @@ public class LoginBean {
 			FacesContext.getCurrentInstance().addMessage(formulaire.getClientId(),
 					new FacesMessage("Utilisateur non reconnu"));
 		}
-		refreshWithQuery();
-	}
-	
-	private void refreshWithQuery() {
-		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-	    HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		String url = request.getRequestURL().toString();
-		String uri = request.getRequestURI();
-		//ec.redirect(redirectURL);
 	}
 	
 	public Boolean isUser() {

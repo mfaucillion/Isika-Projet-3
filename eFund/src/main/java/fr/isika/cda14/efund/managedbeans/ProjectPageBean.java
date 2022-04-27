@@ -45,7 +45,7 @@ public class ProjectPageBean {
 	private ContentVM contentBlockVM = new ContentVM();
 
 	private GoalVM goalVM = new GoalVM();
-	private FaqVM faqVM=new FaqVM();
+	private FaqVM faqVM = new FaqVM();
 
 	private Long remainingDays;
 
@@ -60,7 +60,6 @@ public class ProjectPageBean {
 		this.remainingDays = calculRemainingDays();
 		this.donationDuration = calculdonationDuration();
 	}
-
 
 	/* Calculs pour l'affichage */
 	public int percentage(BigDecimal currentCollect, BigDecimal target) {
@@ -165,24 +164,29 @@ public class ProjectPageBean {
 	public void removeGoal(Long goalId) {
 		projectService.removeGoal(goalId);
 	}
+
+	/* Gestion des questions/réponses de la FAQ */
+
+	public void addFaq() {
+		projectService.addFaq(faqVM, project);
+	}
+
+	public void removeFaq(Long faqId) {
+		projectService.removeFaq(faqId);
+	}
+
 	/* Update ProjectEntity in EntityManager */
 	public void updateProject() {
 		projectService.update(project);
 	}
 
-	public void addFaq() {
-		projectService.addFaq(faqVM,project);
-	}
-	public void removeFaq(Long faqId) {
-		projectService.removeFaq(faqId);		
-	}
-	
 	// Return True si l'utilisateur connecté est le propriétaire de l'organization
 	public Boolean isOwner() {
-		return this.organizationAccount.getId() == SessionTool.getUserId() && SessionTool.getRole().equals(Role.ASSOC.toString());
+		return this.organizationAccount.getId().equals(SessionTool.getUserId())
+				&& SessionTool.getRole().equals(Role.ASSOC.toString());
 	}
-	
-	/* Getters and Setters*/
+
+	/* Getters and Setters */
 	public Project getProject() {
 		return project;
 	}
@@ -211,7 +215,6 @@ public class ProjectPageBean {
 		return goalVM;
 	}
 
-
 	public FaqVM getFaqVM() {
 		return faqVM;
 	}
@@ -219,6 +222,5 @@ public class ProjectPageBean {
 	public void setFaqVM(FaqVM faqVM) {
 		this.faqVM = faqVM;
 	}
-
 
 }

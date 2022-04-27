@@ -29,7 +29,7 @@
 				</p:column>
 
 				<p:column headerText="EventName">
-					<p:link outcome="pageEvent?id=#{event.id}faces-redirect=true">
+					<p:link outcome="eventPage?faces-redirect=true&amp;id=#{event.id}">
 						<h:outputText value="#{event.name}" />
 					</p:link>
 				</p:column>

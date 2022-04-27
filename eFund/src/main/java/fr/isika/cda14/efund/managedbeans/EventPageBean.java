@@ -21,6 +21,7 @@ import fr.isika.cda14.efund.services.InteractionService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
+import fr.isika.cda14.efund.viewmodel.FaqVM;
 
 @ManagedBean
 @ViewScoped
@@ -38,6 +39,8 @@ public class EventPageBean {
 
 	private ContentVM contentVM = new ContentVM();
 
+	private FaqVM faqVM = new FaqVM();
+
 	private Long remainingDays;
 
 	private Long registerDuration;
@@ -51,6 +54,7 @@ public class EventPageBean {
 		this.registerDuration = calculRegisterDuration();
 	}
 
+	// Calcul de pourcentage / durée / compte à rebour
 	public int percentage(Integer volunteerCurrent, Integer volunteerTarget) {
 		if (volunteerTarget == 0) {
 			return 100;
@@ -138,6 +142,16 @@ public class EventPageBean {
 		FileUpload.doUpload(file, filePath);
 	}
 
+	/* Gestion des questions/réponses de la FAQ */
+
+	public void addFaq() {
+		eventService.addFaq(faqVM, event);
+	}
+
+	public void removeFaq(Long faqId) {
+		eventService.removeFaq(faqId);
+	}
+
 	/* Update ProjectEntity in EntityManager */
 	public void updateEvent() {
 		eventService.update(event);
@@ -151,7 +165,7 @@ public class EventPageBean {
 
 	// Return True si l'utilisateur connecté est le propriétaire de l'organization
 	public Boolean isOwner() {
-		return this.organizationAccount.getId() == SessionTool.getUserId()
+		return this.organizationAccount.getId().equals(SessionTool.getUserId())
 				&& SessionTool.getRole().equals(Role.ASSOC.toString());
 	}
 
@@ -178,5 +192,13 @@ public class EventPageBean {
 
 	public ContentVM getContentVM() {
 		return contentVM;
+	}
+
+	public FaqVM getFaqVM() {
+		return faqVM;
+	}
+
+	public void setFaqVM(FaqVM faqVM) {
+		this.faqVM = faqVM;
 	}
 }

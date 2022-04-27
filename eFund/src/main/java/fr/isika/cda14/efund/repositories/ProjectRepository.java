@@ -25,27 +25,28 @@ public class ProjectRepository {
 	public Project findProject(Long id) {
 		return this.em.find(Project.class, id);
 	}
-	
+
 	// HEAVY LOADER - Fetch les collections d'objets
 	public Project loadProjectWithChildren(Long projId) {
-		/* On force le Fetching de la collection de ContentBlocks dans le Project */
+			/* On force le Fetching de la collection de ContentBlocks dans le Project */
 		String query = "SELECT distinct proj " + "FROM Project proj " + "LEFT JOIN FETCH proj.contentBlocks "
 				+ "WHERE proj.id=:id";
 		Project project = em.createQuery(query, Project.class).setParameter("id", projId).getSingleResult();
-		
-		/* On force le Fetching de la collection de FAQs dans le Project */
+
+			/* On force le Fetching de la collection de FAQs dans le Project */
 		query = "SELECT distinct proj FROM Project proj " + "LEFT JOIN FETCH proj.faq faq WHERE proj in :proj";
 
 		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
 
-		/* On force le Fetching de la collection de StretchGoals dans le Project */
-		query = "SELECT proj FROM Project proj " + "LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
+			/* On force le Fetching de la collection de StretchGoals dans le Project */
+		query = "SELECT proj FROM Project proj "
+				+ "LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
 
 		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
 
 		return project;
 	}
-	
+
 	public List<Project> findAll() {
 		return this.em.createQuery("SELECT pro FROM Project pro", Project.class).getResultList();
 	}
@@ -89,17 +90,15 @@ public class ProjectRepository {
 	}
 
 	public void removeGoal(StretchGoal goal) {
-		em.remove(goal);		
+		em.remove(goal);
 	}
-
+	
+	/* FAQ methods*/
 	public FaqElement findFaq(Long faqId) {
-		// TODO Auto-generated method stub
 		return em.find(FaqElement.class, faqId);
 	}
 
 	public void removeFaq(FaqElement faqElement) {
 		em.remove(faqElement);
-		
 	}
-
 }

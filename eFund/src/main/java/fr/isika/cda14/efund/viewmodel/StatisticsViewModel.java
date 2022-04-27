@@ -1,7 +1,5 @@
 package fr.isika.cda14.efund.viewmodel;
 
-import javax.persistence.Column;
-
 public class StatisticsViewModel {
 	private Integer nbOrganizations;
 	private Integer nbProjects;
