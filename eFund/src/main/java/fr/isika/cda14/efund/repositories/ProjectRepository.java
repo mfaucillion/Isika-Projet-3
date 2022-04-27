@@ -6,12 +6,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.project.StretchGoal;
-import fr.isika.cda14.efund.entity.shop.Shop;
-import fr.isika.cda14.efund.entity.space.OrganizationSpace;
 
 @Stateless
 public class ProjectRepository {

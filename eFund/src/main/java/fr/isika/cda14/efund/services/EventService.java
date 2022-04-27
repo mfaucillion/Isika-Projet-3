@@ -10,7 +10,6 @@ import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.enums.ProjectStatus;
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.EventRepository;
 import fr.isika.cda14.efund.tool.SessionTool;

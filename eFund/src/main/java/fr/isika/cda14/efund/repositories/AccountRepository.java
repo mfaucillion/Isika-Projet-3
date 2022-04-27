@@ -15,7 +15,6 @@ import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Shop;
 import fr.isika.cda14.efund.entity.space.OrganizationSpace;

@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.GenericProject;
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.project.UserLike;
 import fr.isika.cda14.efund.repositories.InteractionRepository;
 

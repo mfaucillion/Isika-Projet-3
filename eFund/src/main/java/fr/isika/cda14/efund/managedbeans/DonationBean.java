@@ -4,9 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.Project;
-
 import fr.isika.cda14.efund.services.ProjectService;
 import fr.isika.cda14.efund.viewmodel.DonationVM;
 

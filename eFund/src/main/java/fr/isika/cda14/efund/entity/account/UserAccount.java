@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.entity.account;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,7 +12,6 @@ import javax.persistence.Table;
 
 import fr.isika.cda14.efund.entity.account.paiement.PaymentMethod;
 import fr.isika.cda14.efund.entity.enums.Role;
-import fr.isika.cda14.efund.entity.shop.Basket;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Entity

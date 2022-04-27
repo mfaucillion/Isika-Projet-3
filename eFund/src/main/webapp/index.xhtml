@@ -34,15 +34,15 @@
 				<div class="ui-fluid row pb-3">
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Nombre de projets</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.nbProjects}</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Montant total récolté</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.totalDonations} €</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">STAT 3</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.averageDonations} €</h5>
 					</div>
 				</div>
 
@@ -61,11 +61,8 @@
 							<p:contentFlow value="#{indexBean.projects}" var="project">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{project.imagePath}" />
-								<p:link class="caption text-dark w-25 mx-auto"
-									outcome="pageProject?id=#{project.id}">
-
-									#{project.name} - #{project.summary}
-									</p:link>
+								<div class="caption text-dark w-25 mx-auto">
+									#{project.name} - #{project.summary}</div>
 
 							</p:contentFlow>
 						</div>
@@ -81,15 +78,15 @@
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Nombre d'évènement</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.nbEvents}</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Nombre de volontaires</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.nbVolunteers}</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">STAT 3</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.averageVolunteers}</h5>
 					</div>
 				</div>
 
@@ -108,12 +105,8 @@
 							<p:contentFlow value="#{indexBean.events}" var="event">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{event.imagePath}" />
-								<p:link class="caption text-dark w-25 mx-auto"
-									outcome="eventPage?id=#{event.id}">
-									<div class="caption text-dark w-25 mx-auto">
-										#{event.name} - #{event.summary}</div>
-								</p:link>
-
+								<div class="caption text-dark w-25 mx-auto">#{event.name}
+									- #{event.summary}</div>
 							</p:contentFlow>
 						</div>
 
@@ -129,15 +122,15 @@
 				<div class="ui-fluid row">
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Nombre d'associations</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.nbOrganizations}</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">Nombre de produits vendus</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.soldProducts}</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
 						<h4 class="text-center">STAT 3</h4>
-						<h5 class="text-center">XXX</h5>
+						<h5 class="text-center">#{indexBean.statsVM.averageGenericProjects}</h5>
 					</div>
 				</div>
 
@@ -156,17 +149,13 @@
 							<p:contentFlow value="#{indexBean.orgs}" var="org">
 								<p:graphicImage styleClass="content rounded-3 shadow"
 									value="#{org.imagePath}" />
-								<p:link class="caption text-dark w-25 mx-auto"
-									outcome="pageOng?id=#{org.id}">
-									<div class="caption text-dark w-25 mx-auto">
-										#{org.organizationInfo.name}</div>
-								</p:link>
+								<div class="caption text-dark w-25 mx-auto">
+									#{org.organizationInfo.name}</div>
 							</p:contentFlow>
 						</div>
 					</div>
 				</div>
 			</div>
-			<br />
 		</ui:define>
 	</ui:composition>
 </h:body>

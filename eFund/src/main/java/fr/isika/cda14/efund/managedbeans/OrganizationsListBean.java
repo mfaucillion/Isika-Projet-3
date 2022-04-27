@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.services.AccountService;
 
 @ManagedBean
