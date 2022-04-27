@@ -17,12 +17,11 @@ import fr.isika.cda14.efund.entity.project.Donation;
 import fr.isika.cda14.efund.entity.project.EventRegistration;
 import fr.isika.cda14.efund.entity.project.Favorite;
 import fr.isika.cda14.efund.entity.project.UserLike;
-import fr.isika.cda14.efund.entity.report.Report;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 
 @Entity
 @Table(name = "user_space")
-public class UserSpace implements Serializable{
+public class UserSpace implements Serializable {
 
 	/**
 	 * 
@@ -53,14 +52,6 @@ public class UserSpace implements Serializable{
 	@OneToMany(mappedBy = "userSpace")
 	private List<Donation> donations;
 
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "user_space_id")
-	private List<Follow> follows;
-	
-	@OneToMany(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "user_space_id")
-	private List<Report> reports;
-
 	public List<BasketOrder> getBasketOrders() {
 		return basketOrders;
 	}
@@ -85,16 +76,7 @@ public class UserSpace implements Serializable{
 		return donations;
 	}
 
-	public List<Follow> getFollows() {
-		return follows;
-	}
-
-	public List<Report> getReports() {
-		return reports;
-	}
-
 	public Long getId() {
 		return id;
 	}
-
 }

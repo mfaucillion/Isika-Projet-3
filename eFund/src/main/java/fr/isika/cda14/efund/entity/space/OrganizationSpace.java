@@ -51,10 +51,6 @@ public class OrganizationSpace implements Serializable{
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_space_id")
-	private List<Follow> follows;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "organization_space_id")
 	private List<ContentBlock> contentBlocks;
 	
 	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
@@ -73,10 +69,6 @@ public class OrganizationSpace implements Serializable{
 
 	public void setShop(Shop shop) {
 		this.shop = shop;
-	}
-
-	public List<Follow> getFollows() {
-		return follows;
 	}
 
 	public List<ContentBlock> getContentBlocks() {

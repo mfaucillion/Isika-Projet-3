@@ -25,11 +25,15 @@ import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
 public class ShopService {
 
 	private BigDecimal sumOfCart = new BigDecimal(0);
-	
+
 	@Inject
 	private ShopRepository shopRepo;
+
 	@Inject
-	private AccountRepository repo;
+	private AccountRepository accountRepo;
+
+	@Inject
+	private StatisticsService statsService;
 
 	public void create(ItemCreationForm itemCreationForm, Long shopId) {
 		Item newItem = new Item();
@@ -45,7 +49,6 @@ public class ShopService {
 		shop.getItems().add(newItem);
 
 		shopRepo.update(shop);
-
 	}
 
 	public List<Item> getShopItemList(Long id) {
@@ -61,7 +64,7 @@ public class ShopService {
 	public OrderLine createOrderLine(Item item) {
 		OrderLine orderLine = new OrderLine();
 		orderLine.setItem(item);
-		
+
 		return orderLine;
 	}
 
@@ -85,15 +88,15 @@ public class ShopService {
 		BasketOrder basketOrder = new BasketOrder();
 		basketOrder.setOrderLines(cart);
 		basketOrder.setTotalItemsQuantity(computeQuantity(cart));
-		// here
+
 		basketOrder.setTotalPrice(sumOfmyCart(cart));
 		basketOrder.setStatus(OrderStatus.PROCESSING);
-		// La date du cart est la date de n'importe quel element
+
 		basketOrder.setDate(new Date());
-		
-		UserAccount uAccount = repo.findUser(SessionTool.getUserId());
+
+		UserAccount uAccount = accountRepo.findUser(SessionTool.getUserId());
 		basketOrder.setUserSpace(uAccount.getUserSpace());
-		
+
 		Address adr = uAccount.getUserInfo().getUserAddress();
 		basketOrder.setBillingAddress(adr);
 
@@ -119,6 +122,8 @@ public class ShopService {
 	}
 
 	public Payment saveMyPayment(Payment payment) {
+		statsService.addSoldProductToStats();
+
 		return shopRepo.persist(payment);
 	}
 }

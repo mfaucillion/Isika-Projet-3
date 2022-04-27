@@ -17,8 +17,12 @@ public class EventCreationService {
 
 	@Inject
 	private EventRepository eventRepo;
+	
 	@Inject
 	private AccountRepository accountRepo;
+	
+	@Inject
+	private StatisticsService statsService;
 
 	public void create(EventCreationFormVM eventCreationFormVM, Long id) {
 		System.out.println("Service; " + eventCreationFormVM);
@@ -42,6 +46,7 @@ public class EventCreationService {
 		newEvent.setOrganizationSpace(orgSpace);
 		
 		eventRepo.create(newEvent);
+		
+		statsService.addEventToStats();		
 	}
-
 }
