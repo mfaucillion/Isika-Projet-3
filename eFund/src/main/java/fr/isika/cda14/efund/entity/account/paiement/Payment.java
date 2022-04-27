@@ -12,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import fr.isika.cda14.efund.entity.project.Project;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.space.UserSpace;
 

@@ -17,9 +17,7 @@ import org.primefaces.PrimeFaces;
 import org.primefaces.event.CellEditEvent;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
-import fr.isika.cda14.efund.entity.account.UserAccount;
 import fr.isika.cda14.efund.entity.account.paiement.Payment;
-import fr.isika.cda14.efund.entity.enums.AccountStatus;
 import fr.isika.cda14.efund.entity.shop.BasketOrder;
 import fr.isika.cda14.efund.entity.shop.Item;
 import fr.isika.cda14.efund.entity.shop.OrderLine;

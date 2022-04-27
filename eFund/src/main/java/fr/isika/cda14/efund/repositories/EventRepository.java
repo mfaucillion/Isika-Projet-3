@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
-import fr.isika.cda14.efund.entity.project.Project;
 
 @Stateless
 public class EventRepository {

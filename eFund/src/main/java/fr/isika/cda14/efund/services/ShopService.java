@@ -20,7 +20,6 @@ import fr.isika.cda14.efund.repositories.AccountRepository;
 import fr.isika.cda14.efund.repositories.ShopRepository;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ItemCreationForm;
-import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 
 @Stateless
 public class ShopService {
