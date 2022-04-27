@@ -47,6 +47,7 @@ public class EventService {
 	public void deleteEvent(Long id) {
 		Event event = findEvent(id);
 		eventRepo.remove(event);
+		statsService.removeEventFromStats();
 	}
 
 	public void update(Event myEvent) {
