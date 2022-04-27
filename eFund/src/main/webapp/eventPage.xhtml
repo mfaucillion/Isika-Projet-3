@@ -49,7 +49,7 @@
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
 										title="Editer la Description" type="button"
-										onclick="PF('descriptionPop').show()" />
+										onclick="PF('descriptionPop').show()" rendered="#{eventPageBean.isOwner()}"/>
 								</div>
 							</div>
 
@@ -69,17 +69,17 @@
 									<p:commandButton icon="fa-solid fa-align-justify"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un bloc de text" type="button"
-										onclick="PF('addTxtBlockPop').show()" />
+										onclick="PF('addTxtBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
 
 									<p:commandButton icon="fa-solid fa-image"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une image" type="button"
-										onclick="PF('addImgBlockPop').show()" />
+										onclick="PF('addImgBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
 
 									<p:commandButton icon="fa-solid fa-film"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une video" type="button"
-										onclick="PF('addVidBlockPop').show()" />
+										onclick="PF('addVidBlockPop').show()" rendered="#{eventPageBean.isOwner()}"/>
 
 									<div class="container mx-auto text-center">
 										<h2 class="text-center">Campagne de recrutement</h2>
@@ -129,7 +129,7 @@
 
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la FAQ" action="#" />
+										title="Editer la FAQ" action="#" rendered="#{eventPageBean.isOwner()}" />
 									<p>FAQ: bla bla bla</p>
 
 								</p:tab>

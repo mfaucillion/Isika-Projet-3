@@ -49,7 +49,7 @@
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
 										title="Editer la Description" type="button"
-										onclick="PF('descriptionPop').show()" />
+										onclick="PF('descriptionPop').show()" rendered="#{projectPageBean.isOwner()}" />
 								</div>
 							</div>
 
@@ -69,17 +69,17 @@
 									<p:commandButton icon="fa-solid fa-align-justify"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un bloc de text" type="button"
-										onclick="PF('addTxtBlockPop').show()" />
+										onclick="PF('addTxtBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-image"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une image" type="button"
-										onclick="PF('addImgBlockPop').show()" />
+										onclick="PF('addImgBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-film"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une video" type="button"
-										onclick="PF('addVidBlockPop').show()" />
+										onclick="PF('addVidBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
 
 									<div class="container mx-auto text-center">
 										<h2 class="text-center">Campagne de financement</h2>
@@ -92,7 +92,7 @@
 													styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
 													title="Supprimer le bloc"
 													action="#{projectPageBean.removeBlock(block.id)}"
-													ajax="false" />
+													ajax="false" rendered="#{projectPageBean.isOwner()}" />
 											</h:form>
 
 											<p:outputLabel
@@ -132,7 +132,7 @@
 									<p:commandButton icon="fa-solid fa-plus"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un palier d'objectif" type="button"
-										onclick="PF('addGoalPop').show()" />
+										onclick="PF('addGoalPop').show()" rendered="#{projectPageBean.isOwner()}" />
 
 									<p:repeat var="goal"
 										value="#{projectPageBean.project.stretchGoals}"
@@ -148,8 +148,8 @@
 															styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
 															title="Supprimer le palier d'objectif"
 															action="#{projectPageBean.removeGoal(goal.id)}"
-															ajax="false" />
-														#{goal.description} €
+															ajax="false" rendered="#{projectPageBean.isOwner()}" />
+														#{goal.description}
 													</p>
 												</h:form>
 											</li>
@@ -165,10 +165,10 @@
 										<i class="fa-solid fa-question" /> FAQ
 									</f:facet>
 
-									<p:commandButton icon="fa-solid fa-pen-to-square"
-										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la FAQ" type="button"
-										onclick="PF('addFaqPop').show()" />
+									<p:commandButton icon="fa-solid fa-plus"
+										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
+										title="Ajouter une question/réponse" type="button"
+										onclick="PF('addFaqPop').show()" rendered="#{projectPageBean.isOwner()}" />
 									<p:repeat var="faqElement"
 										value="#{projectPageBean.project.faq}"
 										varStatus="status">
@@ -183,7 +183,7 @@
 															styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
 															title="Supprimer la question"
 															action="#{projectPageBean.removeFaq(faqElement.id)}"
-															ajax="false" />
+															ajax="false" rendered="#{projectPageBean.isOwner()}" />
 														#{faqElement.answer}
 													</p>
 												</h:form>
