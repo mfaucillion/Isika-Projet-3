@@ -33,11 +33,12 @@ public class EventRepository {
 
 	// HEAVY LOADER - Fetch les collections d'objets
 	public Event loadProjectWithChildren(Long eventId) {
-		/* On force le Fetching de la collection de ContentBlocks dans l'event */
+		// On force le Fetching de la collection de ContentBlocks dans l'event
 		String query = "SELECT distinct event " + "FROM Event event " + "LEFT JOIN FETCH event.contentBlocks "
 				+ "WHERE event.id=:id";
 		Event event = em.createQuery(query, Event.class).setParameter("id", eventId).getSingleResult();
 
+		// On force le Fetching de la collection d'élements FAQ dans l'event
 		query = "SELECT event " + "FROM Event event " + "LEFT JOIN FETCH event.faq " + "WHERE event=:event";
 		event = em.createQuery(query, Event.class).setParameter("event", event).getSingleResult();
 		return event;
@@ -58,7 +59,7 @@ public class EventRepository {
 	}
 
 	public List<Event> getTopEvents() {
-		String query = "SELECT event " + "FROM Event event " + "ORDER BY event.creationDate";
+		String query = "SELECT event FROM Event event ORDER BY event.creationDate";
 		return em.createQuery(query, Event.class).setMaxResults(3).getResultList();
 	}
 

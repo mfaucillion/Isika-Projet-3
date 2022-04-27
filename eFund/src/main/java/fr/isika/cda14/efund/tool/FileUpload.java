@@ -29,7 +29,6 @@ public class FileUpload {
 			
 			Files.copy(myInputStream, newPath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

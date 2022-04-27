@@ -8,7 +8,7 @@ import fr.isika.cda14.efund.entity.common.Statistics;
 
 @Stateless
 public class StatisticsRepository {
-	
+
 	@PersistenceContext
 	EntityManager em;
 
@@ -18,6 +18,6 @@ public class StatisticsRepository {
 	}
 
 	public void updateStat(Statistics stats) {
-		em.merge(stats);		
+		em.merge(stats);
 	}
 }

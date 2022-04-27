@@ -19,11 +19,10 @@ public class CreateOrganizationAccountBean {
 
 	@Inject
 	AccountService accountService;
-	
+
 	private OrganizationForm organization = new OrganizationForm();
 
 	public String create() {
-
 		OrganizationAccount account = accountService.createOrg(organization);
 		SessionTool.writeInSession(account);
 		return "orgCreationForm2?id=" + account.getId() + "faces-redirect=true";
@@ -40,11 +39,11 @@ public class CreateOrganizationAccountBean {
 	public void upload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/organization/" + file.getFileName();
-		
+
 		FileUpload.doUpload(file, filePath);
 		organization.setImagePath("/img" + filePath);
 	}
-	
+
 	public OrganizationForm getOrganization() {
 		return organization;
 	}
@@ -52,5 +51,4 @@ public class CreateOrganizationAccountBean {
 	public void setOrganization(OrganizationForm organization) {
 		this.organization = organization;
 	}
-
 }

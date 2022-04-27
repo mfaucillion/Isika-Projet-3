@@ -20,9 +20,8 @@ public class OrgModificationProfileBean {
 	private AccountService accService;
 
 	private OrganizationAccount organizationAccount;
-	
+
 	private String imagePath;
-	
 
 	public void onLoad() {
 		this.organizationAccount = accService.findOrganizationAccount(SessionTool.getUserId());
@@ -35,18 +34,17 @@ public class OrgModificationProfileBean {
 		FileUpload.doUpload(file, filePath);
 		this.imagePath = "/img" + filePath;
 	}
-	
+
 	public String updateOrgModification() {
-		if(this.imagePath != null) {
+		if (this.imagePath != null) {
 			organizationAccount.setImagePath(imagePath);
 			SessionTool.updateSessionImage(imagePath);
 		}
 		accService.updateOrg(organizationAccount);
 		return SessionTool.getDashBoardURL() + "&amp;faces-redirect=true";
 	}
-	
+
 	public OrganizationAccount getOrganizationAccount() {
 		return organizationAccount;
 	}
-	
 }

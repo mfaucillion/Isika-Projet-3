@@ -89,5 +89,4 @@ public class ProjectCreationFormVM {
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
 	}
-
 }

@@ -62,5 +62,4 @@ public class OrganizationInfo {
 	public Long getId() {
 		return id;
 	}
-
 }

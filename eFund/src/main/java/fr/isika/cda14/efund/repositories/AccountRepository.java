@@ -56,12 +56,13 @@ public class AccountRepository {
 	public OrganizationAccount findOrganization(Long id) {
 		return em.find(OrganizationAccount.class, id);
 	}
-	
+
 	// recherche d'un compte Ornanization par son nom à partir de la page OrgaListe
-		public List<OrganizationAccount> searchOrganizationAccountFromPage(String searchOrganization) {
-			String query = "SELECT orgName FROM OrganizationAccount orgName JOIN orgName.organizationInfo inf WHERE inf.name LIKE CONCAT('%', :searchOrganization, '%') ";
-			return em.createQuery(query, OrganizationAccount.class).setParameter("searchOrganization", searchOrganization).getResultList();
-		}
+	public List<OrganizationAccount> searchOrganizationAccountFromPage(String searchOrganization) {
+		String query = "SELECT orgName FROM OrganizationAccount orgName JOIN orgName.organizationInfo inf WHERE inf.name LIKE CONCAT('%', :searchOrganization, '%') ";
+		return em.createQuery(query, OrganizationAccount.class).setParameter("searchOrganization", searchOrganization)
+				.getResultList();
+	}
 
 	/* Recherche d'un compte tout type confondu à partir d'un email */
 	public Optional<Account> findByEmail(String email) {
@@ -71,7 +72,7 @@ public class AccountRepository {
 							.setParameter("email", email).getSingleResult());
 			return result;
 		} catch (NoResultException ex) {
-			System.out.println("Aucun utilisateur trouvé");
+			ex.printStackTrace();
 		}
 		return Optional.empty();
 	}
@@ -96,40 +97,32 @@ public class AccountRepository {
 	}
 
 	public OrganizationAccount loadOrganizationAccountWithChildren(Long id) {
-		System.out.println("0");
 		/* On force le Fetching de la collection d'Items dans le Shop */
 		String query = "SELECT distinct shop FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
 				+ "INNER JOIN space.shop shop LEFT JOIN FETCH shop.items WHERE org.id=:id";
 		Shop shop = em.createQuery(query, Shop.class).setParameter("id", id).getSingleResult();
-		System.out.println("1");
 
 		/* On force le Fetching de la collection de Projects dans le Space */
 		query = "SELECT distinct space FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
 				+ "LEFT JOIN FETCH space.projects INNER JOIN space.shop shop WHERE space.shop in :shop";
 		OrganizationSpace space = em.createQuery(query, OrganizationSpace.class).setParameter("shop", shop)
 				.getSingleResult();
-		System.out.println("2");
 
 		/* On force le Fetching de la collection d'Events dans le Space */
 		query = "SELECT distinct space FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
 				+ "LEFT JOIN FETCH space.events INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
-		System.out.println("3");
 
 		/* On force le Fetching de la collection de ContentTabs dans le Space */
-
 		query = "SELECT distinct space FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
-				+ "LEFT JOIN FETCH space.contentBlocks INNER JOIN space.shop shop "
-				+ "WHERE org.organizationSpace in :space";
+				+ "LEFT JOIN FETCH space.contentBlocks INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
 		space = em.createQuery(query, OrganizationSpace.class).setParameter("space", space).getSingleResult();
-		System.out.println("4");
 
 		/* On relie le tout et on sort notre OrganizationAccount */
 		query = "SELECT distinct org FROM OrganizationAccount org INNER JOIN org.organizationSpace space "
 				+ "INNER JOIN space.shop shop WHERE org.organizationSpace in :space";
 		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("space", space)
 				.getSingleResult();
-		System.out.println("5");
 
 		return account;
 	}
@@ -137,19 +130,15 @@ public class AccountRepository {
 	public OrganizationAccount getOrgFromProject(Long id) {
 		String query = "SELECT orgAcc FROM OrganizationAccount orgAcc JOIN orgAcc.organizationSpace orgSpace "
 				+ "JOIN orgSpace.projects pro WHERE pro.id =:id ";
-		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("id", id)
-				.getSingleResult();
 
-		return account;
+		return em.createQuery(query, OrganizationAccount.class).setParameter("id", id).getSingleResult();
 	}
 
 	public OrganizationAccount getOrgFromEvent(Long id) {
 		String query = "SELECT orgAcc FROM OrganizationAccount orgAcc JOIN orgAcc.organizationSpace orgSpace "
 				+ "JOIN orgSpace.events ev WHERE ev.id =:id ";
-		OrganizationAccount account = em.createQuery(query, OrganizationAccount.class).setParameter("id", id)
-				.getSingleResult();
 
-		return account;
+		return em.createQuery(query, OrganizationAccount.class).setParameter("id", id).getSingleResult();
 	}
 
 	public List<UserAccount> getAllUsers() {
@@ -185,7 +174,7 @@ public class AccountRepository {
 		String query = "SELECT reg FROM EventRegistration reg JOIN reg.userSpace usr  WHERE usr.id=:id";
 		return em.createQuery(query, EventRegistration.class).setParameter("id", userSpaceId).getResultList();
 	}
-	
+
 	public List<BasketOrder> getBasketOrders(Long userSpaceId) {
 		String query = "SELECT ord FROM BasketOrder ord JOIN ord.userSpace usr  WHERE usr.id=:id";
 		return em.createQuery(query, BasketOrder.class).setParameter("id", userSpaceId).getResultList();
@@ -196,6 +185,6 @@ public class AccountRepository {
 	}
 
 	public void removeBlock(ContentBlock block) {
-		em.remove(block);		
+		em.remove(block);
 	}
 }

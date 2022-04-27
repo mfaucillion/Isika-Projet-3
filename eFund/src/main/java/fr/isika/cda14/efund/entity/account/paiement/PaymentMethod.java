@@ -14,5 +14,4 @@ public abstract class PaymentMethod {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
-
 }

@@ -27,15 +27,15 @@ public class OrganizationForm implements Serializable {
 	@NotEmpty(message = "Ne doit pas être vide")
 	@NotNull(message = "Ne doit pas être null")
 	private String displayedName;
-	
+
 	private String imagePath;
-	
+
 	private String organizationName;
-	
+
 	private String siret;
-	
+
 	private String summary;
-	
+
 	private String description;
 
 	public String getEmail() {
@@ -101,5 +101,4 @@ public class OrganizationForm implements Serializable {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-
 }

@@ -12,5 +12,4 @@ public class AdminAccount extends Account {
 	@OneToOne
 	@JoinColumn(name = "admin_info_id")
 	private AdminInfo adminInfo;
-
 }

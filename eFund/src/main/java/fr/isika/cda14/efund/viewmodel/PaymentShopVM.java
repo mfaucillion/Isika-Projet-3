@@ -1,6 +1,5 @@
 package fr.isika.cda14.efund.viewmodel;
 
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,21 +24,20 @@ public class PaymentShopVM implements Serializable {
 	@Size(min = 1, max = 25, message = "Doit être entre 1 et 25 car.")
 	@Pattern(regexp = "[^0-9]*", message = "Ne doit pas contenir des chiffres")
 	private String name;
-	
+
 	@NotEmpty(message = "Ne doit pas être vide")
 	@NotNull(message = "Ne doit pas être null")
 	@Size(min = 15, max = 15, message = "Doit avoir 15 caractère.")
 	private String cardNumber;
-	
-	
+
 	@NotNull(message = "Ne doit pas être null")
 	private Date expirationDate;
-	
+
 	@NotEmpty(message = "Ne doit pas être vide")
 	@NotNull(message = "Ne doit pas être null")
 	@Size(min = 3, max = 3, message = "Doit avoir 3 caractère.")
 	private String SecurityCode;
-	
+
 	@NotEmpty(message = "Ne doit pas être vide")
 	@NotNull(message = "Ne doit pas être null")
 	@Size(min = 5, max = 5, message = "Doit avoir 5 caractère.")
@@ -115,7 +113,4 @@ public class PaymentShopVM implements Serializable {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-
 }

@@ -43,7 +43,7 @@ public class ShopBean {
 	private OrderLine selectedOrderLine;
 
 	public void onLoad(String itemId) throws IOException {
-		
+
 		if (itemId == null || itemId.isEmpty()) {
 		} else {
 			this.addOrderLineToCart(this.createOrderLine(Long.parseLong(itemId)));
@@ -72,15 +72,15 @@ public class ShopBean {
 			orderLine.setDate(Calendar.getInstance().getTime());
 			cart.add(orderLine);
 		} else {
-			
+
 			for (int i = 0; i < cart.size(); i++) {
-				
+
 				if (cart.get(i).getItem().getId().compareTo(orderLine.getItem().getId()) == 0) {
 					cart.get(i).setQuantity(cart.get(i).getQuantity() + 1);
 					orderlineExists = true;
 				}
 			}
-			
+
 			if (!orderlineExists) {
 				orderLine.setQuantity(1);
 				orderLine.setDate(Calendar.getInstance().getTime());
@@ -114,7 +114,7 @@ public class ShopBean {
 
 	public Payment saveMyPayment(BasketOrder basketOrder) {
 		Payment payment = new Payment();
-		
+
 		payment.setBasketOrder(basketOrder);
 		payment.setCreditCardNumber(paymentVM.getCardNumber());
 		payment.setCryptogram(paymentVM.getSecurityCode());
@@ -122,7 +122,7 @@ public class ShopBean {
 		payment.setAmount(basketOrder.getTotalPrice());
 		payment.setExpirationDate(paymentVM.getExpirationDate());
 		payment.setPaymentDate(basketOrder.getDate());
-		
+
 		shopService.saveMyPayment(payment);
 
 		return payment;
@@ -134,7 +134,7 @@ public class ShopBean {
 
 		OrderLine orderLine = (OrderLine) event.getComponent().getAttributes().get("orderLineAttr");
 		orderLine.setQuantity(newValue);
-		
+
 		for (int i = 0; i < cart.size(); i++) {
 			if (cart.get(i).getItem().getId().compareTo(orderLine.getItem().getId()) == 0) {
 				cart.get(i).setQuantity(newValue);
@@ -148,13 +148,13 @@ public class ShopBean {
 		}
 		try {
 			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-	    
+
 			externalContext.redirect("cartPage.xhtml");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void deleteOrderLine() {
 		this.cart.remove(this.selectedOrderLine);
 		this.selectedOrderLine = null;
@@ -215,5 +215,4 @@ public class ShopBean {
 	public void setPaymentShopForm(PaymentShopVM paymentShopForm) {
 		this.paymentVM = paymentShopForm;
 	}
-
 }

@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+/* Future fonctionnalité */
 @Entity
 public class Comment {
 
@@ -30,4 +31,27 @@ public class Comment {
 	@OneToOne
 	private Comment child;
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public Comment getParent() {
+		return parent;
+	}
+
+	public void setParent(Comment parent) {
+		this.parent = parent;
+	}
+
+	public void setChild(Comment child) {
+		this.child = child;
+	}
+
+	public Comment getChild() {
+		return child;
+	}
 }

@@ -28,19 +28,18 @@ public class ProjectRepository {
 
 	// HEAVY LOADER - Fetch les collections d'objets
 	public Project loadProjectWithChildren(Long projId) {
-			/* On force le Fetching de la collection de ContentBlocks dans le Project */
-		String query = "SELECT distinct proj " + "FROM Project proj " + "LEFT JOIN FETCH proj.contentBlocks "
-				+ "WHERE proj.id=:id";
+
+		/* On force le Fetching de la collection de ContentBlocks dans le Project */
+		String query = "SELECT distinct proj FROM Project proj LEFT JOIN FETCH proj.contentBlocks WHERE proj.id=:id";
 		Project project = em.createQuery(query, Project.class).setParameter("id", projId).getSingleResult();
 
-			/* On force le Fetching de la collection de FAQs dans le Project */
-		query = "SELECT distinct proj FROM Project proj " + "LEFT JOIN FETCH proj.faq faq WHERE proj in :proj";
+		/* On force le Fetching de la collection de FAQs dans le Project */
+		query = "SELECT distinct proj FROM Project proj LEFT JOIN FETCH proj.faq faq WHERE proj in :proj";
 
 		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
 
-			/* On force le Fetching de la collection de StretchGoals dans le Project */
-		query = "SELECT proj FROM Project proj "
-				+ "LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
+		/* On force le Fetching de la collection de StretchGoals dans le Project */
+		query = "SELECT proj FROM Project proj LEFT JOIN FETCH proj.stretchGoals goal WHERE proj in :proj ORDER BY goal.target";
 
 		project = em.createQuery(query, Project.class).setParameter("proj", project).getSingleResult();
 
@@ -92,8 +91,8 @@ public class ProjectRepository {
 	public void removeGoal(StretchGoal goal) {
 		em.remove(goal);
 	}
-	
-	/* FAQ methods*/
+
+	/* FAQ methods */
 	public FaqElement findFaq(Long faqId) {
 		return em.find(FaqElement.class, faqId);
 	}

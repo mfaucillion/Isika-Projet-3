@@ -30,10 +30,10 @@ public class AdminDashboardBean {
 
 	@Inject
 	AccountService accountService;
-	
+
 	@Inject
 	ProjectService projectService;
-	
+
 	@Inject
 	EventService eventService;
 
@@ -69,7 +69,7 @@ public class AdminDashboardBean {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
-	
+
 	public void onOrgCellEdit(CellEditEvent<AccountStatus> event) {
 		AccountStatus oldValue = (AccountStatus) event.getOldValue();
 		AccountStatus newValue = (AccountStatus) event.getNewValue();
@@ -85,7 +85,7 @@ public class AdminDashboardBean {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
-	
+
 	public void onProjCellEdit(CellEditEvent<ProjectStatus> event) {
 		ProjectStatus oldValue = (ProjectStatus) event.getOldValue();
 		ProjectStatus newValue = (ProjectStatus) event.getNewValue();
@@ -101,7 +101,7 @@ public class AdminDashboardBean {
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
-	
+
 	public void onEventCellEdit(CellEditEvent<ProjectStatus> event) {
 		ProjectStatus oldValue = (ProjectStatus) event.getOldValue();
 		ProjectStatus newValue = (ProjectStatus) event.getNewValue();
@@ -125,22 +125,21 @@ public class AdminDashboardBean {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Compte utilisateur supprimé"));
 		PrimeFaces.current().ajax().update("@form:messagesUser", "@form:dt-users");
 	}
-	
+
 	public void sendingMail() {
 		EmailTool.sendMail(mailForm.getToMail(), mailForm.getSubject(), mailForm.getMessage());
-		System.out.println("mail" + selectedUser.getId());
 		this.selectedUser = null;
 	}
-	
+
 	/* Getting Enum Values to populate Selected List */
 	public AccountStatus[] getAccountStatus() {
 		return AccountStatus.values();
 	}
-	
+
 	public ProjectStatus[] getProjectStatus() {
 		return ProjectStatus.values();
 	}
-	
+
 	public UserAccount getSelectedUser() {
 		return selectedUser;
 	}
@@ -149,7 +148,7 @@ public class AdminDashboardBean {
 		this.selectedUser = selectedUser;
 		this.mailForm.setToMail(selectedUser.getEmail());
 	}
-	
+
 	public OrganizationAccount getSelectedOrg() {
 		return selectedOrg;
 	}
@@ -158,7 +157,7 @@ public class AdminDashboardBean {
 		this.selectedOrg = selectedOrg;
 		this.mailForm.setToMail(selectedOrg.getEmail());
 	}
-	
+
 	public MailForm getMailForm() {
 		return mailForm;
 	}
@@ -174,13 +173,12 @@ public class AdminDashboardBean {
 	public List<OrganizationAccount> getOrgs() {
 		return orgs;
 	}
-	
+
 	public List<Event> getEvents() {
 		return events;
 	}
-	
+
 	public List<Project> getProjects() {
 		return projects;
 	}
-	
 }

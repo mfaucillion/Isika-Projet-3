@@ -1,15 +1,15 @@
 package fr.isika.cda14.efund.viewmodel;
 
 public class UserMessageViewModel {
-	
+
 	private String firstName;
-	
+
 	private String lastName;
-	
+
 	private String email;
-	
+
 	private String sujet;
-	
+
 	private String message;
 
 	public String getFirstName() {
@@ -51,5 +51,4 @@ public class UserMessageViewModel {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }

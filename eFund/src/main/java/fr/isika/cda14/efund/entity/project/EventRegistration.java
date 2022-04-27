@@ -17,14 +17,14 @@ public class EventRegistration {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@ManyToOne
 	private Event event;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
-	
+
 	public Event getEvent() {
 		return event;
 	}

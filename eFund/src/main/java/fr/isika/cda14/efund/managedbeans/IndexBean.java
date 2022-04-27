@@ -34,7 +34,7 @@ public class IndexBean {
 	private List<Project> projects;
 	private List<Event> events;
 	private List<OrganizationAccount> orgs;
-	
+
 	StatisticsViewModel statsVM = new StatisticsViewModel();
 
 	public void onLoad() {

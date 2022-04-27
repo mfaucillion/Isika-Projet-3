@@ -41,8 +41,6 @@ public class ProjectService {
 	@Inject
 	StatisticsService statsService;
 
-	private static final String STATUS = "SUBMITTED";
-
 	public void create(ProjectCreationFormVM projectCreationFormVM, Long orgSpaceId) {
 		Project newProject = new Project();
 		newProject.setName(projectCreationFormVM.getName());
@@ -156,7 +154,7 @@ public class ProjectService {
 		StretchGoal goal = projectRepo.findGoal(goalId);
 		projectRepo.removeGoal(goal);
 	}
-	
+
 	public void addFaq(FaqVM faqVM, Project project) {
 		FaqElement newFaqElement = new FaqElement();
 

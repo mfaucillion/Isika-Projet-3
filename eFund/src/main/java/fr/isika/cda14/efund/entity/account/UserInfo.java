@@ -39,7 +39,7 @@ public class UserInfo implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_address_id")
 	private Address userAddress;
-	
+
 	public UserInfo() {
 		this.userAddress = new Address();
 	}
@@ -75,5 +75,4 @@ public class UserInfo implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
 }

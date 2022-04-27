@@ -43,7 +43,7 @@ public class CreateUserBean {
 			return "userCreationForm2?id=" + account.getId() + "faces-redirect=true";
 
 		} catch (UserAlreadyExistsException ex) {
-			System.out.println(ex.getMessage());
+			ex.printStackTrace();
 		}
 
 		return "userCreationForm.xhtml";

@@ -20,5 +20,4 @@ public class AdminInfo {
 
 	@Column(length = 50, name = "last_name")
 	private String lastName;
-
 }

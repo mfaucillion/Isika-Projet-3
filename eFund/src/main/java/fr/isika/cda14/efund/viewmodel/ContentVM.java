@@ -5,7 +5,7 @@ import javax.validation.constraints.Size;
 public class ContentVM {
 	@Size(max = 5000)
 	private String content;
-	
+
 	private String type;
 
 	public String getContent() {
@@ -23,6 +23,4 @@ public class ContentVM {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	
 }

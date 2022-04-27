@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity
 public class UserMessage {
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,13 +18,13 @@ public class UserMessage {
 
 	@Column(length = 50, name = "last_name")
 	private String lastName;
-	
+
 	@Column(length = 50, name = "email")
 	private String email;
-	
+
 	@Column(length = 50, name = "sujet")
 	private String sujet;
-	
+
 	@Column(length = 200, name = "message")
 	private String message;
 
@@ -76,5 +75,4 @@ public class UserMessage {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-
 }

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
 import fr.isika.cda14.efund.services.AccountService;
+
 @ManagedBean
 public class OrganizationBean {
 
@@ -16,7 +17,7 @@ public class OrganizationBean {
 
 	@PostConstruct
 	private void init() {
-		orgAccount=getOrganizationAccount(Long.parseLong(id));
+		orgAccount = getOrganizationAccount(Long.parseLong(id));
 	}
 
 	private OrganizationAccount getOrganizationAccount(Long id) {

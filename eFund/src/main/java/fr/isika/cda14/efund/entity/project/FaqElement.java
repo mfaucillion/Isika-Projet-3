@@ -15,26 +15,30 @@ public class FaqElement {
 	protected Long id;
 	@Column
 	private String question;
-	
+
 	@Column
-	private  String answer;
-	
+	private String answer;
+
 	public FaqElement() {
 		super();
-	
 	}
+
 	public String getQuestion() {
 		return question;
 	}
+
 	public void setQuestion(String question) {
 		this.question = question;
 	}
+
 	public String getAnswer() {
 		return answer;
 	}
+
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
 	public Long getId() {
 		return id;
 	}

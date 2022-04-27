@@ -26,8 +26,7 @@ public class InteractionRepository {
 	}
 
 	public List<Favorite> checkFavorite(Long userId, Long projId) {
-		String query = "SELECT fav from Favorite fav " + "WHERE fav.userSpace.id=:uid "
-				+ "AND fav.genericProject.id=:pid";
+		String query = "SELECT fav from Favorite fav WHERE fav.userSpace.id=:uid AND fav.genericProject.id=:pid";
 		return em.createQuery(query, Favorite.class).setParameter("uid", userId).setParameter("pid", projId)
 				.getResultList();
 	}
@@ -43,23 +42,21 @@ public class InteractionRepository {
 	}
 
 	public Favorite getFavorite(Long userId, Long projId) {
-		String query = "SELECT fav from Favorite fav " + "WHERE fav.userSpace.id=:uid "
-				+ "AND fav.genericProject.id=:pid";
+		String query = "SELECT fav from Favorite fav WHERE fav.userSpace.id=:uid AND fav.genericProject.id=:pid";
 		return em.createQuery(query, Favorite.class).setParameter("uid", userId).setParameter("pid", projId)
 				.getSingleResult();
 
 	}
 
 	public List<UserLike> checkLike(Long userId, Long projId) {
-		String query = "SELECT lik from UserLike lik " + "WHERE lik.userSpace.id=:uid " + "AND lik.genericProject.id=:pid";
+		String query = "SELECT lik from UserLike lik WHERE lik.userSpace.id=:uid AND lik.genericProject.id=:pid";
 		return em.createQuery(query, UserLike.class).setParameter("uid", userId).setParameter("pid", projId)
 				.getResultList();
 	}
 
 	public UserLike getLike(Long userId, Long projId) {
-		String query = "SELECT lik from UserLike lik " + "WHERE lik.userSpace.id=:uid " + "AND lik.genericProject.id=:pid";
+		String query = "SELECT lik from UserLike lik WHERE lik.userSpace.id=:uid AND lik.genericProject.id=:pid";
 		return em.createQuery(query, UserLike.class).setParameter("uid", userId).setParameter("pid", projId)
 				.getSingleResult();
 	}
-
 }
