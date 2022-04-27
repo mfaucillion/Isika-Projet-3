@@ -167,8 +167,31 @@
 
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
-										title="Editer la FAQ" action="#" />
-									<p>FAQ: bla bla bla</p>
+										title="Editer la FAQ" type="button"
+										onclick="PF('addFaqPop').show()" />
+									<p:repeat var="faqElement"
+										value="#{projectPageBean.project.faq}"
+										varStatus="status">
+
+										<ul>
+											<li>
+												<h5>
+													Question #{status.index + 1} : <b>#{faqElement.question} </b>
+												</h5> <h:form>
+													<p>
+														<p:commandButton icon="fa-solid fa-minus"
+															styleClass="rounded-button ui-button-secondary ui-button-outlined m-3"
+															title="Supprimer la question"
+															action="#{projectPageBean.removeFaq(faqElement.id)}"
+															ajax="false" />
+														#{faqElement.answer}
+													</p>
+												</h:form>
+											</li>
+										</ul>
+										<hr />
+
+									</p:repeat>
 
 								</p:tab>
 
@@ -280,6 +303,7 @@
 				src="WEB-INF/subpage/projectPage/modifDescriptionPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/donationPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/goalPopup.xhtml" />
+			<ui:include src="WEB-INF/subpage/projectPage/faqPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/txtBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/imgBlockPopup.xhtml" />
 			<ui:include src="WEB-INF/subpage/projectPage/vidBlockPopup.xhtml" />
