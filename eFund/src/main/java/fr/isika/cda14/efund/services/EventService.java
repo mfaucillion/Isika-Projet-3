@@ -23,6 +23,8 @@ public class EventService {
 
 	@Inject
 	private AccountRepository accountRepo;
+	
+	@Inject StatisticsService statsService;
 
 	public List<Event> getAllEvents() {
 		return eventRepo.findAll();
@@ -89,5 +91,7 @@ public class EventService {
 		Event event = eventRepo.find(id);
 		event.setVolunteerCurrent(event.getVolunteerCurrent() + 1);
 		eventRepo.update(event);
+		
+		statsService.addVolunteerToStats();
 	}
 }

@@ -12,9 +12,11 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class PaymentShopVM implements Serializable {
-	private static final long serialVersionUID = 0;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7838217853200090951L;
 
-	
 	@NotNull(message = "Ne doit pas être null")
 	private BigDecimal amount;
 

@@ -16,4 +16,8 @@ public class StatisticsRepository {
 		String query = "SELECT stats FROM Statistics stats";
 		return em.createQuery(query, Statistics.class).setMaxResults(1).getSingleResult();
 	}
+
+	public void updateStat(Statistics stats) {
+		em.merge(stats);		
+	}
 }

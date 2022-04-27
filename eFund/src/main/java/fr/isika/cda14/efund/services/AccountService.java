@@ -27,6 +27,9 @@ public class AccountService {
 	@Inject
 	private AccountRepository repo;
 
+	@Inject
+	StatisticsService statsService;
+
 	public OrganizationAccount createOrg(OrganizationForm inputOrg) {
 
 		OrganizationAccount org = new OrganizationAccount();
@@ -34,7 +37,9 @@ public class AccountService {
 		org.setEmail(inputOrg.getEmail());
 		org.setPassword(inputOrg.getPassword());
 		org.setDisplayedName(inputOrg.getDisplayedName());
-		
+
+		statsService.addOrgToStats();
+
 		return repo.persist(org);
 	}
 
@@ -68,6 +73,8 @@ public class AccountService {
 		user.setEmail(inputUser.getEmail());
 		user.setPassword(inputUser.getPassword());
 		user.setDisplayedName(inputUser.getDisplayedName());
+
+		statsService.addUserToStats();
 
 		return repo.persist(user);
 
@@ -155,7 +162,7 @@ public class AccountService {
 	public List<EventRegistration> getRegistrations(Long userSpaceId) {
 		return repo.getRegistrations(userSpaceId);
 	}
-	
+
 	public List<BasketOrder> getBasketOrders(Long userSpaceId) {
 		return repo.getBasketOrders(userSpaceId);
 	}
@@ -174,6 +181,4 @@ public class AccountService {
 		ContentBlock block = repo.findBlock(blockId);
 		repo.removeBlock(block);
 	}
-
-
 }

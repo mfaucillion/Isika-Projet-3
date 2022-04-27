@@ -18,6 +18,9 @@ public class Statistics {
 	@Column(name = "nb_organizations")
 	private Integer nbOrganizations;
 
+	@Column(name = "nb_users")
+	private Integer nbUsers;
+
 	@Column(name = "nb_projects")
 	private Integer nbProjects;
 
@@ -35,7 +38,7 @@ public class Statistics {
 
 	@Column(name = "sold_products")
 	private Integer soldProducts;
-	
+
 	private LocalDate date;
 
 	public Integer getNbOrganizations() {
@@ -44,6 +47,14 @@ public class Statistics {
 
 	public void setNbOrganizations(Integer nbOrganizations) {
 		this.nbOrganizations = nbOrganizations;
+	}
+
+	public Integer getNbUsers() {
+		return nbUsers;
+	}
+
+	public void setNbUsers(Integer nbUsers) {
+		this.nbUsers = nbUsers;
 	}
 
 	public Integer getNbProjects() {
@@ -85,7 +96,7 @@ public class Statistics {
 	public void setTotalDonations(Integer totalDonations) {
 		this.totalDonations = totalDonations;
 	}
-	
+
 	public Integer getSoldProducts() {
 		return soldProducts;
 	}

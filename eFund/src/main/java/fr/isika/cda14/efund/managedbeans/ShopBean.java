@@ -114,6 +114,7 @@ public class ShopBean {
 
 	public Payment saveMyPayment(BasketOrder basketOrder) {
 		Payment payment = new Payment();
+		
 		payment.setBasketOrder(basketOrder);
 		payment.setCreditCardNumber(paymentVM.getCardNumber());
 		payment.setCryptogram(paymentVM.getSecurityCode());
@@ -121,6 +122,7 @@ public class ShopBean {
 		payment.setAmount(basketOrder.getTotalPrice());
 		payment.setExpirationDate(paymentVM.getExpirationDate());
 		payment.setPaymentDate(basketOrder.getDate());
+		
 		shopService.saveMyPayment(payment);
 
 		return payment;

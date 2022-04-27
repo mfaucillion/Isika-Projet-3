@@ -13,7 +13,6 @@ import fr.isika.cda14.efund.viewmodel.PaymentShopVM;
 @ManagedBean
 @ViewScoped
 public class CreatePaymentBean implements Serializable {
-	private static final long serialVersionUID = 0;
 
 	@Inject
 	private PaymentService paymentService;
