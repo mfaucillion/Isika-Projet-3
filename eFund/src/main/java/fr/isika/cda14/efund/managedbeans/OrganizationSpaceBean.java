@@ -161,10 +161,7 @@ public class OrganizationSpaceBean {
 	// Vérifie si le projet est en Draft pour cacher/afficher le bouton de
 	// suppression
 	public Boolean isDraft(ProjectStatus status) {
-		if (status == ProjectStatus.DRAFT) {
-			return true;
-		}
-		return false;
+		return status.equals(ProjectStatus.DRAFT);
 	}
 
 	// Getter Setters
