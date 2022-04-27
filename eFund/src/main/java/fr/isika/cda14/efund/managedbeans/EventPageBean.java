@@ -21,6 +21,7 @@ import fr.isika.cda14.efund.services.InteractionService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.tool.SessionTool;
 import fr.isika.cda14.efund.viewmodel.ContentVM;
+import fr.isika.cda14.efund.viewmodel.FaqVM;
 
 @ManagedBean
 @ViewScoped
@@ -37,6 +38,8 @@ public class EventPageBean {
 	private OrganizationAccount organizationAccount;
 
 	private ContentVM contentVM = new ContentVM();
+	
+	private FaqVM faqVM = new FaqVM();
 
 	private Long remainingDays;
 
@@ -51,6 +54,7 @@ public class EventPageBean {
 		this.registerDuration = calculRegisterDuration();
 	}
 
+	// Calcul de pourcentage / durée / compte à rebour
 	public int percentage(Integer volunteerCurrent, Integer volunteerTarget) {
 		if (volunteerTarget == 0) {
 			return 100;
@@ -136,6 +140,16 @@ public class EventPageBean {
 		String filePath = "/content/" + file.getFileName();
 		contentVM.setContent("img" + filePath);
 		FileUpload.doUpload(file, filePath);
+	}
+
+	/* Gestion des questions/réponses de la FAQ */
+
+	public void addFaq() {
+		eventService.addFaq(faqVM, event);
+	}
+
+	public void removeFaq(Long faqId) {
+		eventService.removeFaq(faqId);
 	}
 
 	/* Update ProjectEntity in EntityManager */

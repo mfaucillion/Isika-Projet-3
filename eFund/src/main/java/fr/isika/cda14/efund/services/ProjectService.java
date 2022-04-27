@@ -37,8 +37,9 @@ public class ProjectService {
 
 	@Inject
 	private DonationRepository donationRepo;
-	
-	@Inject StatisticsService statsService;
+
+	@Inject
+	StatisticsService statsService;
 
 	private static final String STATUS = "SUBMITTED";
 
@@ -99,7 +100,7 @@ public class ProjectService {
 		project.setCurrentAmount(project.getCurrentAmount().add(newDon.getAmount()));
 
 		donationRepo.createDonationRepo(newDon);
-		
+
 		statsService.addDonationToStats(newDon.getAmount().intValue());
 	}
 
@@ -110,7 +111,7 @@ public class ProjectService {
 	public void deleteProject(Long id) {
 		Project project = findProject(id);
 		projectRepo.remove(project);
-		
+
 		statsService.removeProjectFromStats();
 	}
 
@@ -155,15 +156,10 @@ public class ProjectService {
 		StretchGoal goal = projectRepo.findGoal(goalId);
 		projectRepo.removeGoal(goal);
 	}
-
-	public void changeStatusToSubmit(Long id) {
-		Project project = projectRepo.findProject(id);
-		project.setProjectStatus(ProjectStatus.SUBMITTED);
-		projectRepo.update(project);
-	}
-
+	
 	public void addFaq(FaqVM faqVM, Project project) {
-		FaqElement newFaqElement=new FaqElement();
+		FaqElement newFaqElement = new FaqElement();
+
 		newFaqElement.setQuestion(faqVM.getQuestion());
 		newFaqElement.setAnswer(faqVM.getAnswer());
 		project.getFaq().add(newFaqElement);
@@ -171,10 +167,13 @@ public class ProjectService {
 	}
 
 	public void removeFaq(Long faqId) {
-		FaqElement faqElement=projectRepo.findFaq(faqId);
+		FaqElement faqElement = projectRepo.findFaq(faqId);
 		projectRepo.removeFaq(faqElement);
-		
-		
 	}
 
+	public void changeStatusToSubmit(Long id) {
+		Project project = projectRepo.findProject(id);
+		project.setProjectStatus(ProjectStatus.SUBMITTED);
+		projectRepo.update(project);
+	}
 }

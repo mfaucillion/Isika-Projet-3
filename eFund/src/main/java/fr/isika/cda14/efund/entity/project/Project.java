@@ -25,18 +25,14 @@ public class Project extends GenericProject {
 
 	@OneToMany(mappedBy = "project")
 	private List<Donation> donations;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "project_id")
-	protected List<StretchGoal> stretchGoals;
-	
+	private List<StretchGoal> stretchGoals;
+
 	@ManyToOne
 	@JoinColumn(name = "organization_space_id")
 	private OrganizationSpace organizationSpace;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	protected List<FaqElement> faq;
-
 
 	public void setTargetAmount(BigDecimal targetAmount) {
 		this.targetAmount = targetAmount;
@@ -92,6 +88,5 @@ public class Project extends GenericProject {
 
 	public void setFaq(List<FaqElement> faq) {
 		this.faq = faq;
-	}	
-	
+	}
 }

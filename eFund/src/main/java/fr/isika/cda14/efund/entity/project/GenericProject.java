@@ -34,7 +34,7 @@ public abstract class GenericProject {
 	protected String name;
 
 	protected String summary;
-	
+
 	@Column(length = 1000)
 	protected String description;
 
@@ -42,7 +42,10 @@ public abstract class GenericProject {
 	protected String imagePath;
 
 	protected String location;
-	
+
+	@OneToMany(cascade = CascadeType.ALL)
+	protected List<FaqElement> faq;
+
 	@Column(name = "creation_date")
 	@Temporal(TemporalType.DATE)
 	protected Date creationDate;
@@ -62,7 +65,7 @@ public abstract class GenericProject {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "project_status")
 	protected ProjectStatus projectStatus;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "generic_project_id")
 	protected List<ContentBlock> contentBlocks;
@@ -73,10 +76,10 @@ public abstract class GenericProject {
 
 	@OneToMany(mappedBy = "genericProject")
 	protected List<UserLike> likes;
-	
+
 	@OneToMany(mappedBy = "genericProject")
 	protected List<Favorite> favorites;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -187,6 +190,14 @@ public abstract class GenericProject {
 
 	public void setFavorites(List<Favorite> favorites) {
 		this.favorites = favorites;
+	}
+
+	public List<FaqElement> getFaq() {
+		return faq;
+	}
+
+	public void setFaq(List<FaqElement> faq) {
+		this.faq = faq;
 	}
 
 	public Long getId() {

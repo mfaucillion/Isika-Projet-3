@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import fr.isika.cda14.efund.entity.common.ContentBlock;
 import fr.isika.cda14.efund.entity.project.Event;
+import fr.isika.cda14.efund.entity.project.FaqElement;
 
 @Stateless
 public class EventRepository {
@@ -71,5 +72,14 @@ public class EventRepository {
 
 	public void removeBlock(ContentBlock block) {
 		em.remove(block);
+	}
+
+	/* FAQ methods*/
+	public FaqElement findFaq(Long faqId) {
+		return em.find(FaqElement.class, faqId);
+	}
+
+	public void removeFaq(FaqElement faqElement) {
+		em.remove(faqElement);
 	}
 }
