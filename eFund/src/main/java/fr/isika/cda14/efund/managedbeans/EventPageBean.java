@@ -14,6 +14,7 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import fr.isika.cda14.efund.entity.account.OrganizationAccount;
+import fr.isika.cda14.efund.entity.enums.Role;
 import fr.isika.cda14.efund.entity.project.Event;
 import fr.isika.cda14.efund.services.EventService;
 import fr.isika.cda14.efund.services.InteractionService;
@@ -146,6 +147,12 @@ public class EventPageBean {
 	public String addVolunteer(Long id) {
 		eventService.addVolunteer(id);
 		return "eventPage?faces-redirect=true&includeViewParams=true";
+	}
+
+	// Return True si l'utilisateur connecté est le propriétaire de l'organization
+	public Boolean isOwner() {
+		return this.organizationAccount.getId() == SessionTool.getUserId()
+				&& SessionTool.getRole().equals(Role.ASSOC.toString());
 	}
 
 	/* Getters and Setters */
