@@ -28,7 +28,7 @@
 					<p:graphicImage value="#{event.imagePath}" />
 				</p:column>
 
-				<p:column headerText="EventName">
+				<p:column headerText="Nom">
 					<p:link outcome="eventPage?faces-redirect=true&amp;id=#{event.id}">
 						<h:outputText value="#{event.name}" />
 					</p:link>
@@ -38,7 +38,7 @@
 					<h:outputText value="#{event.eventStartDate}" />
 				</p:column>
 
-				<p:column headerText="Status">
+				<p:column headerText="Statut">
                 <p:cellEditor>
                     <f:facet name="output">
                         <h:outputText value="#{event.projectStatus}"/>

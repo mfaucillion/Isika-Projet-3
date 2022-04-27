@@ -30,7 +30,7 @@
 					<p:graphicImage value="#{org.imagePath}" />
 				</p:column>
 
-				<p:column headerText="OrgName">
+				<p:column headerText="Nom">
 					<p:link outcome="pageOng?id=#{org.id}faces-redirect=true">
 						<h:outputText value="#{org.displayedName}" />
 					</p:link>
@@ -40,7 +40,7 @@
 					<h:outputText value="#{org.email}" />
 				</p:column>
 
-				<p:column headerText="Status">
+				<p:column headerText="Statut">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{org.accountStatus}" />
