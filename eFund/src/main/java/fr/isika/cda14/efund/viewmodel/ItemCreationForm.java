@@ -13,7 +13,7 @@ public class ItemCreationForm {
 	private BigDecimal price;
 
 	private String description;
-	
+
 	private String imagePath;
 
 	private ItemCategory itemCategory;
@@ -69,5 +69,4 @@ public class ItemCreationForm {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-
 }

@@ -91,5 +91,4 @@ public class StatisticsViewModel {
 	public void setAverageGenericProjects(Integer averageGenericProjects) {
 		this.averageGenericProjects = averageGenericProjects;
 	}
-
 }

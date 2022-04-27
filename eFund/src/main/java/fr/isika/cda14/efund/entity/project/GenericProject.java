@@ -203,5 +203,4 @@ public abstract class GenericProject {
 	public Long getId() {
 		return id;
 	}
-
 }

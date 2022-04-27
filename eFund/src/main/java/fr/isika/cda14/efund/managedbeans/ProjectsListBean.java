@@ -32,13 +32,10 @@ public class ProjectsListBean {
 
 	private List<Project> projectsList;
 
-
-	
 	public void onLoad(String name) {
-		System.out.println(name);
 		if (name.isEmpty()) {
 			this.projectsList = getAllProjects();
-		}else {
+		} else {
 			this.projectsList = searchResult(name);
 		}
 	}
@@ -63,16 +60,13 @@ public class ProjectsListBean {
 	}
 
 	public String search() {
-		
-		String returnUrl = "projectsList.xhtml?faces-redirect=true&amp;searchId=" + this.searchRequest ;
-		System.out.println(returnUrl);
+
+		String returnUrl = "projectsList.xhtml?faces-redirect=true&amp;searchId=" + this.searchRequest;
 		return returnUrl;
 	}
-	
+
 	public List<Project> searchResult(String searchProject) {
-		System.out.println("Contenu de recherche : " + searchProject);
 		return projectService.searchProjectFromPage(searchProject);
-		
 	}
 
 	public Long getRemainingDays() {

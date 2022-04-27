@@ -32,7 +32,7 @@ public class Payment {
 
 	@Column(name = "expiration_date")
 	private Date expirationDate;
-	
+
 	@Column(name = "payment_date")
 	private Date paymentDate;
 
@@ -113,6 +113,4 @@ public class Payment {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	
-
 }

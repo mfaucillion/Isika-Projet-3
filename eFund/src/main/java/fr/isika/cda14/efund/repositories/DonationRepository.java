@@ -15,5 +15,4 @@ public class DonationRepository {
 	public void createDonationRepo(Donation donation) {
 		em.persist(donation);
 	}
-
 }

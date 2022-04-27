@@ -20,7 +20,6 @@ import fr.isika.cda14.efund.services.AccountService;
 import fr.isika.cda14.efund.tool.FileUpload;
 import fr.isika.cda14.efund.viewmodel.CreateUserViewModel;
 
-
 @ViewScoped
 @ManagedBean
 public class UserProfilBean {
@@ -31,11 +30,11 @@ public class UserProfilBean {
 	private UserAccount userAccount;
 
 	private List<Favorite> favorites;
-	
+
 	private List<Donation> donations;
-	
+
 	private List<EventRegistration> registrations;
-	
+
 	private List<BasketOrder> basketOrders;
 
 	private CreateUserViewModel userViewModel = new CreateUserViewModel();
@@ -48,14 +47,14 @@ public class UserProfilBean {
 		this.basketOrders = accService.getBasketOrders(userSpaceId);
 		this.registrations = accService.getRegistrations(userSpaceId);
 	}
-	
+
 	public void upload(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/user/" + file.getFileName();
 		userViewModel.setImagePath("img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
-	
+
 	public String redirectToProjectPage(GenericProject gProject) {
 		if (gProject instanceof Event) {
 			return "pageEvent?id=" + gProject.getId() + "faces-redirect=true";
@@ -67,7 +66,7 @@ public class UserProfilBean {
 	public List<Favorite> getFavorites() {
 		return favorites;
 	}
-	
+
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}
@@ -75,16 +74,16 @@ public class UserProfilBean {
 	public void setFavorites(List<Favorite> favorites) {
 		this.favorites = favorites;
 	}
-	
+
 	public List<Donation> getDonations() {
 		return donations;
 	}
-	
+
 	public List<EventRegistration> getRegistrations() {
 		return registrations;
 	}
-	
+
 	public List<BasketOrder> getBasketOrders() {
 		return basketOrders;
-	}	
+	}
 }

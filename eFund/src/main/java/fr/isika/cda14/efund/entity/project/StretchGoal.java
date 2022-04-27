@@ -41,6 +41,4 @@ public class StretchGoal {
 	public Long getId() {
 		return id;
 	}
-
-	
 }

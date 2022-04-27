@@ -27,13 +27,13 @@ public class Event extends GenericProject {
 
 	@Column(name = "volunteer_target")
 	private Integer volunteerTarget;
-	
+
 	@Column(name = "volunteer_current")
 	private Integer volunteerCurrent;
-	
+
 	@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "event")
 	private List<EventRegistration> eventRegistrations;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "organization_space_id")
 	private OrganizationSpace organizationSpace;
@@ -84,5 +84,5 @@ public class Event extends GenericProject {
 
 	public void setOrganizationSpace(OrganizationSpace organizationSpace) {
 		this.organizationSpace = organizationSpace;
-	} 
+	}
 }

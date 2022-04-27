@@ -17,11 +17,11 @@ public class UserLike {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "generic_project_id")
 	private GenericProject genericProject;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
@@ -45,5 +45,4 @@ public class UserLike {
 	public Long getId() {
 		return id;
 	}
-
 }

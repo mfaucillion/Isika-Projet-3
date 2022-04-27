@@ -15,11 +15,11 @@ public class Favorite {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "generic_project_id")
 	private GenericProject genericProject;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
@@ -39,5 +39,4 @@ public class Favorite {
 	public void setUserSpace(UserSpace userSpace) {
 		this.userSpace = userSpace;
 	}
-
 }

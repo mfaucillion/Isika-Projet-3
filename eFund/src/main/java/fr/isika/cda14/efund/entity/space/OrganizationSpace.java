@@ -21,7 +21,7 @@ import fr.isika.cda14.efund.entity.shop.Shop;
 
 @Entity
 @Table(name = "organization_space")
-public class OrganizationSpace implements Serializable{
+public class OrganizationSpace implements Serializable {
 
 	/**
 	 * 
@@ -33,36 +33,36 @@ public class OrganizationSpace implements Serializable{
 	private Long id;
 
 	private String imagePath = "/img/space/default.jpg";
-	
+
 	@Column(name = "main_tab")
 	private Boolean mainTab = true;
-	
+
 	@Column(name = "shop_tab")
 	private Boolean shopTab = true;;
-	
+
 	@Column(name = "projects_tab")
 	private Boolean projectsTab = true;;
-	
+
 	@Column(name = "events_tab")
 	private Boolean eventsTab = true;;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private Shop shop;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "organization_space_id")
 	private List<ContentBlock> contentBlocks;
-	
+
 	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
 	private List<Project> projects;
-	
+
 	@OneToMany(mappedBy = "organizationSpace", cascade = CascadeType.ALL)
 	private List<Event> events;
-	
+
 	public OrganizationSpace() {
 		this.shop = new Shop();
 	}
-	
+
 	public Shop getShop() {
 		return shop;
 	}
@@ -122,7 +122,7 @@ public class OrganizationSpace implements Serializable{
 	public Boolean getMainTab() {
 		return mainTab;
 	}
-	
+
 	public void setMainTab(Boolean mainTab) {
 		this.mainTab = mainTab;
 	}

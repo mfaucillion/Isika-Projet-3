@@ -17,16 +17,16 @@ public class EventCreationService {
 
 	@Inject
 	private EventRepository eventRepo;
-	
+
 	@Inject
 	private AccountRepository accountRepo;
-	
+
 	@Inject
 	private StatisticsService statsService;
 
 	public void create(EventCreationFormVM eventCreationFormVM, Long id) {
-		System.out.println("Service; " + eventCreationFormVM);
 		Event newEvent = new Event();
+
 		newEvent.setName(eventCreationFormVM.getName());
 		newEvent.setEndDate(eventCreationFormVM.getEndDate());
 		newEvent.setSummary(eventCreationFormVM.getSummary());
@@ -40,13 +40,11 @@ public class EventCreationService {
 		newEvent.setDuration(eventCreationFormVM.getDuration());
 		newEvent.setProjectStatus(ProjectStatus.DRAFT);
 		newEvent.setCreationDate(new Date());
-		
-		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 
+		OrganizationSpace orgSpace = accountRepo.findOrgSpace(id);
 		newEvent.setOrganizationSpace(orgSpace);
-		
+
 		eventRepo.create(newEvent);
-		
-		statsService.addEventToStats();		
+		statsService.addEventToStats();
 	}
 }

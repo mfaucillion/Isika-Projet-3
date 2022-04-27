@@ -13,7 +13,7 @@ public class OrganizationsListBean {
 
 	@Inject
 	private AccountService organisationService;
-	
+
 	private String searchRequest;
 
 	private List<OrganizationAccount> organizationsList;
@@ -21,25 +21,23 @@ public class OrganizationsListBean {
 	public void onLoad(String name) {
 		if (name.isEmpty()) {
 			this.organizationsList = getAllOrganizations();
-		}else {
+		} else {
 			this.organizationsList = searchResult(name);
 		}
 	}
-	
-public String search() {
-		
-		String returnUrl = "orgaListe.xhtml?faces-redirect=true&amp;searchId=" + this.searchRequest ;
-		System.out.println(returnUrl);
+
+	public String search() {
+
+		String returnUrl = "orgaListe.xhtml?faces-redirect=true&amp;searchId=" + this.searchRequest;
 		return returnUrl;
 	}
 
-public List<OrganizationAccount> searchResult(String searchOrganization) {
-	System.out.println("Contenu de recherche : " + searchOrganization);
-	return organisationService.searchOrganizationAccountFromPage(searchOrganization);
-	
-}
+	public List<OrganizationAccount> searchResult(String searchOrganization) {
+		return organisationService.searchOrganizationAccountFromPage(searchOrganization);
 
-	private List<OrganizationAccount> getAllOrganizations(){
+	}
+
+	private List<OrganizationAccount> getAllOrganizations() {
 		return this.organisationService.findAll();
 	}
 

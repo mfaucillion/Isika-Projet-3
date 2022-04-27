@@ -19,14 +19,14 @@ public class ContentBlock {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name = "post_date")
 	@Temporal(TemporalType.DATE)
 	private Date postDate;
-	
-	/*image video texte*/
+
+	/* image video texte */
 	private String type;
-	
+
 	@Lob
 	@Column(length = 5000)
 	private String content;
@@ -34,7 +34,7 @@ public class ContentBlock {
 	public ContentBlock() {
 		this.postDate = new Date();
 	}
-	
+
 	public Date getPostDate() {
 		return postDate;
 	}
@@ -62,5 +62,4 @@ public class ContentBlock {
 	public Long getId() {
 		return id;
 	}
-	
 }

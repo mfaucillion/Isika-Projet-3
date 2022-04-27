@@ -1,4 +1,4 @@
-package fr.isika.cda14.efund.managedbeans;
+package fr.isika.cda14.efund.tool;
 
 public final class SessionAttributesUtils {
 

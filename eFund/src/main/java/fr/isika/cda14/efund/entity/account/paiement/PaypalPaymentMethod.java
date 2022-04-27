@@ -12,5 +12,4 @@ public class PaypalPaymentMethod extends PaymentMethod {
 
 	@Column(length = 320)
 	private String email;
-
 }

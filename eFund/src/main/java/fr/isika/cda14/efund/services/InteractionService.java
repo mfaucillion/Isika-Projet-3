@@ -22,8 +22,6 @@ public class InteractionService {
 	@Inject
 	InteractionRepository repo;
 
-	
-
 	public void addLike(Long userId, GenericProject project) {
 		UserLike like = new UserLike();
 
@@ -31,11 +29,10 @@ public class InteractionService {
 
 		like.setGenericProject(project);
 		like.setUserSpace(user.getUserSpace());
-		
+
 		repo.persists(like);
 	}
-	
-	
+
 	public void addFavorite(Long userId, GenericProject project) {
 		Favorite fav = new Favorite();
 
@@ -59,7 +56,6 @@ public class InteractionService {
 		repo.remove(fav);
 	}
 
-
 	public Boolean checkLike(Long userId, Long projId) {
 		UserAccount user = accountService.findUserAccountById(userId);
 		List<UserLike> result = repo.checkLike(user.getUserSpace().getId(), projId);
@@ -72,5 +68,4 @@ public class InteractionService {
 		UserLike like = repo.getLike(user.getUserSpace().getId(), projId);
 		repo.remove(like);
 	}
-
 }

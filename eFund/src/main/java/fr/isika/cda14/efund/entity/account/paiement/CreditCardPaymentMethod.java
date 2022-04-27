@@ -18,5 +18,4 @@ public class CreditCardPaymentMethod extends PaymentMethod {
 
 	@Column(name = "expiration_date", length = 5)
 	private String expirationDate;
-
 }

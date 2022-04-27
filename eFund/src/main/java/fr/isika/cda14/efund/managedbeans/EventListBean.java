@@ -21,7 +21,7 @@ public class EventListBean {
 	public void onLoad(String name) {
 		if (name.isEmpty()) {
 			this.eventsList = getAllEvents();
-		}else {
+		} else {
 			this.eventsList = searchResult(name);
 		}
 	}
@@ -37,14 +37,12 @@ public class EventListBean {
 	public String search() {
 
 		String returnUrl = "eventList.xhtml?faces-redirect=true&amp;searchId=" + this.searchRequest;
-		System.out.println(returnUrl);
 		return returnUrl;
 	}
-	
+
 	public List<Event> searchResult(String searchEvent) {
-		System.out.println("Contenu de recherche : " + searchEvent);
 		return eventService.searchEventFromPage(searchEvent);
-		
+
 	}
 
 	public void setEvents(List<Event> events) {

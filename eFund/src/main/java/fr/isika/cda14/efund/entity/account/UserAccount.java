@@ -22,7 +22,7 @@ public class UserAccount extends Account {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_info_id")
 	private UserInfo userInfo;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;

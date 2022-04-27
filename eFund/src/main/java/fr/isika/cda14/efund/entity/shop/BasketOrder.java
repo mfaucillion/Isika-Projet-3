@@ -27,7 +27,7 @@ import fr.isika.cda14.efund.entity.space.UserSpace;
 
 @Entity
 @Table(name = "basket_order")
-public class BasketOrder implements Serializable{
+public class BasketOrder implements Serializable {
 
 	/**
 	 * 
@@ -57,7 +57,7 @@ public class BasketOrder implements Serializable{
 	@OneToOne
 	@JoinColumn(name = "billing_address_id")
 	private Address billingAddress;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_space_id")
 	private UserSpace userSpace;
@@ -65,7 +65,7 @@ public class BasketOrder implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "basket_order_id")
 	private List<OrderLine> orderLines;
-	
+
 	public BasketOrder() {
 		date = new Date();
 	}
@@ -125,7 +125,7 @@ public class BasketOrder implements Serializable{
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
 	}
-	
+
 	public void setOrderLines(List<OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}
@@ -141,7 +141,5 @@ public class BasketOrder implements Serializable{
 	public void setUserSpace(UserSpace userSpace) {
 		this.userSpace = userSpace;
 	}
-	
-	
-	
+
 }

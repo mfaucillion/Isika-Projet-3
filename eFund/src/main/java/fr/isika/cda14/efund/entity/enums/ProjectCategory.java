@@ -14,5 +14,4 @@ public enum ProjectCategory {
 		return projectCategoryLabel;
 
 	}
-
 }

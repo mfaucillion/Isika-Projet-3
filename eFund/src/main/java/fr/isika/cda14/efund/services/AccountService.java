@@ -90,7 +90,6 @@ public class AccountService {
 		user.getUserInfo().getUserAddress().setCity(inputUser.getCity());
 		user.getUserInfo().getUserAddress().setZipcode(inputUser.getZipcode());
 		user.getUserInfo().getUserAddress().setCountry(inputUser.getCountry());
-		System.out.println(inputUser.getImagePath());
 
 		if (inputUser.getImagePath() != null) {
 			user.setImagePath(inputUser.getImagePath());

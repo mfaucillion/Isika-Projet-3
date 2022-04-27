@@ -38,7 +38,7 @@ public class DonationVM {
 	public String getCryptogram() {
 		return cryptogram;
 	}
-	
+
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
@@ -62,6 +62,4 @@ public class DonationVM {
 	public void setProject(Project project) {
 		this.project = project;
 	}
-	
-	
 }

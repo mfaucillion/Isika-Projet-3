@@ -45,7 +45,7 @@ public class EmailTool {
 
 			Transport.send(msg);
 		} catch (Exception ex) {
-			System.out.println(ex);
+			ex.printStackTrace();
 		}
 	}
 

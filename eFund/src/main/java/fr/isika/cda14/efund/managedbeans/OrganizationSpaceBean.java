@@ -42,7 +42,7 @@ public class OrganizationSpaceBean {
 	ShopService shopService;
 
 	ContentVM contentVM = new ContentVM();
-	
+
 	private String orgSpaceImagePath;
 
 	OrganizationAccount orgAccount;
@@ -57,7 +57,7 @@ public class OrganizationSpaceBean {
 	/* Loading OrganizationAccount, all inner collections + Init properties */
 	public void onLoad(String id) {
 		Long orgId = Long.parseLong(id);
-		
+
 		orgAccount = accountService.loadOrganizationAccountWithChildren(orgId);
 		projects = orgAccount.getOrganizationSpace().getProjects();
 		events = orgAccount.getOrganizationSpace().getEvents();
@@ -98,8 +98,9 @@ public class OrganizationSpaceBean {
 		contentVM.setContent("img" + filePath);
 		FileUpload.doUpload(file, filePath);
 	}
-	
-	// Upload de fichier pour l'espace Organization et prépare chemin à insérer dans l'organizationSpace
+
+	// Upload de fichier pour l'espace Organization et prépare chemin à insérer dans
+	// l'organizationSpace
 	public void uploadFileForSpace(FileUploadEvent event) {
 		UploadedFile file = event.getFile();
 		String filePath = "/space/" + file.getFileName();
@@ -120,7 +121,7 @@ public class OrganizationSpaceBean {
 	public OrderLine createOrderLine(Item item) {
 		return shopService.createOrderLine(item);
 	}
-	
+
 	// Supprime un objet de la boutique
 	public String deleteItem(String id) {
 		shopService.deleteItem(Long.parseLong(id));
@@ -146,26 +147,26 @@ public class OrganizationSpaceBean {
 		}
 		return (current.intValue() * 100 / target.intValue());
 	}
-	
-	// Change le statut du projet pour le soumettre à la publication	
+
+	// Change le statut du projet pour le soumettre à la publication
 	public void submitDraftProject(String id) {
 		projectService.changeStatusToSubmit(Long.parseLong(id));
 	}
-	
+
 	// Change le statut de l'évènement pour le soumettre à la publication
 	public void submitDraftEvent(String id) {
 		eventService.changeStatusToSubmit(Long.parseLong(id));
 	}
-	
-	// Vérifie si le projet est en Draft pour cacher/afficher le bouton de suppression
+
+	// Vérifie si le projet est en Draft pour cacher/afficher le bouton de
+	// suppression
 	public Boolean isDraft(ProjectStatus status) {
-		if(status == ProjectStatus.DRAFT) {
+		if (status == ProjectStatus.DRAFT) {
 			return true;
 		}
 		return false;
 	}
 
-	
 	// Getter Setters
 	public OrganizationAccount getOrgAccount() {
 		return orgAccount;

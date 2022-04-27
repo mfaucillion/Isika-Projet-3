@@ -9,13 +9,13 @@ import fr.isika.cda14.efund.viewmodel.StatisticsViewModel;
 
 @Stateless
 public class StatisticsService {
-	
+
 	@Inject
 	StatisticsRepository statsRepo;
 
 	public StatisticsViewModel getStats() {
 		StatisticsViewModel statsVM = new StatisticsViewModel();
-		
+
 		Statistics stats = statsRepo.getStats();
 
 		Integer nbGenericProjects = stats.getNbProjects() + stats.getNbEvents();
@@ -54,7 +54,7 @@ public class StatisticsService {
 		stats.setNbEvents(stats.getNbEvents() + 1);
 		statsRepo.updateStat(stats);
 	}
-	
+
 	public void removeEventFromStats() {
 		Statistics stats = statsRepo.getStats();
 		stats.setNbEvents(stats.getNbEvents() - 1);

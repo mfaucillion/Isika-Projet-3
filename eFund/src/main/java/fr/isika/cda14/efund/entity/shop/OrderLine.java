@@ -14,7 +14,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "order_line")
-public class OrderLine implements Serializable{
+public class OrderLine implements Serializable {
 
 	/**
 	 * 
@@ -29,14 +29,14 @@ public class OrderLine implements Serializable{
 
 	@Temporal(TemporalType.DATE)
 	private Date date;
-	
+
 	@OneToOne
 	private Item item;
 
 	public Long getId() {
 		return id;
 	}
-	
+
 	public Date getDate() {
 		return date;
 	}
@@ -60,5 +60,4 @@ public class OrderLine implements Serializable{
 	public void setItem(Item item) {
 		this.item = item;
 	}
-
 }

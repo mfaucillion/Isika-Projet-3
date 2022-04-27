@@ -105,5 +105,4 @@ public class Donation {
 	public void setCryptogram(String cryptogram) {
 		this.cryptogram = cryptogram;
 	}
-
 }
