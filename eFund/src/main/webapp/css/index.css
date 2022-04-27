@@ -3,7 +3,8 @@
     background-repeat: no-repeat;
     background-size: cover; 
     background-position: center;
-    height: 400px;
+    height: 300px;
+    position: ralative;
     }
     
 .container{
@@ -28,4 +29,7 @@ hr{
 	border: none;
 	width: 50%;
 	margin:auto;
+}
+.img-fluid{
+	border-radius: 20px;
 }

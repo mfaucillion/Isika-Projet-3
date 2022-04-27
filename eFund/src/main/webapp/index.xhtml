@@ -20,12 +20,13 @@
 
 		<ui:define name="content">
 
-			<div class="ui-fuild row text-center  my-5"></div>
+				<div class="container shadow p-0 mt-5">
+					<img src="#{request.contextPath}/img/Banner.png" class="img-fluid"/>
+				</div>
 
-			<div class="ui-fuild row text-center  my-5">
-				<h1>Participez maintenant</h1>
-				<h1>et soutenez les actions d'associations et d'ONGs !</h1>
-			</div>
+
+
+
 
 			<div class="ui-fuild row text-center  my-5"></div>
 
@@ -41,7 +42,8 @@
 						<h5 class="text-center">Montant total récolté</h5>
 					</div>
 					<div class="col-12 col-md-4 mt-3">
-						<h1 class="text-center">#{indexBean.statsVM.averageDonations} €</h1>
+						<h1 class="text-center">#{indexBean.statsVM.averageDonations}
+							€</h1>
 						<h5 class="text-center">Montant total récolté moyen</h5>
 					</div>
 				</div>
