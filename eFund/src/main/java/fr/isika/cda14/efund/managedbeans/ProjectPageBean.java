@@ -182,7 +182,7 @@ public class ProjectPageBean {
 
 	// Return True si l'utilisateur connecté est le propriétaire de l'organization
 	public Boolean isOwner() {
-		return this.organizationAccount.getId() == SessionTool.getUserId()
+		return this.organizationAccount.getId().equals(SessionTool.getUserId())
 				&& SessionTool.getRole().equals(Role.ASSOC.toString());
 	}
 

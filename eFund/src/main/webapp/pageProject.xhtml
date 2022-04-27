@@ -41,7 +41,7 @@
 
 							<div class="row">
 								<div class="col-12 col-lg-6 text-center">
-									<img class="img-fluid mb-4" style="object-fit: cover" 
+									<img class="img-fluid mb-4" style="object-fit: cover"
 										src="#{request.contextPath}#{projectPageBean.project.imagePath}" />
 								</div>
 								<div class="col-12 col-lg-6 my-auto pb-4">
@@ -49,7 +49,8 @@
 									<p:commandButton icon="fa-solid fa-pen-to-square"
 										styleClass="rounded-button ui-button-secondary ui-button-outlined"
 										title="Editer la Description" type="button"
-										onclick="PF('descriptionPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('descriptionPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 								</div>
 							</div>
 
@@ -69,17 +70,20 @@
 									<p:commandButton icon="fa-solid fa-align-justify"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un bloc de text" type="button"
-										onclick="PF('addTxtBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('addTxtBlockPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-image"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une image" type="button"
-										onclick="PF('addImgBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('addImgBlockPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 
 									<p:commandButton icon="fa-solid fa-film"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une video" type="button"
-										onclick="PF('addVidBlockPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('addVidBlockPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 
 									<div class="container mx-auto text-center">
 										<h2 class="text-center">Campagne de financement</h2>
@@ -132,7 +136,8 @@
 									<p:commandButton icon="fa-solid fa-plus"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter un palier d'objectif" type="button"
-										onclick="PF('addGoalPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('addGoalPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 
 									<p:repeat var="goal"
 										value="#{projectPageBean.project.stretchGoals}"
@@ -168,15 +173,16 @@
 									<p:commandButton icon="fa-solid fa-plus"
 										styleClass="rounded-button ui-button-primary ui-button-outlined m-1"
 										title="Ajouter une question/réponse" type="button"
-										onclick="PF('addFaqPop').show()" rendered="#{projectPageBean.isOwner()}" />
+										onclick="PF('addFaqPop').show()"
+										rendered="#{projectPageBean.isOwner()}" />
 									<p:repeat var="faqElement"
-										value="#{projectPageBean.project.faq}"
-										varStatus="status">
+										value="#{projectPageBean.project.faq}" varStatus="status">
 
 										<ul>
 											<li>
 												<h5>
-													Question #{status.index + 1} : <b>#{faqElement.question} </b>
+													Question #{status.index + 1} : <b>#{faqElement.question}
+													</b>
 												</h5> <h:form>
 													<p>
 														<p:commandButton icon="fa-solid fa-minus"
@@ -206,7 +212,8 @@
 								<h:link
 									outcome="pageOng.xhtml?id=#{projectPageBean.organizationAccount.id}faces-redirect=true">
 									<img class="img-fluid w-100" id="containerBorder"
-										src="#{request.contextPath}#{projectPageBean.organizationAccount.imagePath}" alt="" />
+										src="#{request.contextPath}#{projectPageBean.organizationAccount.imagePath}"
+										alt="" />
 								</h:link>
 							</div>
 							<div class="col-12 col-lg-7 my-auto">
@@ -279,8 +286,8 @@
 										</div>
 										<div class="col-6 col-md-2">
 											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"
-												styleClass="rounded-button ui-button-secondary ui-button-outlined" title="J'aime"
-												action="#{projectPageBean.addLike}"
+												styleClass="rounded-button ui-button-secondary ui-button-outlined"
+												title="J'aime" action="#{projectPageBean.addLike}"
 												rendered="#{!projectPageBean.isLiked()}" async="true"
 												oncomplete="location.reload()" />
 											<p:commandButton icon="fa-regular fa-thumbs-up" type="submit"

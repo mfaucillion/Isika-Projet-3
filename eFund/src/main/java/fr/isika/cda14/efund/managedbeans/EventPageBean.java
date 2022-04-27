@@ -38,7 +38,7 @@ public class EventPageBean {
 	private OrganizationAccount organizationAccount;
 
 	private ContentVM contentVM = new ContentVM();
-	
+
 	private FaqVM faqVM = new FaqVM();
 
 	private Long remainingDays;
@@ -165,7 +165,7 @@ public class EventPageBean {
 
 	// Return True si l'utilisateur connecté est le propriétaire de l'organization
 	public Boolean isOwner() {
-		return this.organizationAccount.getId() == SessionTool.getUserId()
+		return this.organizationAccount.getId().equals(SessionTool.getUserId())
 				&& SessionTool.getRole().equals(Role.ASSOC.toString());
 	}
 
@@ -192,5 +192,13 @@ public class EventPageBean {
 
 	public ContentVM getContentVM() {
 		return contentVM;
+	}
+
+	public FaqVM getFaqVM() {
+		return faqVM;
+	}
+
+	public void setFaqVM(FaqVM faqVM) {
+		this.faqVM = faqVM;
 	}
 }
